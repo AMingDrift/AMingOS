@@ -1,0 +1,23 @@
+html {
+    @apply scroll-smooth;
+}
+
+.ant-app {
+    @apply h-[100vh] w-full p-0 m-0;
+}
+
+.lucide {
+    @apply w-4 h-4 stroke-[1px];
+}
+
+.xicon {
+    @apply w-[1em] h-[1em] inline-flex;
+
+    & svg {
+        @apply !w-full !h-full;
+
+        &:not([fill]) {
+            fill: currentcolor;
+        }
+    }
+}

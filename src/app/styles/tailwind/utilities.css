@@ -1,0 +1,107 @@
+/********************************************************* 自定义tailwind工具类 *********************************************************/
+@utility page-item {
+    @apply flex flex-auto flex-col mt-20 items-center;
+}
+
+/* 页面包装容器 */
+@utility page-container {
+    @apply max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%] flex-auto mb-5;
+}
+
+/* 页面包装容器 */
+
+/* 空白页样式,一般用于404和error页面 */
+@utility page-blank {
+    @apply bg-white/80  backdrop-blur-sm h-full w-full drop-shadow-lg rounded-md flex justify-center items-center flex-col space-y-3 lg:space-y-0 lg:flex-row;
+
+    html.dark & {
+        @apply bg-black/50;
+    }
+}
+
+/* 全透明图标按钮 */
+@utility btn-icon-transparent {
+    @apply block w-auto! border-none! bg-transparent! shadow-none! ring-0! hover:bg-transparent! focus-visible:ring-0!;
+}
+
+@utility page-block {
+    @apply bg-zinc-100/80;
+
+    html.dark & {
+        @apply bg-zinc-800/50;
+    }
+}
+
+@utility page-block-hover {
+    @apply hover:bg-white/90;
+
+    html.dark & {
+        @apply hover:bg-black/80;
+    }
+}
+
+/* 只显示一行文字, 溢出部分以省略号代替 */
+@utility ellips {
+    @apply inline-block overflow-hidden max-w-full whitespace-nowrap text-ellipsis break-all;
+}
+
+/* 鼠标移动到文字或链接出现动画下划线 */
+@utility animate-decoration {
+    padding-bottom: 2px;
+    background: linear-gradient(hsl(var(--foreground)), hsl(var(--foreground))) 0% 100% / 0% 1px
+        no-repeat;
+    transition: background-size ease-out 200ms;
+
+    &:not(:focus):hover {
+        background-size: 100% 1px;
+    }
+}
+
+/* 粗下划线 */
+@utility animate-decoration-lg {
+    &:not(:focus):hover {
+        background-size: 100% 2px;
+    }
+}
+
+/* 取消下划线 */
+@utility none-animate-decoration {
+    background-size: 0 !important;
+    transition: none !important;
+
+    &:hover,
+    &:not(:focus):hover {
+        background-size: 100% 0 !important;
+    }
+}
+
+/* 透明滚动条 */
+@utility transparent-scrollbar {
+    &::-webkit-scrollbar {
+        @apply w-1 h-1;
+    }
+
+    &::-webkit-scrollbar-track {
+        @apply bg-gray-100;
+    }
+
+    html.dark &::-webkit-scrollbar-track {
+        @apply bg-zinc-800;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        @apply bg-gray-300 rounded;
+    }
+
+    html.dark &::-webkit-scrollbar-thumb {
+        @apply bg-zinc-600;
+    }
+
+    &::-webkit-scrollbar-corner {
+        @apply bg-gray-100;
+    }
+
+    html.dark &::-webkit-scrollbar-corner {
+        @apply bg-zinc-800;
+    }
+}

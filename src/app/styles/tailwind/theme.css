@@ -1,0 +1,33 @@
+/********************************************************* 自定义tailwind主题扩展 *********************************************************/
+
+@theme {
+    --breakpoint-xs: 30rem;
+    --breakpoint-sm: 36rem;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 62rem;
+    --breakpoint-xl: 75rem;
+    --breakpoint-2xl: 87.5rem;
+    --shadow-nysm: 0 0 2px 0 rgb(0 0 0 / 5%);
+    --shadow-ny: 0 0 3px 0 rgb(0 0 0 / 10%), 0 0 2px - 1px rgb(0 0 0 / 10%);
+    --shadow-nymd: 0 0 6px -1px rgb(0 0 0 / 10%), 0 0 4px -2px rgb(0 0 0 / 10%);
+    --shadow-nylg: 0 0 15px -3px rgb(0 0 0 / 10%), 0 0 6px -4px rgb(0 0 0 / 10%);
+    --shadow-spread: 0 5px 40px rgb(0 0 0 / 10%);
+
+    /* 默认字体 */
+    --font-base:
+        -apple-system, blinkmacsystemfont, tahoma, arial, 'Hiragino Sans GB', 'Microsoft YaHei',
+        'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
+
+    /* 霞鹜文楷字体 */
+    --font-lxgw:
+        'LXGW WenKai', '楷体', 'STKaiti', -apple-system, blinkmacsystemfont, tahoma, arial,
+        'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* 默认代码字体 */
+    --font-code:
+        'Fira Code', -apple-system, blinkmacsystemfont, tahoma, arial, 'Hiragino Sans GB',
+        'Microsoft YaHei', 'WenQuanYi Micro Hei', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+}

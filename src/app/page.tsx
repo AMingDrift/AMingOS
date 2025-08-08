@@ -1,103 +1,78 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+// 桌面图标数据
+const desktopIcons = [
+    { name: '我的电脑', icon: '/window.svg', position: { top: '10%', left: '5%' } },
+    { name: '文档', icon: '/window.svg', position: { top: '10%', left: '15%' } },
+    { name: '回收站', icon: '/window.svg', position: { top: '10%', left: '25%' } },
+    { name: '设置', icon: '/window.svg', position: { top: '25%', left: '5%' } },
+];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+export default function Desktop() {
+    return (
+        <div className="min-h-screen relative overflow-hidden bg-win-dark">
+            {/* 桌面背景图 */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/bg-dark.png"
+                    alt="桌面背景"
+                    fill
+                    className="object-cover opacity-70"
+                    priority
+                />
+            </div>
+
+            {/* 桌面图标 */}
+            <div className="absolute inset-0 z-10 p-4">
+                {desktopIcons.map((icon, index) => (
+                    <div
+                        key={index}
+                        className="desktop-icon absolute"
+                        style={{ top: icon.position.top, left: icon.position.left }}
+                    >
+                        <div className="w-12 h-12 flex items-center justify-center">
+                            <Image src={icon.icon} alt={icon.name} width={48} height={48} />
+                        </div>
+                        <span className="desktop-icon-label">{icon.name}</span>
+                    </div>
+                ))}
+            </div>
+
+            {/* 底部任务栏 */}
+            <div className="fixed bottom-0 left-0 right-0 h-14 bg-taskbar-bg bg-blur-win z-50 border-t border-white/10 flex items-center px-4">
+                {/* 开始菜单按钮 */}
+                <div className="taskbar-item mr-2">
+                    <Image src="/windows-logo.svg" alt="开始菜单" width={24} height={24} />
+                </div>
+
+                {/* 固定程序 */}
+                <div className="flex items-center space-x-1">
+                    <div className="taskbar-item">
+                        <Image src="/edge.svg" alt="Edge浏览器" width={24} height={24} />
+                    </div>
+                    <div className="taskbar-item">
+                        <Image
+                            src="/file-explorer.svg"
+                            alt="文件资源管理器"
+                            width={24}
+                            height={24}
+                        />
+                    </div>
+                </div>
+
+                {/* 右侧系统托盘 */}
+                <div className="ml-auto flex items-center space-x-2">
+                    <div className="taskbar-item">
+                        <span className="text-white text-sm">18:30</span>
+                    </div>
+                    <div className="taskbar-item">
+                        <Image src="/volume.svg" alt="音量" width={20} height={20} />
+                    </div>
+                    <div className="taskbar-item">
+                        <Image src="/network.svg" alt="网络" width={20} height={20} />
+                    </div>
+                </div>
+            </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+    );
 }
