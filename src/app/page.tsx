@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { DockDemo } from '@/_components/dock-menu/dock-menu';
+import { DockDemo } from '@/_components/dock-menu';
 
 // 桌面图标数据
 const desktopIcons = [
