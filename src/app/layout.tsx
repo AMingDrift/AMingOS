@@ -1,8 +1,10 @@
 import type { Metadata } from 'next';
+import type { FC, PropsWithChildren } from 'react';
 
 import './styles/index.css';
+import { ThemeProvider } from 'next-themes';
 
-import type { FC, PropsWithChildren } from 'react';
+import $styles from './layout.module.css';
 
 export const metadata: Metadata = {
     title: 'nextapp',
@@ -11,7 +13,11 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = ({ children }) => (
     <html lang="en" suppressHydrationWarning>
-        <body>{children}</body>
+        <body>
+            <ThemeProvider enableSystem={true} defaultTheme="system">
+                <div className={$styles.layout}>{children}</div>
+            </ThemeProvider>
+        </body>
     </html>
 );
 

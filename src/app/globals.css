@@ -1,28 +1,8 @@
 @import 'tailwindcss';
 
 :root {
-    --background: #0f0f0f; /* Windows暗色主题背景 */
-    --foreground: #ffffff;
-    --taskbar-bg: rgba(15, 15, 15, 0.8);
-    --taskbar-blur: 20px;
-}
-
-/* 添加毛玻璃效果工具类 */
-.bg-blur-win {
-    backdrop-filter: blur(var(--taskbar-blur));
-    -webkit-backdrop-filter: blur(var(--taskbar-blur));
-}
-
-.desktop-icon {
-    @apply flex flex-col items-center cursor-pointer transition-transform hover:scale-110;
-}
-
-.desktop-icon-label {
-    @apply text-white text-xs mt-1 bg-black/50 px-1 rounded;
-}
-
-.taskbar-item {
-    @apply flex items-center justify-center px-3 py-2 rounded-md hover:bg-white/20 transition-colors;
+    --background: #fff;
+    --foreground: #171717;
 }
 
 @theme inline {
@@ -40,7 +20,7 @@
 }
 
 body {
-    background: var(--background);
+    font-family: 'Arial', 'Helvetica', sans-serif;
     color: var(--foreground);
-    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
 }

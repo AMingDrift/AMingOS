@@ -1,0 +1,11 @@
+@reference "#tailwind.css";
+
+.layout {
+    /* 设置全局背景图片 */
+    @apply min-h-full w-full flex p-0 m-0 flex-col justify-between
+    bg-fixed bg-cover bg-no-repeat bg-center bg-[url(./styles/images/bg-light2.png)];
+}
+
+html[data-theme='dark'] .layout {
+    @apply bg-[url(./styles/images/bg-dark2.jpg)];
+}

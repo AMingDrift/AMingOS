@@ -73,7 +73,7 @@
     --sidebar-ring: oklch(70.5% 0.015 286.067deg);
 }
 
-.dark {
+[data-theme='dark'] {
     --background: oklch(14.1% 0.005 285.823deg);
     --foreground: oklch(98.5% 0 0deg);
     --card: oklch(21% 0.006 285.885deg);
