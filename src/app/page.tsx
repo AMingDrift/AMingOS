@@ -1,6 +1,7 @@
-import Image from 'next/image';
+import { Folders } from 'lucide-react';
 
 import { DockDemo } from '@/_components/dock-menu';
+import Explorer from '@/_components/explorer';
 
 // 桌面图标数据
 const desktopIcons = [
@@ -12,10 +13,10 @@ const desktopIcons = [
 
 export default function Desktop() {
     return (
-        <div className="min-h-screen relative overflow-hidden bg-win-dark">
+        <div className="min-h-screen relative overflow-hidden">
             {/* 桌面图标 */}
             <div className="absolute inset-0 z-10 p-4">
-                {desktopIcons.map((icon, index) => (
+                {/* {desktopIcons.map((icon, index) => (
                     <div
                         key={index}
                         className="desktop-icon absolute"
@@ -26,7 +27,17 @@ export default function Desktop() {
                         </div>
                         <span className="desktop-icon-label">{icon.name}</span>
                     </div>
-                ))}
+                ))} */}
+                <Explorer />
+                <div
+                    id="computer-icon"
+                    className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
+                >
+                    <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
+                        <Folders />
+                    </div>
+                    <div className="text-sm font-medium truncate">Document</div>
+                </div>
             </div>
 
             {/* 底部任务栏 */}

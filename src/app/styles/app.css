@@ -2,12 +2,8 @@ html {
     @apply scroll-smooth;
 }
 
-.ant-app {
-    @apply h-[100vh] w-full p-0 m-0;
-}
-
 .lucide {
-    @apply w-4 h-4 stroke-[1px];
+    @apply w-10 stroke-[2px];
 }
 
 .xicon {

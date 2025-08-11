@@ -3,6 +3,7 @@ import type { FC, PropsWithChildren } from 'react';
 
 import './styles/index.css';
 import { ThemeProvider } from '@/_components/theme-provider';
+import VideoBackground from '@/_components/video-background';
 
 import $styles from './layout.module.css';
 
@@ -16,6 +17,7 @@ const RootLayout: FC<PropsWithChildren> = ({ children }) => (
         <body>
             <ThemeProvider enableSystem defaultTheme="system" disableTransitionOnChange>
                 <div className={$styles.layout}>{children}</div>
+                <VideoBackground />
             </ThemeProvider>
         </body>
     </html>

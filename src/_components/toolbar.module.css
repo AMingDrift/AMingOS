@@ -1,0 +1,149 @@
+.toolbar {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 28px;
+    border-radius: 6px 6px 0 0;
+
+    &[data-float='false'] {
+        z-index: 10;
+    }
+
+    &[data-back='light'] {
+        background: #fefefe;
+    }
+
+    &[data-back='dark'] {
+        background: #181818;
+    }
+}
+
+.topInfo {
+    height: 100%;
+
+    &[data-float='true'] {
+        opacity: 0;
+    }
+
+    .uicon {
+        margin: 0 10px 0 6px;
+    }
+}
+
+.actbtns {
+    height: 100%;
+
+    .uicon {
+        height: 100%;
+        padding: 0 18px;
+        transition: all ease-in-out 60ms;
+
+        img {
+            transition: all ease-in-out 60ms;
+        }
+
+        &:hover {
+            background: rgb(136 136 136 / 20%);
+        }
+
+        &[data-payload='close']:hover {
+            background: rgb(255 0 0 / 80%);
+
+            img {
+                filter: invert(1);
+            }
+        }
+    }
+}
+
+.closeBtn {
+    border-radius: 0 6px 0 0;
+}
+
+.snapbox {
+    position: relative;
+
+    &[data-hv='true'] {
+        background: rgb(136 136 136 / 20%);
+    }
+}
+
+body[data-theme='dark'] .toolbar[data-noinvert='false'] {
+    .snapcont {
+        background: #222;
+
+        .snapper {
+            background: #4e4e4e;
+            border: solid 1px #777;
+
+            &:hover {
+                background: var(--clrPrm);
+                border: solid 1px var(--clrPrm);
+            }
+        }
+    }
+
+    .appFullName {
+        color: #fefefe;
+    }
+
+    .actbtns {
+        .uicon img {
+            filter: invert(1);
+        }
+    }
+}
+
+.resizecont {
+    position: absolute;
+    z-index: 12;
+}
+
+.topone {
+    top: -8px;
+    left: 0;
+    z-index: 22;
+    width: 80%;
+}
+
+.leftone {
+    left: -8px;
+    height: 100%;
+}
+
+.rightone {
+    right: -8px;
+    bottom: 0;
+    height: 90%;
+}
+
+.bottomone {
+    bottom: -8px;
+    left: 0;
+    width: 100%;
+}
+
+.conrsz {
+    width: 8px;
+    height: 8px;
+}
+
+.edgrsz {
+    min-width: 8px;
+    min-height: 8px;
+}
+
+.wdws {
+    width: 100%;
+}
+
+.hdws {
+    height: 100%;
+}
+
+.noscroll::-webkit-scrollbar {
+    display: none;
+}
