@@ -99,7 +99,7 @@
     --chart-3: oklch(76.9% 0.188 70.08deg);
     --chart-4: oklch(62.7% 0.265 303.9deg);
     --chart-5: oklch(64.5% 0.246 16.439deg);
-    --sidebar: hsl(240deg 5.9% 10%);
+    --sidebar: #1c1c2978;
     --sidebar-foreground: hsl(240deg 4.8% 95.9%);
     --sidebar-primary: hsl(224.3deg 76.3% 48%);
     --sidebar-primary-foreground: hsl(0deg 0% 100%);

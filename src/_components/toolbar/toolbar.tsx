@@ -1,16 +1,10 @@
 'use client';
 import type { MouseEvent } from 'react';
 
-import clsx from 'clsx';
-
 /* eslint-disable */
-import styles from './toolbar.module.css';
-export const ToolBar = (props) => {
+import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
+export const ToolBar = ({name, docApp, setDocApp }) => {
     const toolClick = () => {
-        // dispatch({
-        //   type: props.app,
-        //   payload: "front",
-        // });
     };
 
     let posP = [0, 0];
@@ -89,126 +83,145 @@ export const ToolBar = (props) => {
             wnapp.classList.remove('z9900');
         }
 
-        // const action = {
-        //     type: props.app,
-        //     payload: 'resize',
-        //     dim: {
-        //         width: getComputedStyle(wnapp).width,
-        //         height: getComputedStyle(wnapp).height,
-        //         top: getComputedStyle(wnapp).top,
-        //         left: getComputedStyle(wnapp).left,
-        //     },
-        // };
+        dispatchFun('resize',{
+            width: getComputedStyle(wnapp!).width,
+            height: getComputedStyle(wnapp!).height,
+            top: getComputedStyle(wnapp!).top,
+            left: getComputedStyle(wnapp!).left,
+        });
 
-        // dispatch(action);
     };
+
+    const dispatchFun = (action: string, payload?: any)=>{
+        switch(action) {
+            case 'full':{
+                setDocApp({
+                    ...docApp,
+                    size: 'full',
+                    hide: false,
+                    max: true,
+                })
+                break;
+            }
+            case 'mxmz': {
+                const size = ["mini", "full"][docApp.size != "full" ? 1 : 0];
+                if(size === "full") {
+                    setPos(0, 0);
+                    setDim(window.innerHeight, window.innerWidth);
+                }
+                setDocApp({
+                    ...docApp,
+                    size,
+                    hide: false,
+                    max: true,
+                })
+                break;
+            }
+            case 'close': {
+                setDocApp({
+                    ...docApp,
+                    hide: true,
+                    max: null,
+                });
+                break;
+            }
+            case 'resize': {
+                const dimP = payload;
+                 setDocApp({
+                    ...docApp,
+                    size: "cstm",
+                    hide: false,
+                    max: true,
+                    dim: dimP,
+                });
+                break;
+            }
+            default:{
+                break;
+            }
+        }
+    }
 
     return (
         <>
-            <div className={styles.toolbar}
-                data-float={props.float != null}
-                data-noinvert={props.noinvert != null}
-                style={{
-                    background: props.bg,
-                }}
+            <div className="toolbar"
             >
                 <div
-                    className={clsx(styles.topInfo, 'flex flex-grow items-center')}
-                    data-float={props.float != null}
+                    className='topInfo flex flex-grow items-center'
                     onClick={toolClick}
                     onMouseDown={toolDrag}
                     data-op="0"
                 >
-                    {/* <Icon src={props.icon} width={14} /> */}
-                    <div className={clsx(styles.appFullName, 'text-xss')} data-white={props.invert != null}>
-                        {props.name}
-                    </div>
+                    <Folders size={18} />
                 </div>
-                <div className={clsx(styles.actbtns, 'flex items-center')}>
-                    {/* <Icon
-                        invert={props.invert}
-                        click={props.app}
-                        payload="mnmz"
-                        pr
-                        src="minimize"
-                        ui
-                        width={12}
-                    /> */}
-                    <div className="snapbox h-full">
-                        {/* <Icon
-                            invert={props.invert}
-                            click={props.app}
-                            ui
-                            pr
-                            width={12}
-                            payload="mxmz"
-                            src={props.size == 'full' ? 'maximize' : 'maxmin'}
-                        /> */}
+                <div className='actbtns flex items-center'>
+                    <div className="actbtn" onClick={() => dispatchFun('close')}>
+                        <CircleMinus size={18} />
                     </div>
-                    {/* <Icon
-                        className="closeBtn"
-                        invert={props.invert}
-                        click={props.app}
-                        payload="close"
-                        pr
-                        src="close"
-                        ui
-                        width={14}
-                    /> */}
+                    <div className="actbtn" onClick={() => dispatchFun('mxmz')}>
+                         {docApp.size === 'full' ? (
+                            <CircleDot  size={18}/>
+                        ) : (
+                            <Circle  size={18}/>
+                        )}
+                    </div>
+                    <div className="actbtn closeBtn"  onClick={() => dispatchFun('close')}>
+                        <CircleX  size={18} />
+                    </div>
                 </div>
             </div>
-            <div className={clsx(styles.resizecont, styles.topone)}>
+            <div className="resizecont topone">
                 <div className="flex">
                     <div
-                        className={clsx(styles.conrsz, 'cursor-nw-resize')}
+                        className='conrsz cursor-nw-resize'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="-1,-1"
                     ></div>
                     <div
-                    className={clsx(styles.edgrsz, 'cursor-n-resize',styles.wdws)}
+                    className="edgrsz cursor-n-resize wdws"
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="-1,0"
                     ></div>
                 </div>
             </div>
-            <div className={clsx(styles.resizecont, styles.leftone)}>
+            <div className="resizecont leftone">
                 <div className="h-full">
                     <div
-                     className={clsx(styles.edgrsz, 'cursor-w-resize',styles.hdws)}
+                     className='edgrsz cursor-w-resize hdws'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="0,-1"
                     ></div>
                 </div>
             </div>
-            <div className={clsx(styles.resizecont, styles.rightone)}>
+            <div className="resizecont rightone">
                 <div className="h-full">
                     <div
-                    className={clsx(styles.edgrsz, 'cursor-w-resize',styles.hdws)}
+                    className='edgrsz cursor-w-resize hdws'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="0,1"
                     ></div>
                 </div>
             </div>
-            <div className={clsx(styles.resizecont, styles.bottomone)}>
+            <div className="resizecont bottomone">
                 <div className="flex">
                     <div
-                    className={clsx(styles.conrsz, 'cursor-ne-resize')}
+                    className='conrsz cursor-ne-resize'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="1,-1"
                     ></div>
                     <div
-                    className={clsx(styles.edgrsz, 'cursor-n-resize',styles.wdws)}
+                    className='edgrsz cursor-n-resize wdws'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="1,0"
                     ></div>
                     <div
-                    className={clsx(styles.conrsz, 'cursor-nw-resize')}
+                    className='conrsz cursor-nw-resize'
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="1,1"

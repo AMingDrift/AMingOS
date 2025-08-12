@@ -1,4 +1,7 @@
+'use client';
+
 import { Folders } from 'lucide-react';
+import { useState } from 'react';
 
 import { DockDemo } from '@/_components/dock-menu';
 import Explorer from '@/_components/explorer';
@@ -12,6 +15,16 @@ const desktopIcons = [
 ];
 
 export default function Desktop() {
+    const [docApp, setDocApp] = useState({
+        name: 'File Explorer',
+        icon: 'explorer',
+        type: 'app',
+        action: 'EXPLORER',
+        size: 'full',
+        hide: true,
+        max: false,
+        z: 1,
+    });
     return (
         <div className="min-h-screen relative overflow-hidden">
             {/* 桌面图标 */}
@@ -28,10 +41,18 @@ export default function Desktop() {
                         <span className="desktop-icon-label">{icon.name}</span>
                     </div>
                 ))} */}
-                <Explorer />
+                <Explorer docApp={docApp} setDocApp={setDocApp} />
                 <div
                     id="computer-icon"
                     className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
+                    onClick={() => {
+                        setDocApp({
+                            ...docApp,
+                            size: 'full',
+                            hide: false,
+                            max: true,
+                        });
+                    }}
                 >
                     <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
                         <Folders />

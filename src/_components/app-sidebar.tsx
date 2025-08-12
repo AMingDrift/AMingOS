@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from 'lucide-react';
+import { Files, FileVideo, Image, Music4, Newspaper } from 'lucide-react';
 
 import {
     Sidebar,
@@ -7,6 +7,7 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
+    SidebarMenuBadge,
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/_components/shadcn/ui/sidebar';
@@ -14,29 +15,34 @@ import {
 // Menu items.
 const items = [
     {
-        title: 'Home',
+        title: 'Music',
         url: '#',
-        icon: Home,
+        icon: Music4,
+        cnt: 2,
     },
     {
-        title: 'Inbox',
+        title: 'Videos',
         url: '#',
-        icon: Inbox,
+        icon: FileVideo,
+        cnt: 15,
     },
     {
-        title: 'Calendar',
+        title: 'Pictures',
         url: '#',
-        icon: Calendar,
+        icon: Image,
+        cnt: 3,
     },
     {
-        title: 'Search',
+        title: 'Files',
         url: '#',
-        icon: Search,
+        icon: Files,
+        cnt: 0,
     },
     {
-        title: 'Settings',
+        title: 'Blogs',
         url: '#',
-        icon: Settings,
+        icon: Newspaper,
+        cnt: 90,
     },
 ];
 
@@ -45,7 +51,7 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
+                    <SidebarGroupLabel>Files</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
@@ -56,6 +62,7 @@ export function AppSidebar() {
                                             <span>{item.title}</span>
                                         </a>
                                     </SidebarMenuButton>
+                                    <SidebarMenuBadge>{item.cnt}</SidebarMenuBadge>
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>

@@ -1,4 +1,4 @@
-.toolbar {
+@utility toolbar {
     position: relative;
     display: flex;
     flex-shrink: 0;
@@ -21,7 +21,7 @@
     }
 }
 
-.topInfo {
+@utility topInfo {
     height: 100%;
 
     &[data-float='true'] {
@@ -33,37 +33,24 @@
     }
 }
 
-.actbtns {
+@utility actbtns {
     height: 100%;
 
-    .uicon {
-        height: 100%;
-        padding: 0 18px;
-        transition: all ease-in-out 60ms;
+    .actbtn {
+        @apply h-full flex items-center justify-center px-1 hover:bg-[#88888833] cursor-pointer transition-all;
 
-        img {
-            transition: all ease-in-out 60ms;
-        }
-
-        &:hover {
-            background: rgb(136 136 136 / 20%);
-        }
-
-        &[data-payload='close']:hover {
-            background: rgb(255 0 0 / 80%);
-
-            img {
-                filter: invert(1);
-            }
+        &.closeBtn {
+            @apply hover:bg-[#ff0000cc];
+            border-radius: 0 6px 0 0;
         }
     }
 }
 
-.closeBtn {
+@utility closeBtn {
     border-radius: 0 6px 0 0;
 }
 
-.snapbox {
+@utility snapbox {
     position: relative;
 
     &[data-hv='true'] {
@@ -97,53 +84,55 @@ body[data-theme='dark'] .toolbar[data-noinvert='false'] {
     }
 }
 
-.resizecont {
+@utility resizecont {
     position: absolute;
     z-index: 12;
 }
 
-.topone {
+@utility topone {
     top: -8px;
     left: 0;
     z-index: 22;
-    width: 80%;
+    width: calc(100% - 48px * 3);
 }
 
-.leftone {
+@utility leftone {
     left: -8px;
     height: 100%;
 }
 
-.rightone {
+@utility rightone {
     right: -8px;
     bottom: 0;
-    height: 90%;
+    height: calc(100% - 28px);
 }
 
-.bottomone {
+@utility bottomone {
     bottom: -8px;
     left: 0;
     width: 100%;
 }
 
-.conrsz {
+@utility conrsz {
     width: 8px;
     height: 8px;
 }
 
-.edgrsz {
+@utility edgrsz {
     min-width: 8px;
     min-height: 8px;
 }
 
-.wdws {
+@utility wdws {
     width: 100%;
 }
 
-.hdws {
+@utility hdws {
     height: 100%;
 }
 
-.noscroll::-webkit-scrollbar {
-    display: none;
+@utility noscroll {
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
