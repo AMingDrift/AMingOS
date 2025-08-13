@@ -5,6 +5,7 @@ import type { MouseEvent } from 'react';
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 export const ToolBar = ({name, docApp, setDocApp }) => {
     const toolClick = () => {
+        // TODO: dispatch "front"
     };
 
     let posP = [0, 0];
@@ -14,29 +15,18 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
     let op = 0;
     let vec = [0, 0];
 
+    let isDragged = false;
+
     const toolDrag = (e:MouseEvent<HTMLDivElement>) => {
+        console.log('toolDrag');
         e = e || window.event;
         e.preventDefault();
         posM = [e.clientY, e.clientX];
         op = Number(e.currentTarget.dataset.op || 0);
-
-        if (op === 0) {
-            wnapp = e.currentTarget.parentElement?.parentElement as HTMLDivElement;
-        } else {
-            vec = e.currentTarget.dataset.vec!.split(',').map(Number);
-            wnapp = e.currentTarget.parentElement?.parentElement?.parentElement as HTMLDivElement;
+        if (e.currentTarget.dataset.vec){
+            vec = e.currentTarget.dataset.vec.split(',').map(Number);
         }
-
-        if (wnapp) {
-            wnapp.classList.add('notrans');
-            wnapp.classList.add('z9900');
-            posP = [wnapp.offsetTop, wnapp.offsetLeft];
-            dimP = [
-                Number.parseFloat(getComputedStyle(wnapp).height.replaceAll('px', '')),
-                Number.parseFloat(getComputedStyle(wnapp).width.replaceAll('px', '')),
-            ];
-        }
-
+        
         document.onmouseup = closeDrag;
         document.onmousemove = eleDrag as any;
 
@@ -57,6 +47,24 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
     const eleDrag = (e:MouseEvent<HTMLDivElement>) => {
         e = e || window.event;
         e.preventDefault();
+
+        isDragged = true;
+
+        if (!wnapp) {
+            if (op === 0) {
+            } else {
+                
+            }
+            wnapp = document.getElementById(`ExplorerApp`) as HTMLDivElement;
+
+            wnapp.classList.add('notrans');
+            wnapp.classList.add('z9900');
+            posP = [wnapp.offsetTop, wnapp.offsetLeft];
+            dimP = [
+                Number.parseFloat(getComputedStyle(wnapp).height.replaceAll('px', '')),
+                Number.parseFloat(getComputedStyle(wnapp).width.replaceAll('px', '')),
+            ];
+        }
 
         let pos0 = posP[0] + e.clientY - posM[0];
         let pos1 = posP[1] + e.clientX - posM[1];
@@ -83,13 +91,15 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
             wnapp.classList.remove('z9900');
         }
 
-        dispatchFun('resize',{
-            width: getComputedStyle(wnapp!).width,
-            height: getComputedStyle(wnapp!).height,
-            top: getComputedStyle(wnapp!).top,
-            left: getComputedStyle(wnapp!).left,
-        });
-
+        if (isDragged) {
+            dispatchFun('resize',{
+                width: getComputedStyle(wnapp!).width,
+                height: getComputedStyle(wnapp!).height,
+                top: getComputedStyle(wnapp!).top,
+                left: getComputedStyle(wnapp!).left,
+            });
+        }
+        isDragged = false;
     };
 
     const dispatchFun = (action: string, payload?: any)=>{
@@ -142,6 +152,21 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
         }
     }
 
+    const toolDoubleClick = (e:MouseEvent<HTMLDivElement>) => {
+        console.log('toolDoubleClick');
+        const size = ["mini", "full"][docApp.size != "full" ? 1 : 0];
+        if(size === "full") {
+            setPos(0, 0);
+            setDim(window.innerHeight, window.innerWidth);
+        }
+        setDocApp({
+            ...docApp,
+            size,
+            hide: false,
+            max: true,
+        })
+    }
+
     return (
         <>
             <div className="toolbar"
@@ -151,6 +176,7 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
                     onClick={toolClick}
                     onMouseDown={toolDrag}
                     data-op="0"
+                    onDoubleClick={toolDoubleClick}
                 >
                     <Folders size={18} />
                 </div>
