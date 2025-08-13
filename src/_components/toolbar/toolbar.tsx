@@ -1,9 +1,11 @@
 'use client';
 import type { MouseEvent } from 'react';
 
-/* eslint-disable */
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
+/* eslint-disable */
+import { useRouter } from 'next/navigation';
 export const ToolBar = ({name, docApp, setDocApp }) => {
+    const router = useRouter();
     const toolClick = () => {
         // TODO: dispatch "front"
     };
@@ -191,7 +193,11 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
                             <Circle  size={18}/>
                         )}
                     </div>
-                    <div className="actbtn closeBtn"  onClick={() => dispatchFun('close')}>
+                    <div className="actbtn closeBtn"  onClick={() => {
+                        dispatchFun('close');
+                        router.push('/');
+                    }
+                    }>
                         <CircleX  size={18} />
                     </div>
                 </div>
