@@ -1,7 +1,8 @@
 import React from 'react';
 
 import Modal from '@/_components/modal';
-import Document from '@/app/documentOrg/page';
+
+import Document from './ui/document';
 
 const Page = () => {
     return (

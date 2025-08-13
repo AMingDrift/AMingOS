@@ -3,7 +3,6 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import './styles/index.css';
 
-import Desktop from '@/_components/desktop';
 import { DockDemo } from '@/_components/dock-menu';
 import { ThemeProvider } from '@/_components/theme-provider';
 import VideoBackground from '@/_components/video-background';
@@ -15,7 +14,13 @@ export const metadata: Metadata = {
     description: '阿明的仿操作系统UI界面博客, 基于Next.js开发',
 };
 
-const RootLayout: FC<PropsWithChildren> = ({ doc }: { children?: ReactNode; doc?: ReactNode }) => {
+const RootLayout: FC<PropsWithChildren> = ({
+    children,
+    doc,
+}: {
+    children?: ReactNode;
+    doc?: ReactNode;
+}) => {
     return (
         <html lang="en" suppressHydrationWarning>
             <body>
@@ -26,7 +31,7 @@ const RootLayout: FC<PropsWithChildren> = ({ doc }: { children?: ReactNode; doc?
                                 {/* 桌面图标 */}
                                 <div className="absolute inset-0 z-10 p-4">
                                     {doc}
-                                    <Desktop></Desktop>
+                                    {children}
                                 </div>
 
                                 {/* 底部任务栏 */}

@@ -1,3 +1,5 @@
-export default function Default() {
-    return null;
-}
+import Desktop from './page';
+
+const DefaultPage = () => <Desktop></Desktop>;
+
+export default DefaultPage;
