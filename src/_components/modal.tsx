@@ -3,16 +3,16 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { useStore } from '@/app/@doc/document/hooks';
+import { useDocStore } from '@/app/@doc/document/hooks';
 
 import { ToolBar } from './toolbar/toolbar';
 const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) => {
-    const docApp = useStore((state) => state.docApp);
-    const full = useStore((state) => state.full);
-    const hide = useStore((state) => state.hide);
+    const docApp = useDocStore((state) => state.docApp);
+    const full = useDocStore((state) => state.full);
     const pathname = usePathname();
+    const prePathname = useRef('');
 
     useEffect(() => {
         // 路由变化时执行的逻辑
@@ -20,12 +20,13 @@ const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) =>
 
         // 示例：根据路径判断是否显示"我的电脑"模态框
         if (pathname.startsWith('/document')) {
-            setTimeout(() => {
-                full();
-            }, 10);
-        } else {
-            hide();
+            if (!prePathname.current.startsWith('/document') || !prePathname.current) {
+                setTimeout(() => {
+                    full();
+                }, 10);
+            }
         }
+        prePathname.current = pathname;
     }, [pathname]);
 
     return (

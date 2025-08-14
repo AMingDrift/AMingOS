@@ -1,4 +1,5 @@
 import { Files, FileVideo, Image, Music4, Newspaper } from 'lucide-react';
+import Link from 'next/link';
 
 import {
     Sidebar,
@@ -16,7 +17,7 @@ import {
 const items = [
     {
         title: 'Music',
-        url: '#',
+        url: '/document/music',
         icon: Music4,
         cnt: 2,
     },
@@ -57,10 +58,10 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <Link href={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </Link>
                                     </SidebarMenuButton>
                                     <SidebarMenuBadge>{item.cnt}</SidebarMenuBadge>
                                 </SidebarMenuItem>
