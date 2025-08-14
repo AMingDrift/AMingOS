@@ -23,7 +23,7 @@ const RootLayout: FC<PropsWithChildren> = ({
 }) => {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body>
+            <body className="overflow-hidden">
                 <ThemeProvider enableSystem defaultTheme="system" disableTransitionOnChange>
                     <div className={$styles.layout}>
                         <div>

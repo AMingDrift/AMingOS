@@ -6,6 +6,7 @@ import React from 'react';
 
 import { AppSidebar } from '@/_components/app-sidebar';
 import Modal from '@/_components/modal';
+import { ScrollArea } from '@/_components/shadcn/ui/scroll-area';
 import { SidebarProvider, SidebarTrigger } from '@/_components/shadcn/ui/sidebar';
 
 const Page = ({ children }: { children?: ReactNode }) => {
@@ -14,9 +15,9 @@ const Page = ({ children }: { children?: ReactNode }) => {
             <div className="windowScreen flex flex-col">
                 <SidebarProvider defaultOpen={true}>
                     <AppSidebar />
-                    <main>
+                    <main className="flex flex-col">
                         <SidebarTrigger />
-                        <div>{children}</div>
+                        <ScrollArea className="h-full w-full rounded-md p-2">{children}</ScrollArea>
                     </main>
                 </SidebarProvider>
             </div>
