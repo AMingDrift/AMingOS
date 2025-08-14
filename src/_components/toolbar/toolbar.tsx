@@ -4,7 +4,12 @@ import type { MouseEvent } from 'react';
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 /* eslint-disable */
 import { useRouter } from 'next/navigation';
-export const ToolBar = ({name, docApp, setDocApp }) => {
+import { useStore } from '@/app/@doc/document/hooks';
+export const ToolBar = ({name}) => {
+    const docApp = useStore((state) => state.docApp);
+    const close = useStore((state) => state.close);
+    const mxmz = useStore((state) => state.mxmz);
+    const resize = useStore((state) => state.resize);
     const router = useRouter();
     const toolClick = () => {
         // TODO: dispatch "front"
@@ -53,10 +58,6 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
         isDragged = true;
 
         if (!wnapp) {
-            if (op === 0) {
-            } else {
-                
-            }
             wnapp = document.getElementById(`ExplorerApp`) as HTMLDivElement;
 
             wnapp.classList.add('notrans');
@@ -94,79 +95,28 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
         }
 
         if (isDragged) {
-            dispatchFun('resize',{
+            const dimP = {
                 width: getComputedStyle(wnapp!).width,
                 height: getComputedStyle(wnapp!).height,
                 top: getComputedStyle(wnapp!).top,
                 left: getComputedStyle(wnapp!).left,
-            });
+            }
+            resize(dimP);
         }
         isDragged = false;
     };
 
-    const dispatchFun = (action: string, payload?: any)=>{
-        switch(action) {
-            case 'full':{
-                setDocApp({
-                    ...docApp,
-                    size: 'full',
-                    hide: false,
-                    max: true,
-                })
-                break;
-            }
-            case 'mxmz': {
-                const size = ["mini", "full"][docApp.size != "full" ? 1 : 0];
-                if(size === "full") {
-                    setPos(0, 0);
-                    setDim(window.innerHeight, window.innerWidth);
-                }
-                setDocApp({
-                    ...docApp,
-                    size,
-                    hide: false,
-                    max: true,
-                })
-                break;
-            }
-            case 'close': {
-                setDocApp({
-                    ...docApp,
-                    hide: true,
-                    max: null,
-                });
-                break;
-            }
-            case 'resize': {
-                const dimP = payload;
-                 setDocApp({
-                    ...docApp,
-                    size: "cstm",
-                    hide: false,
-                    max: true,
-                    dim: dimP,
-                });
-                break;
-            }
-            default:{
-                break;
-            }
+    const minimize = () => {
+        mxmz();
+        if (docApp.size === "full") {
+            setPos(0, 0);
+            setDim(window.innerHeight, window.innerWidth);
         }
     }
 
     const toolDoubleClick = (e:MouseEvent<HTMLDivElement>) => {
         console.log('toolDoubleClick');
-        const size = ["mini", "full"][docApp.size != "full" ? 1 : 0];
-        if(size === "full") {
-            setPos(0, 0);
-            setDim(window.innerHeight, window.innerWidth);
-        }
-        setDocApp({
-            ...docApp,
-            size,
-            hide: false,
-            max: true,
-        })
+        minimize();
     }
 
     return (
@@ -183,10 +133,11 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
                     <Folders size={18} />
                 </div>
                 <div className='actbtns flex items-center'>
-                    <div className="actbtn" onClick={() => dispatchFun('close')}>
+                    <div className="actbtn" onClick={close}>
                         <CircleMinus size={18} />
                     </div>
-                    <div className="actbtn" onClick={() => dispatchFun('mxmz')}>
+                    <div className="actbtn" onClick={minimize}
+                        >
                          {docApp.size === 'full' ? (
                             <CircleDot  size={18}/>
                         ) : (
@@ -194,7 +145,7 @@ export const ToolBar = ({name, docApp, setDocApp }) => {
                         )}
                     </div>
                     <div className="actbtn closeBtn"  onClick={() => {
-                        dispatchFun('close');
+                        close();
                         router.push('/');
                     }
                     }>

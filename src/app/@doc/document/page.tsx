@@ -1,15 +1,7 @@
-import React from 'react';
+import type { ReactNode } from 'react';
 
-import Modal from '@/_components/modal';
-
-import Document from './ui/document';
-
-const Page = () => {
-    return (
-        <Modal>
-            <Document></Document>
-        </Modal>
-    );
+const Page = ({ children }: { children?: ReactNode }) => {
+    return null;
 };
 
 export default Page;

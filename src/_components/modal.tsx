@@ -3,21 +3,15 @@
 import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+
+import { useStore } from '@/app/@doc/document/hooks';
 
 import { ToolBar } from './toolbar/toolbar';
 const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) => {
-    const [docApp, setDocApp] = useState({
-        name: 'File Explorer',
-        icon: 'explorer',
-        type: 'app',
-        action: 'EXPLORER',
-        size: 'full',
-        hide: true,
-        max: true,
-        z: 1,
-    });
-
+    const docApp = useStore((state) => state.docApp);
+    const full = useStore((state) => state.full);
+    const hide = useStore((state) => state.hide);
     const pathname = usePathname();
 
     useEffect(() => {
@@ -25,21 +19,12 @@ const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) =>
         console.log('当前路径:', pathname);
 
         // 示例：根据路径判断是否显示"我的电脑"模态框
-        if (pathname === '/document') {
+        if (pathname.startsWith('/document')) {
             setTimeout(() => {
-                setDocApp({
-                    ...docApp,
-                    size: 'full',
-                    hide: false,
-                    max: true,
-                });
-            }, 0);
+                full();
+            }, 10);
         } else {
-            setDocApp({
-                ...docApp,
-                hide: true,
-                max: true,
-            });
+            hide();
         }
     }, [pathname]);
 
@@ -55,7 +40,7 @@ const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) =>
                 zIndex: docApp.z,
             }}
         >
-            <ToolBar name="Document" docApp={docApp} setDocApp={setDocApp} />
+            <ToolBar name="Document" />
             {children}
         </div>
     );

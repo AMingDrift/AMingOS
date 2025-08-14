@@ -28,7 +28,7 @@ const items = [
     },
     {
         title: 'Pictures',
-        url: '#',
+        url: '/document/picture',
         icon: Image,
         cnt: 3,
     },
