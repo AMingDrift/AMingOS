@@ -1,6 +1,4 @@
-import type { ReactNode } from 'react';
-
-const Page = ({ children }: { children?: ReactNode }) => {
+const Page = () => {
     return null;
 };
 
