@@ -9,6 +9,8 @@ const ACCESS_KEY = process.env.ACCESS_KEY!;
 const SECRET_KEY = process.env.SECRET_KEY!;
 const DOMAIN = process.env.DOMAIN!;
 
+console.log('00000000000');
+console.log(DOMAIN);
 // 初始化鉴权对象
 const mac = new qiniu.auth.digest.Mac(ACCESS_KEY, SECRET_KEY);
 const config = new qiniu.conf.Config();
