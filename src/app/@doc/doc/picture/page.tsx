@@ -5,27 +5,32 @@ import { BlurFade } from '@/_components/magicui/blur-fade';
 import { fetchApi } from '@/libs/api';
 export const dynamic = 'force-dynamic';
 const PicturePage = async () => {
-    const result = await fetchApi(async (c) =>
-        c.api.doc.$get({
-            query: { type: 'image' },
-        }),
-    );
-    if (!result.ok) throw new Error((await result.json()).message);
-    const res = await result.json();
-
-    const getImageUrl = async (filename: string) =>
-        fetchApi(async (c) =>
-            c.api.doc.url.$get({
-                query: { filename },
+    let images: any[] = [];
+    try {
+        const result = await fetchApi(async (c) =>
+            c.api.doc.$get({
+                query: { type: 'image' },
             }),
         );
+        if (!result.ok) throw new Error((await result.json()).message);
+        const res = await result.json();
 
-    const images = await Promise.all(
-        res.map(async (item) => ({
-            ...item,
-            url: (await (await getImageUrl(item.key)).json()) as string,
-        })),
-    );
+        const getImageUrl = async (filename: string) =>
+            fetchApi(async (c) =>
+                c.api.doc.url.$get({
+                    query: { filename },
+                }),
+            );
+
+        images = await Promise.all(
+            res.map(async (item) => ({
+                ...item,
+                url: (await (await getImageUrl(item.key)).json()) as string,
+            })),
+        );
+    } catch {
+        console.error('2222');
+    }
 
     return (
         <div className="columns-2 gap-4 sm:columns-3">
