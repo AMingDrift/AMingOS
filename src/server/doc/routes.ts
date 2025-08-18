@@ -4,7 +4,7 @@ import { getPrivateDownloadUrl, queryKodoByType } from './service';
 
 // ...
 const app = createHonoApp();
-export const postApi = app
+export const docApi = app
     .get('/', async (c) => {
         try {
             const query = c.req.query();
