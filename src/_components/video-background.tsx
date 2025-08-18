@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { fetchApi } from '@/libs/api';
-
+export const dynamic = 'force-dynamic';
 const videoBackground = async () => {
     const result = await fetchApi(async (c) =>
         c.api.doc.url.$get({
