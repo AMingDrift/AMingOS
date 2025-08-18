@@ -6,7 +6,7 @@ import type { MouseEvent } from 'react';
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-import { useDocStore } from '@/app/@doc/document/hooks';
+import { useDocStore } from '@/app/@doc/doc/hooks';
 export const ToolBar = ({ name }: { name: string }) => {
     const docApp = useDocStore((state) => state.docApp);
     const close = useDocStore((state) => state.close);

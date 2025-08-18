@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MusicPage = () => {
+const MusicPage = async () => {
     return <div>MusicPage</div>;
 };
 

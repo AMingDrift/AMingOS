@@ -9,6 +9,19 @@ const nextConfig: NextConfig = {
     reactStrictMode: true, // 开启react严格模式
     // serverExternalPackages: externals,
     // transpilePackages: ['@uiw/react-md-editor'],
+    images: {
+        dangerouslyAllowSVG: true,
+        remotePatterns: [
+            {
+                protocol: 'https',
+                hostname: '*',
+            },
+            {
+                protocol: 'http',
+                hostname: '*',
+            },
+        ],
+    },
 };
 
 export default nextConfig;

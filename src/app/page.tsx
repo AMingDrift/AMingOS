@@ -11,7 +11,7 @@ const Desktop = () => {
         <div
             id="computer-icon"
             className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
-            onClick={() => router.push('/document')}
+            onClick={() => router.push('/doc')}
         >
             <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-2 group-hover:bg-primary/20 transition-colors">
                 <Folders />

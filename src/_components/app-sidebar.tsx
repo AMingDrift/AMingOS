@@ -17,7 +17,7 @@ import {
 const items = [
     {
         title: 'Music',
-        url: '/document/music',
+        url: '/doc/music',
         icon: Music4,
         cnt: 2,
     },
@@ -29,7 +29,7 @@ const items = [
     },
     {
         title: 'Pictures',
-        url: '/document/picture',
+        url: '/doc/picture',
         icon: Image,
         cnt: 3,
     },

@@ -5,7 +5,7 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 import { usePathname } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 
-import { useDocStore } from '@/app/@doc/document/hooks';
+import { useDocStore } from '@/app/@doc/doc/hooks';
 
 import { ToolBar } from './toolbar/toolbar';
 const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) => {
@@ -19,8 +19,8 @@ const Modal: FC<PropsWithChildren> = ({ children }: { children?: ReactNode }) =>
         console.log('当前路径:', pathname);
 
         // 示例：根据路径判断是否显示"我的电脑"模态框
-        if (pathname.startsWith('/document')) {
-            if (!prePathname.current.startsWith('/document') || !prePathname.current) {
+        if (pathname.startsWith('/doc')) {
+            if (!prePathname.current.startsWith('/doc') || !prePathname.current) {
                 setTimeout(() => {
                     full();
                 }, 10);

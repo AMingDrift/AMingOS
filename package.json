@@ -50,6 +50,8 @@
         "pg": "^8.16.3",
         "pinyin": "^4.0.0",
         "prisma-paginate": "^5.2.2",
+        "proxy-agent": "^6.5.0",
+        "qiniu": "^7.14.0",
         "react": "^19.1.0",
         "react-dom": "^19.1.0",
         "react-hook-form": "^7.61.1",
