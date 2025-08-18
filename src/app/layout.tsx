@@ -8,7 +8,7 @@ import { ThemeProvider } from '@/_components/theme-provider';
 import VideoBackground from '@/_components/video-background';
 
 import $styles from './layout.module.css';
-
+export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
     title: 'AMingOS',
     description: '阿明的仿操作系统UI界面博客, 基于Next.js开发',
