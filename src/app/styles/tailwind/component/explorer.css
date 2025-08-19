@@ -9,8 +9,9 @@
     --fakeMica: #202020 radial-gradient(#1a1f35 25%, #202020 100%) no-repeat fixed;
     --txt-col: #ddd;
     color: var(--txt-col);
-    background: var(--fakeMica);
-    opacity: 0.9;
+
+    /* background: var(--fakeMica); */
+    @apply bg-black/30 backdrop-blur-md;
 }
 
 @utility floatTab {

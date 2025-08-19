@@ -1,23 +1,25 @@
-import React from 'react';
+import { unstable_cache } from 'next/cache';
+import React, { Suspense } from 'react';
 
 import { BlurFade } from '@/_components/magicui/blur-fade';
+import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 import { fetchApi } from '@/libs/api';
-const PicturePage = async () => {
-    let images: any[] = [];
-    try {
-        const result = await fetchApi(async (c) =>
-            c.api.doc.$get({
-                query: { prefix: 'picture' },
-            }),
-        );
-        if (!result.ok) throw new Error((await result.json()).message);
-        const res = await result.json();
+const PictureContainer = async () => {
+    const getImages = unstable_cache(
+        async () => {
+            const result = await fetchApi(async (c) =>
+                c.api.doc.$get({
+                    query: { prefix: 'picture' },
+                }),
+            );
+            if (!result.ok) throw new Error((await result.json()).message);
+            return await result.json();
+        },
+        ['images-picture-cache'],
+        { revalidate: 60 },
+    );
 
-        images = res;
-        console.log(res);
-    } catch {
-        console.error('2222');
-    }
+    const images = await getImages();
 
     return (
         <div className="columns-2 gap-4 sm:columns-3">
@@ -34,6 +36,14 @@ const PicturePage = async () => {
                 </BlurFade>
             ))}
         </div>
+    );
+};
+
+const PicturePage = () => {
+    return (
+        <Suspense fallback={<Skeleton className="h-[400px] w-[33%] rounded-lg" />}>
+            <PictureContainer />
+        </Suspense>
     );
 };
 

@@ -11,6 +11,7 @@ const videoBackground = async () => {
         const result = await fetchApi(async (c) =>
             c.api.doc.$get({
                 query: { prefix: 'video/xqtd.mp4' },
+                // query: { prefix: '' },
             }),
         );
         if (!result.ok) throw new Error((await result.json()).message);

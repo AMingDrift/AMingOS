@@ -2,7 +2,7 @@
 
 import type { ReactNode } from 'react';
 
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import { AppSidebar } from '@/_components/app-sidebar';
 import Modal from '@/_components/modal';
@@ -15,11 +15,9 @@ const Page = ({ children }: { children?: ReactNode }) => {
             <div className="windowScreen flex flex-col">
                 <SidebarProvider defaultOpen={true}>
                     <AppSidebar />
-                    <main className="flex flex-col">
+                    <main className="flex flex-col w-full">
                         <SidebarTrigger />
-                        <ScrollArea className="h-full w-full rounded-md p-2">
-                            <Suspense fallback={<>Loading...</>}>{children}</Suspense>
-                        </ScrollArea>
+                        <ScrollArea className="h-full w-full rounded-md p-2">{children}</ScrollArea>
                     </main>
                 </SidebarProvider>
             </div>
