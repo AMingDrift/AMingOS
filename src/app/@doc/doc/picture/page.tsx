@@ -2,7 +2,6 @@ import React from 'react';
 
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { fetchApi } from '@/libs/api';
-export const dynamic = 'force-dynamic';
 const PicturePage = async () => {
     let images: any[] = [];
     try {

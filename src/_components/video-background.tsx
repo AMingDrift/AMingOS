@@ -5,7 +5,6 @@ import React from 'react';
 import type { DateToString } from '@/libs/types';
 
 import { fetchApi } from '@/libs/api';
-export const dynamic = 'force-dynamic';
 const videoBackground = async () => {
     let blob: DateToString<ListBlobResultBlob> | null = null;
     try {
