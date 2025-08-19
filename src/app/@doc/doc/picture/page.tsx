@@ -28,7 +28,7 @@ const PicturePage = async () => {
                         key={imageUrl.url}
                         className="mb-4 size-full rounded-lg object-contain"
                         src={imageUrl.url}
-                        alt={`Random stock ${idx + 1}`}
+                        alt={imageUrl.pathname}
                         width={600}
                         height={800}
                     />
