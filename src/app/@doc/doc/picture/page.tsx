@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import React from 'react';
 
 import { BlurFade } from '@/_components/magicui/blur-fade';
@@ -9,25 +8,14 @@ const PicturePage = async () => {
     try {
         const result = await fetchApi(async (c) =>
             c.api.doc.$get({
-                query: { type: 'image' },
+                query: { prefix: 'picture' },
             }),
         );
         if (!result.ok) throw new Error((await result.json()).message);
         const res = await result.json();
 
-        const getImageUrl = async (filename: string) =>
-            fetchApi(async (c) =>
-                c.api.doc.url.$get({
-                    query: { filename },
-                }),
-            );
-
-        images = await Promise.all(
-            res.map(async (item) => ({
-                ...item,
-                url: (await (await getImageUrl(item.key)).json()) as string,
-            })),
-        );
+        images = res;
+        console.log(res);
     } catch {
         console.error('2222');
     }
@@ -35,8 +23,9 @@ const PicturePage = async () => {
     return (
         <div className="columns-2 gap-4 sm:columns-3">
             {images.map((imageUrl, idx) => (
-                <BlurFade key={imageUrl.key} delay={0.25 + idx * 0.05} inView>
-                    <Image
+                <BlurFade key={imageUrl.url} delay={0.25 + idx * 0.05} inView>
+                    <img
+                        key={imageUrl.url}
                         className="mb-4 size-full rounded-lg object-contain"
                         src={imageUrl.url}
                         alt={`Random stock ${idx + 1}`}
