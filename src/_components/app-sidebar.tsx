@@ -1,5 +1,6 @@
 import { Files, FileVideo, Image, Music4, Newspaper } from 'lucide-react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import {
     Sidebar,
@@ -8,7 +9,6 @@ import {
     SidebarGroupContent,
     SidebarGroupLabel,
     SidebarMenu,
-    SidebarMenuBadge,
     SidebarMenuButton,
     SidebarMenuItem,
 } from '@/_components/shadcn/ui/sidebar';
@@ -48,6 +48,7 @@ const items = [
 ];
 
 export function AppSidebar() {
+    const pathname = usePathname();
     return (
         <Sidebar>
             <SidebarContent>
@@ -58,12 +59,23 @@ export function AppSidebar() {
                             {items.map((item) => (
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
-                                        <Link href={item.url}>
-                                            <item.icon />
+                                        <Link
+                                            href={item.url}
+                                            className={
+                                                pathname === item.url
+                                                    ? 'bg-primary/10 text-primary'
+                                                    : ''
+                                            }
+                                        >
+                                            <item.icon
+                                                className={
+                                                    pathname === item.url ? 'text-primary' : ''
+                                                }
+                                            />
                                             <span>{item.title}</span>
                                         </Link>
                                     </SidebarMenuButton>
-                                    <SidebarMenuBadge>{item.cnt}</SidebarMenuBadge>
+                                    {/* <SidebarMenuBadge>{item.cnt}</SidebarMenuBadge> */}
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>
