@@ -22,6 +22,7 @@
     flex-direction: column;
     width: 100%;
 
+    /* TODO: theme(spacing.16) 换成动态获得dock menu高度 */
     @apply h-[calc(100vh-theme(spacing.16))];
     border-radius: 6px;
     transform-origin: center;

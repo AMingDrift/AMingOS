@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarIcon, HomeIcon, MailIcon, PencilIcon } from 'lucide-react';
+import { CalendarIcon, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -64,8 +64,9 @@ const Icons = {
 
 const DATA = {
     navbar: [
-        { href: '#', icon: HomeIcon, label: 'Home' },
-        { href: '#', icon: PencilIcon, label: 'Blog' },
+        { href: '/', icon: HomeIcon, label: 'Home' },
+        { href: '/doc', icon: Folders, label: 'Document' },
+        { href: '#', icon: NotebookPen, label: 'Blog' },
     ],
     contact: {
         social: {

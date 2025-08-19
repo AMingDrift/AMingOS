@@ -5,14 +5,20 @@ import type { MouseEvent } from 'react';
 
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useShallow } from 'zustand/shallow';
 
 import { useDocStore } from '@/app/@doc/doc/hooks';
+
 export const ToolBar = ({ name }: { name: string }) => {
-    const docApp = useDocStore((state) => state.docApp);
-    const close = useDocStore((state) => state.close);
-    const hide = useDocStore((state) => state.hide);
-    const mxmz = useDocStore((state) => state.mxmz);
-    const resize = useDocStore((state) => state.resize);
+    const { docApp, close, hide, mxmz, resize } = useDocStore(
+        useShallow((state) => ({
+            docApp: state.docApp,
+            close: state.close,
+            hide: state.hide,
+            mxmz: state.mxmz,
+            resize: state.resize,
+        })),
+    );
     const router = useRouter();
     const toolClick = () => {
         // TODO: dispatch "front"

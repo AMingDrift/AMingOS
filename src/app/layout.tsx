@@ -29,7 +29,8 @@ const RootLayout: FC<PropsWithChildren> = ({
                         <div>
                             <div className="min-h-screen relative overflow-hidden">
                                 {/* 桌面图标 */}
-                                <div className="absolute inset-0 z-10 p-4">
+                                {/* TODO: bottom-[4rem] 替换成docker menu 高度 */}
+                                <div className="absolute inset-0 z-10 p-6 bottom-[4rem]">
                                     {doc}
                                     {children}
                                 </div>

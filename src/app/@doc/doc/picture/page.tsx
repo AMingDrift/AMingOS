@@ -16,7 +16,7 @@ const PictureContainer = async () => {
             return await result.json();
         },
         ['images-picture-cache'],
-        { revalidate: 60 },
+        { revalidate: 60 * 60 },
     );
 
     const images = await getImages();
