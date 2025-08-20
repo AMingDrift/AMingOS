@@ -4,7 +4,7 @@ import React from 'react';
 
 import { fetchApi } from '@/libs/api';
 
-export const revalidate = 60 * 60;
+export const revalidate = 3600;
 
 const videoBackground = async () => {
     const getBackgroundVideo = unstable_cache(
