@@ -7,6 +7,8 @@ import { BlurFade } from '@/_components/magicui/blur-fade';
 import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 import { fetchApi } from '@/libs/api';
 
+export const revalidate = process.env.NODE_ENV === 'development' ? 0 : 60 * 60 * 24;
+
 const PictureContainer = async () => {
     const getImages =
         process.env.NODE_ENV === 'development'

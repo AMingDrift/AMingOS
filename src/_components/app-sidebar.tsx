@@ -52,6 +52,7 @@ export function AppSidebar() {
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <Link
+                                            prefetch={true}
                                             href={item.url}
                                             className={
                                                 pathname === item.url
