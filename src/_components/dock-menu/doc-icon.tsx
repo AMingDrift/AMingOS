@@ -1,5 +1,6 @@
 'use client';
 
+import { debounce } from 'lodash';
 import { Folders } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -21,24 +22,26 @@ const DocIcon = () => {
         })),
     );
     const router = useRouter();
-
-    const handleModal = () => {
-        // src/app/@doc/doc/layout.tsx 中对'/doc'路由已有full()处理[兼容刷新保持modal]，这里无需再调用full()
-        if (docApp.hide) {
-            // state: 无 -> 全屏
-            router.push('/doc');
-        } else {
-            if (docApp.max) {
-                // state: 全屏 -> 最小化
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const handleModal = debounce(async () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
+        try {
+            if (docApp.hide) {
+                router.push('/doc');
+            } else if (docApp.max) {
                 hide();
                 router.push('/');
             } else {
-                // state: 最小化 -> 全屏
-                router.push(docApp.preMiniPath);
+                const targetPath = docApp.preMiniPath?.startsWith('/doc')
+                    ? docApp.preMiniPath
+                    : '/doc';
+                router.push(targetPath);
             }
+        } finally {
+            setTimeout(() => setIsTransitioning(false), 300);
         }
-    };
-
+    }, 200);
     const [isAnimating, setIsAnimating] = useState(false); // 添加动画状态
     // // for debug
     // const handleKeyDown = (event: KeyboardEvent) => {
@@ -76,7 +79,7 @@ const DocIcon = () => {
                         )}
                         onClick={(e) => {
                             e.preventDefault();
-                            setIsAnimating(true); // 开始动画
+                            setIsAnimating(true);
                             setTimeout(() => setIsAnimating(false), 400);
                             handleModal();
                         }}
