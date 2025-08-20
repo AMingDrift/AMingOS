@@ -122,7 +122,7 @@ export const ToolBar = ({ name }: { name: string }) => {
         }
     };
 
-    const toolDoubleClick = (e: MouseEvent<HTMLDivElement>) => {
+    const toolDoubleClick = () => {
         console.log('toolDoubleClick');
         minimize();
     };

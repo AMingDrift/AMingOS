@@ -32,6 +32,7 @@ export const docApi = app.get(
             const query = c.req.valid('query');
             const prefix = query.prefix ? query.prefix : '';
             const result = await queryDocBlobByType({ prefix });
+            console.log(`[${String(new Date())}]: 对象存储查询`);
             return c.json(result, 200);
         } catch (error) {
             return c.json(createErrorResult('查询对象存储数据失败', error), 500);

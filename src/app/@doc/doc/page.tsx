@@ -1,5 +1,5 @@
 const Page = () => {
-    return null;
+    return <div>doc dashboard placeholder</div>;
 };
 
 export default Page;

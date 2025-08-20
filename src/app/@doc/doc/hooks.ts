@@ -10,6 +10,7 @@ export interface DocOptions {
         hide: boolean;
         max: boolean | null;
         z: number;
+        preMiniPath: string;
         dim?: {
             width: string;
             height: string;
@@ -25,6 +26,7 @@ export interface DocActions {
     mxmz: () => void;
     close: () => void;
     resize: (dimP: DocOptions['docApp']['dim']) => void;
+    setPreMiniPath: (path: string) => void;
 }
 
 export const createDocStore = () =>
@@ -41,6 +43,7 @@ export const createDocStore = () =>
                         hide: true,
                         max: true,
                         z: 1,
+                        preMiniPath: '',
                     },
                     full: () =>
                         set((state) => {
@@ -67,6 +70,7 @@ export const createDocStore = () =>
                         set((state) => {
                             state.docApp.hide = true;
                             state.docApp.max = null;
+                            state.docApp.preMiniPath = '';
                         }),
                     resize: (dimP) =>
                         set((state) => {
@@ -74,6 +78,10 @@ export const createDocStore = () =>
                             state.docApp.hide = false;
                             state.docApp.max = true;
                             state.docApp.dim = dimP;
+                        }),
+                    setPreMiniPath: (path: string) =>
+                        set((state) => {
+                            state.docApp.preMiniPath = path;
                         }),
                 }),
                 { name: 'docStore' },

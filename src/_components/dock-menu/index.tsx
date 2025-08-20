@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarIcon, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
+import { CalendarIcon, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -15,6 +15,8 @@ import {
     TooltipTrigger,
 } from '@/_components/shadcn/ui/tooltip';
 import { cn } from '@/_components/shadcn/utils';
+
+import DocIcon from './doc-icon';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -65,7 +67,6 @@ const Icons = {
 const DATA = {
     navbar: [
         { href: '/', icon: HomeIcon, label: 'Home' },
-        { href: '/doc', icon: Folders, label: 'Document' },
         { href: '#', icon: NotebookPen, label: 'Blog' },
     ],
     contact: {
@@ -120,6 +121,26 @@ export function DockDemo({ className }: { className?: string }) {
                             </Tooltip>
                         </DockIcon>
                     ))}
+                    <DocIcon />
+                    {/* <DockIcon key="Document">
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="/doc"
+                                    aria-label={'Document'}
+                                    className={cn(
+                                        buttonVariants({ variant: 'ghost', size: 'icon' }),
+                                        'size-12 rounded-full',
+                                    )}
+                                >
+                                    <Folders className="size-4" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>{'Document'}</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </DockIcon> */}
                     <Separator orientation="vertical" className="h-full" />
                     {Object.entries(DATA.contact.social).map(([name, social]) => (
                         <DockIcon key={name}>

@@ -1,4 +1,4 @@
-import { Files, FileVideo, Image, Music4, Newspaper } from 'lucide-react';
+import { Files, FileVideo, Image, Music4 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
@@ -7,7 +7,6 @@ import {
     SidebarContent,
     SidebarGroup,
     SidebarGroupContent,
-    SidebarGroupLabel,
     SidebarMenu,
     SidebarMenuButton,
     SidebarMenuItem,
@@ -23,7 +22,7 @@ const items = [
     },
     {
         title: 'Videos',
-        url: '#',
+        url: '/doc/video',
         icon: FileVideo,
         cnt: 15,
     },
@@ -35,15 +34,9 @@ const items = [
     },
     {
         title: 'Files',
-        url: '#',
+        url: '/doc/file',
         icon: Files,
         cnt: 0,
-    },
-    {
-        title: 'Blogs',
-        url: '#',
-        icon: Newspaper,
-        cnt: 90,
     },
 ];
 
@@ -53,7 +46,6 @@ export function AppSidebar() {
         <Sidebar>
             <SidebarContent>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Files</SidebarGroupLabel>
                     <SidebarGroupContent>
                         <SidebarMenu>
                             {items.map((item) => (
