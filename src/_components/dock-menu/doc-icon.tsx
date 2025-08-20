@@ -3,7 +3,7 @@
 import { debounce } from 'lodash';
 import { Folders } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
@@ -22,24 +22,22 @@ const DocIcon = () => {
         })),
     );
     const router = useRouter();
-    const [isTransitioning, setIsTransitioning] = useState(false);
+    const currentPath = usePathname();
     const handleModal = debounce(async () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
-        try {
-            if (docApp.hide) {
-                router.push('/doc');
-            } else if (docApp.max) {
-                hide();
-                router.push('/');
-            } else {
-                const targetPath = docApp.preMiniPath?.startsWith('/doc')
-                    ? docApp.preMiniPath
-                    : '/doc';
-                router.push(targetPath);
+        let targetPath;
+        if (docApp.hide) {
+            targetPath = '/doc';
+        } else if (docApp.max) {
+            targetPath = '/';
+        } else {
+            targetPath = docApp.preMiniPath?.startsWith('/doc') ? docApp.preMiniPath : '/doc';
+        }
+        // 路径相同则不重复跳转
+        if (currentPath !== targetPath) {
+            router.push(targetPath);
+            if (targetPath === '/') {
+                hide(); // TODO: 后面专门做了home-icon.tsx后（里面监听/路由逻辑），就删掉
             }
-        } finally {
-            setTimeout(() => setIsTransitioning(false), 300);
         }
     }, 200);
     const [isAnimating, setIsAnimating] = useState(false); // 添加动画状态
