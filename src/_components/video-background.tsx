@@ -3,6 +3,9 @@ import Image from 'next/image';
 import React from 'react';
 
 import { fetchApi } from '@/libs/api';
+
+export const revalidate = 60 * 60;
+
 const videoBackground = async () => {
     const getBackgroundVideo = unstable_cache(
         async () => {
