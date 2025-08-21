@@ -8,8 +8,8 @@ import React, { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { DockIcon } from '@/_components/magicui/dock';
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
 import { useDocStore } from '@/_components/modal/hooks';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
 
 import { buttonVariants } from '../shadcn/ui/button';
 import { cn } from '../shadcn/utils';
