@@ -9,15 +9,15 @@ import { useShallow } from 'zustand/shallow';
 
 import { DockIcon } from '@/_components/magicui/dock';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
-import { useDocStore } from '@/app/@doc/doc/hooks';
+import { useDocStore } from '@/_components/modal/hooks';
 
 import { buttonVariants } from '../shadcn/ui/button';
 import { cn } from '../shadcn/utils';
 
 const DocIcon = () => {
-    const { docApp, hide } = useDocStore(
+    const { modalApp, hide } = useDocStore(
         useShallow((state) => ({
-            docApp: state.docApp,
+            modalApp: state.modalApp,
             hide: state.hide,
         })),
     );
@@ -25,12 +25,12 @@ const DocIcon = () => {
     const currentPath = usePathname();
     const handleModal = debounce(async () => {
         let targetPath;
-        if (docApp.hide) {
+        if (modalApp.hide) {
             targetPath = '/doc';
-        } else if (docApp.max) {
+        } else if (modalApp.max) {
             targetPath = '/';
         } else {
-            targetPath = docApp.preMiniPath?.startsWith('/doc') ? docApp.preMiniPath : '/doc';
+            targetPath = modalApp.preMiniPath?.startsWith('/doc') ? modalApp.preMiniPath : '/doc';
         }
         // 路径相同则不重复跳转
         if (currentPath !== targetPath) {
@@ -70,7 +70,7 @@ const DocIcon = () => {
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'icon' }),
                             'origin-center ease-in-out transition-all duration-200',
-                            !docApp.hide
+                            !modalApp.hide
                                 ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] backdrop-blur-md shadow-lg '
                                 : 'bg-transparent',
                             isAnimating ? 'animate-popintro' : '',

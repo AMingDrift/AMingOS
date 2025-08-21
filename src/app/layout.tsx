@@ -16,9 +16,11 @@ export const metadata: Metadata = {
 const RootLayout: FC<PropsWithChildren> = ({
     children,
     doc,
+    blog,
 }: {
     children?: ReactNode;
     doc?: ReactNode;
+    blog?: ReactNode;
 }) => {
     return (
         <html lang="en" suppressHydrationWarning>
@@ -31,6 +33,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                                 {/* TODO: bottom-[4rem] 替换成docker menu 高度 */}
                                 <div className="absolute inset-0 z-10 p-6 bottom-[4rem] contain-layout contain-size">
                                     {doc}
+                                    {blog}
                                     {children}
                                 </div>
 

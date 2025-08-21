@@ -1,18 +1,26 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 'use client';
-import type { MouseEvent } from 'react';
+import type { MouseEvent, RefObject } from 'react';
 
 import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
 
-import { useDocStore } from '@/app/@doc/doc/hooks';
+import type { ModalAppStore } from '@/_components/modal/hooks';
 
-export const ToolBar = ({ name }: { name: string }) => {
-    const { docApp, close, hide, mxmz, resize } = useDocStore(
+export const ToolBar = ({
+    name,
+    parentRef,
+    useModalAppStore,
+}: {
+    name: string;
+    parentRef: RefObject<HTMLDivElement | null>;
+    useModalAppStore: ModalAppStore;
+}) => {
+    const { modalApp, close, hide, mxmz, resize } = useModalAppStore(
         useShallow((state) => ({
-            docApp: state.docApp,
+            modalApp: state.modalApp,
             close: state.close,
             hide: state.hide,
             mxmz: state.mxmz,
@@ -66,7 +74,7 @@ export const ToolBar = ({ name }: { name: string }) => {
         isDragged = true;
 
         if (!wnapp) {
-            wnapp = document.getElementById(`ExplorerApp`) as HTMLDivElement;
+            wnapp = parentRef.current as HTMLDivElement;
 
             wnapp.classList.add('notrans');
             wnapp.classList.add('z9900');
@@ -116,7 +124,7 @@ export const ToolBar = ({ name }: { name: string }) => {
 
     const minimize = () => {
         mxmz();
-        if (docApp.size === 'full') {
+        if (modalApp.size === 'full') {
             setPos(0, 0);
             setDim(window.innerHeight, window.innerWidth);
         }
@@ -151,7 +159,7 @@ export const ToolBar = ({ name }: { name: string }) => {
                         <CircleMinus size={18} />
                     </div>
                     <div className="actbtn" onClick={minimize}>
-                        {docApp.size === 'full' ? <CircleDot size={18} /> : <Circle size={18} />}
+                        {modalApp.size === 'full' ? <CircleDot size={18} /> : <Circle size={18} />}
                     </div>
                     <div
                         className="actbtn closeBtn"

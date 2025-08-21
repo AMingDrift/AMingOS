@@ -1,3 +1,6 @@
+import type { LucideProps } from 'lucide-react';
+import type { ForwardRefExoticComponent, RefAttributes } from 'react';
+
 /**
  * 应用配置
  */
@@ -18,3 +21,10 @@ export type DateToString<T> = {
                 ? DateToString<T[K]>
                 : T[K];
 };
+
+export interface MenuItemType {
+    title: string;
+    url: string;
+    icon: ForwardRefExoticComponent<Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>>;
+    cnt?: number;
+}
