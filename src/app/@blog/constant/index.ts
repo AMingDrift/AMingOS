@@ -1,4 +1,4 @@
-import { Layers, NotebookPen, SquarePlus } from 'lucide-react';
+import { Layers, NotebookPen, SquarePlus, TestTubeDiagonal } from 'lucide-react';
 
 export const MenuItems = [
     {
@@ -17,5 +17,10 @@ export const MenuItems = [
         url: '/blog/collection',
         icon: Layers,
         cnt: 3,
+    },
+    {
+        title: '测试 mdx',
+        url: '/blog/mdx',
+        icon: TestTubeDiagonal,
     },
 ];

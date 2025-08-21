@@ -1,11 +1,11 @@
 /********************************************************* 自定义tailwind工具类 *********************************************************/
 @utility page-item {
-    @apply flex flex-auto flex-col mt-20 items-center;
+    @apply flex flex-auto flex-col mt-0 items-center;
 }
 
 /* 页面包装容器 */
 @utility page-container {
-    @apply max-w-[90%] md:max-w-[80%] lg:max-w-[70%] xl:max-w-[60%] flex-auto mb-5;
+    @apply flex-auto mb-5;
 }
 
 /* 页面包装容器 */
