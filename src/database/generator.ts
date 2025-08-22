@@ -34,7 +34,10 @@ const posts: IPost[] = [...Array.from({ length: 60 }).keys()].map(() => ({
  * 检测数据库文件，如果不存在则创建并把初始数据写入
  */
 const checkDbFile = async () => {
-    const dbPath = resolve(__dirname, '../../public/db.json');
+    const dbPath =
+        process.env.NODE_ENV === 'production'
+            ? resolve(__dirname, './db.json')
+            : resolve(__dirname, '../../public/db.json');
     if (!existsSync(dbPath)) {
         const json = JSON.stringify(posts);
         writeFileSync(dbPath, json);
@@ -49,7 +52,7 @@ export const readDbFile = async (): Promise<IPost[]> => {
     await checkDbFile();
     const dbPath =
         process.env.NODE_ENV === 'production'
-            ? resolve(__dirname, '../db.json')
+            ? resolve(__dirname, './db.json')
             : resolve(__dirname, '../../public/db.json');
     const data = readFileSync(dbPath, 'utf-8');
     return JSON.parse(data);
@@ -62,7 +65,10 @@ export const readDbFile = async (): Promise<IPost[]> => {
 export const resetDbFile = async (data: IPost[]) => {
     // 先检测一下数据库文件，不存在则创建并写入初始数据
     await checkDbFile();
-    const dbPath = resolve(__dirname, '../../public/db.json');
+    const dbPath =
+        process.env.NODE_ENV === 'production'
+            ? resolve(__dirname, './db.json')
+            : resolve(__dirname, '../../public/db.json');
     const json = JSON.stringify(data);
     fs.writeFileSync(dbPath, json);
 };
