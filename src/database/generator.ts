@@ -49,7 +49,7 @@ export const readDbFile = async (): Promise<IPost[]> => {
     await checkDbFile();
     const dbPath =
         process.env.NODE_ENV === 'production'
-            ? resolve(__dirname, '../../db.json')
+            ? resolve(__dirname, '../db.json')
             : resolve(__dirname, '../../public/db.json');
     const data = readFileSync(dbPath, 'utf-8');
     return JSON.parse(data);
