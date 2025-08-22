@@ -8,12 +8,17 @@ import { BlurFade } from '@/_components/magicui/blur-fade';
 import { queryPostPaginate } from '@/app/actions/post';
 
 import ImageComponent from './components/ImageComponent';
+import dbjson from './db.json';
 
 const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ searchParams }) => {
     const { page: currentPage, limit = 22 } = await searchParams;
     // 当没有传入当前页或当前页小于1时，设置为第1页
+    console.log(dbjson);
     const page = isNil(currentPage) || Number(currentPage) < 1 ? 1 : Number(currentPage);
-    const { items } = await queryPostPaginate({ page: Number(page), limit });
+    const items =
+        process.env.NODE_ENV === 'development'
+            ? (await queryPostPaginate({ page: Number(page), limit })).items
+            : dbjson;
     console.log(items);
     return (
         <div className="columns-2 gap-2 lg:columns-3 mt-2">
