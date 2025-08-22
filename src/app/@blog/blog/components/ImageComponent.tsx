@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { checkRandomNumberParity } from '../utils/randomNumberChecker';
 
@@ -26,12 +26,14 @@ export default function ImageComponent({ src, alt, id }: ImageComponentProps) {
         newSrc = src;
     }
 
-    const img = new Image();
-    img.src = newSrc;
-    img.onload = () => {
-        const isLandscape = img.naturalWidth > img.naturalHeight;
-        setAspectRatio(isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]');
-    };
+    useEffect(() => {
+        const img = new Image();
+        img.src = newSrc;
+        img.onload = () => {
+            const isLandscape = img.naturalWidth > img.naturalHeight;
+            setAspectRatio(isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]');
+        };
+    }, [newSrc]);
 
     return (
         <img
