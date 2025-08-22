@@ -106,6 +106,10 @@
     }
 }
 
+@utility aspect-range {
+    aspect-ratio: clamp(3/4, 1, 4/3);
+}
+
 @layer utilities {
     .animate-popintro {
         animation: popintro 0.4s ease-in-out;
