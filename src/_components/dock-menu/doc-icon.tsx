@@ -1,42 +1,54 @@
 'use client';
 
 import { debounce } from 'lodash';
-import { Folders } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { DockIcon } from '@/_components/magicui/dock';
-import { useDocStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/modal/hooks';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
+
+import type { appType } from '../modal/types';
 
 import { buttonVariants } from '../shadcn/ui/button';
 import { cn } from '../shadcn/utils';
 
-const DocIcon = () => {
-    const { modalApp, hide } = useDocStore(
+const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) => {
+    const { app, hide, list, front } = useModalStore(
         useShallow((state) => ({
-            modalApp: state.modalApp,
+            list: state.modalApp.list,
+            app: state.modalApp.list[name],
             hide: state.hide,
+            front: state.front,
         })),
     );
     const router = useRouter();
     const currentPath = usePathname();
     const handleModal = debounce(async () => {
         let targetPath;
-        if (modalApp.hide) {
-            targetPath = '/doc';
-        } else if (modalApp.max) {
+        let isNeedFront = false;
+        if (app.hide) {
+            targetPath = `/${name}`;
+        } else if (app.max) {
+            // TODO: check home logic
             targetPath = '/';
+            const aboveApp = Object.entries(list).find(
+                ([appName, appItem]) => appName !== name && appItem.z > app.z,
+            );
+            if (aboveApp) {
+                isNeedFront = true;
+                front(name);
+            }
         } else {
-            targetPath = modalApp.preMiniPath?.startsWith('/doc') ? modalApp.preMiniPath : '/doc';
+            targetPath = app.preMiniPath?.startsWith(`/${name}`) ? app.preMiniPath : `/${name}`;
         }
         // 路径相同则不重复跳转
-        if (currentPath !== targetPath) {
+        if (currentPath !== targetPath && !isNeedFront) {
             router.push(targetPath);
             if (targetPath === '/') {
-                hide(); // TODO: 后面专门做了home-icon.tsx后（里面监听/路由逻辑），就删掉
+                hide(name); // TODO: 后面专门做了home-icon.tsx后（里面监听/路由逻辑），就删掉
             }
         }
     }, 200);
@@ -61,16 +73,16 @@ const DocIcon = () => {
     //     };
     // }, [handleKeyDown]);
     return (
-        <DockIcon key="Document">
+        <DockIcon key={app.title}>
             <Tooltip>
                 <TooltipTrigger asChild>
                     <Link
                         href="#"
-                        aria-label="Document"
+                        aria-label={app.title}
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'icon' }),
                             'origin-center ease-in-out transition-all duration-200',
-                            !modalApp.hide
+                            !app.hide
                                 ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] backdrop-blur-md shadow-lg '
                                 : 'bg-transparent',
                             isAnimating ? 'animate-popintro' : '',
@@ -82,15 +94,15 @@ const DocIcon = () => {
                             handleModal();
                         }}
                     >
-                        <Folders className="size-4" />
+                        {icon}
                     </Link>
                 </TooltipTrigger>
                 <TooltipContent>
-                    <p>Document</p>
+                    <p>{app.title}</p>
                 </TooltipContent>
             </Tooltip>
         </DockIcon>
     );
 };
 
-export default DocIcon;
+export default DockMenuIcon;

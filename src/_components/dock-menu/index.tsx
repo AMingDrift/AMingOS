@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarIcon, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
+import { CalendarIcon, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -16,7 +16,7 @@ import {
 } from '@/_components/shadcn/ui/tooltip';
 import { cn } from '@/_components/shadcn/utils';
 
-import DocIcon from './doc-icon';
+import DockMenuIcon from './doc-icon';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -65,10 +65,7 @@ const Icons = {
 };
 
 const DATA = {
-    navbar: [
-        { href: '/', icon: HomeIcon, label: 'Home' },
-        { href: '#', icon: NotebookPen, label: 'Blog' },
-    ],
+    navbar: [{ href: '/', icon: HomeIcon, label: 'Home' }],
     contact: {
         social: {
             GitHub: {
@@ -121,7 +118,8 @@ export function DockDemo({ className }: { className?: string }) {
                             </Tooltip>
                         </DockIcon>
                     ))}
-                    <DocIcon />
+                    <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
+                    <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
                     {/* <DockIcon key="Document">
                         <Tooltip>
                             <TooltipTrigger asChild>

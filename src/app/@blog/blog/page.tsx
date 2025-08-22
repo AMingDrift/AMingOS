@@ -13,7 +13,6 @@ import dbjson from './db.json';
 const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ searchParams }) => {
     const { page: currentPage, limit = 22 } = await searchParams;
     // 当没有传入当前页或当前页小于1时，设置为第1页
-    console.log(dbjson);
     const page = isNil(currentPage) || Number(currentPage) < 1 ? 1 : Number(currentPage);
     const items =
         process.env.NODE_ENV === 'development'

@@ -1,47 +1,42 @@
-import type { FC, PropsWithChildren, ReactNode } from 'react';
+import type { FC, PropsWithChildren } from 'react';
 
 import { useRef } from 'react';
+import { useShallow } from 'zustand/shallow';
 
-import type { ModalOptions } from '@/_components/modal/types';
-
-import type { ModalAppStore } from './hooks';
+import type { appType, ModalOptions } from '@/_components/modal/types';
 
 import { ToolBar } from '../toolbar';
+import { useModalStore } from './hooks';
 const Modal: FC<
     PropsWithChildren & {
-        modalApp: ModalOptions['modalApp'];
-        id: string;
-        name: string;
-        useModalAppStore: ModalAppStore;
+        app: ModalOptions['modalApp']['list'][appType];
+        name: appType;
     }
-> = ({
-    children,
-    modalApp,
-    id,
-    name,
-    useModalAppStore,
-}: {
-    children?: ReactNode;
-    modalApp: ModalOptions['modalApp'];
-    id: string;
-    name: string;
-    useModalAppStore: ModalAppStore;
-}) => {
+> = ({ children, app, name }) => {
     const modalRef = useRef<HTMLDivElement>(null);
+    const { front } = useModalStore(
+        useShallow((state) => ({
+            front: state.front,
+        })),
+    );
     return (
+        // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
             className="msfiles floatTab dpShad"
-            id={id}
             ref={modalRef}
-            data-size={modalApp.size}
-            data-max={modalApp.max}
-            data-hide={modalApp.hide}
+            data-size={app.size}
+            data-max={app.max}
+            data-hide={app.hide}
             style={{
-                ...(modalApp.size === 'cstm' ? modalApp.dim : null),
-                zIndex: modalApp.z,
+                ...(app.size === 'cstm' ? app.dim : null),
+                zIndex: app.z,
+            }}
+            onMouseDown={(e) => {
+                e.stopPropagation();
+                front(name);
             }}
         >
-            <ToolBar name={name} parentRef={modalRef} useModalAppStore={useModalAppStore} />
+            <ToolBar name={name} app={app} parentRef={modalRef} />
             <div className="windowScreen flex flex-col">{children}</div>
         </div>
     );

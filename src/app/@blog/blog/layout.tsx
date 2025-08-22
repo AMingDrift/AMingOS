@@ -7,21 +7,21 @@ import { useShallow } from 'zustand/shallow';
 
 import { AppSidebar } from '@/_components/app-sidebar';
 import Modal from '@/_components/modal';
-import { useBlogStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/modal/hooks';
 import { ScrollArea, ScrollBar } from '@/_components/shadcn/ui/scroll-area';
 import { SidebarProvider, SidebarTrigger } from '@/_components/shadcn/ui/sidebar';
 
 import { MenuItems } from '../constant';
 
 const Page = ({ children }: { children?: ReactNode }) => {
-    const { modalApp } = useBlogStore(
+    const { app } = useModalStore(
         useShallow((state) => ({
-            modalApp: state.modalApp,
+            app: state.modalApp.list.blog,
         })),
     );
 
     return (
-        <Modal modalApp={modalApp} id="blogApp" name="Blog" useModalAppStore={useBlogStore}>
+        <Modal app={app} name="blog">
             <SidebarProvider defaultOpen={true}>
                 <AppSidebar items={MenuItems} />
                 <main className="flex flex-col w-full overflow-x-auto">

@@ -6,14 +6,16 @@ import { usePathname, useRouter } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import { useDocStore } from '../modal/hooks';
+import type { appType } from '../modal/types';
 
-const DesktopDocIcon = () => {
+import { useModalStore } from '../modal/hooks';
+
+const DesktopIcon = ({ name }: { name: appType }) => {
     const router = useRouter();
 
-    const { modalApp, hide, full, setPreMiniPath } = useDocStore(
+    const { app, hide, full, setPreMiniPath } = useModalStore(
         useShallow((state) => ({
-            modalApp: state.modalApp,
+            app: state.modalApp.list[name],
             full: state.full,
             hide: state.hide,
             setPreMiniPath: state.setPreMiniPath,
@@ -27,12 +29,15 @@ const DesktopDocIcon = () => {
         // 路由变化时执行的逻辑
         console.log('当前路径:', pathname);
         // 兼容刷新页面时，路径开头为/doc时，显示模态框
-        if (pathname.startsWith('/doc')) {
-            setPreMiniPath(pathname);
-            if (!prePathname.current || !prePathname.current.startsWith('/doc')) {
+        if (pathname.startsWith(`/${name}`)) {
+            setPreMiniPath(name, pathname);
+            if (
+                (!prePathname.current || !prePathname.current.startsWith(`/${name}`)) &&
+                !(!app.hide && app.max) // 排除打开状态
+            ) {
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        full();
+                        full(name);
                     });
                 });
             }
@@ -45,17 +50,17 @@ const DesktopDocIcon = () => {
             className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
             onClick={() => {
                 // src/app/@doc/doc/layout.tsx 中对'/doc'路由已有full()处理[兼容刷新保持modal]，这里无需再调用full()
-                if (modalApp.hide) {
+                if (app.hide) {
                     // state: 无 -> 全屏
-                    router.push('/doc');
+                    router.push(`/${name}`);
                 } else {
-                    if (modalApp.max) {
+                    if (app.max) {
                         // state: 全屏 -> 最小化
-                        hide();
+                        hide(name);
                         router.push('/');
                     } else {
                         // state: 最小化 -> 全屏
-                        router.push(modalApp.preMiniPath);
+                        router.push(app.preMiniPath);
                     }
                 }
             }}
@@ -63,9 +68,9 @@ const DesktopDocIcon = () => {
             <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-1 group-hover:bg-primary/20 transition-colors">
                 <Folders />
             </div>
-            <div className="text-sm font-medium truncate">Document</div>
+            <div className="text-sm font-medium truncate">{app.title}</div>
         </div>
     );
 };
 
-export default DesktopDocIcon;
+export default DesktopIcon;

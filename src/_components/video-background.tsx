@@ -22,8 +22,11 @@ const videoBackground = async () => {
         { revalidate: 60 * 60 * 24 },
     );
 
-    const videoUrl =
-        process.env.NODE_ENV === 'development' ? '/test/xqtd.mp4' : await getBackgroundVideo();
+    let videoUrl = '/test/xqtd.mp4';
+    const tmpBlockServerVideo = true;
+    if (process.env.NODE_ENV === 'production' && !tmpBlockServerVideo) {
+        videoUrl = await getBackgroundVideo();
+    }
 
     const imgUrl = '/xqtd.png';
 

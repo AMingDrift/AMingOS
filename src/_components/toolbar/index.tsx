@@ -7,18 +7,20 @@ import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
 
-import type { ModalAppStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/modal/hooks';
+
+import type { appType, ModalOptions } from '../modal/types';
 
 export const ToolBar = ({
     name,
+    app,
     parentRef,
-    useModalAppStore,
 }: {
-    name: string;
+    name: appType;
+    app: ModalOptions['modalApp']['list'][appType];
     parentRef: RefObject<HTMLDivElement | null>;
-    useModalAppStore: ModalAppStore;
 }) => {
-    const { modalApp, close, hide, mxmz, resize } = useModalAppStore(
+    const { modalApp, close, hide, mxmz, resize } = useModalStore(
         useShallow((state) => ({
             modalApp: state.modalApp,
             close: state.close,
@@ -30,6 +32,7 @@ export const ToolBar = ({
     const router = useRouter();
     const toolClick = () => {
         // TODO: dispatch "front"
+        console.log('toolClick');
     };
 
     let posP = [0, 0];
@@ -117,14 +120,14 @@ export const ToolBar = ({
                 top: getComputedStyle(wnapp!).top,
                 left: getComputedStyle(wnapp!).left,
             };
-            resize(dimP);
+            resize(name, dimP);
         }
         isDragged = false;
     };
 
     const minimize = () => {
-        mxmz();
-        if (modalApp.size === 'full') {
+        mxmz(name);
+        if (modalApp.list[name].size === 'full') {
             setPos(0, 0);
             setDim(window.innerHeight, window.innerWidth);
         }
@@ -146,25 +149,29 @@ export const ToolBar = ({
                     onDoubleClick={toolDoubleClick}
                 >
                     <Folders size={18} />
-                    <div className="title">{name}</div>
+                    <div className="title">{app.title}</div>
                 </div>
                 <div className="actbtns flex items-center">
                     <div
                         className="actbtn"
                         onClick={() => {
-                            hide();
+                            hide(name);
                             router.push('/');
                         }}
                     >
                         <CircleMinus size={18} />
                     </div>
                     <div className="actbtn" onClick={minimize}>
-                        {modalApp.size === 'full' ? <CircleDot size={18} /> : <Circle size={18} />}
+                        {modalApp.list[name].size === 'full' ? (
+                            <CircleDot size={18} />
+                        ) : (
+                            <Circle size={18} />
+                        )}
                     </div>
                     <div
                         className="actbtn closeBtn"
                         onClick={() => {
-                            close();
+                            close(name);
                             router.push('/');
                         }}
                     >

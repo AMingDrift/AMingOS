@@ -4,129 +4,98 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-import type { ModalActions, ModalOptions } from './types';
+import type { appType, ModalActions, ModalOptions } from './types';
 
-export const createDocStore = () =>
+export const createModalStore = () =>
     create<ModalOptions & ModalActions>()(
         immer(
             devtools(
                 (set) => ({
                     modalApp: {
-                        // name: 'File Explorer',
-                        // icon: 'explorer',
-                        // type: 'app',
-                        // action: 'EXPLORER',
-                        size: 'full',
-                        hide: true,
-                        max: true,
-                        z: 1,
-                        preMiniPath: '',
+                        list: {
+                            doc: {
+                                title: 'Document',
+                                size: 'full',
+                                hide: true,
+                                max: true,
+                                z: 1,
+                                preMiniPath: '',
+                            },
+                            blog: {
+                                title: 'Blog',
+                                size: 'full',
+                                hide: true,
+                                max: true,
+                                z: 1,
+                                preMiniPath: '',
+                            },
+                        },
+                        hz: 2,
                     },
-                    full: () =>
+                    full: (appName: appType) =>
                         set((state) => {
-                            state.modalApp.size = 'full';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
+                            const app = state.modalApp.list[appName];
+                            app.size = 'full';
+                            app.hide = false;
+                            app.max = true;
+                            state.modalApp.hz++;
+                            app.z = state.modalApp.hz;
                         }),
-                    hide: () =>
+                    hide: (appName: appType) =>
                         set((state) => {
-                            state.modalApp.size = 'full';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = false;
+                            const app = state.modalApp.list[appName];
+                            app.size = 'full';
+                            app.hide = false;
+                            app.max = false;
                         }),
-                    mxmz: () =>
+                    mxmz: (appName: appType) =>
                         set((state) => {
-                            const size = (['mini', 'full'] as const)[
-                                state.modalApp.size !== 'full' ? 1 : 0
-                            ];
-                            state.modalApp.size = size;
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
+                            const app = state.modalApp.list[appName];
+                            const size = (['mini', 'full'] as const)[app.size !== 'full' ? 1 : 0];
+                            app.size = size;
+                            app.hide = false;
+                            app.max = true;
+                            state.modalApp.hz++;
+                            app.z = state.modalApp.hz;
                         }),
-                    close: () =>
+                    close: (appName: appType) =>
                         set((state) => {
-                            state.modalApp.hide = true;
-                            state.modalApp.max = null;
-                            state.modalApp.preMiniPath = '';
+                            const app = state.modalApp.list[appName];
+                            app.hide = true;
+                            app.max = null;
+                            app.preMiniPath = '';
+                            app.z = -1;
+                            state.modalApp.hz--;
                         }),
-                    resize: (dimP) =>
+                    resize: (appName: appType, dimP) =>
                         set((state) => {
-                            state.modalApp.size = 'cstm';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
-                            state.modalApp.dim = dimP;
+                            const app = state.modalApp.list[appName];
+                            app.size = 'cstm';
+                            app.hide = false;
+                            app.max = true;
+                            app.dim = dimP;
+                            if (app.z !== state.modalApp.hz) state.modalApp.hz++;
+                            app.z = state.modalApp.hz;
                         }),
-                    setPreMiniPath: (path: string) =>
+                    front: (appName: appType) =>
                         set((state) => {
-                            state.modalApp.preMiniPath = path;
+                            const app = state.modalApp.list[appName];
+                            if (app.z !== state.modalApp.hz) {
+                                state.modalApp.hz++;
+                                app.z = state.modalApp.hz;
+                            }
+                        }),
+                    setPreMiniPath: (appName: appType, path: string) =>
+                        set((state) => {
+                            const app = state.modalApp.list[appName];
+                            app.preMiniPath = path;
                         }),
                 }),
-                { name: 'docStore' },
+                { name: 'modalStore' },
             ),
         ),
     );
 
-export const createBlogStore = () =>
-    create<ModalOptions & ModalActions>()(
-        immer(
-            devtools(
-                (set) => ({
-                    modalApp: {
-                        // name: 'File Explorer',
-                        // icon: 'explorer',
-                        // type: 'app',
-                        // action: 'EXPLORER',
-                        size: 'full',
-                        hide: true,
-                        max: true,
-                        z: 1,
-                        preMiniPath: '',
-                    },
-                    full: () =>
-                        set((state) => {
-                            state.modalApp.size = 'full';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
-                        }),
-                    hide: () =>
-                        set((state) => {
-                            state.modalApp.size = 'full';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = false;
-                        }),
-                    mxmz: () =>
-                        set((state) => {
-                            const size = (['mini', 'full'] as const)[
-                                state.modalApp.size !== 'full' ? 1 : 0
-                            ];
-                            state.modalApp.size = size;
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
-                        }),
-                    close: () =>
-                        set((state) => {
-                            state.modalApp.hide = true;
-                            state.modalApp.max = null;
-                            state.modalApp.preMiniPath = '';
-                        }),
-                    resize: (dimP) =>
-                        set((state) => {
-                            state.modalApp.size = 'cstm';
-                            state.modalApp.hide = false;
-                            state.modalApp.max = true;
-                            state.modalApp.dim = dimP;
-                        }),
-                    setPreMiniPath: (path: string) =>
-                        set((state) => {
-                            state.modalApp.preMiniPath = path;
-                        }),
-                }),
-                { name: 'docStore' },
-            ),
-        ),
-    );
+export const useModalStore = createModalStore();
 
-export const useDocStore = createDocStore();
-export const useBlogStore = createBlogStore();
-
-export type ModalAppStore = ReturnType<typeof createDocStore>;
+export type ModalAppStore = ReturnType<typeof createModalStore>;
