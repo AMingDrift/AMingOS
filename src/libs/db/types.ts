@@ -1,4 +1,3 @@
-// src/database/types.ts
 /**
  * 分页原数据
  */
@@ -42,29 +41,7 @@ export interface PaginateOptions {
 /**
  * 分页返回数据
  */
-export interface PaginateReturn<E extends Record<string, any>> {
-    meta: PaginateMeta;
+export interface PaginateReturn<E> {
+    meta: PaginateMeta & Record<string, any>;
     items: E[];
-}
-export interface IPost {
-    /**
-     * 文章ID
-     */
-    id: string;
-    /**
-     * 文章标题
-     */
-    title: string;
-    /**
-     * 文章内容
-     */
-    body: string;
-    /**
-     * 文章封面图
-     */
-    thumb: string;
-    /**
-     * 文章摘要
-     */
-    summary?: string;
 }

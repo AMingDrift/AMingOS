@@ -44,3 +44,5 @@ next-env.d.ts
 .env*.local
 
 *.mp4
+
+/src/generated/prisma

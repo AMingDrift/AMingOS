@@ -6,6 +6,7 @@ import type { IPaginateQueryProps } from '@/_components/paginate/types';
 
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { queryPostPaginate } from '@/app/actions/post';
+import { formatChineseTime } from '@/libs/time';
 
 import ImageComponent from './components/ImageComponent';
 import dbjson from './db.json';
@@ -36,7 +37,12 @@ const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ search
                             id={item.id}
                         />
                         <div className="footer">
-                            <div>{item.title}</div>
+                            <div className="font-bold">{item.title}</div>
+                            <time className="mt-2 w-full ellips text-right">
+                                {!isNil(item.updatedAt)
+                                    ? formatChineseTime(new Date(item.updatedAt))
+                                    : formatChineseTime(new Date(item.createdAt))}
+                            </time>
                         </div>
                     </div>
                 </BlurFade>

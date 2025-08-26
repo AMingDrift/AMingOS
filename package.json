@@ -6,13 +6,29 @@
         "#tailwind.css": "./src/app/styles/tailwind.css"
     },
     "scripts": {
-        "dev": "rimraf -rf .next src/database/db.json && next dev --turbopack -p 3001",
+        "dev": "rimraf -rf .next && next dev --turbopack -p 3001",
         "build": "next build",
         "start": "next start",
         "------------------ lint command": "----",
         "lint": "pnpm lint:es && pnpm lint:style",
         "lint:es": "next lint --fix",
-        "lint:style": "stylelint \"**/*.css\" --fix --cache --cache-location node_modules/.cache/stylelint/"
+        "lint:style": "stylelint \"**/*.css\" --fix --cache --cache-location node_modules/.cache/stylelint/",
+        "------------------ db command": "----",
+        "dbg": "cross-env NODE_ENV=development prisma generate",
+        "dbp": "cross-env NODE_ENV=development prisma db push",
+        "dbmc": "cross-env NODE_ENV=development prisma migrate dev --create-only --skip-generate",
+        "dbm": "cross-env NODE_ENV=development prisma migrate dev --skip-seed",
+        "dbmr": "cross-env NODE_ENV=development prisma migrate reset -f --skip-seed",
+        "dbms": "cross-env NODE_ENV=development prisma migrate dev",
+        "dbmrs": "cross-env NODE_ENV=development prisma migrate reset -f",
+        "dbs": "prisma db seed",
+        "dbmd": "cross-env NODE_ENV=production prisma migrate deploy",
+        "dbo": "prisma studio",
+        "postinstall": "pnpm run dbm && pnpm run dbs && pnpm run dbg"
+    },
+    "prisma": {
+        "schema": "src/database/schema",
+        "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} -r tsconfig-paths/register src/database/seed/index.ts"
     },
     "dependencies": {
         "@faker-js/faker": "^9.9.0",

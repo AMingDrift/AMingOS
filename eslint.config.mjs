@@ -25,7 +25,6 @@ export default antfu(
             'pnpm-lock.yaml',
             'package-lock.json',
             'next-env.d.ts',
-            'src/database/db.json',
         ],
     },
     {
