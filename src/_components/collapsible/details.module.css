@@ -1,0 +1,9 @@
+@reference "#tailwind.css";
+
+.details {
+    @apply border p-2 overflow-hidden;
+
+    & > .content {
+        @apply overflow-hidden px-2 py-3;
+    }
+}

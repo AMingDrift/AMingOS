@@ -1,0 +1,56 @@
+@reference "#tailwind.css";
+
+.mdx-preview {
+    .code-window {
+        @apply my-4 rounded-sm  overflow-hidden border border-neutral-700;
+
+        & pre {
+            @apply m-0;
+        }
+
+        & code {
+            @apply bg-transparent;
+        }
+    }
+
+    .code-header {
+        @apply list-none flex justify-between items-center px-2 pt-1 pb-2 bg-[color:hsl(220deg_13%_18%)];
+    }
+
+    .window-controls {
+        @apply flex gap-1 items-center;
+    }
+
+    .window-controls .control {
+        @apply w-[0.625rem] h-[0.625rem] rounded-full;
+    }
+
+    .control.close {
+        @apply bg-red-500 hover:bg-red-600;
+    }
+
+    .control.minimize {
+        @apply bg-yellow-500 hover:bg-yellow-600;
+    }
+
+    .control.maximize {
+        @apply bg-green-500 hover:bg-green-600;
+    }
+
+    .code-tools {
+        @apply flex gap-2;
+    }
+
+    .code-lang,
+    .code-copy {
+        @apply text-xs text-neutral-400 flex items-center font-semibold;
+    }
+
+    .code-lang {
+        @apply ml-auto mx-2;
+    }
+
+    .code-content {
+        @apply h-auto;
+    }
+}

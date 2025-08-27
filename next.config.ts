@@ -8,16 +8,15 @@ const withMDX = createMDX({
         rehypePlugins: [['rehype-prism-plus', { showLineNumbers: true }] as any],
     },
 });
-// const externals: string[] = ['next-mdx-remote-client'];
-// if (process.env.TURBOPACK) {
-//     externals.push('rehype-prism-plus');
-// }
+const externals: string[] = ['next-mdx-remote-client'];
+if (process.env.TURBOPACK) {
+    externals.push('rehype-prism-plus');
+}
 
 const nextConfig: NextConfig = {
     reactStrictMode: true, // 开启react严格模式
-    // serverExternalPackages: externals,
+    serverExternalPackages: externals,
     // transpilePackages: ['@uiw/react-md-editor'],
-    serverExternalPackages: ['next-mdx-remote', 'rehype-prism-plus'],
     images: {
         dangerouslyAllowSVG: true,
         remotePatterns: [

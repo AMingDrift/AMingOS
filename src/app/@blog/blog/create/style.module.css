@@ -1,0 +1,12 @@
+@reference "#tailwind.css";
+
+.item {
+    @apply flex flex-auto flex-col space-y-6  bg-white/90 min-w-full lg:min-w-[60%] px-5 py-3 rounded-md;
+    /* @apply bg-white/80 flex-auto w-[80%] min-w-[68rem] drop-shadow-lg rounded-md flex flex-col; */
+}
+
+html[data-theme='dark'] {
+    .item {
+        @apply !bg-zinc-800/80;
+    }
+}

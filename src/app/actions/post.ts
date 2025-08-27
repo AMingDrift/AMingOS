@@ -21,7 +21,7 @@ export const queryPostPaginate = async (
     const data = await db.post.paginate({
         orderBy: [{ updatedAt: 'desc' }, { createdAt: 'desc' }],
         page: 1,
-        limit: 20,
+        limit: 15,
         ...options,
     });
     return paginateTransform(data);
@@ -31,7 +31,7 @@ export const queryPostPaginate = async (
  * 根据查询条件获取文章总页数
  * @param limit
  */
-export const queryPostTotalPages = async (limit = 8): Promise<number> => {
+export const queryPostTotalPages = async (limit = 15): Promise<number> => {
     const data = await queryPostPaginate({ page: 1, limit });
     return data.meta.totalPages ?? 0;
 };

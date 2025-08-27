@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 
 import { isNil } from 'lodash';
+import Link from 'next/link';
 
 import type { IPaginateQueryProps } from '@/_components/paginate/types';
 
@@ -29,22 +30,24 @@ const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ search
                     inView
                     className="flex flex-col mb-6 break-inside-avoid"
                 >
-                    <div className="flex flex-col cursor-pointer border-2 border-transparent rounded-xl p-4 transition-all duration-300 hover:border-white/30 hover:backdrop-blur-md hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]">
-                        <ImageComponent
-                            key={item.id}
-                            src={item.thumb}
-                            alt={item.title}
-                            id={item.id}
-                        />
-                        <div className="footer">
-                            <div className="font-bold">{item.title}</div>
-                            <time className="mt-2 w-full ellips text-right">
-                                {!isNil(item.updatedAt)
-                                    ? formatChineseTime(new Date(item.updatedAt))
-                                    : formatChineseTime(new Date(item.createdAt))}
-                            </time>
+                    <Link href={`/blog/${item.id}`}>
+                        <div className="flex flex-col cursor-pointer border-2 border-transparent rounded-xl p-4 transition-all duration-300 hover:border-white/30 hover:backdrop-blur-md hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]">
+                            <ImageComponent
+                                key={item.id}
+                                src={item.thumb}
+                                alt={item.title}
+                                id={item.id}
+                            />
+                            <div className="footer">
+                                <div className="font-bold">{item.title}</div>
+                                <time className="mt-2 w-full ellips text-right">
+                                    {!isNil(item.updatedAt)
+                                        ? formatChineseTime(new Date(item.updatedAt))
+                                        : formatChineseTime(new Date(item.createdAt))}
+                                </time>
+                            </div>
                         </div>
-                    </div>
+                    </Link>
                 </BlurFade>
             ))}
         </div>
