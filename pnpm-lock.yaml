@@ -20,15 +20,6 @@ importers:
       '@hookform/resolvers':
         specifier: ^5.1.1
         version: 5.2.1(react-hook-form@7.62.0(react@19.1.0))
-      '@mdx-js/loader':
-        specifier: ^3.1.0
-        version: 3.1.0(acorn@8.15.0)
-      '@mdx-js/react':
-        specifier: ^3.1.0
-        version: 3.1.0(@types/react@19.1.9)(react@19.1.0)
-      '@next/mdx':
-        specifier: ^15.5.0
-        version: 15.5.0(@mdx-js/loader@3.1.0(acorn@8.15.0))(@mdx-js/react@3.1.0(@types/react@19.1.9)(react@19.1.0))
       '@prisma/adapter-pg':
         specifier: ^6.12.0
         version: 6.13.0
@@ -122,9 +113,6 @@ importers:
       pinyin:
         specifier: ^4.0.0
         version: 4.0.0(segmentit@2.0.3)
-      prism-themes:
-        specifier: ^1.9.0
-        version: 1.9.0
       prisma-paginate:
         specifier: ^5.2.2
         version: 5.2.2(@prisma/client@6.12.0(prisma@6.12.0(typescript@5.9.2))(typescript@5.9.2))(prisma@6.12.0(typescript@5.9.2))
@@ -793,14 +781,6 @@ packages:
   '@keyv/serialize@1.1.0':
     resolution: {integrity: sha512-RlDgexML7Z63Q8BSaqhXdCYNBy/JQnqYIwxofUrNLGCblOMHp+xux2Q8nLMLlPpgHQPoU0Do8Z6btCpRBEqZ8g==}
 
-  '@mdx-js/loader@3.1.0':
-    resolution: {integrity: sha512-xU/lwKdOyfXtQGqn3VnJjlDrmKXEvMi1mgYxVmukEUtVycIz1nh7oQ40bKTd4cA7rLStqu0740pnhGYxGoqsCg==}
-    peerDependencies:
-      webpack: '>=5'
-    peerDependenciesMeta:
-      webpack:
-        optional: true
-
   '@mdx-js/mdx@3.1.0':
     resolution: {integrity: sha512-/QxEhPAvGwbQmy1Px8F899L5Uc2KZ6JtXwlCgJmjSTBedwOZkByYcBG4GceIGPXRDsmfxhHazuS+hlOShRLeDw==}
 
@@ -821,17 +801,6 @@ packages:
 
   '@next/eslint-plugin-next@15.4.6':
     resolution: {integrity: sha512-2NOu3ln+BTcpnbIDuxx6MNq+pRrCyey4WSXGaJIyt0D2TYicHeO9QrUENNjcf673n3B1s7hsiV5xBYRCK1Q8kA==}
-
-  '@next/mdx@15.5.0':
-    resolution: {integrity: sha512-TxfWpIDHx9Xy/GgZwegrl+HxjzeQml0bTclxX72SqJLi83IhJaFiglQbfMTotB2hDRbxCGKpPYh0X20+r1Trtw==}
-    peerDependencies:
-      '@mdx-js/loader': '>=0.15.0'
-      '@mdx-js/react': '>=0.15.0'
-    peerDependenciesMeta:
-      '@mdx-js/loader':
-        optional: true
-      '@mdx-js/react':
-        optional: true
 
   '@next/swc-darwin-arm64@15.4.3':
     resolution: {integrity: sha512-YAhZWKeEYY7LHQJiQ8fe3Y6ymfcDcTn7rDC8PDu/pdeIl1Z2LHD4uyPNuQUGCEQT//MSNv6oZCeQzZfTCKZv+A==}
@@ -4112,9 +4081,6 @@ packages:
   preval.macro@4.0.0:
     resolution: {integrity: sha512-sJJnE71X+MPr64CVD2AurmUj4JEDqbudYbStav3L9Xjcqm4AR0ymMm6sugw1mUmfI/7gw4JWA4JXo/k6w34crw==}
 
-  prism-themes@1.9.0:
-    resolution: {integrity: sha512-tX2AYsehKDw1EORwBps+WhBFKc2kxfoFpQAjxBndbZKr4fRmMkv47XN0BghC/K1qwodB1otbe4oF23vUTFDokw==}
-
   prisma-paginate@5.2.2:
     resolution: {integrity: sha512-Lq7wZ8DPtvNF8r8WTmMlBYDk3La2g+3/Pm09tctbkmLdgDijQifG62HRUy72a/ZnXciUjtAOaHIEvmeESLWkoQ==}
     peerDependencies:
@@ -5541,14 +5507,6 @@ snapshots:
 
   '@keyv/serialize@1.1.0': {}
 
-  '@mdx-js/loader@3.1.0(acorn@8.15.0)':
-    dependencies:
-      '@mdx-js/mdx': 3.1.0(acorn@8.15.0)
-      source-map: 0.7.6
-    transitivePeerDependencies:
-      - acorn
-      - supports-color
-
   '@mdx-js/mdx@3.1.0(acorn@8.15.0)':
     dependencies:
       '@types/estree': 1.0.8
@@ -5601,13 +5559,6 @@ snapshots:
   '@next/eslint-plugin-next@15.4.6':
     dependencies:
       fast-glob: 3.3.1
-
-  '@next/mdx@15.5.0(@mdx-js/loader@3.1.0(acorn@8.15.0))(@mdx-js/react@3.1.0(@types/react@19.1.9)(react@19.1.0))':
-    dependencies:
-      source-map: 0.7.6
-    optionalDependencies:
-      '@mdx-js/loader': 3.1.0(acorn@8.15.0)
-      '@mdx-js/react': 3.1.0(@types/react@19.1.9)(react@19.1.0)
 
   '@next/swc-darwin-arm64@15.4.3':
     optional: true
@@ -9408,8 +9359,6 @@ snapshots:
   preval.macro@4.0.0:
     dependencies:
       babel-plugin-preval: 4.0.0
-
-  prism-themes@1.9.0: {}
 
   prisma-paginate@5.2.2(@prisma/client@6.12.0(prisma@6.12.0(typescript@5.9.2))(typescript@5.9.2))(prisma@6.12.0(typescript@5.9.2)):
     dependencies:

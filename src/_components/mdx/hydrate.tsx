@@ -15,12 +15,13 @@ import { deepMerge } from '@/libs/utils';
 import type { MdxHydrateProps } from './types';
 
 import './styles/index.css';
+import Toc from './components/toc';
 import { useCodeWindow } from './hooks/code-window';
 import $styles from './hydrate.module.css';
 import { defaultMdxHydrateOptions } from './options/hydrate';
 
 export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
-    const { serialized, ...rest } = props;
+    const { serialized, toc = true, ...rest } = props;
     const [content, setContent] = useState<JSX.Element | null>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const options = useMemo(() => deepMerge(defaultMdxHydrateOptions, rest, 'merge'), [rest]);
@@ -49,7 +50,14 @@ export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
     return (
         !isNil(content) && (
             <div className={$styles.container}>
-                <div className={$styles.article}>{content}</div>
+                <div className={$styles.article} ref={contentRef}>
+                    {content}
+                </div>
+                {toc && !isNil(serialized.scope?.toc) && (
+                    <div className={$styles.toc}>
+                        <Toc toc={serialized.scope.toc} />
+                    </div>
+                )}
             </div>
         )
     );

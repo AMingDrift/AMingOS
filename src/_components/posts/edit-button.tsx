@@ -3,7 +3,7 @@
 import type { FC } from 'react';
 
 import { isNil } from 'lodash';
-import { UserPen } from 'lucide-react';
+import { SquarePen } from 'lucide-react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useMemo } from 'react';
@@ -19,8 +19,7 @@ const Button: FC<{ id: string }> = ({ id }) => {
     return (
         <CNButton asChild className="mr-3">
             <Link href={`/blog/edit/${id}${getUrlQuery}`}>
-                <UserPen />
-                编辑
+                <SquarePen />
             </Link>
         </CNButton>
     );

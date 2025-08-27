@@ -1,0 +1,32 @@
+@reference "#tailwind.css";
+
+.container {
+    @apply flex flex-auto w-full;
+
+    & > :global(.wmde-markdown-var.w-md-editor) {
+        @apply flex-auto w-full;
+    }
+
+    & :global(.wmde-markdown-var:has(.w-md-editor-text-input:disabled)) {
+        @apply pointer-events-none cursor-not-allowed;
+
+        &::before {
+            @apply content-[''] absolute inset-0 z-[99] pointer-events-none rounded-[3px] bg-zinc-300/50 backdrop-blur-[2px];
+        }
+
+        & > :global(.w-md-editor-content > .w-md-editor-area),
+        & > :global(.w-md-editor-content > .w-md-editor-preview) {
+            @apply overflow-hidden;
+        }
+    }
+}
+
+html[data-theme='dark'] {
+    .container {
+        & :global(.wmde-markdown-var:has(.w-md-editor-text-input:disabled)) {
+            &::before {
+                @apply bg-zinc-900/50;
+            }
+        }
+    }
+}

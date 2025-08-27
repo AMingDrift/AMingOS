@@ -1,0 +1,123 @@
+@reference "#tailwind.css";
+
+.toc-container {
+    @apply grid border-l-2 border-slate-200/60;
+    grid-template-rows: auto 1fr;
+}
+
+.toc-container.close {
+    @apply grid;
+    grid-template-rows: auto 0fr;
+}
+
+.toc-title {
+    @apply cursor-pointer select-none;
+}
+
+.toc-list {
+    @apply max-w-fit overflow-hidden text-base relative;
+}
+
+/* 滑动指示器 */
+.indicator {
+    @apply absolute left-3 w-0.5 bg-blue-500;
+    height: 1rem; /* 减小边框长度 */
+
+    @apply transition-transform duration-300;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); /* 使用更稳定的缓动函数 */
+}
+
+.toc-list li {
+    @apply relative py-0.5 ml-0; /* 减小垂直内边距 */
+}
+
+.toc-list li[data-active='true']::before {
+    content: '';
+
+    @apply absolute left-3 h-4 w-0.5 bg-amber-500;
+    @apply top-1/2 -translate-y-1/2;
+}
+
+/* 激活项的样式 */
+.toc-list li[data-active='true'] a {
+    @apply text-amber-500 font-medium;
+}
+
+/* 链接基本样式 */
+.toc-list a {
+    @apply block w-full px-4 text-sm;
+    @apply text-slate-600;
+    @apply hover:text-slate-900;
+    @apply transition-colors duration-200;
+}
+
+/* 内容缩进 */
+.toc-list li a div {
+    @apply transition-transform duration-200;
+}
+
+.toc-list li.h1indent a div,
+.toc-list li.h2indent a div {
+    @apply pl-4;
+}
+
+.toc-list li.h3indent a div {
+    @apply pl-8;
+}
+
+.toc-list li.h4indent a div {
+    @apply pl-12;
+}
+
+.toc-list li.h5indent a div {
+    @apply pl-16;
+}
+
+.toc-list li.h6indent a div {
+    @apply pl-20;
+}
+
+.toc-list li.tight {
+    @apply my-[0.05rem];
+}
+
+/* first and last li when mobile */
+.toc-list li:first-child {
+    @apply pt-[0.6rem];
+}
+
+.toc-list li:last-child {
+    @apply pb-[0.6rem];
+}
+
+.toc-list span.numbering {
+    @apply mr-2 text-[var(--primary)];
+}
+
+.toc-list span.href {
+    @apply hidden;
+}
+
+.toc-list a:hover span.href {
+    @apply inline-block ml-4 text-[80%] text-gray-500;
+}
+
+html[data-theme='dark'] {
+    .toc-container {
+        @apply border-slate-700/60;
+    }
+
+    .toc-list li[data-active='true']::before {
+        @apply bg-amber-400;
+    }
+
+    /* 激活项的样式 */
+    .toc-list li[data-active='true'] a {
+        @apply text-amber-400;
+    }
+
+    /* 链接基本样式 */
+    .toc-list a {
+        @apply text-slate-400 hover:text-slate-200;
+    }
+}

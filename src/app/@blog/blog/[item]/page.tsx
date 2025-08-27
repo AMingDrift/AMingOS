@@ -19,7 +19,6 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
     if (isNil(post)) return notFound();
     return (
         <>
-            <PostEditButton id={post.id} />
             <div className="page-item">
                 <div className={cn('page-container', $styles.item)}>
                     <div className={$styles.thumb}>
@@ -32,10 +31,12 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
                             unoptimized
                         />
                     </div>
-
                     <div className={$styles.content}>
                         <header className={$styles.title}>
-                            <h1>{post.title}</h1>
+                            <div className="flex justify-between">
+                                <h1>{post.title}</h1>
+                                <PostEditButton id={post.id} />
+                            </div>
                         </header>
                         <div className={$styles.meta}>
                             <span>
