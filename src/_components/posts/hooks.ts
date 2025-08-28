@@ -2,7 +2,6 @@
 'use client';
 import type { Post } from '@prisma/client';
 // ...
-import type { DeepNonNullable } from 'utility-types';
 
 import { isNil, trim } from 'lodash';
 // import { isNil, trim } from 'lodash';
@@ -11,6 +10,7 @@ import { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { createPostItem, updatePostItem } from '@/app/actions/post';
+import { getDefaultFormValues } from '@/libs/form';
 
 import type { PostCreateData, PostFormData, PostUpdateData } from './types';
 
@@ -21,22 +21,15 @@ import type { PostCreateData, PostFormData, PostUpdateData } from './types';
  */
 export const usePostActionForm = (params: { type: 'create' } | { type: 'update'; item: Post }) => {
     // 定义默认数据
-    const defaultValues = useMemo(() => {
-        if (params.type === 'create') {
-            return {
-                title: '文章标题',
-                body: '文章内容',
-                summary: '',
-            } as DeepNonNullable<PostCreateData>;
-        }
-
-        return {
-            title: params.item.title,
-            body: params.item.body,
-            summary: isNil(params.item.summary) ? '' : params.item.summary,
-        } as DeepNonNullable<PostUpdateData>;
-    }, [params.type]);
-    return useForm<DeepNonNullable<PostFormData>>({
+    const defaultValues = useMemo(
+        () =>
+            getDefaultFormValues<Post, PostFormData>(
+                ['title', 'body', 'summary', 'slug', 'keywords', 'description'],
+                params,
+            ),
+        [params.type],
+    );
+    return useForm<PostFormData>({
         defaultValues,
     });
 };
@@ -69,7 +62,7 @@ export const usePostFormSubmitHandler = (
                 }
                 // 创建或更新文章后跳转到文章详情页
                 // 注意,这里不要用push,防止在详情页后退后返回到创建或编辑页面的弹出框
-                if (!isNil(post)) router.replace(`/blog/${post.id}`);
+                if (!isNil(post)) router.replace(`/blog/${post.slug || post.id}`);
             } catch (error) {
                 console.log('error', error);
             }

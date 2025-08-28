@@ -30,7 +30,7 @@ const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ search
                     inView
                     className="flex flex-col mb-6 break-inside-avoid"
                 >
-                    <Link href={`/blog/${item.id}`}>
+                    <Link href={`/blog/${item.slug || item.id}`}>
                         <div className="flex flex-col cursor-pointer border-2 border-transparent rounded-xl p-4 transition-all duration-300 hover:border-white/30 hover:backdrop-blur-md hover:shadow-[0_0_15px_rgba(255,255,255,0.4)]">
                             <ImageComponent
                                 key={item.id}

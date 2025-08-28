@@ -10,7 +10,7 @@ import VideoBackground from '@/_components/video-background';
 import $styles from './layout.module.css';
 export const metadata: Metadata = {
     title: 'AMingOS',
-    description: '阿明的仿操作系统UI界面博客, 基于Next.js开发',
+    description: '阿明的仿操作系统UI界面博客',
 };
 
 const RootLayout: FC<PropsWithChildren> = ({

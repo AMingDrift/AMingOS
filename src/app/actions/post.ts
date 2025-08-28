@@ -35,14 +35,31 @@ export const queryPostTotalPages = async (limit = 15): Promise<number> => {
     const data = await queryPostPaginate({ page: 1, limit });
     return data.meta.totalPages ?? 0;
 };
+
 /**
  * 根据id或slug查询文章信息
  * @param arg
  */
 export const queryPostItem = async (arg: string): Promise<Post | null> => {
     const item = await db.post.findFirst({
-        where: { id: arg },
+        where: {
+            OR: [
+                { id: arg },
+                {
+                    slug: arg,
+                },
+            ],
+        },
     });
+    return item;
+};
+
+/**
+ * 根据slug查询文章信息
+ * @param slug
+ */
+export const queryPostItemBySlug = async (slug: string): Promise<Post | null> => {
+    const item = await db.post.findUnique({ where: { slug } });
     return item;
 };
 
