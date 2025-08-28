@@ -8,8 +8,9 @@ import type { HeadingDepth, HeadingParent, TocItem } from 'remark-flexible-toc';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { cn } from '../../shadcn/utils';
-import $styles from './toc.module.css';
+import { cn } from '@/_components/shadcn/utils';
+
+import $styles from './list.module.css';
 
 interface Props {
     toc: TocItem[];
@@ -22,7 +23,7 @@ interface Props {
     skipParents?: Exclude<HeadingParent, 'root'>[];
 }
 
-const Toc: FC<Props> = ({
+export const TocList: FC<Props> = ({
     toc,
     maxDepth = 6,
     ordered = false,
@@ -106,7 +107,7 @@ const Toc: FC<Props> = ({
 
     return (
         <div className={$styles['toc-container']}>
-            <ul ref={tocListRef} className={cn($styles['toc-list'], 'tw-flex tw-flex-col')}>
+            <ul ref={tocListRef} className={cn($styles['toc-list'], 'flex flex-col')}>
                 {filteredToc.map((heading) => {
                     const headingId = heading.href.replace(/^#/, '');
                     return (
@@ -114,13 +115,13 @@ const Toc: FC<Props> = ({
                             key={heading.href}
                             data-active={headingId === activeId}
                             className={cn(
-                                'tw-flex tw-items-center',
+                                'flex items-center',
                                 indented && $styles[`h${heading.depth}indent`],
                                 tight && $styles.tight,
                             )}
                         >
                             <a href={`#${headingId}`} onClick={(e) => handleClick(e, headingId)}>
-                                <div className={`h${heading.depth} tw-ellips`}>
+                                <div className={`h${heading.depth} ellips`}>
                                     {ordered ? (
                                         <strong>
                                             <span className={$styles.numbering}>
@@ -138,5 +139,3 @@ const Toc: FC<Props> = ({
         </div>
     );
 };
-
-export default Toc;

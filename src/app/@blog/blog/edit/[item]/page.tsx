@@ -18,7 +18,7 @@ const PostEditPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
     const post = await queryPostItemById(item);
     if (isNil(post)) return notFound();
     return (
-        <div className="page-item">
+        <div className="page-item h-full">
             <div className={cn($styles.item, 'page-container')}>
                 <PostPageForm post={post} />
             </div>

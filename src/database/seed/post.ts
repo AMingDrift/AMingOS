@@ -18,7 +18,7 @@ export const createPostData = async () => {
                 // 生成3-6个段落的内容并把每个段落用换行符换行
                 body: faker.lorem.paragraphs(getRandomInt(3, 6), '\n'),
                 // 有49%的机率会生成一段摘要
-                summary: Math.random() < 0.5 ? faker.lorem.text() : undefined,
+                summary: Math.random() < 0.5 ? faker.lorem.text() : null,
             },
         });
     }

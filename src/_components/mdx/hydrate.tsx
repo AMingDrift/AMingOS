@@ -10,12 +10,13 @@ import { hydrate } from 'next-mdx-remote-client';
 import { useMemo, useRef, useState } from 'react';
 import { useDeepCompareEffect, useMount } from 'react-use';
 
+import { useIsMobile, useIsTablet } from '@/libs/broswer';
 import { deepMerge } from '@/libs/utils';
 
+import './styles/index.css';
 import type { MdxHydrateProps } from './types';
 
-import './styles/index.css';
-import Toc from './components/toc';
+import { Toc } from './components/toc';
 import { useCodeWindow } from './hooks/code-window';
 import $styles from './hydrate.module.css';
 import { defaultMdxHydrateOptions } from './options/hydrate';
@@ -24,6 +25,9 @@ export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
     const { serialized, toc = true, ...rest } = props;
     const [content, setContent] = useState<JSX.Element | null>(null);
     const contentRef = useRef<HTMLDivElement>(null);
+    const mobile = useIsMobile();
+    const tablet = useIsTablet();
+    const isMobile = useMemo(() => mobile || tablet, [mobile, tablet]);
     const options = useMemo(() => deepMerge(defaultMdxHydrateOptions, rest, 'merge'), [rest]);
     useMount(() => {
         // 确保页面完全加载
@@ -53,11 +57,7 @@ export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
                 <div className={$styles.article} ref={contentRef}>
                     {content}
                 </div>
-                {toc && !isNil(serialized.scope?.toc) && (
-                    <div className={$styles.toc}>
-                        <Toc toc={serialized.scope.toc} />
-                    </div>
-                )}
+                {toc && <Toc serialized={serialized} isMobile={isMobile} />}
             </div>
         )
     );

@@ -33,9 +33,9 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
                     </div>
                     <div className={$styles.content}>
                         <header className={$styles.title}>
-                            <div className="flex justify-between">
-                                <h1>{post.title}</h1>
-                                <PostEditButton id={post.id} />
+                            <h1 className="text-lg lg:text-3xl">{post.title}</h1>
+                            <div className="ml-2">
+                                <PostEditButton id={post.id} iconBtn />
                             </div>
                         </header>
                         <div className={$styles.meta}>
