@@ -5,7 +5,7 @@
 
 /* 页面包装容器 */
 @utility page-container {
-    @apply flex-auto mb-5;
+    @apply flex-auto;
 }
 
 /* 页面包装容器 */
@@ -14,7 +14,7 @@
 @utility page-blank {
     @apply bg-white/80  backdrop-blur-sm h-full w-full drop-shadow-lg rounded-md flex justify-center items-center flex-col space-y-3 lg:space-y-0 lg:flex-row;
 
-    html.dark & {
+    html[data-theme='dark'] & {
         @apply bg-black/50;
     }
 }
@@ -27,7 +27,7 @@
 @utility page-block {
     @apply bg-zinc-100/80;
 
-    html.dark & {
+    html[data-theme='dark'] & {
         @apply bg-zinc-800/50;
     }
 }
@@ -35,7 +35,7 @@
 @utility page-block-hover {
     @apply hover:bg-white/90;
 
-    html.dark & {
+    html[data-theme='dark'] & {
         @apply hover:bg-black/80;
     }
 }
@@ -85,7 +85,7 @@
         @apply bg-gray-100;
     }
 
-    html.dark &::-webkit-scrollbar-track {
+    html[data-theme='dark'] &::-webkit-scrollbar-track {
         @apply bg-zinc-800;
     }
 
@@ -93,7 +93,7 @@
         @apply bg-gray-300 rounded;
     }
 
-    html.dark &::-webkit-scrollbar-thumb {
+    html[data-theme='dark'] &::-webkit-scrollbar-thumb {
         @apply bg-zinc-600;
     }
 
@@ -101,7 +101,7 @@
         @apply bg-gray-100;
     }
 
-    html.dark &::-webkit-scrollbar-corner {
+    html[data-theme='dark'] &::-webkit-scrollbar-corner {
         @apply bg-zinc-800;
     }
 }

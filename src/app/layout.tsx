@@ -4,6 +4,7 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 import './styles/index.css';
 
 import { DockDemo } from '@/_components/dock-menu';
+import { Toaster } from '@/_components/shadcn/ui/sonner';
 import { ThemeProvider } from '@/_components/theme-provider';
 import VideoBackground from '@/_components/video-background';
 
@@ -42,6 +43,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                             </div>
                         </div>
                     </div>
+                    <Toaster />
                     <VideoBackground />
                 </ThemeProvider>
             </body>

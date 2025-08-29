@@ -1,6 +1,8 @@
 import type { Post, Prisma } from '@prisma/client';
 import type { BaseSyntheticEvent } from 'react';
+import type { z } from 'zod';
 
+import type { generatePostFormValidator } from './form-validator';
 /**
  * 文章操作表单组件创建文章操作的参数
  */
@@ -39,7 +41,7 @@ export type PostActionFormProps = (PostCreateFormProps | PostUpdateFormProps) & 
 /**
  * 文章操作表单的submit(提交表单以创建或更新文章)函数参数
  */
-export type PostFormData = PostCreateData | PostUpdateData;
+export type PostFormData = z.infer<ReturnType<typeof generatePostFormValidator>>;
 
 /**
  * 文章保存表单的Ref,配合useImperativeHandle可以在表单外部页面调用表单提交函数

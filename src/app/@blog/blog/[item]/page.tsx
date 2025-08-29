@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from 'next';
 import type { FC } from 'react';
 
 import { isNil } from 'lodash';
@@ -6,13 +7,12 @@ import Image from 'next/image';
 import { notFound } from 'next/navigation';
 
 import { MdxRender } from '@/_components/mdx/render';
-import { PostEditButton } from '@/_components/posts/edit-button';
+import { PostEditButton } from '@/_components/post/edit-button';
 import { cn } from '@/_components/shadcn/utils';
 import { queryPostItem } from '@/app/actions/post';
 import { formatChineseTime } from '@/libs/time';
 
 import $styles from './page.module.css';
-import { ResolvingMetadata, Metadata } from 'next';
 
 export const generateMetadata = async (
     { params }: { params: Promise<{ item: string }> },

@@ -16,6 +16,7 @@ import { deepMerge } from '@/libs/utils';
 import './styles/index.css';
 import type { MdxHydrateProps } from './types';
 
+import { PostContentSkeleton } from '../post/skeleton';
 import { Toc } from './components/toc';
 import { useCodeWindow } from './hooks/code-window';
 import $styles from './hydrate.module.css';
@@ -51,14 +52,15 @@ export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
     }, [serialized, options]);
     useCodeWindow(contentRef, content);
     if (isNil(serialized) || 'error' in serialized) return null;
-    return (
-        !isNil(content) && (
-            <div className={$styles.container}>
-                <div className={$styles.article} ref={contentRef}>
-                    {content}
-                </div>
-                {toc && <Toc serialized={serialized} isMobile={isMobile} />}
+
+    return !isNil(content) ? (
+        <div className={$styles.container}>
+            <div className={$styles.article} ref={contentRef}>
+                {content}
             </div>
-        )
+            {toc && <Toc serialized={serialized} isMobile={isMobile} />}
+        </div>
+    ) : (
+        <PostContentSkeleton />
     );
 };

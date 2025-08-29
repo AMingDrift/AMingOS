@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { isNil } from 'lodash';
 import { notFound } from 'next/navigation';
 
-import { PostPageForm } from '@/_components/posts/page-form';
+import { PostPageForm } from '@/_components/post/page-form';
 import { cn } from '@/_components/shadcn/utils';
 import { queryPostItemById } from '@/app/actions/post';
 
