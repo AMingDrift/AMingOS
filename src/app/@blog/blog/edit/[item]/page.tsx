@@ -1,3 +1,4 @@
+import type { Metadata, ResolvingMetadata } from 'next';
 import type { FC } from 'react';
 
 import { isNil } from 'lodash';
@@ -8,7 +9,6 @@ import { cn } from '@/_components/shadcn/utils';
 import { queryPostItemById } from '@/app/actions/post';
 
 import $styles from '../../create/style.module.css';
-import { ResolvingMetadata, Metadata } from 'next';
 
 // 添加动态标记，强制使用 SSR
 export const dynamic = 'force-dynamic';

@@ -1,6 +1,6 @@
 import deepmerge from 'deepmerge';
 import { lowerCase, trim } from 'lodash';
-import pinyin from 'pinyin';
+import { pinyin } from 'pinyin-pro';
 
 /**
  * 深度合并对象
@@ -28,15 +28,15 @@ export const deepMerge = <T1, T2>(
  * 如果是汉字,则先转换为拼音后再进行以上操作
  * @param from
  */
-export const generateLowerString = (from: string) => {
+export function generateLowerString(from: string): string {
+    // 使用pinyin-pro重构拼音转换逻辑
     const slug = pinyin(from, {
-        style: 0,
-        segment: false,
-    })
-        .map((words) => words[0])
-        .join('-');
+        toneType: 'none', // 对应原style: 0（无声调）
+        type: 'array', // 返回数组格式
+    }).join('-'); // 直接连接数组元素
+
     return lowerCase(slug)
         .split(' ')
         .map((v) => trim(v, ' '))
         .join('-');
-};
+}

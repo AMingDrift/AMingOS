@@ -9,7 +9,7 @@ import { fetchApi } from '@/libs/api';
 
 export const revalidate = 3600;
 
-const PictureContainer = async () => {
+const PictureContent = async () => {
     const getImages =
         process.env.NODE_ENV === 'development'
             ? async () => {
@@ -66,7 +66,7 @@ const PictureContainer = async () => {
 const PicturePage = () => {
     return (
         <Suspense fallback={<Skeleton className="h-[400px] w-[33%] rounded-lg" />}>
-            <PictureContainer />
+            <PictureContent />
         </Suspense>
     );
 };
