@@ -1,6 +1,6 @@
 'use client';
 
-import { debounce } from 'lodash';
+import { throttle } from 'lodash';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
@@ -26,7 +26,7 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
     );
     const router = useRouter();
     const currentPath = usePathname();
-    const handleModal = debounce(async () => {
+    const handleModal = throttle(async () => {
         let targetPath;
         let isNeedFront = false;
         if (app.hide) {
@@ -89,9 +89,9 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
                         )}
                         onClick={(e) => {
                             e.preventDefault();
-                            setIsAnimating(true);
-                            setTimeout(() => setIsAnimating(false), 400);
                             handleModal();
+                            setIsAnimating(true);
+                            setTimeout(() => setIsAnimating(false), 300);
                         }}
                     >
                         {icon}
