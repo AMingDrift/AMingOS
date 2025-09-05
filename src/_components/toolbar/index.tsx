@@ -133,11 +133,6 @@ export const ToolBar = ({
         }
     };
 
-    const toolDoubleClick = () => {
-        console.log('toolDoubleClick');
-        minimize();
-    };
-
     return (
         <>
             <div className="toolbar">
@@ -146,7 +141,7 @@ export const ToolBar = ({
                     onClick={toolClick}
                     onMouseDown={toolDrag}
                     data-op="0"
-                    onDoubleClick={toolDoubleClick}
+                    onDoubleClick={minimize}
                 >
                     <Folders size={18} />
                     <div className="title">{app.title}</div>

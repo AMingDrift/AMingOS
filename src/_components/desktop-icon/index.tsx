@@ -49,7 +49,6 @@ const DesktopIcon = ({ name }: { name: appType }) => {
             id="computer-icon"
             className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
             onClick={() => {
-                // src/app/@doc/doc/layout.tsx 中对'/doc'路由已有full()处理[兼容刷新保持modal]，这里无需再调用full()
                 if (app.hide) {
                     // state: 无 -> 全屏
                     router.push(`/${name}`);
