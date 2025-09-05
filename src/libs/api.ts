@@ -1,3 +1,5 @@
+//TODO: delete this file when hono support ssr fetch
+
 import { hc } from 'hono/client';
 
 import type { AppType } from '@/server/main';

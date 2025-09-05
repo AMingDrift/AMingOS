@@ -1,0 +1,12 @@
+model Category {
+    id       String  @id @default(uuid())
+    name     String  @unique
+    slug     String? @unique
+    path     String  @unique
+    depth    Int
+    numchild Int     @default(0)
+    posts    Post[]
+
+    @@index([path])
+    @@map("categories")
+}

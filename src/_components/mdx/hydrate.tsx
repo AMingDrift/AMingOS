@@ -16,7 +16,7 @@ import { deepMerge } from '@/libs/utils';
 import './styles/index.css';
 import type { MdxHydrateProps } from './types';
 
-import { PostContentSkeleton } from '../post/skeleton';
+import { PostContentSkeleton } from '../blog/skeleton';
 import { Toc } from './components/toc';
 import { useCodeWindow } from './hooks/code-window';
 import $styles from './hydrate.module.css';

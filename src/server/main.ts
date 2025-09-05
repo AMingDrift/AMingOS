@@ -4,14 +4,19 @@ import { Scalar } from '@scalar/hono-api-reference';
 import { openAPISpecs } from 'hono-openapi';
 import { prettyJSON } from 'hono/pretty-json';
 
+import { categoryPath, categoryRoutes } from './category/routes';
 import { createHonoApp } from './common/app';
-import { docApi } from './doc/routes';
+import { postPath, postRoutes } from './post/routes';
+import { tagPath, tagRoutes } from './tag/routes';
 
 const app = createHonoApp().basePath('/api');
 app.use(prettyJSON());
 app.get('/', (c) => c.text('AmingOS Blog API'));
 app.notFound((c) => c.json({ message: 'Not Found', ok: false }, 404));
-const routes = app.route('/doc', docApi);
+const routes = app
+    .route(tagPath, tagRoutes)
+    .route(categoryPath, categoryRoutes)
+    .route(postPath, postRoutes);
 app.get(
     '/data',
     openAPISpecs(app, {

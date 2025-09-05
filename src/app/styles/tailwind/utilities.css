@@ -48,8 +48,7 @@
 /* 鼠标移动到文字或链接出现动画下划线 */
 @utility animate-decoration {
     padding-bottom: 2px;
-    background: linear-gradient(hsl(var(--foreground)), hsl(var(--foreground))) 0% 100% / 0% 1px
-        no-repeat;
+    background: linear-gradient(var(--foreground), var(--foreground)) 0% 100% / 0% 1px no-repeat;
     transition: background-size ease-out 200ms;
 
     &:not(:focus):hover {

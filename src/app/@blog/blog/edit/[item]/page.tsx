@@ -1,12 +1,11 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 import type { FC } from 'react';
 
-import { isNil } from 'lodash';
 import { notFound } from 'next/navigation';
 
-import { PostPageForm } from '@/_components/post/page-form';
+import { PostPageForm } from '@/_components/blog/form';
 import { cn } from '@/_components/shadcn/utils';
-import { queryPostItemById } from '@/app/actions/post';
+import { postApi } from '@/api/post';
 
 import $styles from '../../create/style.module.css';
 
@@ -22,14 +21,15 @@ export const generateMetadata = async (_: any, parent: ResolvingMetadata): Promi
 
 const PostEditPage: FC<{ params: Promise<{ item: string }> }> = async ({ params }) => {
     const { item } = await params;
-    if (isNil(item)) return notFound();
-    const post = await queryPostItemById(item);
-    if (isNil(post)) return notFound();
+    const result = await postApi.detail(item);
+    if (!result.ok) {
+        if (result.status !== 404) throw new Error((await result.json()).message);
+        return notFound();
+    }
+    const post = await result.json();
     return (
-        <div className="page-item h-full">
-            <div className={cn($styles.item, 'page-container')}>
-                <PostPageForm post={post} />
-            </div>
+        <div className={cn($styles.item, 'h-full')}>
+            <PostPageForm post={post} />
         </div>
     );
 };

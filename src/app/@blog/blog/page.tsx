@@ -2,28 +2,33 @@ import type { FC } from 'react';
 
 import { isNil } from 'lodash';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 import type { IPaginateQueryProps } from '@/_components/paginate/types';
+import type { PostItem } from '@/server/post/type';
 
+import { BlogIndexSkeleton } from '@/_components/blog/skeleton';
 import { BlurFade } from '@/_components/magicui/blur-fade';
-import { queryPostPaginate } from '@/app/actions/post';
-import { formatChineseTime } from '@/libs/time';
+import { postApi } from '@/api/post';
+import { formatTime } from '@/libs/time';
 
 import ImageComponent from './components/ImageComponent';
-import dbjson from './db.json';
 
-const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ searchParams }) => {
-    const { page: currentPage, limit = 22 } = await searchParams;
+const PageContent: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({
+    searchParams,
+}) => {
+    const { page: currentPage, limit = 20 } = await searchParams;
     // 当没有传入当前页或当前页小于1时，设置为第1页
-    const page = isNil(currentPage) || Number(currentPage) < 1 ? 1 : Number(currentPage);
-    const items =
-        process.env.NODE_ENV === 'development'
-            ? (await queryPostPaginate({ page: Number(page), limit })).items
-            : dbjson;
-    console.log(items);
+    const result = await postApi.paginate({
+        page: currentPage,
+        limit,
+    });
+    if (!result.ok) throw new Error((await result.json()).message);
+    const { items, meta } = await result.json();
+
     return (
         <div className="columns-2 gap-2 lg:columns-3 mt-2">
-            {items.map((item, idx) => (
+            {(items as PostItem[]).map((item, idx) => (
                 <BlurFade
                     key={item.id}
                     delay={0.25 + idx * 0.05}
@@ -42,8 +47,8 @@ const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ search
                                 <div className="font-bold">{item.title}</div>
                                 <time className="mt-2 w-full ellips text-right">
                                     {!isNil(item.updatedAt)
-                                        ? formatChineseTime(new Date(item.updatedAt))
-                                        : formatChineseTime(new Date(item.createdAt))}
+                                        ? formatTime(item.updatedAt.toString())
+                                        : formatTime(item.createdAt.toString())}
                                 </time>
                             </div>
                         </div>
@@ -51,6 +56,14 @@ const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ search
                 </BlurFade>
             ))}
         </div>
+    );
+};
+
+const Page: FC<{ searchParams: Promise<IPaginateQueryProps> }> = async ({ searchParams }) => {
+    return (
+        <Suspense fallback={<BlogIndexSkeleton />}>
+            <PageContent searchParams={searchParams} />
+        </Suspense>
     );
 };
 

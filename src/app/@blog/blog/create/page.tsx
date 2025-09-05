@@ -1,7 +1,7 @@
 import type { Metadata, ResolvingMetadata } from 'next';
 import type { FC } from 'react';
 
-import { PostPageForm } from '@/_components/post/page-form';
+import { PostPageForm } from '@/_components/blog/form';
 import { cn } from '@/_components/shadcn/utils';
 
 import $styles from './style.module.css';

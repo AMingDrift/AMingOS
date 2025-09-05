@@ -58,7 +58,7 @@ export const MdxEditor: FC<MdxEditorProps> = (props) => {
             const parentHeight = containerRef.current.clientHeight;
             if (parentHeight) {
                 // eslint-disable-next-line react-hooks-extra/no-direct-set-state-in-use-effect
-                setEditorHeight(parentHeight);
+                setEditorHeight(Math.max(parentHeight, 500));
             }
         }
     }, [containerRef.current]);
@@ -67,8 +67,9 @@ export const MdxEditor: FC<MdxEditorProps> = (props) => {
         const scrollAreaEle = containerRef.current?.closest(
             '[data-slot="scroll-area-viewport"]',
         ) as HTMLElement | null;
-        if (scrollAreaEle?.firstChild as HTMLElement) {
-            (scrollAreaEle?.firstChild as HTMLElement).style.height = '100%';
+        const contentEle = scrollAreaEle?.firstChild as HTMLElement | null;
+        if (contentEle) {
+            contentEle.style.height = '100%';
         }
     });
 

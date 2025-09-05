@@ -7,23 +7,30 @@ import { UserPen } from 'lucide-react';
 import Link from 'next/link';
 import { Suspense } from 'react';
 
+import type { PostItem } from '@/server/post/type';
+
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from '@/_components/shadcn/ui/tooltip';
+import { cn } from '@/_components/shadcn/utils';
 import { useUrlQuery } from '@/libs/url';
 
-import { Button as CNButton } from '../shadcn/ui/button';
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '../shadcn/ui/tooltip';
-import { cn } from '../shadcn/utils';
+import { Button as CNButton } from '../../../shadcn/ui/button';
 
 const Button: FC<{ id: string; iconBtn?: boolean }> = ({ id, iconBtn }) => {
     const urlQuery = useUrlQuery();
     return (
         <CNButton
             asChild
-            className={cn({
+            className={cn('text-xs', {
                 'mr-3': !iconBtn,
                 'btn-icon-transparent ': iconBtn,
             })}
-            variant={iconBtn ? 'outline' : 'default'}
-            size={iconBtn ? 'icon' : 'default'}
+            variant="secondary"
+            size={iconBtn ? 'icon' : 'sm'}
         >
             <Link href={`/blog/edit/${id}${urlQuery}`}>
                 {iconBtn ? (
@@ -39,21 +46,17 @@ const Button: FC<{ id: string; iconBtn?: boolean }> = ({ id, iconBtn }) => {
     );
 };
 
-export const PostEditButton: FC<{ id: string; iconBtn?: boolean }> = ({ id, iconBtn }) => (
+export const PostEditButton: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, iconBtn }) => (
     <Suspense>
-        {iconBtn ? (
-            <TooltipProvider>
-                <Tooltip>
-                    <TooltipTrigger>
-                        <Button id={id} iconBtn />
-                    </TooltipTrigger>
-                    <TooltipContent>
-                        <p>编辑文章</p>
-                    </TooltipContent>
-                </Tooltip>
-            </TooltipProvider>
-        ) : (
-            <Button id={id} />
-        )}
+        <TooltipProvider>
+            <Tooltip>
+                <TooltipTrigger>
+                    <Button id={item.id} iconBtn={iconBtn} />
+                </TooltipTrigger>
+                <TooltipContent>
+                    <p>编辑文章</p>
+                </TooltipContent>
+            </Tooltip>
+        </TooltipProvider>
     </Suspense>
 );

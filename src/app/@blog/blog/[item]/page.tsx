@@ -5,12 +5,15 @@ import { isNil } from 'lodash';
 import { Calendar } from 'lucide-react';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
+import { Suspense } from 'react';
 
+import { PostEditButton } from '@/_components/blog/list/actions/edit-button';
+import { PostContentSkeleton } from '@/_components/blog/skeleton';
 import { MdxRender } from '@/_components/mdx/render';
-import { PostEditButton } from '@/_components/post/edit-button';
 import { cn } from '@/_components/shadcn/utils';
+import { postApi } from '@/api/post';
 import { queryPostItem } from '@/app/actions/post';
-import { formatChineseTime } from '@/libs/time';
+import { formatTime } from '@/libs/time';
 
 import $styles from './page.module.css';
 
@@ -30,10 +33,14 @@ export const generateMetadata = async (
     };
 };
 
-const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params }) => {
+const PostItemPageContent: FC<{ params: Promise<{ item: string }> }> = async ({ params }) => {
     const { item } = await params;
-    const post = await queryPostItem(item);
-    if (isNil(post)) return notFound();
+    const result = await postApi.detail(item);
+    if (!result.ok) {
+        if (result.status !== 404) throw new Error((await result.json()).message);
+        return notFound();
+    }
+    const post = await result.json();
     return (
         <>
             <div className="page-item">
@@ -52,7 +59,7 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
                         <header className={$styles.title}>
                             <h1 className="text-lg lg:text-3xl">{post.title}</h1>
                             <div className="ml-2">
-                                <PostEditButton id={post.id} iconBtn />
+                                <PostEditButton item={post} iconBtn />
                             </div>
                         </header>
                         <div className={$styles.meta}>
@@ -61,8 +68,8 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
                             </span>
                             <time className="ellips">
                                 {!isNil(post.updatedAt)
-                                    ? formatChineseTime(post.updatedAt)
-                                    : formatChineseTime(post.createdAt)}
+                                    ? formatTime(post.updatedAt.toString())
+                                    : formatTime(post.createdAt.toString())}
                             </time>
                         </div>
                         <div className={$styles.body}>
@@ -74,4 +81,13 @@ const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params 
         </>
     );
 };
+
+const PostItemPage: FC<{ params: Promise<{ item: string }> }> = async ({ params }) => {
+    return (
+        <Suspense fallback={<PostContentSkeleton />}>
+            <PostItemPageContent params={params} />
+        </Suspense>
+    );
+};
+
 export default PostItemPage;
