@@ -1,0 +1,5 @@
+@reference "#tailwind.css";
+
+.sidebar {
+    @apply flex w-full lg:w-72 flex-none flex-col lg:order-2 order-1 mb-6 lg:mb-0;
+}

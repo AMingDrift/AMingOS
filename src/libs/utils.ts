@@ -33,6 +33,7 @@ export function generateLowerString(from: string): string {
     const slug = pinyin(from, {
         toneType: 'none', // 对应原style: 0（无声调）
         type: 'array', // 返回数组格式
+        nonZh: 'consecutive', // 将非中文字符作为一个整体处理
     }).join('-'); // 直接连接数组元素
 
     return lowerCase(slug)

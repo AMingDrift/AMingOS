@@ -1,7 +1,5 @@
-// src/app/_components/mdx/hydrate.tsx
 'use client';
 
-// ...
 import type { HydrateProps } from 'next-mdx-remote-client';
 import type { FC, JSX } from 'react';
 
@@ -23,7 +21,7 @@ import $styles from './hydrate.module.css';
 import { defaultMdxHydrateOptions } from './options/hydrate';
 
 export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
-    const { serialized, toc = true, ...rest } = props;
+    const { serialized, header, toc = true, ...rest } = props;
     const [content, setContent] = useState<JSX.Element | null>(null);
     const contentRef = useRef<HTMLDivElement>(null);
     const mobile = useIsMobile();
@@ -52,10 +50,10 @@ export const MdxHydrate: FC<MdxHydrateProps> = (props) => {
     }, [serialized, options]);
     useCodeWindow(contentRef, content);
     if (isNil(serialized) || 'error' in serialized) return null;
-
     return !isNil(content) ? (
         <div className={$styles.container}>
             <div className={$styles.article} ref={contentRef}>
+                {header}
                 {content}
             </div>
             {toc && <Toc serialized={serialized} isMobile={isMobile} />}

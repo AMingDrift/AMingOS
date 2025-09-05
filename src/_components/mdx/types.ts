@@ -1,4 +1,3 @@
-// src/app/_components/mdx/types.ts
 import type { HydrateProps, SerializeResult } from 'next-mdx-remote-client';
 import type { MDXRemoteProps } from 'next-mdx-remote-client/rsc';
 import type { TocItem } from 'remark-flexible-toc';
@@ -32,16 +31,20 @@ export type MdxHydrateOptions = Omit<HydrateProps, 'compiledSource'> & {
  * mdx水合组件props
  */
 export interface MdxHydrateProps extends MdxHydrateOptions {
+    header?: React.ReactNode;
     serialized: SerializeResult<Record<string, unknown>, Scope>;
 }
+
 /**
  * mdx渲染器组件props
  */
-export interface MdxRenderProps {
+export interface MdxRnderProps {
     source: Compatible;
+    header?: React.ReactNode;
     options?: MdxSerializeOptions;
     hydrate?: MdxHydrateOptions;
 }
+
 /**
  * mdx编辑器组件props
  */

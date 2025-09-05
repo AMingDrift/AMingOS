@@ -1,0 +1,14 @@
+@reference "#tailwind.css";
+
+.container {
+    @apply flex flex-wrap items-center;
+
+    & > a {
+        @apply text-sm text-muted-foreground mr-2 mb-2 border border-muted-foreground rounded-[0.2rem] px-2;
+
+        &.tagActived,
+        &:hover {
+            @apply text-foreground border-foreground;
+        }
+    }
+}

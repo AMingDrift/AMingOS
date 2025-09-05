@@ -1,0 +1,117 @@
+@reference "#tailwind.css";
+
+.blogIndex {
+    @apply flex w-full flex-auto flex-col lg:flex-row lg:space-x-4;
+
+    & > .container {
+        @apply order-2 flex flex-auto flex-col space-y-5 lg:order-1;
+    }
+}
+
+.list {
+    @apply w-full space-y-4;
+
+    & .item {
+        @apply rounded-md flex flex-col transition-all duration-300 backdrop-blur-md;
+
+        &:last-child {
+            @apply mb-0;
+        }
+
+        &:hover {
+            @apply scale-[1.02];
+
+            &::before {
+                @apply opacity-100;
+            }
+
+            & > .content {
+                @apply drop-shadow-[0_0_15px_rgba(0,0,0,0.35)];
+            }
+        }
+
+        & > .content {
+            @apply w-full  rounded-md px-5  transition-all duration-300;
+
+            & > .header {
+                @apply py-2 flex items-center;
+            }
+
+            & > .header > .icon {
+                background-position-x: 0;
+                background-size: 2.5rem auto;
+
+                @apply w-[42px]
+                    h-[42px]
+                    border
+                    float-left
+                    mr-3
+                    relative
+                    inline-block
+                    rounded-[50%]
+                    bg-no-repeat;
+            }
+
+            & > .header > .headerRight {
+                @apply flex flex-col justify-between w-full lg:w-auto;
+
+                & > .title {
+                    @apply flex max-w-full block overflow-hidden text-foreground;
+
+                    & > h2 {
+                        @apply text-base font-bold;
+                    }
+                }
+
+                & > .categories {
+                    @apply flex flex-wrap items-center;
+
+                    & > a {
+                        @apply text-sm mr-1 items-center inline-flex pt-1;
+                    }
+                }
+            }
+
+            & > .summary {
+                @apply py-2 text-muted-foreground;
+            }
+
+            & > .footer {
+                @apply py-3 flex justify-between text-muted-foreground flex-wrap space-y-3 md:space-y-0;
+
+                & > .meta {
+                    @apply flex flex-col;
+
+                    & > .tags {
+                        @apply flex flex-wrap items-center;
+
+                        & > a {
+                            @apply text-sm text-muted-foreground mr-2 mb-2 border border-muted-foreground rounded-[0.2rem] px-2;
+
+                            &.tagActived,
+                            &:hover {
+                                @apply text-foreground border-foreground;
+                            }
+                        }
+                    }
+
+                    & > .info {
+                        @apply flex flex-wrap items-center;
+
+                        & > span {
+                            @apply mt-2 inline-flex items-center text-sm text-muted-foreground mr-3;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+html[data-theme='dark'] {
+    .list {
+        & .item:hover > .content {
+            @apply drop-shadow-[0_0_15px_rgba(255,255,255,0.35)];
+        }
+    }
+}

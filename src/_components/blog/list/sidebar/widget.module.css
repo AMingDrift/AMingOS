@@ -1,0 +1,25 @@
+@reference "#tailwind.css";
+
+.widget {
+    @apply flex w-full flex-col p-2;
+}
+
+.title {
+    @apply w-full py-2 flex space-x-1 items-center;
+}
+
+.content {
+    @apply w-full p-2 max-h-[12rem] overflow-auto;
+}
+
+.mobileWidget {
+    .mobileItem {
+        @apply py-0 border-none;
+
+        & > h3 {
+            & > button {
+                @apply py-0;
+            }
+        }
+    }
+}
