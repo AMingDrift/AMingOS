@@ -16,6 +16,8 @@ import { getPostItemRequestSchema } from '@/server/post/schema';
 
 import type { PostFormData } from './types';
 
+import { updateOrCreate } from './actions';
+
 /**
  * slug唯一性验证函数
  * slug创建和编辑文章时，如果slug已经被占用且不是当前文章（编辑文章）的slug时，验证失败
@@ -84,18 +86,7 @@ export const usePostFormSubmitHandler = (
                 }
             }
             try {
-                // 更新文章
-                if (params.type === 'update') {
-                    const res = await postApi.update(params.id, data);
-                    if (!res.ok) throw new Error((await res.json()).message);
-                    post = await res.json();
-                }
-                // 创建文章
-                else {
-                    const res = await postApi.create(data);
-                    if (!res.ok) throw new Error((await res.json()).message);
-                    post = await res.json();
-                }
+                post = await updateOrCreate(params, data);
                 // 创建或更新文章后跳转到文章详情页
                 // 注意,这里不要用push,防止在详情页后退后返回到创建或编辑页面的弹出框
                 if (!isNil(post)) router.replace(`/blog/${post.slug || post.id}`);
