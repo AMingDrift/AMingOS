@@ -46,9 +46,9 @@
     & > .tags {
         @apply flex flex-wrap items-center;
 
-        & > a {
+        /* & > a {
             @apply text-sm text-muted-foreground mr-2 border  rounded-[0.2rem] px-2;
-        }
+        } */
     }
 }
 

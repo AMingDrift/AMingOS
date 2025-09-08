@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 
-import { isNil } from 'lodash';
 import Link from 'next/link';
 
 import type { CategoryItem } from '@/server/category/type';
@@ -10,7 +9,6 @@ import Card3D from '@/_components/3D-card';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { cn } from '@/_components/shadcn/utils';
 import ImageComponent from '@/app/@blog/blog/components/ImageComponent';
-import { formatTime } from '@/libs/time';
 
 import type { IPaginateQueryProps } from '../../paginate/types';
 
@@ -40,27 +38,28 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                                 alt={item.title}
                                 id={item.id}
                             />
-                            <div className="footer">
-                                <div className="font-bold">{item.title}</div>
+                            <div className="footer flex flex-col gap-2">
+                                <div className="font-bold text-lg mt-0.5">{item.title}</div>
                                 {item.tags.length > 0 && (
-                                    <div className={cn($styles.tags, 'relative z-[2] gap-2')}>
+                                    <div className={cn($styles.tags, 'flex relative z-[2] gap-2')}>
                                         {item.tags.map((tagItem) => (
                                             <TagLink
                                                 key={tagItem.id}
                                                 tag={tagItem}
-                                                className={cn({
-                                                    [$styles.tagActived]:
-                                                        activeTag === tagItem.text,
-                                                })}
+                                                variant={
+                                                    activeTag === tagItem.text
+                                                        ? 'default'
+                                                        : 'outline'
+                                                }
                                             />
                                         ))}
                                     </div>
                                 )}
-                                <time className="mt-2 w-full ellips text-right">
+                                {/* <time className="mt-2 w-full ellips text-right">
                                     {formatTime(
                                         !isNil(item.updatedAt) ? item.updatedAt : item.createdAt,
                                     )}
-                                </time>
+                                </time> */}
                             </div>
                         </div>
                     </Link>

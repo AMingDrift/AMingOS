@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import { isNil } from 'lodash';
 import { Calendar, Tag } from 'lucide-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
@@ -12,6 +11,7 @@ import { cn } from '@/_components/shadcn/utils';
 import { postApi } from '@/api/post';
 import { formatTime } from '@/libs/time';
 
+import { TagLink } from '../form/tag';
 import { PostEditButton } from '../list/actions/edit-button';
 import { PostContentSkeleton } from '../skeleton';
 import $styles from './style.module.css';
@@ -26,7 +26,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
     return (
         <div className="page-item">
             <div className={cn('page-container', $styles.item)}>
-                <div className={$styles.thumb}>
+                {/* <div className={$styles.thumb}>
                     <Image
                         src={post.thumb}
                         alt={post.title}
@@ -35,7 +35,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                         sizes="100%"
                         unoptimized
                     />
-                </div>
+                </div> */}
 
                 <div className={$styles.content}>
                     <MdxRender
@@ -66,11 +66,16 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                                             <span className="mr-2">
                                                 <Tag />
                                             </span>
-                                            {post.tags.map((tag) => (
-                                                <Link key={tag.id} href={`/blog?tag=${tag.text}`}>
-                                                    {tag.text}
-                                                </Link>
-                                            ))}
+                                            <div className="flex gap-2">
+                                                {post.tags.map((tag) => (
+                                                    <Link
+                                                        key={tag.id}
+                                                        href={`/blog?tag=${tag.text}`}
+                                                    >
+                                                        <TagLink tag={tag} key={tag.id}></TagLink>
+                                                    </Link>
+                                                ))}
+                                            </div>
                                         </div>
                                     )}
                                 </div>

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { Folders } from 'lucide-react';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
@@ -12,6 +12,7 @@ import { useModalStore } from '../modal/hooks';
 
 const DesktopIcon = ({ name }: { name: appType }) => {
     const router = useRouter();
+    const searchParams = useSearchParams();
 
     const { app, hide, full, setPreMiniPath } = useModalStore(
         useShallow((state) => ({
@@ -30,7 +31,8 @@ const DesktopIcon = ({ name }: { name: appType }) => {
         console.log('当前路径:', pathname);
         // 兼容刷新页面时，路径开头为/doc时，显示模态框
         if (pathname.startsWith(`/${name}`)) {
-            setPreMiniPath(name, pathname);
+            const params = new URLSearchParams(searchParams);
+            setPreMiniPath(name, pathname + (params.toString() ? `?${params.toString()}` : ''));
             if (
                 (!prePathname.current || !prePathname.current.startsWith(`/${name}`)) &&
                 !(!app.hide && app.max) // 排除打开状态
@@ -43,7 +45,7 @@ const DesktopIcon = ({ name }: { name: appType }) => {
             }
         }
         prePathname.current = pathname;
-    }, [pathname]);
+    }, [pathname, searchParams]);
     return (
         <div
             id="computer-icon"

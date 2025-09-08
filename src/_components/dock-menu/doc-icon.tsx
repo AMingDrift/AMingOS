@@ -53,25 +53,7 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
         }
     }, 200);
     const [isAnimating, setIsAnimating] = useState(false); // 添加动画状态
-    // // for debug
-    // const handleKeyDown = (event: KeyboardEvent) => {
-    //     // 监听特定按键，例如Escape键
-    //     if (event.key === 'e') {
-    //         console.log('Escape键被按下');
-    //         // 在这里添加你的处理逻辑
-    //         handleModal();
-    //     }
-    // };
 
-    // useEffect(() => {
-    //     // 添加事件监听器
-    //     window.addEventListener('keydown', handleKeyDown);
-
-    //     // 组件卸载时移除监听器
-    //     return () => {
-    //         window.removeEventListener('keydown', handleKeyDown);
-    //     };
-    // }, [handleKeyDown]);
     return (
         <DockIcon key={app.title}>
             <Tooltip>
