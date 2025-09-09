@@ -17,3 +17,20 @@ html {
         }
     }
 }
+
+::view-transition-old(root), ::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
+}
+
+:root {
+    --modal-txt-color: #222;
+    --modal-bg-color: rgba(255, 255, 255, 0.3);
+    --modal-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] {
+    --modal-txt-color: #ddd;
+    --modal-bg-color: rgba(0, 0, 0, 0.3); 
+    --modal-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+}

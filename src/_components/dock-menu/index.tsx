@@ -5,7 +5,6 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Dock, DockIcon } from '@/_components/magicui/dock';
-import { ModeToggle } from '@/_components/mode-toggle';
 import { buttonVariants } from '@/_components/shadcn/ui/button';
 import { Separator } from '@/_components/shadcn/ui/separator';
 import {
@@ -16,6 +15,7 @@ import {
 } from '@/_components/shadcn/ui/tooltip';
 import { cn } from '@/_components/shadcn/utils';
 
+import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
 import DockMenuIcon from './doc-icon';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
@@ -165,7 +165,7 @@ export function DockDemo({ className }: { className?: string }) {
                     <DockIcon>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <ModeToggle className="rounded-full" />
+                                <AnimatedThemeToggler className="rounded-full" />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <p>Theme</p>

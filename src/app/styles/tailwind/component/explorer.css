@@ -7,11 +7,10 @@
     --hover-bg: rgb(0 178 255 / 16%);
     --focus-bg: rgb(0 183 255 / 25%);
     --fakeMica: #202020 radial-gradient(#1a1f35 25%, #202020 100%) no-repeat fixed;
-    --txt-col: #ddd;
-    color: var(--txt-col);
-
-    /* background: var(--fakeMica); */
-    @apply bg-black/30 backdrop-blur-md;
+    
+    color: var(--modal-txt-color);
+    background: var(--modal-bg-color);
+    @apply backdrop-blur-md;
 }
 
 @utility floatTab {
