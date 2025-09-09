@@ -21,17 +21,17 @@ export interface PostListProps extends IPaginateQueryProps {
 }
 
 export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items, activeTag }) => (
-    <div className="columns-2 gap-10 lg:columns-3 mt-5 mx-8">
+    <div className="columns-2 gap-10 lg:columns-3 mt-5 mx-10">
         {(items as PostItem[]).map((item, idx) => (
             <BlurFade
                 key={item.id}
                 delay={0.25 + idx * 0.05}
                 inView
-                className="flex flex-col mb-10 break-inside-avoid transition-all"
+                className="flex flex-col mb-10 break-inside-avoid"
             >
                 <Card3D>
                     <Link href={`/blog/${item.slug || item.id}`}>
-                        <div className="flex flex-col cursor-pointer border-1 border-transparent rounded-xl p-3 transition-all duration-150 border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)]">
+                        <div className="flex flex-col cursor-pointer border-0 rounded-xl p-3 transition-all duration-150 border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)]">
                             <ImageComponent
                                 key={item.id}
                                 src={item.thumb}
