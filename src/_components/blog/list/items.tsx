@@ -55,11 +55,6 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                                         ))}
                                     </div>
                                 )}
-                                {/* <time className="mt-2 w-full ellips text-right">
-                                    {formatTime(
-                                        !isNil(item.updatedAt) ? item.updatedAt : item.createdAt,
-                                    )}
-                                </time> */}
                             </div>
                         </div>
                     </Link>
