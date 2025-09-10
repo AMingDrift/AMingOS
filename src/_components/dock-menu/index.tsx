@@ -1,6 +1,6 @@
 'use client';
 
-import { CalendarIcon, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
+import { CalendarIcon, FileUser, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -70,7 +70,7 @@ const DATA = {
         social: {
             GitHub: {
                 name: 'GitHub',
-                url: '#',
+                url: 'https://www.baidu.com',
                 icon: Icons.github,
             },
             LinkedIn: {
@@ -106,7 +106,8 @@ export function DockDemo({ className }: { className?: string }) {
                                         aria-label={item.label}
                                         className={cn(
                                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                            'size-12 rounded-full',
+                                            'origin-center ease-in-out transition-all duration-200',
+                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
                                         )}
                                     >
                                         <item.icon className="size-4" />
@@ -120,25 +121,7 @@ export function DockDemo({ className }: { className?: string }) {
                     ))}
                     <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
                     <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
-                    {/* <DockIcon key="Document">
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Link
-                                    href="/doc"
-                                    aria-label={'Document'}
-                                    className={cn(
-                                        buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                        'size-12 rounded-full',
-                                    )}
-                                >
-                                    <Folders className="size-4" />
-                                </Link>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                                <p>{'Document'}</p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </DockIcon> */}
+                    <DockMenuIcon name="about" icon={<FileUser className="size-4" />} />
                     <Separator orientation="vertical" className="h-full" />
                     {Object.entries(DATA.contact.social).map(([name, social]) => (
                         <DockIcon key={name}>
@@ -146,10 +129,12 @@ export function DockDemo({ className }: { className?: string }) {
                                 <TooltipTrigger asChild>
                                     <Link
                                         href={social.url}
+                                        target="_blank"
                                         aria-label={social.name}
                                         className={cn(
                                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                            'size-12 rounded-full',
+                                            'origin-center ease-in-out transition-all duration-200',
+                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
                                         )}
                                     >
                                         <social.icon className="size-4" />
@@ -165,7 +150,13 @@ export function DockDemo({ className }: { className?: string }) {
                     <DockIcon>
                         <Tooltip>
                             <TooltipTrigger asChild>
-                                <AnimatedThemeToggler className="rounded-full" />
+                                <AnimatedThemeToggler
+                                    className={cn(
+                                        buttonVariants({ variant: 'ghost', size: 'icon' }),
+                                        'origin-center ease-in-out transition-all duration-200',
+                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
+                                    )}
+                                />
                             </TooltipTrigger>
                             <TooltipContent>
                                 <p>Theme</p>

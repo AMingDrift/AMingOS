@@ -76,7 +76,7 @@ export const queryPostPaginate = async (options: PostPaginateOptions = {}) => {
     const data = await db.post.paginate({
         orderBy: [{ updatedAt: 'desc' }, { createdAt: 'desc' }],
         page: 1,
-        limit: 20,
+        limit: 10,
         where,
         ...defaultPostPaginateOptions,
         ...rest,

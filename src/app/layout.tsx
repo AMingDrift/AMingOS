@@ -18,10 +18,12 @@ const RootLayout: FC<PropsWithChildren> = ({
     children,
     doc,
     blog,
+    about,
 }: {
     children?: ReactNode;
     doc?: ReactNode;
     blog?: ReactNode;
+    about?: ReactNode;
 }) => {
     return (
         <html lang="en" suppressHydrationWarning>
@@ -35,6 +37,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                                 <div className="absolute inset-0 z-10 p-6 bottom-[4rem] contain-layout contain-size">
                                     {doc}
                                     {blog}
+                                    {about}
                                     {children}
                                 </div>
 

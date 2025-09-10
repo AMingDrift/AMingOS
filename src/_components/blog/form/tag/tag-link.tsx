@@ -19,7 +19,13 @@ export const TagLink: FC<{
     const getPageUrl = useCallback(
         (item: TagItem) => {
             const params = new URLSearchParams(searchParams);
-            if (params.has('tag')) params.delete('tag');
+            if (params.has('tag')) {
+                const curTag = params.get('tag');
+                params.delete('tag');
+                if (item.text === curTag) {
+                    return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+                }
+            }
             params.set('tag', item.text);
             return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
         },

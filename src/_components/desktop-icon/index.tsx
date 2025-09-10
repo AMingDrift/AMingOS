@@ -1,21 +1,21 @@
 'use client';
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { Folders } from 'lucide-react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { appType } from '../modal/types';
+import type { AppItem, appType } from '../modal/types';
 
 import { useModalStore } from '../modal/hooks';
 
-const DesktopIcon = ({ name }: { name: appType }) => {
+const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const { app, hide, full, setPreMiniPath } = useModalStore(
+    const { app, list, hide, full, setPreMiniPath } = useModalStore(
         useShallow((state) => ({
+            list: state.modalApp.list,
             app: state.modalApp.list[name],
             full: state.full,
             hide: state.hide,
@@ -58,7 +58,22 @@ const DesktopIcon = ({ name }: { name: appType }) => {
                     if (app.max) {
                         // state: 全屏 -> 最小化
                         hide(name);
-                        router.push('/');
+
+                        const otherApps = Object.entries(list).filter(([key]) => key !== name);
+                        // 找到otherApps中hide=false,max=true,并且z最大的app
+                        let popApp: AppItem | null = null;
+                        let maxZ = 0;
+                        otherApps.forEach(([, app]: [string, AppItem]) => {
+                            if (!app.hide && app.max && app.z > maxZ) {
+                                popApp = app;
+                                maxZ = app.z;
+                            }
+                        });
+                        if (popApp) {
+                            router.push((popApp as AppItem).preMiniPath);
+                        } else {
+                            router.push('/');
+                        }
                     } else {
                         // state: 最小化 -> 全屏
                         router.push(app.preMiniPath);
@@ -67,7 +82,7 @@ const DesktopIcon = ({ name }: { name: appType }) => {
             }}
         >
             <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-1 group-hover:bg-primary/20 transition-colors">
-                <Folders />
+                {icon}
             </div>
             <div className="text-sm font-medium truncate">{app.title}</div>
         </div>

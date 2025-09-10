@@ -18,19 +18,39 @@ html {
     }
 }
 
-::view-transition-old(root), ::view-transition-new(root) {
-    animation: none;
+::view-transition-old(root),
+::view-transition-new(root) {
     mix-blend-mode: normal;
+    animation: none;
 }
 
 :root {
     --modal-txt-color: #222;
-    --modal-bg-color: rgba(255, 255, 255, 0.3);
-    --modal-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+    --modal-bg-color: rgb(255 255 255 / 30%);
+    --modal-shadow: 0 0 15px rgb(0 0 0 / 40%);
 }
 
 [data-theme='dark'] {
     --modal-txt-color: #ddd;
-    --modal-bg-color: rgba(0, 0, 0, 0.3); 
-    --modal-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+    --modal-bg-color: rgb(0 0 0 / 30%);
+    --modal-shadow: 0 0 15px rgb(255 255 255 / 40%);
+}
+
+@utility gradient-ring {
+    width: 24px;
+    height: 24px;
+    background: conic-gradient(#800080, #00f, #800080);
+    border-radius: 50%;
+    mask: radial-gradient(transparent 9px, #000 10px);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
 }

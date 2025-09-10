@@ -33,6 +33,23 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
             targetPath = `/${name}`;
         } else if (app.max) {
             // TODO: check home logic
+
+            // const otherApps = Object.entries(list).filter(([key]) => key !== name);
+            // // 找到otherApps中hide=false,max=true,并且z最大的app
+            // let popApp: AppItem | null = null;
+            // let maxZ = 0;
+            // otherApps.forEach(([, app]: [string, AppItem]) => {
+            //     if (!app.hide && app.max && app.z > maxZ) {
+            //         popApp = app;
+            //         maxZ = app.z;
+            //     }
+            // });
+            // if (popApp) {
+            //     targetPath = (popApp as AppItem).preMiniPath;
+            // } else {
+            //     targetPath = '/';
+            // }
+
             targetPath = '/';
             const aboveApp = Object.entries(list).find(
                 ([appName, appItem]) => appName !== name && appItem.z > app.z,
@@ -63,9 +80,9 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
                         aria-label={app.title}
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                            'origin-center ease-in-out transition-all duration-200',
+                            'size-11 hover:backdrop-blur-md hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] origin-center ease-in-out transition-all duration-200',
                             !app.hide
-                                ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] backdrop-blur-md shadow-lg '
+                                ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] shadow-lg '
                                 : 'bg-transparent',
                             isAnimating ? 'animate-popintro' : '',
                         )}
