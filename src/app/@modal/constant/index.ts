@@ -12,7 +12,7 @@ import {
     User,
 } from 'lucide-react';
 
-import type { appType } from '@/_components/modal/types';
+import type { AppType } from '@/_components/modal/types';
 
 interface IMenuItem {
     title: string;
@@ -20,7 +20,13 @@ interface IMenuItem {
     icon: LucideIcon;
 }
 
-export const MenuItems: Record<appType, IMenuItem[]> = {
+export const DefaultMenuUrl: Record<AppType, string> = {
+    blog: '/blog',
+    doc: '/doc',
+    about: '/about',
+};
+
+export const MenuItems: Record<AppType, IMenuItem[]> = {
     blog: [
         {
             title: '博客',

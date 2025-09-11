@@ -5,7 +5,9 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 
-import type { appType, ModalActions, ModalOptions } from './types';
+import { DefaultMenuUrl } from '@/app/@modal/constant';
+
+import type { AppType, ModalActions, ModalOptions } from './types';
 
 /**
  * 创建modal store
@@ -52,21 +54,54 @@ export const createModalStore = () =>
                         windowStack: [],
                     },
                     actions: {
-                        toggleWindow: (appName: appType) => {
+                        toggleWindow: (appName: AppType) => {
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 const windowStack = state.modalApp.windowStack;
-                                const { full } = state.actions;
+                                const { full, front, hide } = state.actions;
                                 const existApp = windowStack.find((win) => win.id === app.id);
                                 if (!existApp) {
-                                    windowStack.push(app);
+                                    // 没有不在显示状态（不包括最小化），推入栈 => open
+                                    // 设置DefaultMenuUrl
+                                    if (app.hide) {
+                                        // close 状态
+                                        app.activePath = DefaultMenuUrl[appName];
+                                    }
                                     nextTick(() => {
                                         full(appName);
                                     });
+                                } else {
+                                    const frontApp = windowStack.at(-1)!;
+                                    if (existApp.id !== frontApp.id) {
+                                        // 不是在栈顶，取出放入栈顶 => front
+                                        nextTick(() => {
+                                            front(appName);
+                                        });
+                                    } else {
+                                        // 是在栈顶，最小化 => hide
+                                        nextTick(() => {
+                                            hide(appName);
+                                        });
+                                    }
                                 }
                             });
                         },
-                        full: (appName: appType) =>
+                        home: () => {
+                            const store = useModalStore.getState();
+                            const appIds = store.modalApp.windowStack.map((app) => app.id);
+
+                            set((state) => {
+                                state.modalApp.windowStack = [];
+                            });
+
+                            // 在set外部调用hide，避免代理对象撤销问题
+                            appIds.forEach((appId) => {
+                                nextTick(() => {
+                                    useModalStore.getState().actions.hide(appId);
+                                });
+                            });
+                        },
+                        full: (appName: AppType) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 app.size = 'full';
@@ -74,15 +109,22 @@ export const createModalStore = () =>
                                 app.max = true;
                                 state.modalApp.hz++;
                                 app.z = state.modalApp.hz;
+
+                                const windowStack = state.modalApp.windowStack;
+                                windowStack.push(app);
                             }),
-                        hide: (appName: appType) =>
+                        hide: (appName: AppType) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 app.size = 'full';
                                 app.hide = false;
                                 app.max = false;
+
+                                const windowStack = state.modalApp.windowStack;
+                                const index = windowStack.findIndex((win) => win.id === app.id);
+                                windowStack.splice(index, 1);
                             }),
-                        mxmz: (appName: appType) =>
+                        mxmz: (appName: AppType) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 const size = (['mini', 'full'] as const)[
@@ -94,7 +136,7 @@ export const createModalStore = () =>
                                 state.modalApp.hz++;
                                 app.z = state.modalApp.hz;
                             }),
-                        close: (appName: appType) =>
+                        close: (appName: AppType) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 app.hide = true;
@@ -102,8 +144,12 @@ export const createModalStore = () =>
                                 app.activePath = '';
                                 app.z = -1;
                                 state.modalApp.hz--;
+
+                                const windowStack = state.modalApp.windowStack;
+                                const index = windowStack.findIndex((win) => win.id === app.id);
+                                windowStack.splice(index, 1);
                             }),
-                        resize: (appName: appType, dimP) =>
+                        resize: (appName: AppType, dimP) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 app.size = 'cstm';
@@ -113,15 +159,20 @@ export const createModalStore = () =>
                                 if (app.z !== state.modalApp.hz) state.modalApp.hz++;
                                 app.z = state.modalApp.hz;
                             }),
-                        front: (appName: appType) =>
+                        front: (appName: AppType) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 if (app.z !== state.modalApp.hz) {
                                     state.modalApp.hz++;
                                     app.z = state.modalApp.hz;
                                 }
+
+                                const windowStack = state.modalApp.windowStack;
+                                const index = windowStack.findIndex((win) => win.id === app.id);
+                                windowStack.splice(index, 1);
+                                windowStack.push(app);
                             }),
-                        setActivePath: (appName: appType, path: string) =>
+                        setActivePath: (appName: AppType, path: string) =>
                             set((state) => {
                                 const app = state.modalApp.list[appName];
                                 app.activePath = path;

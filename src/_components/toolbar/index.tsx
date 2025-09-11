@@ -9,15 +9,15 @@ import { useShallow } from 'zustand/shallow';
 
 import { useModalStore } from '@/_components/modal/hooks';
 
-import type { appType, ModalOptions } from '../modal/types';
+import type { AppType, ModalOptions } from '../modal/types';
 
 export const ToolBar = ({
     name,
     app,
     parentRef,
 }: {
-    name: appType;
-    app: ModalOptions['modalApp']['list'][appType];
+    name: AppType;
+    app: ModalOptions['modalApp']['list'][AppType];
     parentRef: RefObject<HTMLDivElement | null>;
 }) => {
     const { modalApp, close, hide, mxmz, resize } = useModalStore(

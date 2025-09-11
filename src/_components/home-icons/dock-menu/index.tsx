@@ -3,8 +3,10 @@
 import { CalendarIcon, FileUser, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
+import { useShallow } from 'zustand/shallow';
 
 import { Dock, DockIcon } from '@/_components/magicui/dock';
+import { useModalStore } from '@/_components/modal/hooks';
 import { buttonVariants } from '@/_components/shadcn/ui/button';
 import { Separator } from '@/_components/shadcn/ui/separator';
 import {
@@ -65,7 +67,6 @@ const Icons = {
 };
 
 const DATA = {
-    navbar: [{ href: '/', icon: HomeIcon, label: 'Home' }],
     contact: {
         social: {
             GitHub: {
@@ -93,32 +94,39 @@ const DATA = {
 };
 
 export function DockDemo({ className }: { className?: string }) {
+    const { home } = useModalStore(
+        useShallow((state) => ({
+            home: state.actions.home,
+        })),
+    );
     return (
         <div className={cn('flex flex-col items-center justify-center', className)}>
             <TooltipProvider>
                 <Dock direction="middle">
-                    {DATA.navbar.map((item) => (
-                        <DockIcon key={item.label}>
-                            <Tooltip>
-                                <TooltipTrigger asChild>
-                                    <Link
-                                        href={item.href}
-                                        aria-label={item.label}
-                                        className={cn(
-                                            buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                            'origin-center ease-in-out transition-all duration-200',
-                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
-                                        )}
-                                    >
-                                        <item.icon className="size-4" />
-                                    </Link>
-                                </TooltipTrigger>
-                                <TooltipContent>
-                                    <p>{item.label}</p>
-                                </TooltipContent>
-                            </Tooltip>
-                        </DockIcon>
-                    ))}
+                    <DockIcon key="Home">
+                        <Tooltip>
+                            <TooltipTrigger asChild>
+                                <Link
+                                    href="#"
+                                    aria-label="Home"
+                                    className={cn(
+                                        buttonVariants({ variant: 'ghost', size: 'icon' }),
+                                        'origin-center ease-in-out transition-all duration-200',
+                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
+                                    )}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        home();
+                                    }}
+                                >
+                                    <HomeIcon className="size-4" />
+                                </Link>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>Home</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </DockIcon>
                     <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
                     <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
                     <DockMenuIcon name="about" icon={<FileUser className="size-4" />} />

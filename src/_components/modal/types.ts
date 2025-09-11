@@ -1,7 +1,7 @@
-export type appType = 'doc' | 'blog' | 'about'; // 与路径名/doc,/blog对应
+export type AppType = 'doc' | 'blog' | 'about'; // 与路径名/doc,/blog对应
 
 export interface AppItem {
-    id: appType;
+    id: AppType;
     title: string;
     size: 'full' | 'mini' | 'cstm';
     hide: boolean;
@@ -19,7 +19,7 @@ export interface AppItem {
 export interface ModalOptions {
     modalApp: {
         list: {
-            [appName in appType]: AppItem;
+            [appName in AppType]: AppItem;
         };
         hz: number;
         windowStack: AppItem[];
@@ -27,12 +27,13 @@ export interface ModalOptions {
 }
 
 export interface ModalActions {
-    toggleWindow: (appName: appType) => void;
-    full: (appName: appType) => void;
-    hide: (appName: appType) => void;
-    mxmz: (appName: appType) => void;
-    close: (appName: appType) => void;
-    resize: (appName: appType, dimP: AppItem['dim']) => void;
-    front: (appName: appType) => void;
-    setActivePath: (appName: appType, path: string) => void;
+    toggleWindow: (appName: AppType) => void;
+    home: () => void;
+    full: (appName: AppType) => void;
+    hide: (appName: AppType) => void;
+    mxmz: (appName: AppType) => void;
+    close: (appName: AppType) => void;
+    resize: (appName: AppType, dimP: AppItem['dim']) => void;
+    front: (appName: AppType) => void;
+    setActivePath: (appName: AppType, path: string) => void;
 }

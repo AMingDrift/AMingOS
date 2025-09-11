@@ -3,14 +3,14 @@ import type { FC, PropsWithChildren } from 'react';
 import { useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { appType, ModalOptions } from '@/_components/modal/types';
+import type { AppType, ModalOptions } from '@/_components/modal/types';
 
 import { ToolBar } from '../toolbar';
 import { useModalStore } from './hooks';
 const Modal: FC<
     PropsWithChildren & {
-        app: ModalOptions['modalApp']['list'][appType];
-        name: appType;
+        app: ModalOptions['modalApp']['list'][AppType];
+        name: AppType;
     }
 > = ({ children, app, name }) => {
     const modalRef = useRef<HTMLDivElement>(null);
