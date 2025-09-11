@@ -4,7 +4,7 @@ import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 
 const VideoBackground = () => {
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
 
     // const getBackgroundVideo = unstable_cache(
@@ -27,8 +27,8 @@ const VideoBackground = () => {
     // }
 
     useEffect(() => {
-        setVideoUrl(theme === 'dark' ? '/test/xqtd.webm' : '/test/xl.webm');
-    }, [theme]);
+        setVideoUrl(resolvedTheme === 'dark' ? '/test/xqtd.webm' : '/test/xl.webm');
+    }, [resolvedTheme]);
 
     return (
         <div className="absolute inset-0 z-[-1] overflow-hidden w-full h-full min-h-full">

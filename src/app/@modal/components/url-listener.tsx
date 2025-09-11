@@ -26,7 +26,7 @@ const UrlListener = () => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     useMount(() => {
-        console.log('当前路径:', pathname);
+        // console.log('当前路径:', pathname);
 
         const params = new URLSearchParams(searchParams);
         const activePath = pathname + (params.toString() ? `?${params.toString()}` : '');
@@ -42,7 +42,7 @@ const UrlListener = () => {
     });
 
     useEffect(() => {
-        console.log('windowStack', windowStack);
+        // console.log('windowStack', windowStack);
         const frontApp = windowStack.at(-1);
         if (frontApp) {
             const app = list[frontApp.id];

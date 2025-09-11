@@ -30,10 +30,6 @@ export const ToolBar = ({
         })),
     );
     const router = useRouter();
-    const toolClick = () => {
-        // TODO: dispatch "front"
-        console.log('toolClick');
-    };
 
     let posP = [0, 0];
     let dimP = [0, 0];
@@ -45,7 +41,7 @@ export const ToolBar = ({
     let isDragged = false;
 
     const toolDrag = (e: MouseEvent<HTMLDivElement>) => {
-        console.log('toolDrag');
+        // console.log('toolDrag');
         e = e || window.event;
         e.preventDefault();
         posM = [e.clientY, e.clientX];
@@ -138,7 +134,6 @@ export const ToolBar = ({
             <div className="toolbar">
                 <div
                     className="topInfo flex flex-grow items-center"
-                    onClick={toolClick}
                     onMouseDown={toolDrag}
                     data-op="0"
                     onDoubleClick={minimize}

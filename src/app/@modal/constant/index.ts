@@ -9,6 +9,7 @@ import {
     NotebookPen,
     Siren,
     SquarePlus,
+    TestTube,
     User,
 } from 'lucide-react';
 
@@ -76,6 +77,11 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             title: 'Record',
             url: '/about/record',
             icon: Siren,
+        },
+        {
+            title: 'Test',
+            url: '/about/test',
+            icon: TestTube,
         },
     ],
 };

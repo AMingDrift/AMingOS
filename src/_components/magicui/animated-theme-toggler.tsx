@@ -3,7 +3,6 @@
 import { MoonIcon, SunIcon } from '@radix-ui/react-icons';
 import { useTheme } from 'next-themes';
 import { useRef } from 'react';
-import { flushSync } from 'react-dom';
 
 import { cn } from '@/_components/shadcn/utils';
 
@@ -16,19 +15,13 @@ interface props {
 export const AnimatedThemeToggler = ({ className }: props) => {
     const buttonRef = useRef<HTMLButtonElement | null>(null);
 
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
     const changeTheme = async () => {
         if (!buttonRef.current) return;
 
         await document.startViewTransition(() => {
-            // eslint-disable-next-line react-dom/no-flush-sync
-            flushSync(() => {
-                // 检查当前是否为暗色模式
-                const isDark = theme === 'dark';
-
-                // 切换主题：如果当前是暗色模式则移除属性，否则设置为 'dark'
-                setTheme(isDark ? 'light' : 'dark');
-            });
+            const isDark = resolvedTheme === 'dark';
+            setTheme(isDark ? 'light' : 'dark');
         }).ready;
 
         const { top, left, width, height } = buttonRef.current.getBoundingClientRect();

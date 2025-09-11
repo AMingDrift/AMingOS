@@ -1,4 +1,3 @@
-// src/app/_components/mdx/editor.tsx
 'use client';
 
 import '@uiw/react-md-editor/markdown-editor.css';
@@ -25,7 +24,7 @@ const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 export const MdxEditor: FC<MdxEditorProps> = (props) => {
     const { content, setContent, disabled } = props;
     const [serialized, setSerialized] = useState<MdxHydrateProps['serialized']>();
-    const { theme } = useTheme();
+    const { resolvedTheme } = useTheme();
     const containerRef = useRef<HTMLDivElement>(null);
     const [editorHeight, setEditorHeight] = useState<number>();
     const isMobile = useIsMobile();
@@ -82,7 +81,7 @@ export const MdxEditor: FC<MdxEditorProps> = (props) => {
     }, [serialized]);
 
     return (
-        <div ref={containerRef} data-color-mode={theme} className={$styles.container}>
+        <div ref={containerRef} data-color-mode={resolvedTheme} className={$styles.container}>
             {isNil(serialized) ? (
                 <Spinner className="rounded-sm bg-white/80 transition-opacity duration-300 dark:bg-black/50" />
             ) : (
