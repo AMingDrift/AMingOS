@@ -6,9 +6,9 @@ import type { CategoryItem } from '@/server/category/type';
 import type { PostItem } from '@/server/post/type';
 
 import Card3D from '@/_components/3D-card';
+import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { cn } from '@/_components/shadcn/utils';
-import ImageComponent from '@/app/@blog/blog/components/ImageComponent';
 
 import type { IPaginateQueryProps } from '../../paginate/types';
 

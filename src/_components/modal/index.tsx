@@ -16,7 +16,7 @@ const Modal: FC<
     const modalRef = useRef<HTMLDivElement>(null);
     const { front } = useModalStore(
         useShallow((state) => ({
-            front: state.front,
+            front: state.actions.front,
         })),
     );
     return (

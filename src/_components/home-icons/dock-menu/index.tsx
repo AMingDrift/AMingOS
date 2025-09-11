@@ -15,7 +15,7 @@ import {
 } from '@/_components/shadcn/ui/tooltip';
 import { cn } from '@/_components/shadcn/utils';
 
-import { AnimatedThemeToggler } from '../magicui/animated-theme-toggler';
+import { AnimatedThemeToggler } from '../../magicui/animated-theme-toggler';
 import DockMenuIcon from './doc-icon';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;

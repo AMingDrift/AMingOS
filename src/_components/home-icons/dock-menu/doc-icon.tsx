@@ -10,18 +10,18 @@ import { DockIcon } from '@/_components/magicui/dock';
 import { useModalStore } from '@/_components/modal/hooks';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
 
-import type { appType } from '../modal/types';
+import type { appType } from '../../modal/types';
 
-import { buttonVariants } from '../shadcn/ui/button';
-import { cn } from '../shadcn/utils';
+import { buttonVariants } from '../../shadcn/ui/button';
+import { cn } from '../../shadcn/utils';
 
 const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) => {
     const { app, hide, list, front } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
             app: state.modalApp.list[name],
-            hide: state.hide,
-            front: state.front,
+            hide: state.actions.hide,
+            front: state.actions.front,
         })),
     );
     const router = useRouter();
@@ -45,7 +45,7 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
             //     }
             // });
             // if (popApp) {
-            //     targetPath = (popApp as AppItem).preMiniPath;
+            //     targetPath = (popApp as AppItem).activePath;
             // } else {
             //     targetPath = '/';
             // }
@@ -59,7 +59,7 @@ const DockMenuIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) 
                 front(name);
             }
         } else {
-            targetPath = app.preMiniPath?.startsWith(`/${name}`) ? app.preMiniPath : `/${name}`;
+            targetPath = app.activePath?.startsWith(`/${name}`) ? app.activePath : `/${name}`;
         }
         // 路径相同则不重复跳转
         if (currentPath !== targetPath && !isNeedFront) {

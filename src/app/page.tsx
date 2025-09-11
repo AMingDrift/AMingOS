@@ -1,7 +1,7 @@
 import { FileUser, Folders, NotebookPen } from 'lucide-react';
 import React from 'react';
 
-import DesktopIcon from '@/_components/desktop-icon';
+import DesktopIcon from '@/_components/home-icons/desktop-icon';
 
 const Desktop = () => {
     return (

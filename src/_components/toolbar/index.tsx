@@ -23,10 +23,10 @@ export const ToolBar = ({
     const { modalApp, close, hide, mxmz, resize } = useModalStore(
         useShallow((state) => ({
             modalApp: state.modalApp,
-            close: state.close,
-            hide: state.hide,
-            mxmz: state.mxmz,
-            resize: state.resize,
+            close: state.actions.close,
+            hide: state.actions.hide,
+            mxmz: state.actions.mxmz,
+            resize: state.actions.resize,
         })),
     );
     const router = useRouter();

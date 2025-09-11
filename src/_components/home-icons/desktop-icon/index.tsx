@@ -5,21 +5,22 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { AppItem, appType } from '../modal/types';
+import type { AppItem, appType } from '../../modal/types';
 
-import { useModalStore } from '../modal/hooks';
+import { useModalStore } from '../../modal/hooks';
 
 const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) => {
     const router = useRouter();
     const searchParams = useSearchParams();
 
-    const { app, list, hide, full, setPreMiniPath } = useModalStore(
+    const { app, list, hide, full, setActivePath, toggleWindow } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
             app: state.modalApp.list[name],
-            full: state.full,
-            hide: state.hide,
-            setPreMiniPath: state.setPreMiniPath,
+            full: state.actions.full,
+            hide: state.actions.hide,
+            setActivePath: state.actions.setActivePath,
+            toggleWindow: state.actions.toggleWindow,
         })),
     );
 
@@ -32,7 +33,7 @@ const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) =
         // 兼容刷新页面时，路径开头为/doc时，显示模态框
         if (pathname.startsWith(`/${name}`)) {
             const params = new URLSearchParams(searchParams);
-            setPreMiniPath(name, pathname + (params.toString() ? `?${params.toString()}` : ''));
+            setActivePath(name, pathname + (params.toString() ? `?${params.toString()}` : ''));
             if (
                 (!prePathname.current || !prePathname.current.startsWith(`/${name}`)) &&
                 !(!app.hide && app.max) // 排除打开状态
@@ -44,6 +45,7 @@ const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) =
                 });
             }
         }
+
         prePathname.current = pathname;
     }, [pathname, searchParams]);
     return (
@@ -51,6 +53,7 @@ const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) =
             id="computer-icon"
             className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
             onClick={() => {
+                // toggleWindow(name);
                 if (app.hide) {
                     // state: 无 -> 全屏
                     router.push(`/${name}`);
@@ -70,13 +73,13 @@ const DesktopIcon = ({ name, icon }: { name: appType; icon: React.ReactNode }) =
                             }
                         });
                         if (popApp) {
-                            router.push((popApp as AppItem).preMiniPath);
+                            router.push((popApp as AppItem).activePath);
                         } else {
                             router.push('/');
                         }
                     } else {
                         // state: 最小化 -> 全屏
-                        router.push(app.preMiniPath);
+                        router.push(app.activePath);
                     }
                 }
             }}

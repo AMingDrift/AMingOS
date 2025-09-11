@@ -3,7 +3,7 @@ import type { FC, PropsWithChildren, ReactNode } from 'react';
 
 import './styles/index.css';
 
-import { DockDemo } from '@/_components/dock-menu';
+import { DockDemo } from '@/_components/home-icons/dock-menu';
 import { Toaster } from '@/_components/shadcn/ui/sonner';
 import { ThemeProvider } from '@/_components/theme-provider';
 import VideoBackground from '@/_components/video-background';
@@ -16,14 +16,10 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = ({
     children,
-    doc,
-    blog,
-    about,
+    modal,
 }: {
     children?: ReactNode;
-    doc?: ReactNode;
-    blog?: ReactNode;
-    about?: ReactNode;
+    modal?: ReactNode;
 }) => {
     return (
         <html lang="en" suppressHydrationWarning>
@@ -35,9 +31,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                                 {/* 桌面图标 */}
                                 {/* TODO: bottom-[4rem] 替换成docker menu 高度 */}
                                 <div className="absolute inset-0 z-10 p-6 bottom-[4rem] contain-layout contain-size">
-                                    {doc}
-                                    {blog}
-                                    {about}
+                                    {modal}
                                     {children}
                                 </div>
 
