@@ -127,9 +127,9 @@ export function DockDemo({ className }: { className?: string }) {
                             </TooltipContent>
                         </Tooltip>
                     </DockIcon>
-                    <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
-                    <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
                     <DockMenuIcon name="about" icon={<FileUser className="size-4" />} />
+                    <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
+                    <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
                     <Separator orientation="vertical" className="h-full" />
                     {Object.entries(DATA.contact.social).map(([name, social]) => (
                         <DockIcon key={name}>

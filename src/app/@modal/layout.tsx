@@ -16,9 +16,9 @@ const Page: FC = ({
 }) => {
     return (
         <>
-            <ModalWrapper routerName="doc">{doc}</ModalWrapper>
-            <ModalWrapper routerName="blog">{blog}</ModalWrapper>
             <ModalWrapper routerName="about">{about}</ModalWrapper>
+            <ModalWrapper routerName="blog">{blog}</ModalWrapper>
+            <ModalWrapper routerName="doc">{doc}</ModalWrapper>
             <UrlListener />
         </>
     );
