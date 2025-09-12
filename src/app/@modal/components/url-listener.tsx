@@ -46,7 +46,7 @@ const UrlListener = () => {
         const frontApp = windowStack.at(-1);
         if (frontApp) {
             const app = list[frontApp.id];
-            router.push(app.activePath);
+            router.push(app.activePath, { scroll: false });
         } else {
             router.push('/');
         }

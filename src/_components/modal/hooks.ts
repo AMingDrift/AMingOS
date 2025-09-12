@@ -169,8 +169,10 @@ export const createModalStore = () =>
 
                                 const windowStack = state.modalApp.windowStack;
                                 const index = windowStack.findIndex((win) => win.id === app.id);
-                                windowStack.splice(index, 1);
-                                windowStack.push(app);
+                                if (index !== windowStack.length - 1) {
+                                    windowStack.splice(index, 1);
+                                    windowStack.push(app);
+                                }
                             }),
                         setActivePath: (appName: AppType, path: string) =>
                             set((state) => {
