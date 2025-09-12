@@ -12,6 +12,7 @@ import { postApi } from '@/api/post';
 import { formatTime } from '@/libs/time';
 
 import { TagLink } from '../form/tag';
+import { PostDelete } from '../list/actions/delete';
 import { PostEditButton } from '../list/actions/edit-button';
 import { PostContentSkeleton } from '../skeleton';
 import $styles from './style.module.css';
@@ -44,8 +45,9 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                             <>
                                 <header className={$styles.title}>
                                     <h1 className="text-lg lg:text-3xl">{post.title}</h1>
-                                    <div className="mt-[0.125rem]">
+                                    <div className="mt-[0.125rem] flex ml-2 gap-2">
                                         <PostEditButton item={post} iconBtn />
+                                        <PostDelete item={post} iconBtn />
                                     </div>
                                 </header>
                                 <div className={$styles.meta}>

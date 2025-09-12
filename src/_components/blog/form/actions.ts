@@ -25,3 +25,10 @@ export const updateOrCreate = async (
     revalidatePath('/blog');
     return post;
 };
+
+export const deletePost = async (id: string) => {
+    const res = await postApi.delete(id);
+    if (!res.ok) throw new Error((await res.json()).message);
+    revalidatePath('/blog');
+    return await res.json();
+};

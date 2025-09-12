@@ -26,8 +26,10 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '@/_components/shadcn/ui/tooltip';
-import { postApi } from '@/api/post';
-export const PostDelete: FC<{ item: PostItem }> = ({ item }) => {
+import { cn } from '@/_components/shadcn/utils';
+
+import { deletePost } from '../../form/actions';
+export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, iconBtn }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
     const [pedding, setPedding] = useState(false);
@@ -45,17 +47,25 @@ export const PostDelete: FC<{ item: PostItem }> = ({ item }) => {
         async (e) => {
             e.preventDefault();
             setPedding(true);
-            const result = await postApi.delete(item.id);
-            if (!result.ok) {
+
+            try {
+                await deletePost(item.id);
+            } catch (error) {
                 toast.warning('删除失败', {
                     id: 'post-delete-error',
-                    description: (await result.json()).message,
+                    description: (error as Error).message,
                 });
             }
             setPedding(false);
             setOpen(false);
+
+            // 1: 从blog list页删除
             // 删除文章后刷新页面
-            router.refresh();
+            // router.refresh();
+
+            // 2. 在blog detail页删除
+            // 删除文章后返回上一页
+            router.replace('/blog');
         },
         [item.id],
     );
@@ -70,12 +80,22 @@ export const PostDelete: FC<{ item: PostItem }> = ({ item }) => {
                     <Tooltip>
                         <TooltipTrigger asChild>
                             <Button
-                                className="text-xs"
+                                className={cn('text-xs', {
+                                    'mr-3': !iconBtn,
+                                    'btn-icon-transparent ': iconBtn,
+                                })}
                                 variant="secondary"
-                                size="sm"
+                                size={iconBtn ? 'icon' : 'sm'}
                                 onClick={openDialog}
                             >
-                                <Trash2 /> 删除
+                                {iconBtn ? (
+                                    <span className="xicon text-2xl text-red-400">
+                                        <Trash2 />
+                                    </span>
+                                ) : (
+                                    <Trash2 />
+                                )}
+                                {!iconBtn && ' 删除'}
                             </Button>
                         </TooltipTrigger>
                         <TooltipContent>
