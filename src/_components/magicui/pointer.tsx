@@ -34,13 +34,17 @@ export function Pointer({ className, style, children, ...props }: PointerProps):
 
                 // Add event listeners to parent
                 const handleMouseMove = (e: MouseEvent) => {
-                    x.set(e.clientX);
-                    y.set(e.clientY);
+                    // 计算相对于父元素的位置，而不是直接使用视口坐标
+                    // 这可以解决modal框偏移时的定位问题
+                    const rect = parentElement.getBoundingClientRect();
+                    x.set(e.clientX - rect.left);
+                    y.set(e.clientY - rect.top);
                 };
 
                 const handleMouseEnter = (e: MouseEvent) => {
-                    x.set(e.clientX);
-                    y.set(e.clientY);
+                    const rect = parentElement.getBoundingClientRect();
+                    x.set(e.clientX - rect.left);
+                    y.set(e.clientY - rect.top);
                     setIsActive(true);
                 };
 
@@ -68,7 +72,7 @@ export function Pointer({ className, style, children, ...props }: PointerProps):
             <AnimatePresence>
                 {isActive && (
                     <motion.div
-                        className="transform-[translate(-50%,-50%)] pointer-events-none fixed z-50"
+                        className="transform-[translate(-50%,-50%)] pointer-events-none absolute z-50"
                         style={{
                             top: y,
                             left: x,
