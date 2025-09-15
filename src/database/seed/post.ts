@@ -106,6 +106,13 @@ const data: Item[] = [
         categoryName: '码农创业记',
         tagNames: ['创业', '外包', '融资'],
     },
+    {
+        title: '手把手教你用 React + Zustand 打造 Windows 风格可拖拽，缩放，多窗口 Modal 组件',
+        summary: '记录仿Windows风格的可拖拽、缩放、多窗口 Modal 组件的实现',
+        bodyPath: path.join(__dirname, '../fixture/wmc/1.md'),
+        categoryName: 'TS全栈开发',
+        tagNames: ['nodejs', 'typescript', 'react'],
+    },
 ];
 
 export const createPostData = async () => {
