@@ -39,21 +39,15 @@ const remarkAdmonitions = () => {
                 const data = node.data || (node.data = {});
                 const attributes = node.attributes || {};
 
-                // 获取第一个子节点作为标题
-                let title;
-                if (node.children && node.children[0]?.type === 'paragraph') {
-                    const firstChild = node.children[0];
-                    if (firstChild.children[0]?.type === 'text') {
-                        title = firstChild.children[0].value;
-                        node.children.shift();
-                    }
-                }
+                // 只有明确设置了 title 属性时才使用标题
+                // 不再自动从内容中提取标题
+                const title = attributes.title;
 
                 // 使用大写的组件名
                 data.hName = 'Admonition';
                 data.hProperties = {
                     type, // 使用映射后的类型
-                    title: title || attributes.title,
+                    title,
                     ...attributes,
                 };
             }

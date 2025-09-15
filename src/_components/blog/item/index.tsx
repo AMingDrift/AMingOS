@@ -45,7 +45,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                             <>
                                 <header className={$styles.title}>
                                     <h1 className="text-lg lg:text-3xl">{post.title}</h1>
-                                    <div className="mt-[0.125rem] flex ml-2 gap-2">
+                                    <div className="mt-[0.125rem] flex ml-2">
                                         <PostEditButton item={post} iconBtn />
                                         <PostDelete item={post} iconBtn />
                                     </div>

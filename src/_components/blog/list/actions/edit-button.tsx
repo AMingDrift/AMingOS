@@ -50,7 +50,7 @@ export const PostEditButton: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item
     <Suspense>
         <TooltipProvider>
             <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger className="size-9">
                     <Button id={item.id} iconBtn={iconBtn} />
                 </TooltipTrigger>
                 <TooltipContent>

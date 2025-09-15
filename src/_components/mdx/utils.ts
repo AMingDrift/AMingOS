@@ -1,4 +1,3 @@
-// src/app/_components/mdx/utils.ts
 'use server';
 import type { Compatible } from 'vfile';
 

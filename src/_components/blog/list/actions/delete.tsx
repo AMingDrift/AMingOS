@@ -78,7 +78,7 @@ export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, ic
             <AlertDialogTrigger asChild>
                 <TooltipProvider>
                     <Tooltip>
-                        <TooltipTrigger asChild>
+                        <TooltipTrigger asChild className="size-9!">
                             <Button
                                 className={cn('text-xs', {
                                     'mr-3': !iconBtn,
