@@ -109,7 +109,10 @@ const data: Item[] = [
     {
         title: '手把手教你用 React + Zustand 打造 Windows 风格可拖拽，缩放，多窗口 Modal 组件',
         summary: '记录仿Windows风格的可拖拽、缩放、多窗口 Modal 组件的实现',
-        bodyPath: path.join(__dirname, '../fixture/wmc/1.md'),
+        bodyPath: path.join(
+            __dirname,
+            '../fixture/wmc/1/手把手教你构建 Windows 风格的 React(Next js) 可拖拽、缩放、多窗口Modal.md',
+        ),
         categoryName: 'TS全栈开发',
         tagNames: ['nodejs', 'typescript', 'react'],
     },

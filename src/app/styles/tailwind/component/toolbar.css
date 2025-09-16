@@ -1,138 +1,140 @@
-@utility toolbar {
-    position: relative;
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 28px;
-    border-radius: 6px 6px 0 0;
+@layer components {
+    .toolbar {
+        position: relative;
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 28px;
+        border-radius: 6px 6px 0 0;
 
-    &[data-float='false'] {
-        z-index: 10;
-    }
+        &[data-float='false'] {
+            z-index: 10;
+        }
 
-    &[data-back='light'] {
-        background: #fefefe;
-    }
+        &[data-back='light'] {
+            background: #fefefe;
+        }
 
-    &[data-back='dark'] {
-        background: #181818;
-    }
-}
-
-@utility topInfo {
-    height: 100%;
-
-    &[data-float='true'] {
-        opacity: 0;
-    }
-
-    .uicon {
-        margin: 0 10px 0 6px;
-    }
-}
-
-@utility actbtns {
-    height: 100%;
-
-    .actbtn {
-        @apply h-full flex items-center justify-center px-1 hover:bg-[#88888833] cursor-pointer transition-all;
-
-        &.closeBtn {
-            @apply hover:bg-[#ff0000cc];
-            border-radius: 0 6px 0 0;
+        &[data-back='dark'] {
+            background: #181818;
         }
     }
-}
 
-@utility closeBtn {
-    border-radius: 0 6px 0 0;
-}
+    .topInfo {
+        height: 100%;
 
-@utility snapbox {
-    position: relative;
+        &[data-float='true'] {
+            opacity: 0;
+        }
 
-    &[data-hv='true'] {
-        background: rgb(136 136 136 / 20%);
+        .uicon {
+            margin: 0 10px 0 6px;
+        }
     }
-}
 
-body[data-theme='dark'] .toolbar[data-noinvert='false'] {
-    .snapcont {
-        background: #222;
+    .actbtns {
+        height: 100%;
 
-        .snapper {
-            background: #4e4e4e;
-            border: solid 1px #777;
+        .actbtn {
+            @apply h-full flex items-center justify-center px-1 hover:bg-[#88888833] cursor-pointer transition-all;
 
-            &:hover {
-                background: var(--clrPrm);
-                border: solid 1px var(--clrPrm);
+            &.closeBtn {
+                @apply hover:bg-[#ff0000cc];
+                border-radius: 0 6px 0 0;
             }
         }
     }
 
-    .appFullName {
-        color: #fefefe;
+    .closeBtn {
+        border-radius: 0 6px 0 0;
     }
 
-    .actbtns {
-        .uicon img {
-            filter: invert(1);
+    .snapbox {
+        position: relative;
+
+        &[data-hv='true'] {
+            background: rgb(136 136 136 / 20%);
         }
     }
-}
 
-@utility resizecont {
-    position: absolute;
-    z-index: 12;
-}
+    .resizecont {
+        position: absolute;
+        z-index: 12;
+    }
 
-@utility topone {
-    top: -8px;
-    left: 0;
-    z-index: 22;
-    width: calc(100% - 48px * 3);
-}
+    .topone {
+        top: -8px;
+        left: 0;
+        z-index: 22;
+        width: calc(100% - 48px * 3);
+    }
 
-@utility leftone {
-    left: -8px;
-    height: 100%;
-}
+    .leftone {
+        left: -8px;
+        height: 100%;
+    }
 
-@utility rightone {
-    right: -8px;
-    bottom: 0;
-    height: calc(100% - 28px);
-}
+    .rightone {
+        right: -8px;
+        bottom: 0;
+        height: calc(100% - 28px);
+    }
 
-@utility bottomone {
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-}
+    .bottomone {
+        bottom: -8px;
+        left: 0;
+        width: 100%;
+    }
 
-@utility conrsz {
-    width: 8px;
-    height: 8px;
-}
+    .conrsz {
+        width: 8px;
+        height: 8px;
+    }
 
-@utility edgrsz {
-    min-width: 8px;
-    min-height: 8px;
-}
+    .edgrsz {
+        min-width: 8px;
+        min-height: 8px;
+    }
 
-@utility wdws {
-    width: 100%;
-}
+    .wdws {
+        width: 100%;
+    }
 
-@utility hdws {
-    height: 100%;
-}
+    .hdws {
+        height: 100%;
+    }
 
-@utility noscroll {
-    &::-webkit-scrollbar {
-        display: none;
+    .noscroll {
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    body[data-theme='dark'] .toolbar[data-noinvert='false'] {
+        .snapcont {
+            background: #222;
+
+            .snapper {
+                background: #4e4e4e;
+                border: solid 1px #777;
+
+                &:hover {
+                    background: var(--clrPrm);
+                    border: solid 1px var(--clrPrm);
+                }
+            }
+        }
+
+        .appFullName {
+            color: #fefefe;
+        }
+
+        .actbtns {
+            .uicon img {
+                filter: invert(1);
+            }
+        }
     }
 }

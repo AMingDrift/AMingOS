@@ -5,8 +5,8 @@ import { useShallow } from 'zustand/shallow';
 
 import type { AppType, ModalOptions } from '@/_components/modal/types';
 
-import { ToolBar } from '../toolbar';
 import { useModalStore } from './hooks';
+import { ToolBar } from './toolbar';
 const Modal: FC<
     PropsWithChildren & {
         app: ModalOptions['modalApp']['list'][AppType];

@@ -9,7 +9,7 @@ import { useShallow } from 'zustand/shallow';
 
 import { useModalStore } from '@/_components/modal/hooks';
 
-import type { AppType, ModalOptions } from '../modal/types';
+import type { AppType, ModalOptions } from './types';
 
 export const ToolBar = ({
     name,
