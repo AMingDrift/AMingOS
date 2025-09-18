@@ -89,7 +89,7 @@ export const usePostFormSubmitHandler = (
                 post = await updateOrCreate(params, data);
                 // 创建或更新文章后跳转到文章详情页
                 // 注意,这里不要用push,防止在详情页后退后返回到创建或编辑页面的弹出框
-                if (!isNil(post)) router.replace(`/blog/${post.slug || post.id}`);
+                if (!isNil(post)) router.replace(`/blog/posts/${post.slug || post.id}`);
             } catch (error) {
                 toast.error('遇到服务器错误,请联系管理员处理', {
                     id: 'post-save-error',

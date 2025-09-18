@@ -12,6 +12,7 @@ type Item = Pick<Prisma.PostCreateInput, 'title' | 'summary'> & {
     bodyPath: string;
     categoryName: string;
     tagNames?: string[];
+    thumb?: string;
 };
 
 const data: Item[] = [
@@ -114,13 +115,14 @@ const data: Item[] = [
             '../fixture/wmc/1/手把手教你构建 Windows 风格的 React(Next js) 可拖拽、缩放、多窗口Modal.md',
         ),
         categoryName: 'TS全栈开发',
-        tagNames: ['nodejs', 'typescript', 'react'],
+        tagNames: ['typescript', 'react', 'next.js'],
+        thumb: '/uploads/thumb/1.webp',
     },
 ];
 
 export const createPostData = async () => {
     for (const post of data) {
-        const { title, summary, bodyPath, categoryName, tagNames } = post;
+        const { title, summary, bodyPath, categoryName, tagNames, thumb } = post;
         const category = await prisma.category.findFirst({
             where: { name: categoryName },
         });
@@ -136,7 +138,7 @@ export const createPostData = async () => {
         await prisma.post.create({
             select: { id: true },
             data: {
-                thumb: `/uploads/thumb/post-${getRandomInt(1, 15)}.png`,
+                thumb: thumb ?? `/uploads/thumb/post-${getRandomInt(1, 15)}.png`,
                 title,
                 summary,
                 body: readFileSync(bodyPath, 'utf8'),

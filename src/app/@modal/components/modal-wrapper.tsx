@@ -15,7 +15,17 @@ import { SidebarProvider, SidebarTrigger } from '@/_components/shadcn/ui/sidebar
 
 import { MenuItems } from '../constant';
 
-const ModalWrapper = ({ children, routerName }: { children: ReactNode; routerName: AppType }) => {
+const ModalWrapper = ({
+    children,
+    routerName,
+    subtoolbar,
+    calcRouteHighlight,
+}: {
+    children: ReactNode;
+    routerName: AppType;
+    subtoolbar?: ReactNode;
+    calcRouteHighlight?: (originUrl: string) => boolean;
+}) => {
     const { list } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
@@ -24,10 +34,15 @@ const ModalWrapper = ({ children, routerName }: { children: ReactNode; routerNam
     return (
         <Modal app={list[routerName]} name={routerName}>
             <SidebarProvider defaultOpen={true}>
-                <AppSidebar items={MenuItems[routerName]} />
-                <main className="flex flex-col w-full overflow-x-auto">
-                    <SidebarTrigger />
-                    <ScrollArea className="h-[calc(100%-28px)] w-full rounded-md p-2">
+                <AppSidebar items={MenuItems[routerName]} calcRouteHighlight={calcRouteHighlight} />
+                <main className="flex flex-col w-full h-full overflow-x-auto">
+                    <div className="h-[40px]  p-1 flex items-center flex-none">
+                        <SidebarTrigger />
+                        {/* subtoolbar menu */}
+                        {subtoolbar}
+                    </div>
+
+                    <ScrollArea className="h-[calc(100%-40px)] w-full rounded-md p-2">
                         {children}
                         <ScrollBar orientation="horizontal" />
                     </ScrollArea>

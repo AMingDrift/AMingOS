@@ -8,7 +8,6 @@ import type { PostItem } from '@/server/post/type';
 import Card3D from '@/_components/3D-card';
 import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
-import { Pointer } from '@/_components/magicui/pointer';
 import { cn } from '@/_components/shadcn/utils';
 
 import type { IPaginateQueryProps } from '../../paginate/types';
@@ -22,7 +21,7 @@ export interface PostListProps extends IPaginateQueryProps {
 }
 
 export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items, activeTag }) => (
-    <div className="columns-2 gap-10 lg:columns-3 my-5 mx-10">
+    <div className="columns-2 gap-10 lg:columns-3 my-8 mx-10">
         {(items as PostItem[]).map((item, idx) => (
             <div key={item.id} className="relative">
                 <BlurFade
@@ -32,8 +31,8 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                     className="flex flex-col mb-10 break-inside-avoid"
                 >
                     <Card3D>
-                        <Link href={`/blog/${item.slug || item.id}`}>
-                            <div className="flex flex-col select-none cursor-none border-0 rounded-xl p-3 transition-all duration-150 border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)]">
+                        <Link href={`/blog/posts/${item.slug || item.id}`}>
+                            <div className="flex flex-col select-none border-0 rounded-xl p-3 transition-all duration-300 ease-out border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)] hover:scale-105 transform">
                                 <ImageComponent
                                     key={item.id}
                                     src={item.thumb}
@@ -68,9 +67,9 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                     </Card3D>
                 </BlurFade>
 
-                <Pointer>
+                {/* <Pointer>
                     <div className="text-2xl select-none">👆</div>
-                </Pointer>
+                </Pointer> */}
             </div>
         ))}
     </div>

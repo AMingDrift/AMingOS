@@ -1,7 +1,7 @@
 'use client';
 import type { FC } from 'react';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useState } from 'react';
 
 import type { TagItem } from '@/server/tag/type';
@@ -14,6 +14,7 @@ export const TagLink: FC<{
 }> = ({ tag, variant }) => {
     const searchParams = useSearchParams();
     const router = useRouter();
+    const pathname = usePathname();
     const [isHovered, setIsHovered] = useState(false);
 
     const getPageUrl = useCallback(
@@ -23,11 +24,11 @@ export const TagLink: FC<{
                 const curTag = params.get('tag');
                 params.delete('tag');
                 if (item.text === curTag) {
-                    return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+                    return pathname + (params.toString() ? `?${params.toString()}` : '');
                 }
             }
             params.set('tag', item.text);
-            return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+            return pathname + (params.toString() ? `?${params.toString()}` : '');
         },
         [searchParams],
     );

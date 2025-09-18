@@ -4,7 +4,6 @@ import {
     Files,
     FileVideo,
     Image,
-    Layers,
     Music4,
     NotebookPen,
     Siren,
@@ -38,11 +37,6 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             title: '发布',
             url: '/blog/create',
             icon: SquarePlus,
-        },
-        {
-            title: '合集',
-            url: '/blog/collection',
-            icon: Layers,
         },
     ],
     doc: [

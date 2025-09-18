@@ -6,20 +6,14 @@
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        height: 28px;
+        height: 32px;
         border-radius: 6px 6px 0 0;
 
         &[data-float='false'] {
             z-index: 10;
         }
 
-        &[data-back='light'] {
-            background: #fefefe;
-        }
-
-        &[data-back='dark'] {
-            background: #181818;
-        }
+        @apply backdrop-blur-lg;
     }
 
     .topInfo {

@@ -1,0 +1,67 @@
+@reference "#tailwind.css";
+
+.container {
+    @apply relative;
+}
+
+.accordion {
+    @apply relative z-10;
+}
+
+.folderItem {
+    @apply flex items-center rounded transition-all duration-200 py-2 px-1
+    border-transparent hover:bg-zinc-200/50;
+
+    &.active {
+        @apply bg-zinc-200;
+    }
+
+    & > .folderLink {
+        @apply flex w-full cursor-pointer items-center;
+
+        & .children {
+            @apply ml-4 border-l border-zinc-200;
+        }
+
+        & > h3 > button {
+            @apply py-0;
+        }
+    }
+}
+
+.item {
+    @apply flex items-center py-2 rounded transition-all duration-200 px-1
+                border-l-2 border-transparent hover:bg-zinc-200/50;
+
+    & > .itemLink {
+        @apply flex items-center w-full cursor-pointer;
+    }
+
+    &.active {
+        @apply bg-zinc-200 border-l-2;
+    }
+}
+
+html[data-theme='dark'] {
+    .folderItem {
+        @apply hover:bg-zinc-700/50;
+
+        &.active {
+            @apply bg-zinc-700;
+        }
+
+        & > .folderLink {
+            & .children {
+                @apply border-zinc-700;
+            }
+        }
+    }
+
+    .item {
+        @apply hover:bg-zinc-700/50;
+
+        &.active {
+            @apply bg-zinc-700;
+        }
+    }
+}

@@ -13,7 +13,13 @@ import {
     SidebarMenuItem,
 } from '@/_components/shadcn/ui/sidebar';
 
-export function AppSidebar({ items }: { items: MenuItemType[] }) {
+export function AppSidebar({
+    items,
+    calcRouteHighlight,
+}: {
+    items: MenuItemType[];
+    calcRouteHighlight?: (originUrl: string) => boolean;
+}) {
     const pathname = usePathname();
     return (
         <Sidebar>
@@ -29,7 +35,8 @@ export function AppSidebar({ items }: { items: MenuItemType[] }) {
                                                 prefetch={true}
                                                 href={item.url}
                                                 className={
-                                                    pathname === item.url
+                                                    pathname === item.url ||
+                                                    calcRouteHighlight?.(item.url)
                                                         ? 'bg-primary/10 text-primary'
                                                         : ''
                                                 }
@@ -42,7 +49,6 @@ export function AppSidebar({ items }: { items: MenuItemType[] }) {
                                                 <span>{item.title}</span>
                                             </Link>
                                         </SidebarMenuButton>
-                                        {/* <SidebarMenuBadge>{item.cnt}</SidebarMenuBadge> */}
                                     </SidebarMenuItem>
                                 ))}
                         </SidebarMenu>

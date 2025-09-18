@@ -1,8 +1,10 @@
 import type { FC } from 'react';
 
+import { notFound } from 'next/navigation';
+
 import type { IPaginateQueryProps } from '../../paginate/types';
 
-import { getBlogResult } from './actions/blog-actions';
+import { getBlogResult, getBreadcrumbsCategories } from '../utils';
 import { PostList } from './items';
 import Loadmore from './Loadmore';
 
@@ -12,14 +14,16 @@ export interface BlogIndexProps extends IPaginateQueryProps {
 }
 
 export const BlogIndex: FC<BlogIndexProps> = async (props) => {
-    const { limit = 10, tag } = props ?? {};
-
-    // 无线滚动 https://www.youtube.com/watch?v=FKZAXFjxlJI&t=2409s
-
+    const { limit = 10, tag, categories } = props ?? {};
+    const categoryItems = await getBreadcrumbsCategories(categories);
+    if (!categoryItems) return notFound();
+    const category = categoryItems.length > 0 ? categoryItems[categoryItems.length - 1] : undefined;
+    const result = await getBlogResult({ page: 1, limit, tag, category: category?.id });
     return (
         <>
-            <PostList items={(await getBlogResult(1, limit, tag)).items} activeTag={tag} />
-            <Loadmore limit={limit} tag={tag} />
+            {/* <CategoryTreeWidget actives={categoryItems} /> */}
+            <PostList items={result.items} activeTag={tag} />
+            <Loadmore limit={limit} tag={tag} category={category?.id} />
         </>
     );
 };

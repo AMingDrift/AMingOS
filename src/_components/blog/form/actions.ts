@@ -22,13 +22,14 @@ export const updateOrCreate = async (
         if (!res.ok) throw new Error((await res.json()).message);
         post = await res.json();
     }
-    revalidatePath('/blog');
+    // TODO: revalidatePath('/blog/[[...categories]]', 'layout'); is invalid
+    revalidatePath('/', 'layout');
     return post;
 };
 
 export const deletePost = async (id: string) => {
     const res = await postApi.delete(id);
     if (!res.ok) throw new Error((await res.json()).message);
-    revalidatePath('/blog');
+    revalidatePath('/', 'layout');
     return await res.json();
 };

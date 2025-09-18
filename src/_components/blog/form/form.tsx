@@ -31,7 +31,7 @@ import {
 } from '../../shadcn/ui/form';
 import { Input } from '../../shadcn/ui/input';
 import { Textarea } from '../../shadcn/ui/textarea';
-// import { CategorySelect } from './category-select';
+import { CategorySelect } from './category-select';
 import { usePostActionForm, usePostFormSubmitHandler } from './hooks';
 import { TagInput } from './tag';
 export const PostActionForm = forwardRef<PostActionFormRef, PostActionFormProps>((props, ref) => {
@@ -201,7 +201,7 @@ export const PostActionForm = forwardRef<PostActionFormRef, PostActionFormProps>
                         )}
                     />
                 </div>
-                {/* <FormField
+                <FormField
                     control={form.control}
                     name="categoryId"
                     render={({ field }) => (
@@ -223,7 +223,7 @@ export const PostActionForm = forwardRef<PostActionFormRef, PostActionFormProps>
                             <FormMessage />
                         </FormItem>
                     )}
-                /> */}
+                />
                 <FormField
                     control={form.control}
                     name="tags"
