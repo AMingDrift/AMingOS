@@ -6,7 +6,7 @@ const Card3D = ({ children }: { children: React.ReactNode }) => {
     const defaultOptions = {
         reverse: false, // reverse the tilt direction
         max: 20, // max tilt rotation (degrees)
-        perspective: 2000, // Transform perspective, the lower the more extreme the tilt gets.
+        perspective: 3000, // Transform perspective, the lower the more extreme the tilt gets.
         scale: 1, // 2 = 200%, 1.5 = 150%, etc..
         speed: 2000, // Speed of the enter/exit transition
         transition: true, // Set a transition on enter/exit.

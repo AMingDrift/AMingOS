@@ -36,13 +36,13 @@ const ModalWrapper = ({
             <SidebarProvider defaultOpen={true}>
                 <AppSidebar items={MenuItems[routerName]} calcRouteHighlight={calcRouteHighlight} />
                 <main className="flex flex-col w-full h-full overflow-x-auto">
-                    <div className="h-[40px]  p-1 flex items-center flex-none">
+                    <div className="h-[50px]  p-1 flex items-center flex-none">
                         <SidebarTrigger />
                         {/* subtoolbar menu */}
                         {subtoolbar}
                     </div>
 
-                    <ScrollArea className="h-[calc(100%-40px)] w-full rounded-md p-2">
+                    <ScrollArea className="h-[calc(100%-50px)] w-full rounded-md">
                         {children}
                         <ScrollBar orientation="horizontal" />
                     </ScrollArea>
