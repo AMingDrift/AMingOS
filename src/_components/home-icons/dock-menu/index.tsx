@@ -122,7 +122,7 @@ export function DockDemo({ className }: { className?: string }) {
                                     <HomeIcon className="size-4" />
                                 </Link>
                             </TooltipTrigger>
-                            <TooltipContent>
+                            <TooltipContent className="z-9999">
                                 <p>Home</p>
                             </TooltipContent>
                         </Tooltip>
@@ -148,7 +148,7 @@ export function DockDemo({ className }: { className?: string }) {
                                         <social.icon className="size-4" />
                                     </Link>
                                 </TooltipTrigger>
-                                <TooltipContent>
+                                <TooltipContent className="z-9999">
                                     <p>{name}</p>
                                 </TooltipContent>
                             </Tooltip>
@@ -166,7 +166,7 @@ export function DockDemo({ className }: { className?: string }) {
                                     )}
                                 />
                             </TooltipTrigger>
-                            <TooltipContent>
+                            <TooltipContent className="z-9999">
                                 <p>Theme</p>
                             </TooltipContent>
                         </Tooltip>
