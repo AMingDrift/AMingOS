@@ -6,6 +6,7 @@ import { prettyJSON } from 'hono/pretty-json';
 
 import { categoryPath, categoryRoutes } from './category/routes';
 import { createHonoApp } from './common/app';
+import { docPath, docRoutes } from './doc/routes';
 import { postPath, postRoutes } from './post/routes';
 import { tagPath, tagRoutes } from './tag/routes';
 
@@ -16,7 +17,8 @@ app.notFound((c) => c.json({ message: 'Not Found', ok: false }, 404));
 const routes = app
     .route(tagPath, tagRoutes)
     .route(categoryPath, categoryRoutes)
-    .route(postPath, postRoutes);
+    .route(postPath, postRoutes)
+    .route(docPath, docRoutes);
 app.get(
     '/data',
     openAPISpecs(app, {

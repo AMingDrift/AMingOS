@@ -3,31 +3,26 @@
 import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 
+import { docApi } from '@/api/doc';
+
 const VideoBackground = () => {
     const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
-
-    // const getBackgroundVideo = unstable_cache(
-    //     async () => {
-    //         const result = await fetchApi(async (c) =>
-    //             c.api.doc.$get({
-    //                 query: { prefix: 'video/xqtd.mp4' },
-    //                 // query: { prefix: '' },
-    //             }),
-    //         );
-    //         if (!result.ok) throw new Error((await result.json()).message);
-    //         return (await result.json())?.[0]?.url;
-    //     },
-    //     ['bg-video-cache'],
-    //     { revalidate: 60 * 60 * 24 },
-    // );
-
-    // if (process.env.NODE_ENV === 'production') {
-    //     videoUrl = await getBackgroundVideo();
-    // }
-
+    const getBackgroundVideo = async (prefix: string) => {
+        const result = await docApi.list(prefix);
+        if (!result.ok) throw new Error((await result.json()).message);
+        return (await result.json())?.[0]?.url;
+    };
     useEffect(() => {
-        setVideoUrl(resolvedTheme === 'dark' ? '/test/xqtd.webm' : '/test/xl.webm');
+        setVideoUrl('');
+        const videoName = resolvedTheme === 'dark' ? 'xqtd.webm' : 'xl.webm';
+        if (process.env.NEXT_PUBLIC_MOCK_BLOB === 'true') {
+            const localUrl = `/test/${videoName}`;
+            setVideoUrl(localUrl);
+        } else {
+            const prefix = `video/${videoName}`;
+            getBackgroundVideo(prefix).then((url) => setVideoUrl(url));
+        }
     }, [resolvedTheme]);
 
     return (

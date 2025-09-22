@@ -12,9 +12,11 @@ import { docRequestQuerySchema, listBlobResultSchema } from './schema';
 import { queryDocBlobByType } from './service';
 
 export const docTags = ['对象存储操作'];
+export const docPath = '/doc';
+export type DocApiType = typeof docRoutes;
 
 const app = createHonoApp();
-export const docApi = app.get(
+export const docRoutes = app.get(
     '/',
     describeRoute({
         tags: docTags,
