@@ -1,17 +1,20 @@
-import { unstable_cache } from 'next/cache';
 import fs from 'node:fs';
 import path from 'node:path';
 import React, { Suspense } from 'react';
 
+import Card3D from '@/_components/3D-card';
+import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { Skeleton } from '@/_components/shadcn/ui/skeleton';
-import { fetchApi } from '@/libs/api';
+
+import { listDoc } from '../../actions';
+import PictureInfo from './components/picture-info';
 
 export const revalidate = 3600;
 
 const PictureContent = async () => {
     const getImages =
-        process.env.NODE_ENV === 'development'
+        process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
             ? async () => {
                   try {
                       const imgDir = path.join(process.cwd(), 'public', 'test', 'img');
@@ -23,40 +26,43 @@ const PictureContent = async () => {
                       return files.map((file) => ({
                           url: `/test/img/${file}`,
                           pathname: file,
+                          size: fs.statSync(path.join(imgDir, file)).size,
+                          uploadedAt: fs.statSync(path.join(imgDir, file)).mtime.getTime(),
+                          downloadUrl: `/test/img/${file}`,
                       }));
                   } catch (err) {
                       console.error('Error loading local images:', err);
                       return [];
                   }
               }
-            : unstable_cache(
-                  async () => {
-                      const result = await fetchApi(async (c) =>
-                          c.api.doc.$get({
-                              query: { prefix: 'picture' },
-                          }),
-                      );
-                      if (!result.ok) throw new Error((await result.json()).message);
-                      return await result.json();
-                  },
-                  ['images-picture-cache'],
-                  { revalidate: 60 * 60 * 24 },
-              );
-
+            : async () => {
+                  const result = await listDoc({ prefix: 'picture/' });
+                  return result;
+              };
     const images = await getImages();
+    images.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
 
     return (
-        <div className="columns-2 gap-4 sm:columns-3">
+        // TODO: 设置滚动加载分页，用到vercel blob的cursor
+        <div className="columns-2 gap-10 lg:columns-3 mt-7 mb-6 mx-10">
             {images.map((imageUrl, idx) => (
-                <BlurFade key={imageUrl.url} delay={0.25 + idx * 0.05} inView>
-                    <img
-                        key={imageUrl.url}
-                        className="mb-4 size-full rounded-lg object-contain"
-                        src={imageUrl.url}
-                        alt={imageUrl.pathname}
-                        width={600}
-                        height={800}
-                    />
+                <BlurFade
+                    key={imageUrl.url}
+                    delay={0.25 + idx * 0.05}
+                    inView
+                    className="flex flex-col mb-10 break-inside-avoid"
+                >
+                    <Card3D>
+                        <div className="relative overflow-hidden flex flex-col select-none border-0 rounded-xl transition-all duration-300 ease-out border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)] hover:scale-105 transform">
+                            <ImageComponent
+                                key={imageUrl.url}
+                                src={imageUrl.url}
+                                alt={imageUrl.pathname}
+                                id={imageUrl.url}
+                            />
+                            <PictureInfo imageUrl={imageUrl} />
+                        </div>
+                    </Card3D>
                 </BlurFade>
             ))}
         </div>

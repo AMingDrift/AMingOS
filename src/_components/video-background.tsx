@@ -9,7 +9,7 @@ const VideoBackground = () => {
     const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
     const getBackgroundVideo = async (prefix: string) => {
-        const result = await docApi.list(prefix);
+        const result = await docApi.list({ prefix });
         if (!result.ok) throw new Error((await result.json()).message);
         return (await result.json())?.[0]?.url;
     };
