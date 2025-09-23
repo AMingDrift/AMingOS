@@ -27,7 +27,7 @@ const PictureContent = async () => {
                           url: `/test/img/${file}`,
                           pathname: file,
                           size: fs.statSync(path.join(imgDir, file)).size,
-                          uploadedAt: fs.statSync(path.join(imgDir, file)).mtime.getTime(),
+                          uploadedAt: `${fs.statSync(path.join(imgDir, file)).mtime.getDate()}`,
                           downloadUrl: `/test/img/${file}`,
                       }));
                   } catch (err) {
