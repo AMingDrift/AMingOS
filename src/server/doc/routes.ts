@@ -83,7 +83,13 @@ export const docRoutes = app
                         // Otherwise, you're allowing anonymous uploads.
 
                         return {
-                            allowedContentTypes: ['image/jpeg', 'image/png', 'image/webp'],
+                            allowedContentTypes: [
+                                'image/jpeg',
+                                'image/png',
+                                'image/webp',
+                                'video/mp4',
+                                'video/webm',
+                            ],
                             addRandomSuffix: true,
                         };
                     },

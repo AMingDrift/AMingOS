@@ -15,16 +15,19 @@ export const listDoc = async (options?: ListCommandOptions) => {
     return await res.json();
 };
 
-export const uploadDoc = async ({ prefix, file }: { prefix: string; file: File }) => {
+export const uploadDoc = async (
+    { prefix, file }: { prefix: string; file: File },
+    pathname?: string,
+) => {
     await upload(`${prefix}${file.name}`, file, {
         access: 'public',
         handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${docPath}/upload`,
     });
-    revalidatePath('/doc/picture');
+    if (pathname) revalidatePath(pathname);
 };
 
-export const deleteDoc = async (url: string) => {
+export const deleteDoc = async (url: string, pathname?: string) => {
     const res = await docApi.delete(url);
     if (!res.ok) throw new Error((await res.json()).message);
-    revalidatePath('/doc/picture');
+    if (pathname) revalidatePath(pathname);
 };

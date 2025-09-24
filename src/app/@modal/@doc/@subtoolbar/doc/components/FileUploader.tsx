@@ -1,7 +1,7 @@
 'use client';
 
 import { UploadCloudIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -24,6 +24,7 @@ const mimeTypes: Record<FileUploaderProps['type'], string> = {
 export default function FileUploader({ type, className = '', maxSizeMB = 1 }: FileUploaderProps) {
     const inputFileRef = useRef<HTMLInputElement>(null);
     const router = useRouter();
+    const pathname = usePathname();
     const [isLoading, setIsLoading] = useState(false);
 
     // 根据类型设置文件接受类型和上传路径前缀
@@ -52,10 +53,13 @@ export default function FileUploader({ type, className = '', maxSizeMB = 1 }: Fi
         try {
             setIsLoading(true);
 
-            await uploadDoc({
-                prefix,
-                file,
-            });
+            await uploadDoc(
+                {
+                    prefix,
+                    file,
+                },
+                pathname,
+            );
 
             toast.success(successMessage);
             router.refresh();

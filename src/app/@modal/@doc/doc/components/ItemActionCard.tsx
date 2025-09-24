@@ -4,7 +4,7 @@ import type { MouseEventHandler } from 'react';
 
 import { DownloadIcon, Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React, { useCallback, useState } from 'react';
 import { toast } from 'sonner';
 
@@ -19,14 +19,30 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from '@/_components/shadcn/ui/alert-dialog';
+import { cn } from '@/_components/shadcn/utils';
 
-import type { listDoc } from '../../../actions';
+import type { listDoc } from '../../actions';
 
-import { deleteDoc } from '../../../actions';
-import HoverInfo from './hover-info';
+import { deleteDoc } from '../../actions';
 
-const PictureInfo = ({ imageUrl }: { imageUrl: Awaited<ReturnType<typeof listDoc>>[0] }) => {
+const docTypeInfo = {
+    video: {
+        label: '视频',
+    },
+    picture: {
+        label: '图片',
+    },
+};
+
+const ItemActionCard = ({
+    blobInfo,
+    docType,
+}: {
+    blobInfo: Awaited<ReturnType<typeof listDoc>>[0];
+    docType: keyof typeof docTypeInfo;
+}) => {
     const router = useRouter();
+    const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const [pedding, setPedding] = useState(false);
 
@@ -45,7 +61,7 @@ const PictureInfo = ({ imageUrl }: { imageUrl: Awaited<ReturnType<typeof listDoc
             setPedding(true);
 
             try {
-                await deleteDoc(imageUrl.url);
+                await deleteDoc(blobInfo.url, pathname);
                 toast.success('删除成功');
             } catch (error) {
                 toast.warning('删除失败', {
@@ -58,17 +74,22 @@ const PictureInfo = ({ imageUrl }: { imageUrl: Awaited<ReturnType<typeof listDoc
             }
             router.refresh();
         },
-        [imageUrl.url],
+        [blobInfo.url],
     );
     const openDialog: MouseEventHandler<SVGSVGElement> = useCallback((e) => {
         e.preventDefault();
         changeOpen(true);
     }, []);
     return (
-        <HoverInfo>
+        <div
+            className={cn(
+                'absolute bottom-0 left-0 right-0 h-20 bg-black/20 dark:bg-black/50 opacity-0 translate-y-full transition-all duration-300 ease-out p-3',
+                'group-hover:opacity-100 group-hover:translate-y-0',
+            )}
+        >
             <div className="h-full w-full flex items-center justify-between">
                 <div className="text-white text-xs truncate">
-                    Size: {(imageUrl.size / 1024).toFixed(2)} KB
+                    Size: {(blobInfo.size / 1024).toFixed(2)} KB
                 </div>
                 <div className="flex gap-4">
                     <AlertDialog open={open} onOpenChange={changeOpen}>
@@ -80,7 +101,9 @@ const PictureInfo = ({ imageUrl }: { imageUrl: Awaited<ReturnType<typeof listDoc
                         </AlertDialogTrigger>
                         <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
                             <AlertDialogHeader>
-                                <AlertDialogTitle>是否确认删除该图片？</AlertDialogTitle>
+                                <AlertDialogTitle>
+                                    是否确认删除该{docTypeInfo[docType].label}？
+                                </AlertDialogTitle>
                                 <AlertDialogDescription>
                                     当前不支持软删除，删除后将无法恢复
                                 </AlertDialogDescription>
@@ -97,17 +120,17 @@ const PictureInfo = ({ imageUrl }: { imageUrl: Awaited<ReturnType<typeof listDoc
                     </AlertDialog>
 
                     <Link
-                        href={imageUrl.downloadUrl}
-                        download={imageUrl.pathname}
+                        href={blobInfo.downloadUrl}
+                        download={blobInfo.pathname}
                         className="text-white hover:text-blue-300 transition-colors"
-                        aria-label="Download image"
+                        aria-label={`Download ${docType}`}
                     >
                         <DownloadIcon className="w-5! h-5" />
                     </Link>
                 </div>
             </div>
-        </HoverInfo>
+        </div>
     );
 };
 
-export default PictureInfo;
+export default ItemActionCard;

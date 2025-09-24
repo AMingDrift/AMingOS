@@ -25,6 +25,9 @@ const nextConfig: NextConfig = {
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     experimental: {
         useCache: true,
+        serverActions: {
+            bodySizeLimit: '5mb',
+        },
     },
 };
 

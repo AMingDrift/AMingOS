@@ -8,9 +8,7 @@ import { BlurFade } from '@/_components/magicui/blur-fade';
 import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 
 import { listDoc } from '../../actions';
-import PictureInfo from './components/picture-info';
-
-export const revalidate = 3600;
+import ItemActionCard from '../components/ItemActionCard';
 
 const PictureContent = async () => {
     const getImages =
@@ -45,22 +43,22 @@ const PictureContent = async () => {
     return (
         // TODO: 设置滚动加载分页，用到vercel blob的cursor
         <div className="columns-2 gap-10 lg:columns-3 mt-7 mb-6 mx-10">
-            {images.map((imageUrl, idx) => (
+            {images.map((imageInfo, idx) => (
                 <BlurFade
-                    key={imageUrl.url}
+                    key={imageInfo.url}
                     delay={0.25 + idx * 0.05}
                     inView
                     className="flex flex-col mb-10 break-inside-avoid"
                 >
                     <Card3D>
-                        <div className="relative overflow-hidden flex flex-col select-none border-0 rounded-xl transition-all duration-300 ease-out border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)] hover:scale-105 transform">
+                        <div className="relative group overflow-hidden flex flex-col select-none border-0 rounded-xl transition-all duration-300 ease-out border-black/15 dark:border-white/30 hover:backdrop-blur-md hover:shadow-[var(--modal-shadow)] hover:scale-105 transform">
                             <ImageComponent
-                                key={imageUrl.url}
-                                src={imageUrl.url}
-                                alt={imageUrl.pathname}
-                                id={imageUrl.url}
+                                key={imageInfo.url}
+                                src={imageInfo.url}
+                                alt={imageInfo.pathname}
+                                id={imageInfo.url}
                             />
-                            <PictureInfo imageUrl={imageUrl} />
+                            <ItemActionCard blobInfo={imageInfo} docType="picture" />
                         </div>
                     </Card3D>
                 </BlurFade>

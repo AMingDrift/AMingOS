@@ -4,7 +4,6 @@ import {
     Files,
     FileVideo,
     Image,
-    Music4,
     NotebookPen,
     Siren,
     SquarePlus,
@@ -40,11 +39,6 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
         },
     ],
     doc: [
-        {
-            title: 'Music',
-            url: '/doc/music',
-            icon: Music4,
-        },
         {
             title: 'Videos',
             url: '/doc/video',
