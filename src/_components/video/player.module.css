@@ -1,0 +1,14 @@
+@reference "#tailwind.css";
+
+.container {
+    @apply w-full rounded-md bg-transparent!;
+
+    & * {
+        @apply rounded-md!;
+    }
+
+    & > :global(.art-video-player),
+    & video {
+        @apply bg-transparent! object-contain; /* 添加object-contain确保保持宽高比 */
+    }
+}

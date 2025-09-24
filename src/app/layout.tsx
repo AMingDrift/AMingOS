@@ -36,7 +36,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                                 </div>
 
                                 {/* 底部任务栏 */}
-                                <DockDemo className="fixed bottom-1 left-1 right-1 h-14 bg-taskbar-bg bg-blur-win z-9999 flex items-center" />
+                                <DockDemo className="fixed bottom-1 left-1 right-1 h-14 bg-taskbar-bg bg-blur-win z-999 flex items-center" />
                             </div>
                         </div>
                     </div>

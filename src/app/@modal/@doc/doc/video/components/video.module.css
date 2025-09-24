@@ -1,0 +1,22 @@
+@reference "#tailwind.css";
+
+.main {
+    @apply h-full w-full rounded-sm bg-cover 
+            bg-center bg-no-repeat items-center justify-center flex
+            before:absolute before:inset-0 before:transition-all before:rounded-sm
+            [&_]:hover:before:bg-gradient-to-b  
+            [&_]:hover:before:from-white/10 [&_]:hover:before:to-white/10 
+            [&_]:hover:before:backdrop-blur-sm;
+}
+
+.openBtn {
+    @apply flex size-16 items-center justify-center rounded-full bg-black/10 
+                            shadow-nysm shadow-zinc-900/60  backdrop-blur-md transition-all
+                            duration-500 hover:rotate-[360deg] hover:bg-white/50  hover:shadow-nylg;
+}
+
+html[data-theme='dark'] {
+    .main {
+        @apply [&_]:hover:before:from-black/10 [&_]:hover:before:to-black/10;
+    }
+}

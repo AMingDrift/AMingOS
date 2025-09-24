@@ -2,6 +2,8 @@ html {
     @apply scroll-smooth;
 }
 
+/* TODO: z-index 变量全局管理,video,dockmenu,toolbar,video-modal,overlay */
+
 .lucide {
     @apply w-10 stroke-[2px];
 }

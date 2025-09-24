@@ -10,12 +10,15 @@
         "cssVariables": true,
         "prefix": ""
     },
+    "iconLibrary": "lucide",
     "aliases": {
         "components": "@/_components/shadcn/ui",
-        "ui": "@/_components/shadcn/ui",
         "utils": "@/_components/shadcn/utils",
+        "ui": "@/_components/shadcn/ui",
         "lib": "@/_components/shadcn/libs",
         "hooks": "@/_components/shadcn/hooks"
     },
-    "iconLibrary": "lucide"
+    "registries": {
+        "@magicui": "https://magicui.design/r/{name}.json"
+    }
 }

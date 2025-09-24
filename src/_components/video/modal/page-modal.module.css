@@ -1,0 +1,9 @@
+@reference "#tailwind.css";
+
+.modalWrapper {
+    @apply w-full h-full flex-auto;
+}
+
+.modalContent {
+    @apply overflow-y-auto max-h-[80vh] w-full px-3;
+}

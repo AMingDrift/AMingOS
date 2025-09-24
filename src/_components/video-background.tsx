@@ -17,7 +17,7 @@ const VideoBackground = () => {
         setVideoUrl('');
         const videoName = resolvedTheme === 'dark' ? 'xqtd.webm' : 'xl.webm';
         if (process.env.NEXT_PUBLIC_MOCK_BLOB === 'true') {
-            const localUrl = `/test/${videoName}`;
+            const localUrl = `/test/video/${videoName}`;
             setVideoUrl(localUrl);
         } else {
             const prefix = `video/${videoName}`;

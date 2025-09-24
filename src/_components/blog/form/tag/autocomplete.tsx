@@ -225,7 +225,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                             marginLeft: `calc(-${popoverWidth}px)`,
                             width: `${popoverWidth}px`,
                             minWidth: `${popoverWidth}px`,
-                            zIndex: 9999,
+                            zIndex: 999,
                         }}
                         onOpenAutoFocus={(e) => e.preventDefault()}
                         onCloseAutoFocus={(e) => e.preventDefault()}
