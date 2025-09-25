@@ -51,7 +51,7 @@ const PictureContent = async () => {
                     className="mb-10 flex break-inside-avoid flex-col"
                 >
                     <Card3D>
-                        <div className="group relative flex transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-[var(--modal-shadow)] hover:backdrop-blur-md dark:border-white/30">
+                        <div className="group relative flex transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--modal-shadow) hover:backdrop-blur-md dark:border-white/30">
                             <ImageComponent
                                 key={imageInfo.url}
                                 src={imageInfo.url}

@@ -51,7 +51,7 @@ const DockMenuIcon = ({ name, icon }: { name: AppType; icon: React.ReactNode }) 
                         {icon}
                     </Link>
                 </TooltipTrigger>
-                <TooltipContent className="z-[var(--z-index-dock-menu)]">
+                <TooltipContent className="z-(--z-index-dock-menu)">
                     <p>{app.title}</p>
                 </TooltipContent>
             </Tooltip>

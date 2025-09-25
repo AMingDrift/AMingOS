@@ -36,7 +36,7 @@ const RootLayout: FC<PropsWithChildren> = ({
                                 {modal}
 
                                 {/* 底部任务栏 */}
-                                <DockMenu className="bg-taskbar-bg bg-blur-win fixed right-1 bottom-1 left-1 z-[var(--z-index-dock-menu)] flex items-center" />
+                                <DockMenu className="bg-taskbar-bg bg-blur-win fixed right-1 bottom-1 left-1 z-(--z-index-dock-menu) flex items-center" />
                             </div>
                         </div>
                     </div>

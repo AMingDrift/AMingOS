@@ -32,7 +32,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                 >
                     <Card3D>
                         <Link href={`/blog/posts/${item.slug || item.id}`}>
-                            <div className="flex transform flex-col rounded-xl border-0 border-black/15 p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-[var(--modal-shadow)] hover:backdrop-blur-md dark:border-white/30">
+                            <div className="flex transform flex-col rounded-xl border-0 border-black/15 p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--modal-shadow) hover:backdrop-blur-md dark:border-white/30">
                                 <ImageComponent
                                     key={item.id}
                                     src={item.thumb}

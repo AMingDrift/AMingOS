@@ -103,7 +103,7 @@ const VideoContent = async () => {
                     inView
                     className="mb-10 flex break-inside-avoid flex-col"
                 >
-                    <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-[var(--modal-shadow)] hover:backdrop-blur-md dark:border-white/30">
+                    <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--modal-shadow) hover:backdrop-blur-md dark:border-white/30">
                         <HomeVideoCard image={video?.thumb} video={video.url} />
                         <ItemActionCard blobInfo={video} docType="video" />
                     </div>

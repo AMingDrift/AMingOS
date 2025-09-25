@@ -102,7 +102,7 @@ export function DockMenu({ className }: { className?: string }) {
     return (
         <div className={cn('flex flex-col items-center justify-center', className)}>
             <TooltipProvider>
-                <Dock direction="middle" className="h-[var(--height-dock-menu)]">
+                <Dock direction="middle" className="h-(--height-dock-menu)">
                     <DockIcon key="Home">
                         <Tooltip>
                             <TooltipTrigger asChild>
@@ -122,7 +122,7 @@ export function DockMenu({ className }: { className?: string }) {
                                     <HomeIcon className="size-4" />
                                 </Link>
                             </TooltipTrigger>
-                            <TooltipContent className="z-[var(--z-index-dock-menu)]">
+                            <TooltipContent className="z-(--z-index-dock-menu)">
                                 <p>Home</p>
                             </TooltipContent>
                         </Tooltip>
@@ -148,7 +148,7 @@ export function DockMenu({ className }: { className?: string }) {
                                         <social.icon className="size-4" />
                                     </Link>
                                 </TooltipTrigger>
-                                <TooltipContent className="z-[var(--z-index-dock-menu)]">
+                                <TooltipContent className="z-(--z-index-dock-menu)">
                                     <p>{name}</p>
                                 </TooltipContent>
                             </Tooltip>
