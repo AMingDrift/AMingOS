@@ -26,11 +26,19 @@ export const TagLink: FC<{
                 const curTag = params.get('tag');
                 params.delete('tag');
                 if (item.text === curTag) {
-                    return pathname + (params.toString() ? `?${params.toString()}` : '');
+                    if (pathname.startsWith('/blog/posts')) {
+                        return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+                    } else {
+                        return pathname + (params.toString() ? `?${params.toString()}` : '');
+                    }
                 }
             }
             params.set('tag', item.text);
-            return pathname + (params.toString() ? `?${params.toString()}` : '');
+            if (pathname.startsWith('/blog/posts')) {
+                return `/blog${params.toString() ? `?${params.toString()}` : ''}`;
+            } else {
+                return pathname + (params.toString() ? `?${params.toString()}` : '');
+            }
         },
         [searchParams],
     );
