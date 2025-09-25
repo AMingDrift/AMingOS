@@ -1,17 +1,17 @@
 @reference "#tailwind.css";
 
 .container {
-    @apply flex flex-auto w-full;
+    @apply flex w-full flex-auto;
 
     & > :global(.wmde-markdown-var.w-md-editor) {
-        @apply flex-auto w-full;
+        @apply w-full flex-auto;
     }
 
     & :global(.wmde-markdown-var:has(.w-md-editor-text-input:disabled)) {
         @apply pointer-events-none cursor-not-allowed;
 
         &::before {
-            @apply content-[''] absolute inset-0 z-[99] pointer-events-none rounded-[3px] bg-zinc-300/50 backdrop-blur-[2px];
+            @apply pointer-events-none absolute inset-0 z-[99] rounded-[3px] bg-zinc-300/50 backdrop-blur-[2px] content-[''];
         }
 
         & > :global(.w-md-editor-content > .w-md-editor-area),

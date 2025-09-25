@@ -1,27 +1,25 @@
 @reference "#tailwind.css";
 
 .desktopToc {
-    @apply w-56 flex-shrink-0 sticky top-16 self-start;
+    @apply sticky top-16 w-56 flex-shrink-0 self-start;
 }
 
 .mobileToc {
-    @apply fixed flex items-center right-0 top-16 z-10 top-[30%] overflow-hidden 
-    transition-transform duration-300 ease-out;
+    @apply fixed top-16 top-[30%] right-0 z-10 flex items-center overflow-hidden transition-transform duration-300 ease-out;
 
     & > .mobileTocButton > span > svg {
         filter: drop-shadow(1px 2px 1px rgb(144 130 130 / 40%));
     }
 
     & > .mobileTocMain {
-        @apply h-full w-56 bg-[rgb(255_255_255/0.8)]  backdrop-blur-sm drop-shadow-sm
-               shadow-lg  rounded-tl-lg rounded-bl-lg py-2;
+        @apply h-full w-56 rounded-tl-lg rounded-bl-lg bg-[rgb(255_255_255/0.8)] py-2 shadow-lg drop-shadow-sm backdrop-blur-sm;
 
         & > .mobileTocTitle {
-            @apply flex items-center py-2 px-4 justify-between;
+            @apply flex items-center justify-between px-4 py-2;
         }
 
         & > .mobileTocContent {
-            @apply overflow-y-auto overflow-x-hidden max-h-96;
+            @apply max-h-96 overflow-x-hidden overflow-y-auto;
             direction: rtl;
 
             & > * {

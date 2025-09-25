@@ -9,8 +9,7 @@
 }
 
 .folderItem {
-    @apply flex items-center rounded transition-all duration-200 py-2 px-1
-    border-transparent hover:bg-zinc-200/50;
+    @apply flex items-center rounded border-transparent px-1 py-2 transition-all duration-200 hover:bg-zinc-200/50;
 
     &.active {
         @apply bg-zinc-200;
@@ -30,15 +29,14 @@
 }
 
 .item {
-    @apply flex items-center py-2 rounded transition-all duration-200 px-1
-                border-l-2 border-transparent hover:bg-zinc-200/50;
+    @apply flex items-center rounded border-l-2 border-transparent px-1 py-2 transition-all duration-200 hover:bg-zinc-200/50;
 
     & > .itemLink {
-        @apply flex items-center w-full cursor-pointer;
+        @apply flex w-full cursor-pointer items-center;
     }
 
     &.active {
-        @apply bg-zinc-200 border-l-2;
+        @apply border-l-2 bg-zinc-200;
     }
 }
 
