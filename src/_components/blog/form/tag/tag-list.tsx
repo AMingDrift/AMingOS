@@ -67,7 +67,7 @@ export const TagList: React.FC<TagListProps> = ({
                                 onMouseLeave={handleMouseUp}
                                 className={cn(
                                     {
-                                        'border border-solid border-primary rounded-md':
+                                        'rounded-md border border-solid border-primary':
                                             draggedTagId === tagObj.id,
                                     },
                                     'transition-all duration-200 ease-in-out',

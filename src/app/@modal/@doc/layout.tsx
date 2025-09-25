@@ -8,7 +8,8 @@ import { SidebarTrigger } from '@/_components/shadcn/ui/sidebar';
 const Layout = ({ children, subtoolbar }: { children: ReactNode; subtoolbar?: ReactNode }) => {
     return (
         <>
-            <div className="h-[50px]  p-1 flex items-center flex-none">
+            {/* TODO: 50px写入css变量中 */}
+            <div className="flex h-[50px] flex-none items-center p-1">
                 <SidebarTrigger />
                 {/* subtoolbar menu */}
                 {subtoolbar}

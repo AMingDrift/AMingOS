@@ -111,8 +111,8 @@ export function DockDemo({ className }: { className?: string }) {
                                     aria-label="Home"
                                     className={cn(
                                         buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                        'origin-center ease-in-out transition-all duration-200',
-                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
+                                        'origin-center transition-all duration-200 ease-in-out',
+                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
                                     )}
                                     onClick={(e) => {
                                         e.preventDefault();
@@ -141,8 +141,8 @@ export function DockDemo({ className }: { className?: string }) {
                                         aria-label={social.name}
                                         className={cn(
                                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                            'origin-center ease-in-out transition-all duration-200',
-                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
+                                            'origin-center transition-all duration-200 ease-in-out',
+                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
                                         )}
                                     >
                                         <social.icon className="size-4" />
@@ -161,8 +161,8 @@ export function DockDemo({ className }: { className?: string }) {
                                 <AnimatedThemeToggler
                                     className={cn(
                                         buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                        'origin-center ease-in-out transition-all duration-200',
-                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md hover:shadow-lg ',
+                                        'origin-center transition-all duration-200 ease-in-out',
+                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
                                     )}
                                 />
                             </TooltipTrigger>

@@ -1,6 +1,6 @@
 /********************************************************* 自定义tailwind工具类 *********************************************************/
 @utility page-item {
-    @apply flex flex-auto flex-col mt-0 items-center;
+    @apply mt-0 flex flex-auto flex-col items-center;
 }
 
 /* 页面包装容器 */
@@ -12,7 +12,7 @@
 
 /* 空白页样式,一般用于404和error页面 */
 @utility page-blank {
-    @apply bg-white/80  backdrop-blur-sm h-full w-full drop-shadow-lg rounded-md flex justify-center items-center flex-col space-y-3 lg:space-y-0 lg:flex-row;
+    @apply flex h-full w-full flex-col items-center justify-center space-y-3 rounded-md bg-white/80 drop-shadow-lg backdrop-blur-sm lg:flex-row lg:space-y-0;
 
     html[data-theme='dark'] & {
         @apply bg-black/50;
@@ -42,7 +42,7 @@
 
 /* 只显示一行文字, 溢出部分以省略号代替 */
 @utility ellips {
-    @apply inline-block overflow-hidden max-w-full whitespace-nowrap text-ellipsis break-all;
+    @apply inline-block max-w-full overflow-hidden break-all text-ellipsis whitespace-nowrap;
 }
 
 /* 鼠标移动到文字或链接出现动画下划线 */
@@ -77,7 +77,7 @@
 /* 透明滚动条 */
 @utility transparent-scrollbar {
     &::-webkit-scrollbar {
-        @apply w-1 h-1;
+        @apply h-1 w-1;
     }
 
     &::-webkit-scrollbar-track {
@@ -89,7 +89,7 @@
     }
 
     &::-webkit-scrollbar-thumb {
-        @apply bg-gray-300 rounded;
+        @apply rounded bg-gray-300;
     }
 
     html[data-theme='dark'] &::-webkit-scrollbar-thumb {

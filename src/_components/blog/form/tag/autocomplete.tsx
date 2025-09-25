@@ -209,7 +209,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                     {childrenWithProps}
                     <PopoverTrigger asChild ref={triggerRef}>
                         <div
-                            className={cn('w-0 h-full mr-0', classStyleProps?.popoverTrigger)}
+                            className={cn('mr-0 h-full w-0', classStyleProps?.popoverTrigger)}
                         ></div>
                     </PopoverTrigger>
                 </div>
@@ -219,7 +219,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                         side="bottom"
                         align="start"
                         forceMount
-                        className={cn(`p-0 relative`, classStyleProps?.popoverContent)}
+                        className={cn(`relative p-0`, classStyleProps?.popoverContent)}
                         style={{
                             top: `calc(${popooverContentTop}px - 5px)`,
                             marginLeft: `calc(-${popoverWidth}px)`,
@@ -239,7 +239,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                     >
                         <div
                             className={cn(
-                                'max-h-80 overflow-y-auto overflow-x-hidden',
+                                'max-h-80 overflow-x-hidden overflow-y-auto',
                                 classStyleProps?.commandList,
                             )}
                             // style={{
@@ -251,7 +251,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                                 key={autocompleteOptions.length}
                                 role="group"
                                 className={cn(
-                                    'overflow-y-auto overflow-hidden p-1 text-foreground',
+                                    'overflow-hidden overflow-y-auto p-1 text-foreground',
                                     classStyleProps?.commandGroup,
                                 )}
                                 style={{
@@ -267,7 +267,7 @@ export const Autocomplete: React.FC<AutocompleteProps> = ({
                                             role="option"
                                             aria-selected={isSelected}
                                             className={cn(
-                                                'relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50 hover:bg-accent',
+                                                'relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none select-none hover:bg-accent aria-selected:bg-accent aria-selected:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50',
                                                 isSelected && 'bg-accent text-accent-foreground',
                                                 classStyleProps?.commandItem,
                                             )}

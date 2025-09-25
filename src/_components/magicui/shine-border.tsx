@@ -61,7 +61,7 @@ export const ShineBorder: FC<ShineBorderProps> = ({
                     } as React.CSSProperties
                 }
                 className={cn(
-                    'before:bg-shine-size pointer-events-none before:border-border before:absolute before:inset-0',
+                    'before:bg-shine-size pointer-events-none before:absolute before:inset-0 before:border-border',
                     'before:size-full before:rounded-[var(--border-radius)]',
                     'before:p-[var(--border-width)] before:will-change-[background-position]',
                     'before:content-[""] before:[-webkit-mask-composite:xor]!',

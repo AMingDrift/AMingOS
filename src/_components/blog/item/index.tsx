@@ -45,7 +45,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                             <>
                                 <header className={$styles.title}>
                                     <h1 className="text-lg lg:text-3xl">{post.title}</h1>
-                                    <div className="mt-[0.125rem] flex ml-2">
+                                    <div className="mt-[0.125rem] ml-2 flex">
                                         <PostEditButton item={post} iconBtn />
                                         <PostDelete item={post} iconBtn />
                                     </div>
@@ -54,7 +54,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                                     <div className={$styles.info}>
                                         <span>
                                             <Calendar className="mr-2" />
-                                            <time className="ellips mt-1">
+                                            <time className="mt-1 ellips">
                                                 {formatTime(
                                                     !isNil(post.updatedAt)
                                                         ? post.updatedAt

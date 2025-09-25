@@ -27,16 +27,16 @@ const RootLayout: FC<PropsWithChildren> = ({
                 <ThemeProvider enableSystem defaultTheme="system" disableTransitionOnChange>
                     <div className={$styles.layout}>
                         <div>
-                            <div className="min-h-screen relative overflow-hidden">
+                            <div className="relative min-h-screen overflow-hidden">
                                 {/* 桌面图标 */}
-                                {/* TODO: bottom-[4rem] 替换成docker menu 高度 */}
-                                <div className="absolute inset-0 z-10 p-6 bottom-[4rem] contain-layout contain-size">
+                                {/* TODO: 4rem 写成calc(var(--dock-menu-height, 4rem)) */}
+                                <div className="absolute inset-0 bottom-[4rem] z-10 p-6 contain-layout contain-size">
                                     {modal}
                                     {children}
                                 </div>
 
                                 {/* 底部任务栏 */}
-                                <DockDemo className="fixed bottom-1 left-1 right-1 h-14 bg-taskbar-bg bg-blur-win z-999 flex items-center" />
+                                <DockDemo className="bg-taskbar-bg bg-blur-win fixed right-1 bottom-1 left-1 z-999 flex h-14 items-center" />
                             </div>
                         </div>
                     </div>

@@ -35,9 +35,9 @@ const DockMenuIcon = ({ name, icon }: { name: AppType; icon: React.ReactNode }) 
                         aria-label={app.title}
                         className={cn(
                             buttonVariants({ variant: 'ghost', size: 'icon' }),
-                            'size-11 hover:backdrop-blur-md hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] origin-center ease-in-out transition-all duration-200',
+                            'size-11 origin-center transition-all duration-200 ease-in-out hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:backdrop-blur-md',
                             !app.hide
-                                ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] shadow-lg '
+                                ? 'bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] shadow-lg'
                                 : 'bg-transparent',
                             isAnimating ? 'animate-popintro' : '',
                         )}

@@ -19,15 +19,15 @@ const DesktopIcon = ({ name, icon }: { name: AppType; icon: React.ReactNode }) =
     return (
         <div
             id="computer-icon"
-            className="w-16 text-center cursor-pointer hover:text-primary transition-colors duration-200 group"
+            className="group w-16 cursor-pointer text-center transition-colors duration-200 hover:text-primary"
             onClick={() => {
                 toggleWindow(name);
             }}
         >
-            <div className="size-14 mx-auto bg-primary/10 rounded-lg flex items-center justify-center mb-1 group-hover:bg-primary/20 transition-colors">
+            <div className="mx-auto mb-1 flex size-14 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/20">
                 {icon}
             </div>
-            <div className="text-sm font-medium truncate">{app.title}</div>
+            <div className="truncate text-sm font-medium">{app.title}</div>
         </div>
     );
 };

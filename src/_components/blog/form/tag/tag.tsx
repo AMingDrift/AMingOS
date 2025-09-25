@@ -124,9 +124,9 @@ export const Tag: React.FC<TagProps> = ({
                     textStyle,
                 }),
                 {
-                    'justify-between w-full': direction === 'column',
+                    'w-full justify-between': direction === 'column',
                     'cursor-pointer': draggable,
-                    'ring-ring ring-offset-2 ring-2 ring-offset-background': isActiveTag,
+                    'ring-2 ring-ring ring-offset-2 ring-offset-background': isActiveTag,
                 },
                 tagClasses?.body,
             )}
@@ -142,7 +142,7 @@ export const Tag: React.FC<TagProps> = ({
                 }}
                 disabled={disabled}
                 className={cn(
-                    `py-1 pl-3 pr-1 h-full hover:bg-transparent`,
+                    `h-full py-1 pr-1 pl-3 hover:bg-transparent`,
                     tagClasses?.closeButton,
                 )}
             >

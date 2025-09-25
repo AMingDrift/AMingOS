@@ -56,7 +56,7 @@ const Item: FC<CategoryItemProps> = ({ category, actives, parentPath }) => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <Link
-                                className="ellips animate-decoration animate-decoration-sm mr-2"
+                                className="animate-decoration-sm mr-2 ellips animate-decoration"
                                 href={currentPath}
                             >
                                 {category.name}
@@ -91,7 +91,7 @@ const Item: FC<CategoryItemProps> = ({ category, actives, parentPath }) => {
                 <Link
                     key={category.id}
                     href={currentPath}
-                    className="ellips animate-decoration animate-decoration-sm"
+                    className="animate-decoration-sm ellips animate-decoration"
                 >
                     {category.name}
                 </Link>

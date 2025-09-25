@@ -7,11 +7,13 @@ import { useCallback, useState } from 'react';
 import type { TagItem } from '@/server/tag/type';
 
 import { Badge } from '@/_components/shadcn/ui/badge';
+import { cn } from '@/_components/shadcn/utils';
 
 export const TagLink: FC<{
     tag: TagItem;
+    className?: string;
     variant?: 'default' | 'secondary' | 'destructive' | 'outline';
-}> = ({ tag, variant }) => {
+}> = ({ tag, variant, className }) => {
     const searchParams = useSearchParams();
     const router = useRouter();
     const pathname = usePathname();
@@ -44,7 +46,7 @@ export const TagLink: FC<{
     return (
         <Badge
             key={tag.id}
-            className="transition-all duration-75"
+            className={cn('transition-all duration-75', className)}
             variant={variant === 'default' ? 'default' : isHovered ? 'secondary' : 'outline'}
             onClick={(e) => {
                 e.stopPropagation();

@@ -82,7 +82,7 @@ export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, ic
                             <Button
                                 className={cn('text-xs', {
                                     'mr-3': !iconBtn,
-                                    'btn-icon-transparent ': iconBtn,
+                                    'btn-icon-transparent': iconBtn,
                                 })}
                                 variant="secondary"
                                 size={iconBtn ? 'icon' : 'sm'}

@@ -64,7 +64,7 @@ export const Admonition: FC<AdmonitionProps> = ({ type, title, children }) => {
     return (
         <div
             className={cn(
-                'flex my-4 rounded border-l-4 p-2',
+                'my-4 flex rounded border-l-4 p-2',
                 'shadow-sm dark:shadow-none',
                 config.containerClasses,
             )}

@@ -27,7 +27,7 @@ const Button: FC<{ id: string; iconBtn?: boolean }> = ({ id, iconBtn }) => {
             asChild
             className={cn('text-xs', {
                 'mr-3': !iconBtn,
-                'btn-icon-transparent ': iconBtn,
+                'btn-icon-transparent': iconBtn,
             })}
             variant="secondary"
             size={iconBtn ? 'icon' : 'sm'}

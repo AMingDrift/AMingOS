@@ -9,10 +9,10 @@ html {
 }
 
 .xicon {
-    @apply w-[1em] h-[1em] inline-flex;
+    @apply inline-flex h-[1em] w-[1em];
 
     & svg {
-        @apply !w-full !h-full;
+        @apply !h-full !w-full;
 
         &:not([fill]) {
             fill: currentcolor;

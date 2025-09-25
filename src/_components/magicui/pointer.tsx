@@ -1,6 +1,7 @@
 'use client';
 
 import type { HTMLMotionProps } from 'motion/react';
+import type { JSX } from 'react';
 
 import { AnimatePresence, motion, useMotionValue } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
@@ -72,7 +73,7 @@ export function Pointer({ className, style, children, ...props }: PointerProps):
             <AnimatePresence>
                 {isActive && (
                     <motion.div
-                        className="transform-[translate(-50%,-50%)] pointer-events-none absolute z-50"
+                        className="pointer-events-none absolute z-50 transform-[translate(-50%,-50%)]"
                         style={{
                             top: y,
                             left: x,

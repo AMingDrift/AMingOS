@@ -413,7 +413,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>((props, ref) 
 
     return (
         <div
-            className={`flex w-full  ${
+            className={`flex w-full ${
                 inputFieldPosition === 'bottom'
                     ? 'flex-col'
                     : inputFieldPosition === 'top'
@@ -444,9 +444,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>((props, ref) 
                 >
                     <div
                         className={cn(
-                            `flex flex-row flex-wrap items-center p-0 gap-0 h-fit w-full space-x-2
-                                    text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none
-                                    focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50`,
+                            `flex h-fit w-full flex-row flex-wrap items-center gap-0 space-x-2 p-0 text-sm file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50`,
                             styleClasses?.inlineTagsContainer,
                         )}
                     >
@@ -490,7 +488,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>((props, ref) 
                             onBlur={handleInputBlur}
                             {...inputProps}
                             className={cn(
-                                'border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 flex-1 w-fit',
+                                'w-fit flex-1 border-0 bg-transparent focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0',
                                 // className,
                                 styleClasses?.input,
                             )}
@@ -504,7 +502,7 @@ const TagInput = React.forwardRef<HTMLInputElement, TagInputProps>((props, ref) 
 
             {showCount && maxTags && (
                 <div className="flex">
-                    <span className="ml-auto mt-1 text-sm text-muted-foreground">
+                    <span className="mt-1 ml-auto text-sm text-muted-foreground">
                         {`${tagCount}`}/{`${maxTags}`}
                     </span>
                 </div>

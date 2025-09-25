@@ -63,7 +63,7 @@ export const CategorySelect: FC<CategorySelectProps> = (props) => {
                 side="bottom"
                 align="start"
                 forceMount
-                className={cn(`p-0 relative`)}
+                className={cn(`relative p-0`)}
                 style={{
                     width: `${popoverWidth}px`,
                     minWidth: `${popoverWidth}px`,

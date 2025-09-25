@@ -178,7 +178,7 @@ export const ToolBar = ({
                         data-vec="-1,-1"
                     ></div>
                     <div
-                        className="edgrsz cursor-n-resize wdws"
+                        className="edgrsz wdws cursor-n-resize"
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="-1,0"
@@ -188,7 +188,7 @@ export const ToolBar = ({
             <div className="resizecont leftone">
                 <div className="h-full">
                     <div
-                        className="edgrsz cursor-w-resize hdws"
+                        className="edgrsz hdws cursor-w-resize"
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="0,-1"
@@ -198,7 +198,7 @@ export const ToolBar = ({
             <div className="resizecont rightone">
                 <div className="h-full">
                     <div
-                        className="edgrsz cursor-w-resize hdws"
+                        className="edgrsz hdws cursor-w-resize"
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="0,1"
@@ -214,7 +214,7 @@ export const ToolBar = ({
                         data-vec="1,-1"
                     ></div>
                     <div
-                        className="edgrsz cursor-n-resize wdws"
+                        className="edgrsz wdws cursor-n-resize"
                         data-op="1"
                         onMouseDown={toolDrag}
                         data-vec="1,0"

@@ -10,7 +10,7 @@ export const ShineCard: FC<
     return (
         <Card
             className={cn(
-                'bg-card/40 backdrop-blur-sm py-0 border-0',
+                'border-0 bg-card/40 py-0 backdrop-blur-sm',
                 `rounded-[${borderRadius}]!`,
                 className,
             )}

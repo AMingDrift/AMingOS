@@ -83,19 +83,19 @@ const ItemActionCard = ({
     return (
         <div
             className={cn(
-                'absolute bottom-0 left-0 right-0 h-20 bg-black/20 dark:bg-black/50 opacity-0 translate-y-full transition-all duration-300 ease-out p-3',
-                'group-hover:opacity-100 group-hover:translate-y-0',
+                'absolute right-0 bottom-0 left-0 h-20 translate-y-full bg-black/20 p-3 opacity-0 transition-all duration-300 ease-out dark:bg-black/50',
+                'group-hover:translate-y-0 group-hover:opacity-100',
             )}
         >
-            <div className="h-full w-full flex items-center justify-between">
-                <div className="text-white text-xs truncate">
+            <div className="flex h-full w-full items-center justify-between">
+                <div className="truncate text-xs text-white">
                     Size: {(blobInfo.size / 1024).toFixed(2)} KB
                 </div>
                 <div className="flex gap-4">
                     <AlertDialog open={open} onOpenChange={changeOpen}>
                         <AlertDialogTrigger asChild>
                             <Trash2
-                                className="w-5! h-5 transition-colors text-red-400 hover:text-red-500 cursor-pointer"
+                                className="h-5 w-5! cursor-pointer text-red-400 transition-colors hover:text-red-500"
                                 onClick={openDialog}
                             />
                         </AlertDialogTrigger>
@@ -122,10 +122,10 @@ const ItemActionCard = ({
                     <Link
                         href={blobInfo.downloadUrl}
                         download={blobInfo.pathname}
-                        className="text-white hover:text-blue-300 transition-colors"
+                        className="text-white transition-colors hover:text-blue-300"
                         aria-label={`Download ${docType}`}
                     >
-                        <DownloadIcon className="w-5! h-5" />
+                        <DownloadIcon className="h-5 w-5!" />
                     </Link>
                 </div>
             </div>

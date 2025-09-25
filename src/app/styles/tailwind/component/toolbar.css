@@ -32,7 +32,7 @@
         height: 100%;
 
         .actbtn {
-            @apply h-full flex items-center justify-center px-1 hover:bg-[#88888833] cursor-pointer transition-all;
+            @apply flex h-full cursor-pointer items-center justify-center px-1 transition-all hover:bg-[#88888833];
 
             &.closeBtn {
                 @apply hover:bg-[#ff0000cc];
