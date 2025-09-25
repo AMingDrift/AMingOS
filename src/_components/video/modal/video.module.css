@@ -1,7 +1,7 @@
 @reference "#tailwind.css";
 
 .overlay {
-    @apply grid place-items-center backdrop-blur-sm z-999;
+    @apply z-999 grid place-items-center backdrop-blur-sm;
 }
 
 /* .content {
@@ -9,55 +9,17 @@
 } */
 
 .content {
-    @apply /* 定位相关 */
-        fixed 
-        left-[50%] 
-        top-[50%] 
-        z-[var(--z-index-modal)] 
-        translate-x-[-50%] 
-        translate-y-[-50%] 
-
-        /* 布局相关 */
-        flex
-        grid 
-        gap-0!
-
-        /* 尺寸相关 - 修改这里以支持竖屏视频 */
-        w-[90vw]  /* 使用视口宽度的百分比 */
-        max-w-[60rem]
-        max-h-[90vh] /* 限制最大高度，防止超出屏幕 */
-        p-0
-
-        /* 外观相关 */
-        bg-transparent
-        rounded-sm
-        md:rounded-lg
-        border-none
-        focus-visible:outline-0!
-        [&_>button]:hidden
-
-        /* 动画与过渡相关 */
-        duration-200;
+    @apply /* 定位相关 */ /* 布局相关 */ /* 尺寸相关 - 修改这里以支持竖屏视频 */ /* 使用视口宽度的百分比 */ /* 限制最大高度，防止超出屏幕 */ /* 外观相关 */ /* 动画与过渡相关 */ fixed top-[50%] left-[50%] z-[var(--z-index-modal)] flex grid max-h-[90vh] w-[90vw] max-w-[60rem] translate-x-[-50%] translate-y-[-50%] gap-0! rounded-sm border-none bg-transparent p-0 duration-200 focus-visible:outline-0! md:rounded-lg [&_>button]:hidden;
 }
 
 .content[data-state='open'] {
-    @apply animate-in
-        fade-in-0
-        zoom-in-95
-        slide-in-from-left-1/2
-        slide-in-from-top-[48%];
+    @apply animate-in fade-in-0 zoom-in-95 slide-in-from-left-1/2 slide-in-from-top-[48%];
 }
 
 .content[data-state='close'] {
-    @apply animate-out
-        fade-out-0
-        zoom-out-95
-        slide-out-to-left-1/2
-        slide-out-to-top-[48%];
+    @apply animate-out fade-out-0 zoom-out-95 slide-out-to-left-1/2 slide-out-to-top-[48%];
 }
 
 .closeBtn {
-    @apply flex size-10 items-center justify-center rounded-full
-                        text-lg text-white shadow-nymd shadow-white/60 transition
-                         duration-300 ease-in-out hover:rotate-180 focus-visible:outline-0!;
+    @apply flex size-10 items-center justify-center rounded-full text-lg text-white shadow-nymd shadow-white/60 transition duration-300 ease-in-out hover:rotate-180 focus-visible:outline-0!;
 }
