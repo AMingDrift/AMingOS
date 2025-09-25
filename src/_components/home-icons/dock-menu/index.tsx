@@ -93,7 +93,7 @@ const DATA = {
     },
 };
 
-export function DockDemo({ className }: { className?: string }) {
+export function DockMenu({ className }: { className?: string }) {
     const { home } = useModalStore(
         useShallow((state) => ({
             home: state.actions.home,
@@ -102,7 +102,7 @@ export function DockDemo({ className }: { className?: string }) {
     return (
         <div className={cn('flex flex-col items-center justify-center', className)}>
             <TooltipProvider>
-                <Dock direction="middle">
+                <Dock direction="middle" className="h-[var(--height-dock-menu)]">
                     <DockIcon key="Home">
                         <Tooltip>
                             <TooltipTrigger asChild>
@@ -122,7 +122,7 @@ export function DockDemo({ className }: { className?: string }) {
                                     <HomeIcon className="size-4" />
                                 </Link>
                             </TooltipTrigger>
-                            <TooltipContent className="z-999">
+                            <TooltipContent className="z-[var(--z-index-dock-menu)]">
                                 <p>Home</p>
                             </TooltipContent>
                         </Tooltip>
@@ -148,7 +148,7 @@ export function DockDemo({ className }: { className?: string }) {
                                         <social.icon className="size-4" />
                                     </Link>
                                 </TooltipTrigger>
-                                <TooltipContent className="z-999">
+                                <TooltipContent className="z-[var(--z-index-dock-menu)]">
                                     <p>{name}</p>
                                 </TooltipContent>
                             </Tooltip>
@@ -156,20 +156,13 @@ export function DockDemo({ className }: { className?: string }) {
                     ))}
                     <Separator orientation="vertical" className="h-full py-2" />
                     <DockIcon>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <AnimatedThemeToggler
-                                    className={cn(
-                                        buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                        'origin-center transition-all duration-200 ease-in-out',
-                                        'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
-                                    )}
-                                />
-                            </TooltipTrigger>
-                            <TooltipContent className="z-999">
-                                <p>Theme</p>
-                            </TooltipContent>
-                        </Tooltip>
+                        <AnimatedThemeToggler
+                            className={cn(
+                                buttonVariants({ variant: 'ghost', size: 'icon' }),
+                                'origin-center transition-all duration-200 ease-in-out',
+                                'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
+                            )}
+                        />
                     </DockIcon>
                 </Dock>
             </TooltipProvider>

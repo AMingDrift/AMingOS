@@ -1,13 +1,13 @@
 @reference "#tailwind.css";
 
 .container {
-    @apply w-full flex gap-8 relative;
+    @apply relative flex w-full gap-8;
 
     & > .article {
-        @apply flex-1 min-w-0 overflow-hidden;
+        @apply min-w-0 flex-1 overflow-hidden;
     }
 
     & > .toc {
-        @apply w-56 flex-shrink-0 sticky top-16 self-start;
+        @apply sticky top-16 w-56 flex-shrink-0 self-start;
     }
 }

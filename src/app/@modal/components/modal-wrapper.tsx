@@ -32,7 +32,7 @@ const ModalWrapper = ({
         <Modal app={list[routerName]} name={routerName}>
             <SidebarProvider defaultOpen={true}>
                 <AppSidebar items={MenuItems[routerName]} calcRouteHighlight={calcRouteHighlight} />
-                <main className="flex flex-col w-full h-full overflow-x-auto">{children}</main>
+                <main className="flex h-full w-full flex-col overflow-x-auto">{children}</main>
             </SidebarProvider>
         </Modal>
     );

@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { docApi } from '@/api/doc';
 
-const VideoBackground = () => {
+const DesktopBackground = () => {
     const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
     const getBackgroundVideo = async (prefix: string) => {
@@ -26,7 +26,7 @@ const VideoBackground = () => {
     }, [resolvedTheme]);
 
     return (
-        <div className="absolute inset-0 h-full min-h-full w-full overflow-hidden">
+        <div className="absolute inset-0 z-[var(--z-index-desktop-bg)] h-full min-h-full w-full overflow-hidden">
             <div
                 className="fixed top-0 left-0 h-full w-full bg-[url('/xl.png')] bg-cover bg-center object-cover dark:bg-[url('/xqtd.png')]"
                 aria-hidden="true"
@@ -46,4 +46,4 @@ const VideoBackground = () => {
     );
 };
 
-export default VideoBackground;
+export default DesktopBackground;

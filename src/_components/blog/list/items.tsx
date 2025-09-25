@@ -42,12 +42,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                                 <div className="footer flex flex-col gap-2">
                                     <div className="mt-0.5 text-lg font-bold">{item.title}</div>
                                     {item.tags.length > 0 && (
-                                        <div
-                                            className={cn(
-                                                $styles.tags,
-                                                'relative z-[2] flex gap-2',
-                                            )}
-                                        >
+                                        <div className={cn($styles.tags, 'relative flex gap-2')}>
                                             {item.tags.map((tagItem) => (
                                                 <TagLink
                                                     key={tagItem.id}

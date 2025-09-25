@@ -12,12 +12,10 @@ const Page: FC = ({
     doc,
     blog,
     about,
-    subtoolbar,
 }: {
     doc?: ReactNode;
     blog?: ReactNode;
     about?: ReactNode;
-    subtoolbar?: ReactNode;
 }) => {
     const pathname = usePathname();
 
@@ -35,19 +33,11 @@ const Page: FC = ({
 
     return (
         <>
-            <ModalWrapper routerName="about" subtoolbar={subtoolbar}>
-                {about}
-            </ModalWrapper>
-            <ModalWrapper
-                routerName="blog"
-                subtoolbar={subtoolbar}
-                calcRouteHighlight={calcBlogRouteHighlight}
-            >
+            <ModalWrapper routerName="about">{about}</ModalWrapper>
+            <ModalWrapper routerName="blog" calcRouteHighlight={calcBlogRouteHighlight}>
                 {blog}
             </ModalWrapper>
-            <ModalWrapper routerName="doc" subtoolbar={subtoolbar}>
-                {doc}
-            </ModalWrapper>
+            <ModalWrapper routerName="doc">{doc}</ModalWrapper>
             <UrlListener />
         </>
     );

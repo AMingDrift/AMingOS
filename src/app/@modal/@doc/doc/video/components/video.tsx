@@ -30,7 +30,7 @@ export const HomeVideoCard: FC<Props> = ({ image, video }) => {
                     </button>
                 </div>
             </StackCard>
-            <VideoModal video={{ url: video }} open={open} setOpen={setOpen} className="z-999!" />
+            <VideoModal video={{ url: video }} open={open} setOpen={setOpen} />
         </>
     );
 };

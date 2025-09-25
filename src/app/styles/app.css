@@ -1,8 +1,19 @@
+:root {
+    /* z-index 值 */
+    --z-index-desktop-bg: -1;
+
+    /* msfiles modal的z-index由 createModalStore 中state.modalApp.hz定义，初始为2，逐步累加 */
+    --z-index-dock-menu: 999;
+    --z-index-video-modal: 1000;
+
+    /* height 值 */
+    --height-dock-menu: 58px;
+    --height-modal-subtoolbar: 50px;
+}
+
 html {
     @apply scroll-smooth;
 }
-
-/* TODO: z-index 变量全局管理,video,dockmenu,toolbar,video-modal,overlay */
 
 .lucide {
     @apply w-10 stroke-[2px];
