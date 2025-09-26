@@ -159,3 +159,72 @@ html {
         transform: scale(1);
     }
 }
+
+/* ===== TYPOGRAPHY */
+@utility h1 {
+    @apply text-[34px] leading-[42px] font-bold;
+}
+
+@utility h2 {
+    @apply text-[24px] leading-[36px] font-bold;
+}
+
+@utility h3 {
+    @apply text-[20px] leading-[28px] font-semibold;
+}
+
+@utility h4 {
+    @apply text-[18px] leading-[20px] font-medium;
+}
+
+@utility h5 {
+    @apply text-[16px] leading-[24px] font-semibold;
+}
+
+@utility subtitle-1 {
+    @apply text-[16px] leading-[24px] font-medium;
+}
+
+@utility subtitle-2 {
+    @apply text-[14px] leading-[20px] font-semibold;
+}
+
+@utility body-1 {
+    @apply text-[16px] leading-[24px] font-normal;
+}
+
+@utility body-2 {
+    @apply text-[14px] leading-[20px] font-normal;
+}
+
+/* Chart */
+
+@utility chart {
+    @apply flex items-center! rounded-[20px]! bg-brand! p-5 text-white md:flex-col! xl:flex-row!;
+}
+
+@utility chart-container {
+    @apply mx-auto! aspect-square! w-[180px]! text-white xl:w-[250px]!;
+}
+
+@utility polar-grid {
+    @apply first:fill-white/20 last:fill-brand;
+}
+
+@utility chart-details {
+    container: unset;
+
+    @apply flex-1 items-start px-3! py-0! sm:px-5! lg:p-3! xl:pr-5!;
+}
+
+@utility chart-total-percentage {
+    @apply fill-white text-4xl font-bold;
+}
+
+@utility chart-title {
+    @apply h3 font-bold text-white! md:text-center lg:text-left;
+}
+
+@utility chart-description {
+    @apply mt-2! w-full! subtitle-1! text-white/70! md:text-center! lg:text-left!;
+}

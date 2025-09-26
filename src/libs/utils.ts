@@ -95,3 +95,9 @@ export function classifyFileType(pathname: string): 'image' | 'video' | 'documen
 
     return 'unknown';
 }
+
+export const calculatePercentage = (sizeInBytes: number, totalGB: number = 1) => {
+    const totalSizeInBytes = totalGB * 1024 * 1024 * 1024; // 2GB in bytes
+    const percentage = (sizeInBytes / totalSizeInBytes) * 100;
+    return Number(percentage.toFixed(2));
+};

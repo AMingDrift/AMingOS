@@ -1,4 +1,4 @@
-/********************************************************* 自定义tailwind主题扩展 *********************************************************/
+/* 自定义tailwind主题扩展 */
 
 @theme {
     --breakpoint-xs: 30rem;
@@ -12,6 +12,11 @@
     --shadow-nymd: 0 0 6px -1px rgb(0 0 0 / 10%), 0 0 4px -2px rgb(0 0 0 / 10%);
     --shadow-nylg: 0 0 15px -3px rgb(0 0 0 / 10%), 0 0 6px -4px rgb(0 0 0 / 10%);
     --shadow-spread: 0 5px 40px rgb(0 0 0 / 10%);
+
+    /* 品牌颜色 */
+    --color-brand: #4c4c6d;
+    --color-light-200: rgb(163 178 199);
+    --color-light-400: rgb(242 244 248);
 
     /* 默认字体 */
     --font-base:

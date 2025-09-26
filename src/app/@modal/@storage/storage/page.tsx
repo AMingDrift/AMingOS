@@ -1,6 +1,12 @@
-import { classifyFileType } from '@/libs/utils';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import { Separator } from '@/_components/shadcn/ui/separator';
+import { classifyFileType, convertFileSize } from '@/libs/utils';
 
 import { listStorage } from '../actions';
+import { Chart } from './components/Chart';
+import FormattedDateTime from './components/FormattedDateTime';
 import { mockStorageList } from './mock';
 
 const Page = async () => {
@@ -15,26 +21,26 @@ const Page = async () => {
               };
     const result = await getAllBlobs();
     const getUsageSummary = () => {
-        const fileItem = {
-            title: 'Documents',
-            size: 0,
-            latestDate: '',
-            icon: '/assets/icons/file-document-light.svg',
-            url: '/storage/documents',
-        };
         const imageItem = {
             title: 'Images',
             size: 0,
             latestDate: '',
-            icon: '/assets/icons/file-document-light.svg',
+            icon: '/assets/file-image-light.svg',
             url: '/storage/images',
         };
         const videoItem = {
             title: 'Video',
             size: 0,
             latestDate: '',
-            icon: '/assets/icons/file-document-light.svg',
+            icon: '/assets/file-video-light.svg',
             url: '/storage/videos',
+        };
+        const fileItem = {
+            title: 'Documents',
+            size: 0,
+            latestDate: '',
+            icon: '/assets/file-document-light.svg',
+            url: '/storage/documents',
         };
         // 根据result中pathname后缀进行分类汇总
         result.forEach((item) => {
@@ -70,12 +76,52 @@ const Page = async () => {
                     break;
             }
         });
-        return [fileItem, imageItem, videoItem];
+        return [imageItem, videoItem, fileItem];
     };
     const usageSummary = getUsageSummary();
+    const totalUsed = usageSummary.reduce((acc, item) => acc + item.size, 0);
 
     console.log('usageSummary:', usageSummary);
-    return <div>doc dashboard placeholder</div>;
+    return (
+        <div className="dashboard-container">
+            <section>
+                <Chart used={totalUsed} />
+
+                {/* Uploaded file type summaries */}
+                <ul className="dashboard-summary-list">
+                    {usageSummary.map((summary) => (
+                        <Link
+                            href={summary.url}
+                            key={summary.title}
+                            className="dashboard-summary-card hover:shadow-(--card-shadow) hover:backdrop-blur-md"
+                        >
+                            <div className="space-y-4">
+                                <div className="flex justify-between gap-3">
+                                    <Image
+                                        src={summary.icon}
+                                        width={100}
+                                        height={100}
+                                        alt="uploaded image"
+                                        className="summary-type-icon"
+                                    />
+                                    <h4 className="summary-type-size">
+                                        {convertFileSize(summary.size) || 0}
+                                    </h4>
+                                </div>
+
+                                <h5 className="summary-type-title">{summary.title}</h5>
+                                <Separator className="bg-light-400" />
+                                <FormattedDateTime
+                                    date={summary.latestDate}
+                                    className="text-center"
+                                />
+                            </div>
+                        </Link>
+                    ))}
+                </ul>
+            </section>
+        </div>
+    );
 };
 
 export default Page;

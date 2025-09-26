@@ -1,0 +1,61 @@
+/* Dashboard */
+.dashboard-container {
+    @apply mx-auto grid max-w-7xl grid-cols-1 gap-6 px-5 xl:gap-10;
+}
+
+.dashboard-summary-list {
+    @apply mt-6 grid grid-cols-1 gap-4 xl:mt-10 xl:grid-cols-2 xl:gap-9;
+}
+
+.dashboard-summary-card {
+    @apply relative mt-6 rounded-[20px] bg-white p-5 transition-all hover:scale-105;
+}
+
+.summary-type-icon {
+    @apply absolute top-[-25px] -left-3 z-10 w-[190px] object-contain;
+}
+
+.summary-type-size {
+    @apply relative z-20 w-full text-right h4 text-[#222]!;
+}
+
+.summary-type-title {
+    @apply relative z-20 text-center h5 text-[#222]!;
+}
+
+.dashboard-recent-files {
+    @apply h-full rounded-[20px] bg-white p-5 xl:p-8;
+}
+
+.recent-file-details {
+    @apply flex w-full flex-col xl:flex-row xl:justify-between;
+}
+
+.recent-file-name {
+    @apply line-clamp-1 w-full subtitle-2 text-gray-100 sm:max-w-[200px] lg:max-w-[250px];
+}
+
+.recent-file-date {
+    @apply body-2 text-gray-100/80;
+}
+
+.empty-list {
+    @apply mt-10 text-center body-1 text-gray-200;
+}
+
+/* Type page */
+.page-container {
+    @apply mx-auto flex w-full max-w-7xl flex-col items-center gap-8;
+}
+
+.total-size-section {
+    @apply mt-2 flex flex-col justify-between sm:flex-row sm:items-center;
+}
+
+.file-list {
+    @apply grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
+}
+
+.sort-container {
+    @apply mt-5 flex items-center sm:mt-0 sm:gap-3;
+}

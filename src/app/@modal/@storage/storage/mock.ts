@@ -10,7 +10,7 @@ export const mockStorageList: {
         downloadUrl:
             'https://jlwjxicihdtbbcmg.public.blob.vercel-storage.com/picture/00001-k3X1nqPC04elrd2kydTF39QGmmJ9CF.png?download=1',
         pathname: 'picture/00001-k3X1nqPC04elrd2kydTF39QGmmJ9CF.png',
-        size: 233333,
+        size: 233333000,
         uploadedAt: '2025-09-23T12:21:08.000Z',
     },
     {
