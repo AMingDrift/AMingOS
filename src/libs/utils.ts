@@ -44,3 +44,54 @@ export function generateLowerString(from: string): string {
         .map((v) => trim(v, ' '))
         .join('-');
 }
+
+/**
+ * 转换文件大小为更易读的格式
+ * @param sizeInBytes 文件大小，单位为字节
+ * @param digits 保留的小数位数，默认保留1位
+ */
+export const convertFileSize = (sizeInBytes: number, digits?: number) => {
+    if (sizeInBytes < 1024) {
+        return `${sizeInBytes} Bytes`; // Less than 1 KB, show in Bytes
+    } else if (sizeInBytes < 1024 * 1024) {
+        const sizeInKB = sizeInBytes / 1024;
+        return `${sizeInKB.toFixed(digits || 1)} KB`; // Less than 1 MB, show in KB
+    } else if (sizeInBytes < 1024 * 1024 * 1024) {
+        const sizeInMB = sizeInBytes / (1024 * 1024);
+        return `${sizeInMB.toFixed(digits || 1)} MB`; // Less than 1 GB, show in MB
+    } else {
+        const sizeInGB = sizeInBytes / (1024 * 1024 * 1024);
+        return `${sizeInGB.toFixed(digits || 1)} GB`; // 1 GB or more, show in GB
+    }
+};
+
+/**
+ * 根据文件路径的扩展名对文件进行分类
+ * @param pathname 文件路径字符串
+ * @returns 文件类型字符串 ('image' | 'video' | 'document' | 'unknown')
+ */
+export function classifyFileType(pathname: string): 'image' | 'video' | 'document' | 'unknown' {
+    const extension = pathname.split('.').pop()?.toLowerCase();
+
+    if (!extension) {
+        return 'unknown';
+    }
+
+    const imageTypes = ['png', 'jpg', 'jpeg', 'webp'];
+    const videoTypes = ['mp4', 'webm'];
+    const documentTypes = ['pdf', 'doc', 'docx', 'excel'];
+
+    if (imageTypes.includes(extension)) {
+        return 'image';
+    }
+
+    if (videoTypes.includes(extension)) {
+        return 'video';
+    }
+
+    if (documentTypes.includes(extension)) {
+        return 'document';
+    }
+
+    return 'unknown';
+}

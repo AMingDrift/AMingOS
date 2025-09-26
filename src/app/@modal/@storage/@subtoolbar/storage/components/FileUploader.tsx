@@ -7,18 +7,17 @@ import { toast } from 'sonner';
 
 import { Button } from '@/_components/shadcn/ui/button';
 import { Input } from '@/_components/shadcn/ui/input';
-import { uploadDoc } from '@/app/@modal/@doc/actions';
+import { uploadStorage } from '@/app/@modal/@storage/actions';
 
 interface FileUploaderProps {
-    type: 'picture' | 'video' | 'music';
+    type: 'images' | 'videos';
     className?: string;
     maxSizeMB?: number;
 }
 
 const mimeTypes: Record<FileUploaderProps['type'], string> = {
-    picture: 'image/*',
-    video: 'video/*',
-    music: 'audio/*',
+    images: 'image/*',
+    videos: 'video/*',
 };
 
 export default function FileUploader({ type, className = '', maxSizeMB = 1 }: FileUploaderProps) {
@@ -53,7 +52,7 @@ export default function FileUploader({ type, className = '', maxSizeMB = 1 }: Fi
         try {
             setIsLoading(true);
 
-            await uploadDoc(
+            await uploadStorage(
                 {
                     prefix,
                     file,
@@ -63,7 +62,7 @@ export default function FileUploader({ type, className = '', maxSizeMB = 1 }: Fi
 
             toast.success(successMessage);
             router.refresh();
-        } catch (error) {
+        } catch {
             toast.error(errorMessage);
         } finally {
             setIsLoading(false);
@@ -96,9 +95,9 @@ export default function FileUploader({ type, className = '', maxSizeMB = 1 }: Fi
                 disabled={isLoading}
             >
                 {isLoading ? (
-                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin duration-500" />
+                    <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent duration-500" />
                 ) : (
-                    <UploadCloudIcon className="w-4! h-4" />
+                    <UploadCloudIcon className="h-4 w-4!" />
                 )}
                 Upload
             </Button>

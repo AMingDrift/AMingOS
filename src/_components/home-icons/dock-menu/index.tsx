@@ -1,8 +1,9 @@
+/* eslint-disable react-dom/no-missing-button-type */
 'use client';
 
-import { CalendarIcon, FileUser, Folders, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
+import { Check, Cloud, Copy, FileUser, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
-import React from 'react';
+import React, { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { Dock, DockIcon } from '@/_components/magicui/dock';
@@ -23,39 +24,7 @@ import DockMenuIcon from './doc-icon';
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
 const Icons = {
-    calendar: (props: IconProps) => <CalendarIcon {...props} />,
     email: (props: IconProps) => <MailIcon {...props} />,
-    linkedin: (props: IconProps) => (
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <title>LinkedIn</title>
-            <path
-                fill="currentColor"
-                d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
-            />
-        </svg>
-    ),
-    x: (props: IconProps) => (
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <title>X</title>
-            <path
-                fill="currentColor"
-                d="M18.901 1.153h3.68l-8.04 9.19L24 22.846h-7.406l-5.8-7.584-6.638 7.584H.474l8.6-9.83L0 1.154h7.594l5.243 6.932ZM17.61 20.644h2.039L6.486 3.24H4.298Z"
-            />
-        </svg>
-    ),
-    youtube: (props: IconProps) => (
-        <svg
-            width="32px"
-            height="32px"
-            viewBox="0 0 32 32"
-            fill="currentColor"
-            xmlns="http://www.w3.org/2000/svg"
-            {...props}
-        >
-            <title>youtube</title>
-            <path d="M29.41,9.26a3.5,3.5,0,0,0-2.47-2.47C24.76,6.2,16,6.2,16,6.2s-8.76,0-10.94.59A3.5,3.5,0,0,0,2.59,9.26,36.13,36.13,0,0,0,2,16a36.13,36.13,0,0,0,.59,6.74,3.5,3.5,0,0,0,2.47,2.47C7.24,25.8,16,25.8,16,25.8s8.76,0,10.94-.59a3.5,3.5,0,0,0,2.47-2.47A36.13,36.13,0,0,0,30,16,36.13,36.13,0,0,0,29.41,9.26ZM13.2,20.2V11.8L20.47,16Z" />
-        </svg>
-    ),
     github: (props: IconProps) => (
         <svg viewBox="0 0 438.549 438.549" {...props}>
             <path
@@ -64,30 +33,57 @@ const Icons = {
             ></path>
         </svg>
     ),
+    juejin: (props: IconProps) => (
+        <svg viewBox="0 0 1212 1024" {...props}>
+            <path
+                fill="currentColor"
+                d="M698.29709823 161.95344498L597.85455501 82.75836245l-104.9189194 82.75165526-5.4575013 4.38439708 110.3764207 87.99453639 110.74434276-87.99453639-10.30179954-7.94096981z m380.6453521 307.15305187l-481.36383602 379.5722479-481.05723562-379.35762774L45.45122758 526.41025479l552.12738673 435.34300046 552.43398714-435.58828146-71.07015112-57.05847694z m-481.36383602 30.78275641l-261.96003953-206.52654705-71.03949028 57.05847694 332.96887012 262.57324259 333.30613134-262.81852359-71.03949141-57.05847694-262.23598024 206.77182805z"
+            ></path>
+        </svg>
+    ),
 };
 
-const DATA = {
+// 定义基础的社交媒体项类型
+interface BaseSocialItem {
+    name: string;
+    url: string;
+    icon: (props: IconProps) => React.ReactNode;
+}
+
+// 定义Email社交媒体项类型，其中address是必需的
+type EmailSocialItem = BaseSocialItem & {
+    address: string;
+};
+
+type SocialKey = 'GitHub' | 'Juejin' | 'Email';
+// 定义社交媒体映射类型，使用条件类型确保email项必须包含address
+type SocialData = {
+    [K in SocialKey]: K extends 'Email' ? EmailSocialItem : BaseSocialItem;
+};
+
+// 修改DATA的类型定义
+const DATA: {
+    contact: {
+        social: SocialData;
+    };
+} = {
     contact: {
         social: {
             GitHub: {
                 name: 'GitHub',
-                url: 'https://www.baidu.com',
+                url: 'https://github.com/AMingDrift',
                 icon: Icons.github,
             },
-            LinkedIn: {
-                name: 'LinkedIn',
-                url: '#',
-                icon: Icons.linkedin,
+            Juejin: {
+                name: '掘金',
+                url: 'https://juejin.cn/user/3667626522083448',
+                icon: Icons.juejin,
             },
-            X: {
-                name: 'X',
-                url: '#',
-                icon: Icons.x,
-            },
-            email: {
-                name: 'Send Email',
-                url: '#',
+            Email: {
+                name: 'Email',
+                url: 'mailto:amingdrift@163.com',
                 icon: Icons.email,
+                address: 'amingdrift@163.com',
             },
         },
     },
@@ -99,6 +95,13 @@ export function DockMenu({ className }: { className?: string }) {
             home: state.actions.home,
         })),
     );
+    const [copiedEmail, setCopiedEmail] = useState(false);
+    const handleCopyEmail = (email: string) => {
+        navigator.clipboard.writeText(email).then(() => {
+            setCopiedEmail(true);
+            setTimeout(() => setCopiedEmail(false), 2000);
+        });
+    };
     return (
         <div className={cn('flex flex-col items-center justify-center', className)}>
             <TooltipProvider>
@@ -129,28 +132,85 @@ export function DockMenu({ className }: { className?: string }) {
                     </DockIcon>
                     <DockMenuIcon name="about" icon={<FileUser className="size-4" />} />
                     <DockMenuIcon name="blog" icon={<NotebookPen className="size-4" />} />
-                    <DockMenuIcon name="doc" icon={<Folders className="size-4" />} />
+                    <DockMenuIcon name="storage" icon={<Cloud className="size-4" />} />
                     <Separator orientation="vertical" className="h-full" />
                     {Object.entries(DATA.contact.social).map(([name, social]) => (
                         <DockIcon key={name}>
                             <Tooltip>
                                 <TooltipTrigger asChild>
-                                    <Link
-                                        href={social.url}
-                                        target="_blank"
-                                        aria-label={social.name}
-                                        className={cn(
-                                            buttonVariants({ variant: 'ghost', size: 'icon' }),
-                                            'origin-center transition-all duration-200 ease-in-out',
-                                            'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
-                                        )}
-                                    >
-                                        <social.icon className="size-4" />
-                                    </Link>
+                                    {name !== 'Email' ? (
+                                        <Link
+                                            href={social.url}
+                                            target="_blank"
+                                            aria-label={social.name}
+                                            className={cn(
+                                                buttonVariants({ variant: 'ghost', size: 'icon' }),
+                                                'origin-center transition-all duration-200 ease-in-out',
+                                                'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
+                                            )}
+                                        >
+                                            <social.icon className="size-4" />
+                                        </Link>
+                                    ) : (
+                                        <div
+                                            className={cn(
+                                                buttonVariants({
+                                                    variant: 'ghost',
+                                                    size: 'icon',
+                                                }),
+                                                'group relative origin-center transition-all duration-200 ease-in-out',
+                                                'size-11 hover:bg-[linear-gradient(120deg,_rgba(161,196,253,0.2)_0%,_rgba(194,233,251,0.2)_100%)] hover:shadow-lg hover:backdrop-blur-md',
+                                            )}
+                                        >
+                                            <social.icon className="size-4" />
+
+                                            {/* TODO: 美化email弹出框样式 */}
+                                            <div className="invisible absolute bottom-full left-1/2 mb-2.5 flex w-48 -translate-x-1/2 cursor-default flex-col gap-1 overflow-hidden rounded-md bg-white/80 pt-1.5 opacity-0 shadow-xl backdrop-blur-3xl transition-all duration-200 group-hover:visible group-hover:opacity-100 dark:bg-gray-800/80">
+                                                <div className="px-3 text-sm font-medium text-gray-800 dark:text-gray-200">
+                                                    联系我
+                                                </div>
+                                                <div className="truncate px-3 text-xs text-gray-500 dark:text-gray-400">
+                                                    {(social as EmailSocialItem).address}
+                                                </div>
+                                                <div className="flex border-t border-gray-100 dark:border-gray-700">
+                                                    <button
+                                                        onClick={() =>
+                                                            (window.location.href = social.url)
+                                                        }
+                                                        className="flex-1 px-3 py-2 text-center text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
+                                                    >
+                                                        发送邮件
+                                                    </button>
+                                                    <button
+                                                        onClick={() =>
+                                                            handleCopyEmail(
+                                                                (social as EmailSocialItem).address,
+                                                            )
+                                                        }
+                                                        className="flex-1 px-3 py-2 text-center text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
+                                                    >
+                                                        {copiedEmail ? (
+                                                            <span className="flex items-center justify-center gap-1">
+                                                                <Check size={12} className="w-4!" />
+                                                                已复制
+                                                            </span>
+                                                        ) : (
+                                                            <span className="flex items-center justify-center gap-1">
+                                                                <Copy size={12} className="w-4!" />
+                                                                复制邮箱
+                                                            </span>
+                                                        )}
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )}
                                 </TooltipTrigger>
-                                <TooltipContent className="z-(--z-index-dock-menu)">
-                                    <p>{name}</p>
-                                </TooltipContent>
+                                {name !== 'Email' && (
+                                    <TooltipContent className="z-(--z-index-dock-menu)">
+                                        <p>{social.name}</p>
+                                    </TooltipContent>
+                                )}
                             </Tooltip>
                         </DockIcon>
                     ))}

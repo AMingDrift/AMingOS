@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 
 import {
+    ChartPie,
     Files,
     FileVideo,
     Image,
@@ -21,7 +22,7 @@ interface IMenuItem {
 
 export const DefaultMenuUrl: Record<AppType, string> = {
     blog: '/blog',
-    doc: '/doc',
+    storage: '/storage',
     about: '/about',
 };
 
@@ -38,20 +39,25 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             icon: SquarePlus,
         },
     ],
-    doc: [
+    storage: [
         {
-            title: 'Videos',
-            url: '/doc/video',
-            icon: FileVideo,
+            title: 'Dashboard',
+            url: '/storage',
+            icon: ChartPie,
         },
         {
-            title: 'Pictures',
-            url: '/doc/picture',
+            title: 'Images',
+            url: '/storage/images',
             icon: Image,
         },
         {
-            title: 'Files',
-            url: '/doc/file',
+            title: 'Videos',
+            url: '/storage/videos',
+            icon: FileVideo,
+        },
+        {
+            title: 'Documents',
+            url: '/storage/documents',
             icon: Files,
         },
     ],

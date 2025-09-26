@@ -17,17 +17,17 @@ import {
     docRequestQuerySchema,
     listBlobResultSchema,
 } from './schema';
-import { deleteDocBlobByUrl, queryDocBlobByType } from './service';
-export const docTags = ['对象存储操作'];
-export const docPath = '/doc';
-export type DocApiType = typeof docRoutes;
+import { deleteStorageBlobByUrl, queryStorageBlobByType } from './service';
+export const storageTags = ['对象存储操作'];
+export const storagePath = '/storage';
+export type StorageApiType = typeof storageRoutes;
 
 const app = createHonoApp();
-export const docRoutes = app
+export const storageRoutes = app
     .get(
         '/',
         describeRoute({
-            tags: docTags,
+            tags: storageTags,
             summary: '对象存储查询',
             description: '对象存储查询',
             responses: {
@@ -46,7 +46,7 @@ export const docRoutes = app
                         ['limit'].includes(k) ? Number(v) : v,
                     ]),
                 );
-                const result = await queryDocBlobByType(options);
+                const result = await queryStorageBlobByType(options);
                 console.log(`[${String(new Date())}]: 对象存储查询`);
                 return c.json(result, 200);
             } catch (error) {
@@ -57,7 +57,7 @@ export const docRoutes = app
     .post(
         '/upload',
         describeRoute({
-            tags: docTags,
+            tags: storageTags,
             summary: '对象存储上传',
             description: '对象存储上传',
             responses: {
@@ -117,7 +117,7 @@ export const docRoutes = app
     .delete(
         '/',
         describeRoute({
-            tags: docTags,
+            tags: storageTags,
             summary: '对象存储删除',
             description: '对象存储删除',
             responses: {
@@ -130,7 +130,7 @@ export const docRoutes = app
         async (c) => {
             try {
                 const { url } = c.req.valid('query');
-                await deleteDocBlobByUrl(url);
+                await deleteStorageBlobByUrl(url);
                 return c.json({}, 200);
             } catch (error) {
                 return c.json(createErrorResult('删除对象存储数据失败', error), 500);

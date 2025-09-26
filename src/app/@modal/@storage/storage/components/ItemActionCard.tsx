@@ -20,12 +20,13 @@ import {
     AlertDialogTrigger,
 } from '@/_components/shadcn/ui/alert-dialog';
 import { cn } from '@/_components/shadcn/utils';
+import { convertFileSize } from '@/libs/utils';
 
-import type { listDoc } from '../../actions';
+import type { listStorage } from '../../actions';
 
-import { deleteDoc } from '../../actions';
+import { deleteStorage } from '../../actions';
 
-const docTypeInfo = {
+const storageTypeInfo = {
     video: {
         label: '视频',
     },
@@ -36,10 +37,10 @@ const docTypeInfo = {
 
 const ItemActionCard = ({
     blobInfo,
-    docType,
+    storageType,
 }: {
-    blobInfo: Awaited<ReturnType<typeof listDoc>>[0];
-    docType: keyof typeof docTypeInfo;
+    blobInfo: Awaited<ReturnType<typeof listStorage>>[0];
+    storageType: keyof typeof storageTypeInfo;
 }) => {
     const router = useRouter();
     const pathname = usePathname();
@@ -61,7 +62,7 @@ const ItemActionCard = ({
             setPedding(true);
 
             try {
-                await deleteDoc(blobInfo.url, pathname);
+                await deleteStorage(blobInfo.url, pathname);
                 toast.success('删除成功');
             } catch (error) {
                 toast.warning('删除失败', {
@@ -89,7 +90,7 @@ const ItemActionCard = ({
         >
             <div className="flex h-full w-full items-center justify-between">
                 <div className="truncate text-xs text-white">
-                    Size: {(blobInfo.size / 1024).toFixed(2)} KB
+                    Size: {convertFileSize(blobInfo.size)}
                 </div>
                 <div className="flex gap-4">
                     <AlertDialog open={open} onOpenChange={changeOpen}>
@@ -102,7 +103,7 @@ const ItemActionCard = ({
                         <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
                             <AlertDialogHeader>
                                 <AlertDialogTitle>
-                                    是否确认删除该{docTypeInfo[docType].label}？
+                                    是否确认删除该{storageTypeInfo[storageType].label}？
                                 </AlertDialogTitle>
                                 <AlertDialogDescription>
                                     当前不支持软删除，删除后将无法恢复
@@ -123,7 +124,7 @@ const ItemActionCard = ({
                         href={blobInfo.downloadUrl}
                         download={blobInfo.pathname}
                         className="text-white transition-colors hover:text-blue-300"
-                        aria-label={`Download ${docType}`}
+                        aria-label={`Download ${storageType}`}
                     >
                         <DownloadIcon className="h-5 w-5!" />
                     </Link>

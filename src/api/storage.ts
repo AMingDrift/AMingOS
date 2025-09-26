@@ -1,15 +1,15 @@
 import type { ListCommandOptions } from '@vercel/blob';
 
-import type { DocApiType } from '@/server/doc/routes';
+import type { StorageApiType } from '@/server/storage/routes';
 
 import { buildClient, fetchApi } from '@/libs/hono';
-import { docPath } from '@/server/doc/routes';
+import { storagePath } from '@/server/storage/routes';
 
-export const docClient = buildClient<DocApiType>(docPath);
+export const storageClient = buildClient<StorageApiType>(storagePath);
 
-export const docApi = {
+export const storageApi = {
     list: async (options?: ListCommandOptions) =>
-        fetchApi(docClient, async (c) =>
+        fetchApi(storageClient, async (c) =>
             c.index.$get({
                 query: Object.fromEntries(
                     Object.entries(options ?? {}).map(([k, v]) => [k, String(v)]),
@@ -17,5 +17,5 @@ export const docApi = {
             }),
         ),
     delete: async (url: string) =>
-        fetchApi(docClient, async (c) => c.index.$delete({ query: { url } })),
+        fetchApi(storageClient, async (c) => c.index.$delete({ query: { url } })),
 };

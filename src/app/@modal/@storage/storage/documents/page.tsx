@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { Button } from '@/_components/shadcn/ui/button';
 import { Input } from '@/_components/shadcn/ui/input';
 import { appConfig } from '@/config/app';
-import { docPath } from '@/server/doc/routes';
+import { storagePath } from '@/server/storage/routes';
 
 export default function AvatarUploadPage() {
     const inputFileRef = useRef<HTMLInputElement>(null);
@@ -29,7 +29,7 @@ export default function AvatarUploadPage() {
 
                     const newBlob = await upload(`picture/${file.name}`, file, {
                         access: 'public',
-                        handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${docPath}/upload`,
+                        handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${storagePath}/upload`,
                     });
 
                     toast.success('Uploaded picture successfully!');

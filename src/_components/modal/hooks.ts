@@ -22,9 +22,9 @@ export const createModalStore = () =>
                 (set) => ({
                     modalApp: {
                         list: {
-                            doc: {
-                                id: 'doc',
-                                title: 'Document',
+                            storage: {
+                                id: 'storage',
+                                title: 'Storage',
                                 size: 'full',
                                 hide: true,
                                 max: true,

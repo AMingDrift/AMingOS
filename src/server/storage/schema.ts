@@ -8,7 +8,7 @@ export const docRequestQuerySchema = z.object({
         description: '指定要返回的最大 blob 对象数的数字。默认为 1000',
     }),
     prefix: z.string().optional().meta({
-        description: '用于筛选 blob 对象的路径名，可包含文件夹名，例如`video/xqtd.mp4`，`picture`',
+        description: '用于筛选 blob 对象的路径名，可包含文件夹名，例如`video/xqtd.mp4`，`images/`',
     }),
     cursor: z.string().optional().meta({
         description: '用于分页的游标字符串，用于获取下一页的结果',

@@ -1,4 +1,4 @@
-export type AppType = 'doc' | 'blog' | 'about'; // 与路径名/doc,/blog对应
+export type AppType = 'storage' | 'blog' | 'about'; // 与路径名/storage,/blog对应
 
 export interface AppItem {
     id: AppType;

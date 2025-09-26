@@ -9,11 +9,11 @@ import ModalWrapper from './components/modal-wrapper';
 import UrlListener from './components/url-listener';
 
 const Page: FC = ({
-    doc,
+    storage,
     blog,
     about,
 }: {
-    doc?: ReactNode;
+    storage?: ReactNode;
     blog?: ReactNode;
     about?: ReactNode;
 }) => {
@@ -37,7 +37,7 @@ const Page: FC = ({
             <ModalWrapper routerName="blog" calcRouteHighlight={calcBlogRouteHighlight}>
                 {blog}
             </ModalWrapper>
-            <ModalWrapper routerName="doc">{doc}</ModalWrapper>
+            <ModalWrapper routerName="storage">{storage}</ModalWrapper>
             <UrlListener />
         </>
     );

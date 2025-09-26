@@ -7,7 +7,7 @@ import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 
-import { listDoc } from '../../actions';
+import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';
 
 const PictureContent = async () => {
@@ -34,7 +34,7 @@ const PictureContent = async () => {
                   }
               }
             : async () => {
-                  const result = await listDoc({ prefix: 'picture/' });
+                  const result = await listStorage({ prefix: 'images/' });
                   return result;
               };
     const images = await getImages();
@@ -58,7 +58,7 @@ const PictureContent = async () => {
                                 alt={imageInfo.pathname}
                                 id={imageInfo.url}
                             />
-                            <ItemActionCard blobInfo={imageInfo} docType="picture" />
+                            <ItemActionCard blobInfo={imageInfo} storageType="picture" />
                         </div>
                     </Card3D>
                 </BlurFade>

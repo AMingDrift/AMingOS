@@ -5,7 +5,7 @@ import React, { Suspense } from 'react';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 
-import { listDoc } from '../../actions';
+import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';
 import { HomeVideoCard } from './components/video';
 
@@ -57,7 +57,7 @@ const VideoContent = async () => {
                   }
               }
             : async () => {
-                  const result = await listDoc({ prefix: 'video/' });
+                  const result = await listStorage({ prefix: 'videos/' });
                   console.log('result:', result);
                   const videoExts = ['.mp4', '.webm'];
                   const videoFiles = result.filter((file) =>
@@ -105,7 +105,7 @@ const VideoContent = async () => {
                 >
                     <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--modal-shadow) hover:backdrop-blur-md dark:border-white/30">
                         <HomeVideoCard image={video?.thumb} video={video.url} />
-                        <ItemActionCard blobInfo={video} docType="video" />
+                        <ItemActionCard blobInfo={video} storageType="video" />
                     </div>
                 </BlurFade>
             ))}

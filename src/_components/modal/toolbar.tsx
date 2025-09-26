@@ -76,7 +76,6 @@ export const ToolBar = ({
             wnapp = parentRef.current as HTMLDivElement;
 
             wnapp.classList.add('notrans');
-            wnapp.classList.add('z9900');
             posP = [wnapp.offsetTop, wnapp.offsetLeft];
             dimP = [
                 Number.parseFloat(getComputedStyle(wnapp).height.replaceAll('px', '')),
@@ -106,7 +105,6 @@ export const ToolBar = ({
 
         if (wnapp) {
             wnapp.classList.remove('notrans');
-            wnapp.classList.remove('z9900');
         }
 
         if (isDragged) {

@@ -4,30 +4,30 @@ import type { ListCommandOptions } from '@vercel/blob';
 import { upload } from '@vercel/blob/client';
 import { revalidatePath } from 'next/cache';
 
-import { docApi } from '@/api/doc';
+import { storageApi } from '@/api/storage';
 import { appConfig } from '@/config/app';
-import { docPath } from '@/server/doc/routes';
+import { storagePath } from '@/server/storage/routes';
 
-export const listDoc = async (options?: ListCommandOptions) => {
+export const listStorage = async (options?: ListCommandOptions) => {
     'use cache';
-    const res = await docApi.list(options);
+    const res = await storageApi.list(options);
     if (!res.ok) throw new Error((await res.json()).message);
     return await res.json();
 };
 
-export const uploadDoc = async (
+export const uploadStorage = async (
     { prefix, file }: { prefix: string; file: File },
     pathname?: string,
 ) => {
     await upload(`${prefix}${file.name}`, file, {
         access: 'public',
-        handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${docPath}/upload`,
+        handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${storagePath}/upload`,
     });
     if (pathname) revalidatePath(pathname);
 };
 
-export const deleteDoc = async (url: string, pathname?: string) => {
-    const res = await docApi.delete(url);
+export const deleteStorage = async (url: string, pathname?: string) => {
+    const res = await storageApi.delete(url);
     if (!res.ok) throw new Error((await res.json()).message);
     if (pathname) revalidatePath(pathname);
 };

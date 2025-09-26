@@ -3,13 +3,13 @@
 import { useTheme } from 'next-themes';
 import React, { useEffect, useState } from 'react';
 
-import { docApi } from '@/api/doc';
+import { storageApi } from '@/api/storage';
 
 const DesktopBackground = () => {
     const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
     const getBackgroundVideo = async (prefix: string) => {
-        const result = await docApi.list({ prefix });
+        const result = await storageApi.list({ prefix });
         if (!result.ok) throw new Error((await result.json()).message);
         return (await result.json())?.[0]?.url;
     };
@@ -20,7 +20,7 @@ const DesktopBackground = () => {
             const localUrl = `/test/video/${videoName}`;
             setVideoUrl(localUrl);
         } else {
-            const prefix = `video/${videoName}`;
+            const prefix = `videos/${videoName}`;
             getBackgroundVideo(prefix).then((url) => setVideoUrl(url));
         }
     }, [resolvedTheme]);
