@@ -22,7 +22,7 @@ const Modal: FC<
     return (
         // eslint-disable-next-line jsx-a11y/no-static-element-interactions
         <div
-            className="msfiles floatTab dpShad"
+            className="msfiles floatTab"
             ref={modalRef}
             data-size={app.size}
             data-max={app.max}

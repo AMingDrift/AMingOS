@@ -30,7 +30,7 @@ const storageTypeInfo = {
     video: {
         label: '视频',
     },
-    picture: {
+    image: {
         label: '图片',
     },
 };
@@ -66,7 +66,7 @@ const ItemActionCard = ({
                 toast.success('删除成功');
             } catch (error) {
                 toast.warning('删除失败', {
-                    id: 'picture-delete-error',
+                    id: 'image-delete-error',
                     description: (error as Error).message,
                 });
             } finally {

@@ -94,7 +94,6 @@ const VideoContent = async () => {
               };
     const videos = await getVideos();
     return (
-        // TODO: 设置滚动加载分页，用到vercel blob的cursor
         <div className="mx-10 mt-7 mb-6 columns-2 gap-10">
             {videos.map((video, idx) => (
                 <BlurFade
@@ -103,7 +102,7 @@ const VideoContent = async () => {
                     inView
                     className="mb-10 flex break-inside-avoid flex-col"
                 >
-                    <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl border-0 border-black/15 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--modal-shadow) hover:backdrop-blur-md dark:border-white/30">
+                    <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
                         <HomeVideoCard image={video?.thumb} video={video.url} />
                         <ItemActionCard blobInfo={video} storageType="video" />
                     </div>

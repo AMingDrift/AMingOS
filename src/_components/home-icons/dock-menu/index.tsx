@@ -164,8 +164,7 @@ export function DockMenu({ className }: { className?: string }) {
                                         >
                                             <social.icon className="size-4" />
 
-                                            {/* TODO: 美化email弹出框样式 */}
-                                            <div className="invisible absolute bottom-full left-1/2 mb-2.5 flex w-48 -translate-x-1/2 cursor-default flex-col gap-1 overflow-hidden rounded-md bg-white/80 pt-1.5 opacity-0 shadow-xl backdrop-blur-3xl transition-all duration-200 group-hover:visible group-hover:opacity-100 dark:bg-gray-800/80">
+                                            <div className="invisible absolute bottom-full left-1/2 mb-2.5 flex w-48 -translate-x-1/2 cursor-default flex-col gap-1 overflow-hidden rounded-md bg-(--modal-bg-color) bg-white/70 pt-1.5 opacity-0 shadow-(--modal-shadow) backdrop-blur-3xl transition-all duration-200 group-hover:visible group-hover:opacity-100 dark:bg-black/70">
                                                 <div className="px-3 text-sm font-medium text-gray-800 dark:text-gray-200">
                                                     联系我
                                                 </div>
