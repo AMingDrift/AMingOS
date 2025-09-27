@@ -43,11 +43,6 @@
     @apply mt-10 text-center body-1 text-gray-200;
 }
 
-/* Type page */
-.page-container {
-    @apply mx-auto flex w-full max-w-7xl flex-col items-center gap-8;
-}
-
 .total-size-section {
     @apply mt-2 flex flex-col justify-between sm:flex-row sm:items-center;
 }

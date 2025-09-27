@@ -26,7 +26,7 @@ const BlogIndexSkeleton: FC = () => {
             ref={loadingRef}
             className="flex h-full w-full flex-auto page-container flex-col space-x-4 lg:flex-row"
         >
-            <div className="order-2 flex flex-auto flex-col space-y-5 lg:order-1">
+            <div className="order-2 flex w-full flex-auto flex-col space-y-5 lg:order-1">
                 <div className="w-full flex-none">
                     <Skeleton className="flex h-9 w-full items-center justify-between rounded-md bg-gray-950/30 px-3 shadow-sm backdrop-blur-sm" />
                 </div>
