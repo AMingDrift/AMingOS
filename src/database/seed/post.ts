@@ -110,13 +110,27 @@ const data: Item[] = [
     {
         title: '手把手教你用 React + Zustand 打造 Windows 风格可拖拽，缩放，多窗口 Modal 组件',
         summary: '记录仿Windows风格的可拖拽、缩放、多窗口 Modal 组件的实现',
-        bodyPath: path.join(
-            __dirname,
-            '../fixture/wmc/1/手把手教你构建 Windows 风格的 React(Next js) 可拖拽、缩放、多窗口Modal.md',
-        ),
-        categoryName: 'TS全栈开发',
-        tagNames: ['typescript', 'react', 'next.js'],
-        thumb: '/uploads/thumb/1.webp',
+        bodyPath: path.join(__dirname, '../fixture/wmc/1.md'),
+        categoryName: '网页开发',
+        tagNames: ['modal', 'typescript', 'react', 'next.js'],
+        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/1.webp',
+    },
+    {
+        title: '【MCP系列】介绍一个我自己开发的MCP工具：MCP Shipit',
+        summary: '介绍一个我自己开发的MCP工具：MCP Shipit，欢迎来github提issue，start!',
+        bodyPath: path.join(__dirname, '../fixture/wmc/2.md'),
+        categoryName: 'MCP工具',
+        tagNames: ['typescript', 'mcp', 'nodejs'],
+        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/mcp-shipit.png',
+    },
+    {
+        title: '【MCP系列】用 MCP 扩展 AI 编辑器：从零开发一个自己的MCP服务',
+        summary:
+            '本文MCP协议，手把手教你构建一个自己的MCP Server，在AI编辑器实现通过自然语言指令调用自己写的工具脚本。',
+        bodyPath: path.join(__dirname, '../fixture/wmc/3.md'),
+        categoryName: 'MCP工具',
+        tagNames: ['typescript', 'mcp', 'nodejs'],
+        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/mcp-thumb.jpg',
     },
 ];
 
