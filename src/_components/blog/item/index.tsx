@@ -9,6 +9,7 @@ import { Suspense } from 'react';
 import { MdxRender } from '@/_components/mdx/render';
 import { cn } from '@/_components/shadcn/utils';
 import { postApi } from '@/api/post';
+import Comments from '@/app/@modal/@blog/blog/posts/[item]/Comments';
 import { formatTime } from '@/libs/time';
 
 import { TagLink } from '../form/tag';
@@ -84,6 +85,8 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                             </>
                         }
                     />
+
+                    <Comments />
                 </div>
             </div>
         </div>
