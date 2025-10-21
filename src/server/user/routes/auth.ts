@@ -11,7 +11,7 @@ import {
 } from '../../common/response';
 import { AuthProtectedMiddleware } from '../middlwares';
 import { authResponseSchema, authSignoutResponseSchema, loginRequestSchema } from '../schema';
-import { getCurrentSession, signIn, signOut } from '../service';
+import { getCurrentSession, signIn, signInGithub, signOut } from '../service';
 
 const app = createHonoApp();
 
@@ -97,6 +97,28 @@ export const authRoutes = app
                 );
             } catch (error) {
                 return c.json(createErrorResult('获取会话失败', error), 500);
+            }
+        },
+    )
+    // 判断当前用户是否是管理员
+    .get(
+        '/is-admin',
+        describeRoute({
+            tags: userTags,
+            summary: '判断是否是管理员',
+            description: '判断当前用户是否是管理员',
+            responses: {
+                ...createSuccessResponse(authResponseSchema),
+                ...createUnauthorizedErrorResponse(),
+                ...createServerErrorResponse('判断管理员失败'),
+            },
+        }),
+        async (c) => {
+            try {
+                const session = await getCurrentSession(c.req.raw);
+                return c.json(session?.user.id === process.env.ADMIN_GITHUB_ID, 200);
+            } catch (error) {
+                return c.json(createErrorResult('判断管理员失败', error), 500);
             }
         },
     );

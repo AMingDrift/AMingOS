@@ -6,6 +6,27 @@ export const loginRequestSchema = z.object({
     password: z.string().min(6, '密码至少6位'),
 });
 
+// const auth: {
+//     id: string;
+//     createdAt: Date;
+//     updatedAt: Date;
+//     email: string;
+//     emailVerified: boolean;
+//     name: string;
+//     image?: string | null | undefined;
+// } | null
+
+// G-用户信息 schema
+export const githubUserSchema = z.object({
+    id: z.string(),
+    createdAt: z.date().meta({ description: '用户创建时间' }),
+    updatedAt: z.date().meta({ description: '用户更新时间' }),
+    email: z.string(),
+    emailVerified: z.boolean(),
+    name: z.string(),
+    image: z.string().nullable(),
+});
+
 // 用户信息 schema
 export const userSchema = z.object({
     id: z.string(),

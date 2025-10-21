@@ -1,8 +1,8 @@
 import { createContext } from 'react';
 
-import type { AuthContextType, AuthType } from './types';
+import type { AuthContextType } from './types';
 
 export const AuthContext = createContext<AuthContextType>({
-    auth: false,
-    setAuth: (_value: AuthType) => {},
+    admin: false,
+    setAdmin: (_value: boolean) => {},
 });

@@ -39,6 +39,17 @@ export const signIn = async (credential: string, password: string) => {
 };
 
 /**
+ * Github 用户登录
+ */
+export const signInGithub = async () =>
+    await auth.api.signInSocial({
+        body: {
+            provider: 'github',
+            callbackURL: '/',
+        },
+    });
+
+/**
  * 用户登出
  */
 export const signOut = async (request: Request) => {

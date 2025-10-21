@@ -3,20 +3,19 @@
 import type { FC } from 'react';
 
 import type { PostItem } from '@/server/post/type';
-import type { User } from '@/server/user/type';
 
 import { AuthChecker } from '@/_components/auth';
 import { cn } from '@/_components/shadcn/utils';
 
 import { PostDelete } from './delete';
 import { PostEditButton } from './edit-button';
-export const Buttons: FC<{ item: PostItem; className?: string; auth: User | null }> = ({
+export const Buttons: FC<{ item: PostItem; className?: string; admin: boolean }> = ({
     item,
     className,
-    auth,
+    admin,
 }) => {
     return (
-        auth && (
+        admin && (
             <div className={cn('flex items-end space-x-1', className)}>
                 <PostEditButton item={item} />
                 <PostDelete item={item} />

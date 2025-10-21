@@ -1,1 +1,1 @@
-export const authPath = '/auth';
+export const authPath = '/custom-auth';

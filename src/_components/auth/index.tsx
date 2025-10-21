@@ -5,15 +5,11 @@ import type { FC, JSX, PropsWithChildren } from 'react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { toast } from 'sonner';
 
-import type { User } from '@/server/user/type';
-
-import { authApi } from '@/api/auth';
-
-import type { AuthType } from './types';
-
 import { Spinner } from '../loading/spinner';
 import { AuthContext } from './constants';
-import { useAuth, useSetAuth } from './hooks';
+import { useAdmin, useSetAdmin } from './hooks';
+import { checkIsAdmin } from './actions';
+import { AdminType } from './types';
 
 const DefaultLoading = () => {
     return (
@@ -25,14 +21,15 @@ const DefaultLoading = () => {
 };
 
 const AuthSetter: FC<PropsWithChildren> = ({ children }) => {
-    const auth = useAuth();
-    const setAuth = useSetAuth();
+    const admin = useAdmin();
+    const setAdmin = useSetAdmin();
     useEffect(() => {
         (async () => {
-            if (auth === false) {
+            if (admin === false) {
                 try {
-                    const auth = await authApi.getAuth();
-                    setAuth(auth);
+                    // const auth = await authApi.getAuth();
+                    const admin = await checkIsAdmin();
+                    setAdmin(admin);
                 } catch (error) {
                     toast.error('网络连接错误', {
                         description: `${(error as Error).message}, 请尝试刷新页面`,
@@ -40,7 +37,7 @@ const AuthSetter: FC<PropsWithChildren> = ({ children }) => {
                 }
             }
         })();
-    }, [auth]);
+    }, [admin]);
     return <>{children}</>;
 };
 
@@ -49,9 +46,9 @@ const AuthSetter: FC<PropsWithChildren> = ({ children }) => {
  * @param param0
  */
 export const Auth: FC<PropsWithChildren> = ({ children }) => {
-    const [auth, changeAuth] = useState<AuthType>(false);
-    const setAuth = useCallback((value: AuthType) => changeAuth(value), []);
-    const value = useMemo(() => ({ auth, setAuth }), [auth]);
+    const [admin, changeAdmin] = useState<AdminType>(false);
+    const setAdmin = useCallback((value: AdminType) => changeAdmin(value), []);
+    const value = useMemo(() => ({ admin, setAdmin }), [admin]);
 
     return (
         <AuthContext value={value}>
@@ -66,9 +63,10 @@ export const Auth: FC<PropsWithChildren> = ({ children }) => {
  */
 export const AuthChecker: FC<{
     loading?: JSX.Element;
-    render: <P extends Record<string, any> & { auth: User | null }>(props: P) => JSX.Element;
+    render: <P extends Record<string, any> & { admin: boolean }>(props: P) => JSX.Element;
 }> = (props) => {
     const { loading = <DefaultLoading />, render } = props;
-    const auth = useAuth();
-    return auth === false ? loading : render({ auth });
+    const admin = useAdmin();
+    console.log('AuthChecker', admin);
+    return !admin ? loading : render({ admin });
 };

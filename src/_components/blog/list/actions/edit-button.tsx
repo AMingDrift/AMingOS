@@ -4,11 +4,10 @@ import type { FC } from 'react';
 
 import DocumentEdit24Regular from '@ricons/fluent/DocumentEdit24Regular';
 import { UserPen } from 'lucide-react';
-import Link from 'next/link';
 import { Suspense } from 'react';
+import Link from 'next/link';
 
 import type { PostItem } from '@/server/post/type';
-import type { User } from '@/server/user/type';
 
 import {
     Tooltip,
@@ -23,19 +22,15 @@ import { AuthChecker } from '@/_components/auth';
 
 import { Button as CNButton } from '../../../shadcn/ui/button';
 
-const Button: FC<{ id: string; iconBtn?: boolean; auth: User | null }> = ({
-    id,
-    iconBtn,
-    auth,
-}) => {
+const Button: FC<{ id: string; iconBtn?: boolean; admin: boolean }> = ({ id, iconBtn, admin }) => {
     const urlQuery = useUrlQuery();
     return (
-        auth && (
+        admin && (
             <CNButton
                 asChild
                 className={cn('text-xs', {
                     'mr-3': !iconBtn,
-                    'btn-icon-transparent ': iconBtn,
+                    'btn-icon-transparent': iconBtn,
                 })}
                 variant="secondary"
                 size={iconBtn ? 'icon' : 'sm'}

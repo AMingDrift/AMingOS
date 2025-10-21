@@ -3,6 +3,7 @@ import type { z } from 'zod';
 import type { authRoutes } from './routes/auth';
 import type {
     authResponseSchema,
+    githubUserSchema,
     loginRequestSchema,
     sessionSchema,
     userDetailRequestParamsSchema,
@@ -11,6 +12,8 @@ import type {
 
 // 用户类型
 export type User = z.infer<typeof userSchema>;
+
+export type GithubUser = z.infer<typeof githubUserSchema>;
 
 // 会话类型
 export type Session = z.infer<typeof sessionSchema>;

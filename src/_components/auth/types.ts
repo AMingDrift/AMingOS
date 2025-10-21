@@ -1,6 +1,5 @@
-import type { User } from '@/server/user/type';
-export type AuthType = User | null | false;
+export type AdminType = boolean;
 export interface AuthContextType {
-    auth: AuthType;
-    setAuth: (value: AuthType) => void;
+    admin: boolean;
+    setAdmin: (value: boolean) => void;
 }
