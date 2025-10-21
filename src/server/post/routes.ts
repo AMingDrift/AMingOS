@@ -11,6 +11,7 @@ import {
     createSuccessResponse,
     createValidatorErrorResponse,
 } from '../common/response';
+import { AuthProtectedMiddleware } from '../user/middlwares';
 import {
     getPostItemRequestSchema,
     postDetailByIdRequestParamsSchema,
@@ -180,6 +181,7 @@ export const postRoutes = app
             },
         }),
         zValidator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
+        AuthProtectedMiddleware,
         async (c) => {
             try {
                 const schema = getPostItemRequestSchema(await isSlugUnique());
@@ -210,6 +212,7 @@ export const postRoutes = app
         }),
         zValidator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
         zValidator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
+        AuthProtectedMiddleware,
         async (c) => {
             try {
                 const params = c.req.valid('param');
@@ -240,6 +243,7 @@ export const postRoutes = app
             },
         }),
         zValidator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
+        AuthProtectedMiddleware,
         async (c) => {
             try {
                 const { id } = c.req.valid('param');
