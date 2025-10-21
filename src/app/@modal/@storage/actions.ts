@@ -6,7 +6,7 @@ import { revalidatePath } from 'next/cache';
 
 import { storageApi } from '@/api/storage';
 import { appConfig } from '@/config/app';
-import { storagePath } from '@/server/storage/routes';
+import { storagePath } from '@/server/storage/constants';
 
 export const listStorage = async (options?: ListCommandOptions) => {
     'use cache';

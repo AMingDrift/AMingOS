@@ -1,8 +1,7 @@
-import type { CategoryApiType } from '@/server/category/routes';
-import type { categoryListRequestParams } from '@/server/category/type';
+import type { CategoryApiType, categoryListRequestParams } from '@/server/category/type';
 
 import { buildClient, fetchApi } from '@/libs/hono';
-import { categoryPath } from '@/server/category/routes';
+import { categoryPath } from '@/server/category/constants';
 
 export const categoryClient = buildClient<CategoryApiType>(categoryPath);
 

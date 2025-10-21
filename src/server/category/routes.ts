@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi';
-import { validator as zValidator } from 'hono-openapi/zod';
+import { describeRoute, validator as zValidator } from 'hono-openapi';
 
 import { createHonoApp } from '../common/app';
 import { createErrorResult, defaultValidatorErrorHandler } from '../common/error';
@@ -19,10 +18,6 @@ import { queryCategoryBreadcrumb, queryCategoryList, queryCategoryTree } from '.
 const app = createHonoApp();
 
 export const categoryTags = ['分类操作'];
-
-export const categoryPath = '/categories';
-
-export type CategoryApiType = typeof categoryRoutes;
 
 export const categoryRoutes = app
     .get(

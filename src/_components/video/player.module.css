@@ -7,8 +7,8 @@
         @apply rounded-md!;
     }
 
-    & > :global(.art-video-player),
+    & > [class~='art-video-player'],
     & video {
-        @apply bg-transparent! object-contain; /* 添加object-contain确保保持宽高比 */
+        @apply bg-transparent!;
     }
 }

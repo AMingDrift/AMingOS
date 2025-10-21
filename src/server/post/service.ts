@@ -12,6 +12,7 @@ import { getRandomInt } from '@/libs/random';
 import { deepMerge } from '@/libs/utils';
 
 import type { TagItem } from '../tag/type';
+import type { PostPaginate } from './type';
 
 type PostCreateInput = Omit<Prisma.PostCreateInput, 'thumb' | 'tags' | 'category'> & {
     tags?: TagItem[];
@@ -95,7 +96,7 @@ export const queryPostPaginate = async (options: PostPaginateOptions = {}) => {
                 : [],
         };
     }
-    return paginateTransform(data);
+    return paginateTransform(data) as any as PostPaginate;
 };
 
 /**

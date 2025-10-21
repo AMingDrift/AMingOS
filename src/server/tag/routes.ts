@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi';
-import { validator } from 'hono-openapi/zod';
+import { describeRoute, validator as zValidator } from 'hono-openapi';
 import { isNil } from 'lodash';
 
 import { createHonoApp } from '../common/app';
@@ -35,7 +34,7 @@ export const tagRoutes = app
                 ...createServerErrorResponse('查询标签数据数据失败'),
             },
         }),
-        validator('param', tagItemRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('param', tagItemRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { item } = c.req.valid('param');

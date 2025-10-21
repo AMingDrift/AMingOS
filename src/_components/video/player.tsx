@@ -9,7 +9,7 @@ import React, { useEffect, useRef } from 'react';
 
 import $styles from './player.module.css';
 
-export const Player: FC<{
+const Player: FC<{
     option: Omit<Option, 'container'>;
     getInstance?: any;
     className?: string;
@@ -66,3 +66,4 @@ export const Player: FC<{
         />
     );
 };
+export default Player;

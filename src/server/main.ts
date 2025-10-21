@@ -1,15 +1,17 @@
 /* eslint-disable unused-imports/no-unused-vars */
 import { swaggerUI } from '@hono/swagger-ui';
 import { Scalar } from '@scalar/hono-api-reference';
-import { openAPISpecs } from 'hono-openapi';
+import { openAPIRouteHandler } from 'hono-openapi';
 import { prettyJSON } from 'hono/pretty-json';
 
-import { categoryPath, categoryRoutes } from './category/routes';
+import { categoryPath } from './category/constants';
+import { categoryRoutes } from './category/routes';
 import { createHonoApp } from './common/app';
-import { postPath, postRoutes } from './post/routes';
-import { storagePath, storageRoutes } from './storage/routes';
+import { postPath } from './post/constants';
+import { postRoutes } from './post/routes';
+import { storagePath } from './storage/constants';
+import { storageRoutes } from './storage/routes';
 import { tagPath, tagRoutes } from './tag/routes';
-
 const app = createHonoApp().basePath('/api');
 app.use(prettyJSON());
 app.get('/', (c) => c.text('AmingOS Blog API'));
@@ -21,11 +23,11 @@ const routes = app
     .route(storagePath, storageRoutes);
 app.get(
     '/data',
-    openAPISpecs(app, {
+    openAPIRouteHandler(app, {
         documentation: {
             info: {
                 version: 'v1',
-                title: 'AMing OS',
+                title: 'AMing OS API',
                 description: 'AMing OS的后端API',
             },
         },

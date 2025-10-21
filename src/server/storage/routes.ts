@@ -1,8 +1,7 @@
 import type { HandleUploadBody } from '@vercel/blob/client';
 
 import { handleUpload } from '@vercel/blob/client';
-import { describeRoute } from 'hono-openapi';
-import { validator } from 'hono-openapi/zod';
+import { describeRoute, validator as zValidator } from 'hono-openapi';
 import z from 'zod';
 
 import { createHonoApp } from '../common/app';
@@ -19,8 +18,6 @@ import {
 } from './schema';
 import { deleteStorageBlobByUrl, queryStorageBlobByType } from './service';
 export const storageTags = ['对象存储操作'];
-export const storagePath = '/storage';
-export type StorageApiType = typeof storageRoutes;
 
 const app = createHonoApp();
 export const storageRoutes = app
@@ -36,7 +33,7 @@ export const storageRoutes = app
                 ...createServerErrorResponse('查询对象存储数据失败'),
             },
         }),
-        validator('query', docRequestQuerySchema, defaultValidatorErrorHandler),
+        zValidator('query', docRequestQuerySchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const query = c.req.valid('query');
@@ -126,7 +123,7 @@ export const storageRoutes = app
                 ...createServerErrorResponse('删除对象存储数据失败'),
             },
         }),
-        validator('query', docDeleteByUrlRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('query', docDeleteByUrlRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { url } = c.req.valid('query');

@@ -1,14 +1,14 @@
 import { isNil } from 'lodash';
 
-import type { PostApiType } from '@/server/post/routes';
 import type {
+    PostApiType,
     PostCreateOrUpdateData,
     PostPaginateNumberRequestQuery,
     PostPaginateRequestQuery,
 } from '@/server/post/type';
 
 import { buildClient, fetchApi } from '@/libs/hono';
-import { postPath } from '@/server/post/routes';
+import { postPath } from '@/server/post/constants';
 
 export const postClient = buildClient<PostApiType>(postPath);
 

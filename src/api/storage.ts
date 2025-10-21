@@ -1,9 +1,9 @@
 import type { ListCommandOptions } from '@vercel/blob';
 
-import type { StorageApiType } from '@/server/storage/routes';
+import type { StorageApiType } from '@/server/storage/type';
 
 import { buildClient, fetchApi } from '@/libs/hono';
-import { storagePath } from '@/server/storage/routes';
+import { storagePath } from '@/server/storage/constants';
 
 export const storageClient = buildClient<StorageApiType>(storagePath);
 

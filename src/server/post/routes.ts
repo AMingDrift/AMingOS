@@ -1,5 +1,4 @@
-import { describeRoute } from 'hono-openapi';
-import { validator } from 'hono-openapi/zod';
+import { describeRoute, validator as zValidator } from 'hono-openapi';
 import { isNil } from 'lodash';
 import z from 'zod';
 
@@ -35,8 +34,6 @@ import {
     updatePostItem,
 } from './service';
 export const postTags = ['文章操作'];
-export const postPath = '/posts';
-export type PostApiType = typeof postRoutes;
 
 const app = createHonoApp();
 export const postRoutes = app
@@ -52,7 +49,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('查询文章分页数据失败'),
             },
         }),
-        validator('query', postPaginateRequestQuerySchema, defaultValidatorErrorHandler),
+        zValidator('query', postPaginateRequestQuerySchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const query = c.req.valid('query');
@@ -81,7 +78,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('查询页面总数失败'),
             },
         }),
-        validator('query', postPageNumbersRequestQuerySchema, defaultValidatorErrorHandler),
+        zValidator('query', postPageNumbersRequestQuerySchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const query = c.req.valid('query');
@@ -111,7 +108,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('查询文章失败'),
             },
         }),
-        validator('param', postDetailRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('param', postDetailRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { item } = c.req.valid('param');
@@ -135,7 +132,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('查询文章分页数据失败'),
             },
         }),
-        validator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { id } = c.req.valid('param');
@@ -159,7 +156,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('查询文章分页数据失败'),
             },
         }),
-        validator('param', postDetailBySlugRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('param', postDetailBySlugRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { slug } = c.req.valid('param');
@@ -182,7 +179,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('创建文章失败'),
             },
         }),
-        validator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
+        zValidator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const schema = getPostItemRequestSchema(await isSlugUnique());
@@ -211,8 +208,8 @@ export const postRoutes = app
                 ...createServerErrorResponse('更新文章失败'),
             },
         }),
-        validator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
-        validator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
+        zValidator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('json', getPostItemRequestSchema(), defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const params = c.req.valid('param');
@@ -242,7 +239,7 @@ export const postRoutes = app
                 ...createServerErrorResponse('删除文章失败'),
             },
         }),
-        validator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
+        zValidator('param', postDetailByIdRequestParamsSchema, defaultValidatorErrorHandler),
         async (c) => {
             try {
                 const { id } = c.req.valid('param');

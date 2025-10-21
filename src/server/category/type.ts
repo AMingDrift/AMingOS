@@ -1,5 +1,6 @@
 import type { z } from 'zod';
 
+import type { categoryRoutes } from './routes';
 import type {
     categoryBreadcrumbRequestParamsSchema,
     categoryListRequestParamsSchema,
@@ -29,3 +30,5 @@ export type CategoryList = z.infer<typeof categoryListSchema>;
  * 分类树查询响应数据类型
  */
 export type CategoryTree = z.infer<typeof categoryTreeSchema>;
+
+export type CategoryApiType = typeof categoryRoutes;
