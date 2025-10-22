@@ -9,7 +9,7 @@ import { toast } from 'sonner';
 import { Button } from '@/_components/shadcn/ui/button';
 import { Input } from '@/_components/shadcn/ui/input';
 import { appConfig } from '@/config/app';
-import { storagePath } from '@/server/storage/routes';
+import { storagePath } from '@/server/storage/constants';
 
 export default function AvatarUploadPage() {
     const inputFileRef = useRef<HTMLInputElement>(null);

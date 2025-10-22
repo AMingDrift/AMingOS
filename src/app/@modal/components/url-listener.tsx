@@ -43,7 +43,6 @@ const UrlListener = () => {
 
     useEffect(() => {
         // console.log('windowStack', windowStack);
-        console.log(pathname);
         if (pathname === '/auth/login') return;
         const frontApp = windowStack.at(-1);
         if (frontApp) {

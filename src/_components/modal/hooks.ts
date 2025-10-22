@@ -1,6 +1,8 @@
 'use client';
 
-import { nextTick } from 'node:process';
+// `node:process` is a Node-only import and breaks client-side bundling.
+// Provide a small browser-safe `nextTick` helper instead.
+const nextTick = (fn: () => void) => queueMicrotask(fn);
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';

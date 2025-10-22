@@ -5,6 +5,7 @@ import type { DateToString } from '@/libs/types';
 import type { PostItem } from '@/server/post/type';
 
 import { postApi } from '@/api/post';
+import { getCookieHeader } from '@/libs/serverFetch';
 
 import type { PostFormData } from './types';
 
@@ -14,11 +15,14 @@ export const updateOrCreate = async (
 ) => {
     let post: DateToString<PostItem> | null;
     if (params.type === 'update') {
-        const res = await postApi.update(params.id, data);
+        // forward client cookies from Next request context so backend can validate session
+        const cookieHeader = await getCookieHeader();
+        const res = await postApi.update(params.id, data, { headers: cookieHeader });
         if (!res.ok) throw new Error((await res.json()).message);
         post = await res.json();
     } else {
-        const res = await postApi.create(data);
+        const cookieHeader = await getCookieHeader();
+        const res = await postApi.create(data, { headers: cookieHeader });
         if (!res.ok) throw new Error((await res.json()).message);
         post = await res.json();
     }
@@ -28,7 +32,8 @@ export const updateOrCreate = async (
 };
 
 export const deletePost = async (id: string) => {
-    const res = await postApi.delete(id);
+    const cookieHeader = await getCookieHeader();
+    const res = await postApi.delete(id, { headers: cookieHeader });
     if (!res.ok) throw new Error((await res.json()).message);
     revalidatePath('/', 'layout');
     return await res.json();

@@ -17,6 +17,7 @@ import {
     listBlobResultSchema,
 } from './schema';
 import { deleteStorageBlobByUrl, queryStorageBlobByType } from './service';
+import { AuthProtectedMiddleware } from '../user/middlwares';
 export const storageTags = ['对象存储操作'];
 
 const app = createHonoApp();
@@ -64,6 +65,7 @@ export const storageRoutes = app
             },
         }),
         // TODO: validate schema
+        AuthProtectedMiddleware,
         async (c) => {
             try {
                 const request = c.req.raw;
@@ -124,6 +126,7 @@ export const storageRoutes = app
             },
         }),
         zValidator('query', docDeleteByUrlRequestParamsSchema, defaultValidatorErrorHandler),
+        AuthProtectedMiddleware,
         async (c) => {
             try {
                 const { url } = c.req.valid('query');

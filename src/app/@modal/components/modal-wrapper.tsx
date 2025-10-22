@@ -13,6 +13,7 @@ import { useModalStore } from '@/_components/modal/hooks';
 import { SidebarProvider } from '@/_components/shadcn/ui/sidebar';
 
 import { MenuItems } from '../constant';
+import { useAdmin } from '@/_components/auth/hooks';
 
 const ModalWrapper = ({
     children,
@@ -31,7 +32,16 @@ const ModalWrapper = ({
     return (
         <Modal app={list[routerName]} name={routerName}>
             <SidebarProvider defaultOpen={true}>
-                <AppSidebar items={MenuItems[routerName]} calcRouteHighlight={calcRouteHighlight} />
+                <AppSidebar
+                    items={(MenuItems[routerName] || []).filter((it) => {
+                        // filter out admin-only items for non-admins
+                        if ((it as any).adminOnly) {
+                            return useAdmin();
+                        }
+                        return true;
+                    })}
+                    calcRouteHighlight={calcRouteHighlight}
+                />
                 <main className="flex h-full w-full flex-col overflow-x-auto">{children}</main>
             </SidebarProvider>
         </Modal>

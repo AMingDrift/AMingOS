@@ -41,15 +41,21 @@ export const postApi = {
                 query: { ...query, limit: (query.limit ?? 20).toString() },
             }),
         ),
-    create: async (data: PostCreateOrUpdateData) =>
-        fetchApi(postClient, async (c) => c.index.$post({ json: data })),
-    update: async (id: string, data: PostCreateOrUpdateData) =>
+    // allow optional headers to be passed (e.g. cookie) so server-side actions can forward client cookies
+    create: async (data: PostCreateOrUpdateData, extra?: { headers?: Record<string, string> }) =>
         fetchApi(postClient, async (c) =>
-            c[':id'].$patch({
-                param: { id },
-                json: data,
-            }),
+            c.index.$post({ json: data }, { headers: extra?.headers }),
         ),
-    delete: async (id: string) =>
-        fetchApi(postClient, async (c) => c[':id'].$delete({ param: { id } })),
+    update: async (
+        id: string,
+        data: PostCreateOrUpdateData,
+        extra?: { headers?: Record<string, string> },
+    ) =>
+        fetchApi(postClient, async (c) =>
+            c[':id'].$patch({ param: { id }, json: data }, { headers: extra?.headers }),
+        ),
+    delete: async (id: string, extra?: { headers?: Record<string, string> }) =>
+        fetchApi(postClient, async (c) =>
+            c[':id'].$delete({ param: { id } }, { headers: extra?.headers }),
+        ),
 };

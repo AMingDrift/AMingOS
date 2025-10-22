@@ -16,6 +16,8 @@ export const storageApi = {
                 ),
             }),
         ),
-    delete: async (url: string) =>
-        fetchApi(storageClient, async (c) => c.index.$delete({ query: { url } })),
+    delete: async (url: string, extra?: { headers?: Record<string, string> }) =>
+        fetchApi(storageClient, async (c) =>
+            c.index.$delete({ query: { url } }, { headers: extra?.headers }),
+        ),
 };

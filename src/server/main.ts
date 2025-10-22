@@ -15,23 +15,19 @@ import { storageRoutes } from './storage/routes';
 import { tagPath, tagRoutes } from './tag/routes';
 import { authPath } from './user/constants';
 import { authRoutes } from './user/routes/auth';
-import { authClient } from '@/api/auth';
 import { auth } from '@/libs/auth';
 const app = createHonoApp().basePath('/api');
 app.use(prettyJSON());
 app.get('/', (c) => c.text('AmingOS Blog API'));
 app.notFound((c) => c.json({ message: 'Not Found', ok: false }));
 
-app.on(['POST', 'GET'], '/auth/*', (c) => {
-    return auth.handler(c.req.raw);
-});
-
 const routes = app
     .use(
         '*',
         cors({
-            origin: '*',
+            origin: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001',
             allowHeaders: ['Content-Type', 'Authorization'],
+            allowMethods: ['POST', 'GET', 'OPTIONS'],
             exposeHeaders: ['Content-Length'],
             maxAge: 600,
             credentials: true,
@@ -42,6 +38,10 @@ const routes = app
     .route(postPath, postRoutes)
     .route(storagePath, storageRoutes)
     .route(authPath, authRoutes);
+
+app.on(['POST', 'GET'], '/auth/*', (c) => {
+    return auth.handler(c.req.raw);
+});
 
 app.get(
     '/data',

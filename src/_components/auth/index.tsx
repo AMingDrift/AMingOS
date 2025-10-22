@@ -67,6 +67,14 @@ export const AuthChecker: FC<{
 }> = (props) => {
     const { loading = <DefaultLoading />, render } = props;
     const admin = useAdmin();
-    console.log('AuthChecker', admin);
     return !admin ? loading : render({ admin });
+};
+
+/**
+ * Admin 认证组件保护器
+ * @param props
+ */
+export const AdminChecker: FC<PropsWithChildren> = ({ children }) => {
+    const admin = useAdmin();
+    return admin ? <>{children}</> : null;
 };

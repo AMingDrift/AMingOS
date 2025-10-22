@@ -29,6 +29,7 @@ import {
 import { cn } from '@/_components/shadcn/utils';
 
 import { deletePost } from '../../form/actions';
+import { AdminChecker } from '@/_components/auth';
 export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, iconBtn }) => {
     const router = useRouter();
     const [open, setOpen] = useState(false);
@@ -74,52 +75,54 @@ export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, ic
         changeOpen(true);
     }, []);
     return (
-        <AlertDialog open={open} onOpenChange={changeOpen}>
-            <AlertDialogTrigger asChild>
-                <TooltipProvider>
-                    <Tooltip>
-                        <TooltipTrigger asChild className="size-9!">
-                            <Button
-                                className={cn('text-xs', {
-                                    'mr-3': !iconBtn,
-                                    'btn-icon-transparent': iconBtn,
-                                })}
-                                variant="secondary"
-                                size={iconBtn ? 'icon' : 'sm'}
-                                onClick={openDialog}
-                            >
-                                {iconBtn ? (
-                                    <span className="xicon text-2xl text-red-400">
+        <AdminChecker>
+            <AlertDialog open={open} onOpenChange={changeOpen}>
+                <AlertDialogTrigger asChild>
+                    <TooltipProvider>
+                        <Tooltip>
+                            <TooltipTrigger asChild className="size-9!">
+                                <Button
+                                    className={cn('text-xs', {
+                                        'mr-3': !iconBtn,
+                                        'btn-icon-transparent': iconBtn,
+                                    })}
+                                    variant="secondary"
+                                    size={iconBtn ? 'icon' : 'sm'}
+                                    onClick={openDialog}
+                                >
+                                    {iconBtn ? (
+                                        <span className="xicon text-2xl text-red-400">
+                                            <Trash2 />
+                                        </span>
+                                    ) : (
                                         <Trash2 />
-                                    </span>
-                                ) : (
-                                    <Trash2 />
-                                )}
-                                {!iconBtn && ' 删除'}
-                            </Button>
-                        </TooltipTrigger>
-                        <TooltipContent>
-                            <p>删除文章</p>
-                        </TooltipContent>
-                    </Tooltip>
-                </TooltipProvider>
-            </AlertDialogTrigger>
-            <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
-                <AlertDialogHeader>
-                    <AlertDialogTitle>是否确认删除该文章？</AlertDialogTitle>
-                    <AlertDialogDescription>
-                        当前不支持软删除，删除文章后将无法恢复
-                    </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                    <AlertDialogCancel disabled={pedding} onClick={close}>
-                        取消
-                    </AlertDialogCancel>
-                    <AlertDialogAction onClick={deleteItem} disabled={pedding}>
-                        {pedding ? '删除中' : '确认'}
-                    </AlertDialogAction>
-                </AlertDialogFooter>
-            </AlertDialogContent>
-        </AlertDialog>
+                                    )}
+                                    {!iconBtn && ' 删除'}
+                                </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>
+                                <p>删除文章</p>
+                            </TooltipContent>
+                        </Tooltip>
+                    </TooltipProvider>
+                </AlertDialogTrigger>
+                <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>是否确认删除该文章？</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            当前不支持软删除，删除文章后将无法恢复
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel disabled={pedding} onClick={close}>
+                            取消
+                        </AlertDialogCancel>
+                        <AlertDialogAction onClick={deleteItem} disabled={pedding}>
+                            {pedding ? '删除中' : '确认'}
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
+        </AdminChecker>
     );
 };

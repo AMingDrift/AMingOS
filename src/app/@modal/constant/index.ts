@@ -18,6 +18,7 @@ interface IMenuItem {
     title: string;
     url: string;
     icon: LucideIcon;
+    adminOnly?: boolean;
 }
 
 export const DefaultMenuUrl: Record<AppType, string> = {
@@ -37,6 +38,7 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             title: '发布',
             url: '/blog/create',
             icon: SquarePlus,
+            adminOnly: true,
         },
     ],
     storage: [

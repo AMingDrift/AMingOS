@@ -1,6 +1,4 @@
 import { createAuthClient } from 'better-auth/react';
-import { isNil } from 'lodash';
-
 import type { AuthApiType } from '@/server/user/type';
 import { buildClient, fetchApi } from '@/libs/hono';
 import { appConfig } from '@/config/app';

@@ -12,6 +12,12 @@ export const getCurrentSession = async (request: Request) => {
     });
 };
 
+export const findAccoundByUserId = async (userId: string) => {
+    return await db.account.findFirst({
+        where: { userId },
+    });
+};
+
 /**
  * 用户登录 - 支持用户名或邮箱
  */

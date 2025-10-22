@@ -5,6 +5,7 @@ import { isNil } from 'lodash';
 import { auth } from '@/libs/auth';
 
 import { createErrorResult } from '../common/error';
+import { findAccoundByUserId } from './service';
 
 export const AuthProtectedMiddleware = createMiddleware(async (c, next) => {
     let session: Awaited<ReturnType<typeof auth.api.getSession>> | null = null;
@@ -17,11 +18,18 @@ export const AuthProtectedMiddleware = createMiddleware(async (c, next) => {
             res: new Response(JSON.stringify(createErrorResult('服务器错误', error))),
         });
     }
-    if (isNil(session?.user)) {
+    let isAdmin = false;
+    if (session?.user.id) {
+        const account = await findAccoundByUserId(session.user.id);
+        if (account) {
+            isAdmin = account.accountId === process.env.ADMIN_GITHUB_ID;
+        }
+    }
+    if (isNil(session) || !isAdmin) {
         c.set('user', null);
         c.set('session', null);
         throw new HTTPException(401, {
-            res: new Response(JSON.stringify(createErrorResult('用户未认证'))),
+            res: new Response(JSON.stringify(createErrorResult('非管理员用户，拒绝操作'))),
         });
     }
 

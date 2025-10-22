@@ -25,6 +25,7 @@ import { convertFileSize } from '@/libs/utils';
 import type { listStorage } from '../../actions';
 
 import { deleteStorage } from '../../actions';
+import { AdminChecker } from '@/_components/auth';
 
 const storageTypeInfo = {
     video: {
@@ -93,33 +94,34 @@ const ItemActionCard = ({
                     Size: {convertFileSize(blobInfo.size)}
                 </div>
                 <div className="flex gap-4">
-                    <AlertDialog open={open} onOpenChange={changeOpen}>
-                        <AlertDialogTrigger asChild>
-                            <Trash2
-                                className="h-5 w-5! cursor-pointer text-red-400 transition-colors hover:text-red-500"
-                                onClick={openDialog}
-                            />
-                        </AlertDialogTrigger>
-                        <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                    是否确认删除该{storageTypeInfo[storageType].label}？
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    当前不支持软删除，删除后将无法恢复
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel disabled={pedding} onClick={close}>
-                                    取消
-                                </AlertDialogCancel>
-                                <AlertDialogAction onClick={deleteItem} disabled={pedding}>
-                                    {pedding ? '删除中' : '确认'}
-                                </AlertDialogAction>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>
-
+                    <AdminChecker>
+                        <AlertDialog open={open} onOpenChange={changeOpen}>
+                            <AlertDialogTrigger asChild>
+                                <Trash2
+                                    className="h-5 w-5! cursor-pointer text-red-400 transition-colors hover:text-red-500"
+                                    onClick={openDialog}
+                                />
+                            </AlertDialogTrigger>
+                            <AlertDialogContent onEscapeKeyDown={(event) => event.preventDefault()}>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        是否确认删除该{storageTypeInfo[storageType].label}？
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        当前不支持软删除，删除后将无法恢复
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel disabled={pedding} onClick={close}>
+                                        取消
+                                    </AlertDialogCancel>
+                                    <AlertDialogAction onClick={deleteItem} disabled={pedding}>
+                                        {pedding ? '删除中' : '确认'}
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+                    </AdminChecker>
                     <Link
                         href={blobInfo.downloadUrl}
                         download={blobInfo.pathname}
