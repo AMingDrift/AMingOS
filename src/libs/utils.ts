@@ -30,7 +30,7 @@ export const deepMerge = <T1, T2>(
  */
 export function generateLowerString(from: string): string {
     // 先移除特殊字符：逗号、引号、冒号等
-    const cleanString = from.replace(/[\s,，、()【】：（）"':;!?[\]{}]+/g, ' ').trim();
+    const cleanString = from.replace(/[\s,，、()【】：「」（）"':;!?[\]{}]+/g, ' ').trim();
 
     // 使用pinyin-pro重构拼音转换逻辑
     const slug = pinyin(cleanString, {

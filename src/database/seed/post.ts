@@ -129,8 +129,17 @@ const data: Item[] = [
             '本文MCP协议，手把手教你构建一个自己的MCP Server，在AI编辑器实现通过自然语言指令调用自己写的工具脚本。',
         bodyPath: path.join(__dirname, '../fixture/wmc/3.md'),
         categoryName: 'MCP工具',
-        tagNames: ['typescript', 'mcp', 'nodejs'],
+        tagNames: ['typescript', 'mcp', 'ai', 'nodejs'],
         thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/mcp-thumb.jpg',
+    },
+    {
+        title: '🧩 AI协助 一周打造「七巧板益智小游戏」：从零高效开发教学工具 💡',
+        summary:
+            '一个“教学痛点”引发的开发冲动。本文讲述如何利用Copilot在一周内快速开发一个面向小学数学教学的七巧板益智小游戏，涵盖需求分析、技术选型、核心算法实现及部署等全过程。',
+        bodyPath: path.join(__dirname, '../fixture/wmc/4.md'),
+        categoryName: '网页开发',
+        tagNames: ['typescript', 'react', 'next.js', 'ai', 'copilot', 'canvas', 'Konva'],
+        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/tangram%2Fthumb.png',
     },
 ];
 
