@@ -1,24 +1,21 @@
 import type { NextConfig } from 'next';
 
-// const externals: string[] = ['next-mdx-remote-client'];
-// if (process.env.TURBOPACK) {
-//     externals.push('rehype-prism-plus');
-// }
-
 const nextConfig: NextConfig = {
     reactStrictMode: true, // 开启react严格模式
-    // serverExternalPackages: externals,
-    // transpilePackages: ['@uiw/react-md-editor'],
     images: {
         dangerouslyAllowSVG: true,
         remotePatterns: [
             {
                 protocol: 'https',
-                hostname: '*',
+                hostname: 'jlwjxicihdtbbcmg.public.blob.vercel-storage.com',
             },
             {
-                protocol: 'http',
-                hostname: '*',
+                protocol: 'https',
+                hostname: 'cdn.jsdelivr.net',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cn-nb1.rains3.com',
             },
         ],
     },
