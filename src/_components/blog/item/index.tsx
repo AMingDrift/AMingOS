@@ -26,67 +26,64 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
     }
     const post = await result.json();
     return (
-        <div className="page-item">
-            <div className={cn('page-container', $styles.item)}>
-                <div className={$styles.content}>
-                    <MdxRender
-                        source={post.body}
-                        header={
-                            <>
-                                <header className={$styles.title}>
-                                    <h1 className="text-lg lg:text-3xl">{post.title}</h1>
-                                    <div className="mt-[0.125rem] ml-2 flex">
-                                        <PostEditButton item={post} iconBtn />
-                                        <PostDelete item={post} iconBtn />
+        <div className={$styles.content}>
+            <MdxRender
+                source={post.body}
+                header={
+                    <>
+                        <header className={$styles.title}>
+                            <h1 className="text-lg lg:text-3xl">{post.title}</h1>
+                            <div className="mt-[0.125rem] ml-2 flex">
+                                <PostEditButton item={post} iconBtn />
+                                <PostDelete item={post} iconBtn />
+                            </div>
+                        </header>
+                        <div className={$styles.meta}>
+                            <div className={$styles.info}>
+                                <span>
+                                    <Calendar className="mr-2" />
+                                    <time className="mt-1 ellips">
+                                        {formatTime(
+                                            !isNil(post.updatedAt)
+                                                ? post.updatedAt
+                                                : post.createdAt,
+                                        )}
+                                    </time>
+                                </span>
+                            </div>
+                            {post.tags.length > 0 && (
+                                <div className={$styles.tags}>
+                                    <span className="mr-2">
+                                        <Tag />
+                                    </span>
+                                    <div className="flex flex-wrap gap-2">
+                                        {post.tags.map((tag) => (
+                                            <Link key={tag.id} href={`/blog?tag=${tag.text}`}>
+                                                <TagLink tag={tag} key={tag.id}></TagLink>
+                                            </Link>
+                                        ))}
                                     </div>
-                                </header>
-                                <div className={$styles.meta}>
-                                    <div className={$styles.info}>
-                                        <span>
-                                            <Calendar className="mr-2" />
-                                            <time className="mt-1 ellips">
-                                                {formatTime(
-                                                    !isNil(post.updatedAt)
-                                                        ? post.updatedAt
-                                                        : post.createdAt,
-                                                )}
-                                            </time>
-                                        </span>
-                                    </div>
-                                    {post.tags.length > 0 && (
-                                        <div className={$styles.tags}>
-                                            <span className="mr-2">
-                                                <Tag />
-                                            </span>
-                                            <div className="flex flex-wrap gap-2">
-                                                {post.tags.map((tag) => (
-                                                    <Link
-                                                        key={tag.id}
-                                                        href={`/blog?tag=${tag.text}`}
-                                                    >
-                                                        <TagLink tag={tag} key={tag.id}></TagLink>
-                                                    </Link>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
                                 </div>
-                            </>
-                        }
-                    />
+                            )}
+                        </div>
+                    </>
+                }
+            />
 
-                    <Comments />
-                </div>
-            </div>
+            <Comments />
         </div>
     );
 };
 
 const PostItemIndex: FC<{ item: string }> = async ({ item }) => {
     return (
-        <Suspense fallback={<PostContentSkeleton />}>
-            <PostItemPageContent item={item} />
-        </Suspense>
+        <div className="page-item h-full">
+            <div className={cn('page-container', $styles.item)}>
+                <Suspense fallback={<PostContentSkeleton />}>
+                    <PostItemPageContent item={item} />
+                </Suspense>
+            </div>
+        </div>
     );
 };
 

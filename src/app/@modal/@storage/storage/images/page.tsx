@@ -5,10 +5,10 @@ import React, { Suspense } from 'react';
 import Card3D from '@/_components/3D-card';
 import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
-import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 
 import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';
+import { BlogIndexSkeleton } from '@/_components/blog/skeleton';
 
 const PictureContent = async () => {
     const getImages =
@@ -68,7 +68,7 @@ const PictureContent = async () => {
 
 const PicturePage = () => {
     return (
-        <Suspense fallback={<Skeleton className="h-[400px] w-[33%] rounded-lg" />}>
+        <Suspense fallback={<BlogIndexSkeleton />}>
             <PictureContent />
         </Suspense>
     );

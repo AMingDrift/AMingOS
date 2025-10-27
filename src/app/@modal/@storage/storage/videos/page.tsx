@@ -8,8 +8,10 @@ import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';
 import { HomeVideoCard } from './components/video';
+import { StorageVideoSkeleton } from '@/_components/blog/skeleton';
 
 const VideoContent = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000));
     const getVideos =
         process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
             ? async () => {
@@ -113,7 +115,7 @@ const VideoContent = async () => {
 };
 const VideoPage = () => {
     return (
-        <Suspense fallback={<Skeleton className="h-[400px] w-[33%] rounded-lg" />}>
+        <Suspense fallback={<StorageVideoSkeleton />}>
             <VideoContent />
         </Suspense>
     );

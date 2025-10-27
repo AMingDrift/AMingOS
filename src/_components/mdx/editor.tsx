@@ -62,16 +62,6 @@ export const MdxEditor: FC<MdxEditorProps> = (props) => {
         }
     }, [containerRef.current]);
 
-    useMount(() => {
-        const scrollAreaEle = containerRef.current?.closest(
-            '[data-slot="scroll-area-viewport"]',
-        ) as HTMLElement | null;
-        const contentEle = scrollAreaEle?.firstChild as HTMLElement | null;
-        if (contentEle) {
-            contentEle.style.height = '100%';
-        }
-    });
-
     useEffect(() => {
         if (!isNil(serialized) && isNil(editorHeight)) updateHeight();
         window.addEventListener('resize', updateHeight);

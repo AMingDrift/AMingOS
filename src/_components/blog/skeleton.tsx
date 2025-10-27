@@ -3,42 +3,37 @@
 import type { FC } from 'react';
 
 import { useRef } from 'react';
-import { useMount } from 'react-use';
 
 import { Skeleton } from '../shadcn/ui/skeleton';
+import { BlurFade } from '../magicui/blur-fade';
 
 /**
  * 文章列表页骨架屏
  */
 const BlogIndexSkeleton: FC = () => {
-    const loadingRef = useRef<HTMLDivElement>(null);
-    useMount(() => {
-        const scrollAreaEle = loadingRef.current?.closest(
-            '[data-slot="scroll-area-viewport"]',
-        ) as HTMLElement | null;
-        const contentEle = scrollAreaEle?.firstChild as HTMLElement | null;
-        if (contentEle) {
-            contentEle.style.height = '100%';
-        }
-    });
     return (
-        <div
-            ref={loadingRef}
-            className="flex h-full w-full flex-auto page-container flex-col space-x-4 lg:flex-row"
-        >
-            <div className="order-2 flex w-full flex-auto flex-col space-y-5 lg:order-1">
-                <div className="w-full flex-none">
-                    <Skeleton className="flex h-9 w-full items-center justify-between rounded-md bg-gray-950/30 px-3 shadow-sm backdrop-blur-sm" />
-                </div>
-                <div className="flex w-full flex-auto flex-col space-y-4">
-                    <Skeleton className="w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
-                    <Skeleton className="w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
-                    <Skeleton className="w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
-                </div>
-            </div>
-            <div className="order-1 mb-6 flex w-full flex-none flex-col lg:order-2 lg:mb-0 lg:w-72">
-                <Skeleton className="h-24 w-full backdrop-blur-md lg:h-1/2" />
-            </div>
+        <div className="mx-10 mt-7 mb-6 columns-2 gap-7 lg:columns-3">
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[30vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[30vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[30vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 break-inside-avoid">
+                <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
         </div>
     );
 };
@@ -48,15 +43,6 @@ const BlogIndexSkeleton: FC = () => {
  */
 const PostItemSkeleton: FC = () => {
     const loadingRef = useRef<HTMLDivElement>(null);
-    useMount(() => {
-        const scrollAreaEle = loadingRef.current?.closest(
-            '[data-slot="scroll-area-viewport"]',
-        ) as HTMLElement | null;
-        const contentEle = scrollAreaEle?.firstChild as HTMLElement | null;
-        if (contentEle) {
-            contentEle.style.height = '100%';
-        }
-    });
     return (
         <div ref={loadingRef} className="flex h-full w-full flex-auto page-container flex-col">
             <div className="order-2 flex flex-auto flex-col space-y-5">
@@ -75,25 +61,28 @@ const PostItemSkeleton: FC = () => {
  * 文章内容骨架屏
  */
 const PostContentSkeleton: FC = () => {
-    const loadingRef = useRef<HTMLDivElement>(null);
-    useMount(() => {
-        const scrollAreaEle = loadingRef.current?.closest(
-            '[data-slot="scroll-area-viewport"]',
-        ) as HTMLElement | null;
-        const contentEle = scrollAreaEle?.firstChild as HTMLElement | null;
-        if (contentEle) {
-            contentEle.style.height = '100%';
-        }
-    });
     return (
-        <div
-            ref={loadingRef}
-            className="relative flex size-full flex-auto justify-between gap-8 space-x-2"
-        >
+        <div className="relative flex size-full flex-auto justify-between space-x-2">
             <Skeleton className="w-auto flex-auto bg-gray-950/30 backdrop-blur-sm" />
-            <Skeleton className="hidden bg-gray-950/30 backdrop-blur-sm lg:flex lg:w-56" />
+            <Skeleton className="hidden bg-gray-950/30 backdrop-blur-sm lg:flex lg:w-60" />
         </div>
     );
 };
 
-export { BlogIndexSkeleton, PostContentSkeleton, PostItemSkeleton };
+const StorageVideoSkeleton: FC = () => {
+    return (
+        <div className="mx-10 mt-7 mb-6 columns-2 gap-10">
+            <BlurFade className="mb-10 flex break-inside-avoid flex-col">
+                <Skeleton className="aspect-video w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 flex break-inside-avoid flex-col">
+                <Skeleton className="aspect-video w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+            <BlurFade className="mb-10 flex break-inside-avoid flex-col">
+                <Skeleton className="aspect-video w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
+            </BlurFade>
+        </div>
+    );
+};
+
+export { BlogIndexSkeleton, PostContentSkeleton, PostItemSkeleton, StorageVideoSkeleton };
