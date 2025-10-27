@@ -52,7 +52,7 @@ export const Chart = ({ used = 0 }: { used: number }) => {
                         startAngle={90}
                         endAngle={endAngle}
                         innerRadius={80}
-                        outerRadius={100}
+                        outerRadius={110}
                     >
                         <PolarGrid
                             gridType="circle"

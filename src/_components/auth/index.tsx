@@ -3,7 +3,6 @@
 import type { FC, JSX, PropsWithChildren } from 'react';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { toast } from 'sonner';
 
 import { Spinner } from '../loading/spinner';
 import { AuthContext } from './constants';
@@ -31,9 +30,7 @@ const AuthSetter: FC<PropsWithChildren> = ({ children }) => {
                     const admin = await checkIsAdmin();
                     setAdmin(admin);
                 } catch (error) {
-                    toast.error('网络连接错误', {
-                        description: `${(error as Error).message}, 请尝试刷新页面`,
-                    });
+                    console.error(error);
                 }
             }
         })();

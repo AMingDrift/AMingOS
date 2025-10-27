@@ -8,7 +8,6 @@ import { storageApi } from '@/api/storage';
 import { appConfig } from '@/config/app';
 import { storagePath } from '@/server/storage/constants';
 import { getCookieHeader } from '@/libs/serverFetch';
-import { headers } from 'next/headers';
 
 export const listStorage = async (options?: ListCommandOptions) => {
     'use cache';

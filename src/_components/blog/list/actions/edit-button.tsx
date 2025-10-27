@@ -4,7 +4,6 @@ import type { FC } from 'react';
 
 import DocumentEdit24Regular from '@ricons/fluent/DocumentEdit24Regular';
 import { UserPen } from 'lucide-react';
-import { Suspense } from 'react';
 import Link from 'next/link';
 
 import type { PostItem } from '@/server/post/type';
@@ -18,7 +17,7 @@ import {
 import { cn } from '@/_components/shadcn/utils';
 import { useUrlQuery } from '@/libs/url';
 
-import { AdminChecker, AuthChecker } from '@/_components/auth';
+import { AdminChecker } from '@/_components/auth';
 
 import { Button as CNButton } from '../../../shadcn/ui/button';
 

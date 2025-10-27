@@ -1,5 +1,4 @@
-import { describeRoute, validator as zValidator } from 'hono-openapi';
-import { isNil } from 'lodash';
+import { describeRoute } from 'hono-openapi';
 
 import { createHonoApp } from '../../common/app';
 import { createErrorResult } from '../../common/error';

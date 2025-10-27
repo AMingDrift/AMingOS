@@ -7,6 +7,7 @@ import React, { useCallback } from 'react';
 
 import ModalWrapper from './components/modal-wrapper';
 import UrlListener from './components/url-listener';
+import { Suspense } from 'react';
 
 const Page: FC = ({
     storage,
@@ -38,7 +39,9 @@ const Page: FC = ({
                 {blog}
             </ModalWrapper>
             <ModalWrapper routerName="storage">{storage}</ModalWrapper>
-            <UrlListener />
+            <Suspense fallback={<div>Loading...</div>}>
+                <UrlListener />
+            </Suspense>
         </>
     );
 };

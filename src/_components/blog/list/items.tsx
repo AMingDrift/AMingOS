@@ -66,10 +66,6 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                         </Link>
                     </Card3D>
                 </BlurFade>
-
-                {/* <Pointer>
-                    <div className="text-2xl select-none">👆</div>
-                </Pointer> */}
             </div>
         ))}
     </div>

@@ -1,9 +1,7 @@
 'use client';
 
-import type { PutBlobResult } from '@vercel/blob';
-
 import { upload } from '@vercel/blob/client';
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { toast } from 'sonner';
 
 import { Button } from '@/_components/shadcn/ui/button';
@@ -13,7 +11,6 @@ import { storagePath } from '@/server/storage/constants';
 
 export default function AvatarUploadPage() {
     const inputFileRef = useRef<HTMLInputElement>(null);
-    const [blob, setBlob] = useState<PutBlobResult | null>(null);
     return (
         <>
             <form
@@ -27,7 +24,7 @@ export default function AvatarUploadPage() {
 
                     const file = inputFileRef.current.files[0];
 
-                    const newBlob = await upload(`picture/${file.name}`, file, {
+                    await upload(`picture/${file.name}`, file, {
                         access: 'public',
                         handleUploadUrl: `${appConfig.baseUrl}${appConfig.apiPath}${storagePath}/upload`,
                     });
