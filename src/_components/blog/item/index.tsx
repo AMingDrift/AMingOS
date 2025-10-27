@@ -28,17 +28,6 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
     return (
         <div className="page-item">
             <div className={cn('page-container', $styles.item)}>
-                {/* <div className={$styles.thumb}>
-                    <Image
-                        src={post.thumb}
-                        alt={post.title}
-                        fill
-                        priority
-                        sizes="100%"
-                        unoptimized
-                    />
-                </div> */}
-
                 <div className={$styles.content}>
                     <MdxRender
                         source={post.body}
@@ -69,7 +58,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                                             <span className="mr-2">
                                                 <Tag />
                                             </span>
-                                            <div className="flex gap-2">
+                                            <div className="flex flex-wrap gap-2">
                                                 {post.tags.map((tag) => (
                                                     <Link
                                                         key={tag.id}

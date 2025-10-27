@@ -2,8 +2,7 @@
 
 .layout {
     /* 设置全局背景图片 */
-    @apply min-h-full w-full flex p-0 m-0 flex-col justify-between
-    bg-fixed bg-cover bg-no-repeat bg-center;
+    @apply m-0 flex min-h-full w-full flex-col justify-between bg-cover bg-fixed bg-center bg-no-repeat p-0;
 }
 
 /* bg-[url(./styles/images/bg-light2.png)] */

@@ -1,15 +1,7 @@
 @reference "#tailwind.css";
 
 .item {
-    @apply flex w-[calc(100vw-20px)] flex-auto flex-col rounded-md bg-white/80 lg:w-[80%] lg:min-w-[68rem];
-
-    & > .thumb {
-        @apply relative block h-36 w-full md:h-48 lg:h-64;
-    }
-
-    & > .thumb img {
-        @apply rounded-tl-md rounded-tr-md opacity-60;
-    }
+    @apply flex w-full flex-auto flex-col rounded-md bg-white/80 lg:w-[80%];
 
     & > .content {
         @apply flex flex-auto flex-col p-3;
