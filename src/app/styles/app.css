@@ -5,6 +5,7 @@
     /* msfiles modal的z-index由 createModalStore 中state.modalApp.hz定义，初始为2，逐步累加 */
     --z-index-dock-menu: 999;
     --z-index-video-modal: 1000;
+    --z-index-error-boundary: 9999;
 
     /* height 值 */
     --height-dock-menu: 58px;
