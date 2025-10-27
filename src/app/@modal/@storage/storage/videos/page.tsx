@@ -96,7 +96,7 @@ const VideoContent = async () => {
               };
     const videos = await getVideos();
     return (
-        <div className="mx-10 mt-7 mb-6 columns-2 gap-10">
+        <div className="mx-10 mt-7 columns-2 gap-10">
             {videos.map((video, idx) => (
                 <BlurFade
                     key={video.url}

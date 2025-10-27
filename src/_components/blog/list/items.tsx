@@ -21,7 +21,7 @@ export interface PostListProps extends IPaginateQueryProps {
 }
 
 export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items, activeTag }) => (
-    <div className="mx-10 mt-7 mb-6 columns-2 gap-7 lg:columns-3">
+    <div className="mx-10 mt-7 columns-2 gap-7 lg:columns-3">
         {(items as PostItem[]).map((item, idx) => (
             <div key={item.id} className="relative">
                 <BlurFade

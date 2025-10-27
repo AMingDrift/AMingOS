@@ -12,7 +12,7 @@ import { BlurFade } from '../magicui/blur-fade';
  */
 const BlogIndexSkeleton: FC = () => {
     return (
-        <div className="mx-10 mt-7 mb-6 columns-2 gap-7 lg:columns-3">
+        <div className="mx-10 mt-7 columns-2 gap-7 lg:columns-3">
             <BlurFade className="mb-10 break-inside-avoid">
                 <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
             </BlurFade>
@@ -71,7 +71,7 @@ const PostContentSkeleton: FC = () => {
 
 const StorageVideoSkeleton: FC = () => {
     return (
-        <div className="mx-10 mt-7 mb-6 columns-2 gap-10">
+        <div className="mx-10 mt-7 columns-2 gap-10">
             <BlurFade className="mb-10 flex break-inside-avoid flex-col">
                 <Skeleton className="aspect-video w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
             </BlurFade>

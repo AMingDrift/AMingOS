@@ -35,13 +35,13 @@ const Page = async () => {
             icon: '/assets/file-video-light.svg',
             url: '/storage/videos',
         };
-        const fileItem = {
-            title: 'Documents',
-            size: 0,
-            latestDate: '',
-            icon: '/assets/file-document-light.svg',
-            url: '/storage/documents',
-        };
+        // const fileItem = {
+        //     title: 'Documents',
+        //     size: 0,
+        //     latestDate: '',
+        //     icon: '/assets/file-document-light.svg',
+        //     url: '/storage/documents',
+        // };
         // 根据result中pathname后缀进行分类汇总
         result.forEach((item) => {
             switch (classifyFileType(item.pathname)) {
@@ -63,20 +63,11 @@ const Page = async () => {
                         imageItem.latestDate = item.uploadedAt;
                     }
                     break;
-                case 'document':
-                    fileItem.size += item.size;
-                    if (
-                        !fileItem.latestDate ||
-                        new Date(item.uploadedAt) > new Date(fileItem.latestDate)
-                    ) {
-                        fileItem.latestDate = item.uploadedAt;
-                    }
-                    break;
                 default:
                     break;
             }
         });
-        return [imageItem, videoItem, fileItem];
+        return [imageItem, videoItem];
     };
     const usageSummary = getUsageSummary();
     const totalUsed = usageSummary.reduce((acc, item) => acc + item.size, 0);

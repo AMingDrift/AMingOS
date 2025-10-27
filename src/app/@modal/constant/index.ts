@@ -56,11 +56,11 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             url: '/storage/videos',
             icon: FileVideo,
         },
-        {
-            title: 'Documents',
-            url: '/storage/documents',
-            icon: Files,
-        },
+        // {
+        //     title: 'Documents',
+        //     url: '/storage/documents',
+        //     icon: Files,
+        // },
     ],
     about: [
         {
