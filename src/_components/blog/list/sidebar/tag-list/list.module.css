@@ -4,11 +4,11 @@
     @apply flex flex-wrap items-center;
 
     & > a {
-        @apply text-sm text-muted-foreground mr-2 mb-2 border border-muted-foreground rounded-[0.2rem] px-2;
+        @apply mr-2 mb-2 rounded-[0.2rem] border border-muted-foreground px-2 text-sm text-muted-foreground;
 
         &.tagActived,
         &:hover {
-            @apply text-foreground border-foreground;
+            @apply border-foreground text-foreground;
         }
     }
 }

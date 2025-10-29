@@ -5,16 +5,16 @@
 }
 
 .title {
-    @apply w-full py-2 flex space-x-1 items-center;
+    @apply flex w-full items-center space-x-1 py-2;
 }
 
 .content {
-    @apply w-full p-2 max-h-[12rem] overflow-auto;
+    @apply max-h-[12rem] w-full overflow-auto p-2;
 }
 
 .mobileWidget {
     .mobileItem {
-        @apply py-0 border-none;
+        @apply border-none py-0;
 
         & > h3 {
             & > button {

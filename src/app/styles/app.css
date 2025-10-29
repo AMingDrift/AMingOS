@@ -230,6 +230,24 @@ html {
     @apply mt-2! w-full! subtitle-1! text-white/70! md:text-center! lg:text-left!;
 }
 
+/* 鼠标移动到文字或链接出现动画下划线 */
+.animate-decoration {
+    padding-bottom: 2px;
+    background: linear-gradient(var(--foreground), var(--foreground)) 0% 100% / 0% 1px no-repeat;
+    transition: background-size ease-out 200ms;
+
+    &:not(:focus):hover {
+        background-size: 100% 1px;
+    }
+}
+
+/* 粗下划线 */
+.animate-decoration-lg {
+    &:not(:focus):hover {
+        background-size: 100% 2px;
+    }
+}
+
 @layer components {
     .scrollbar-custom {
         &::-webkit-scrollbar {

@@ -1,6 +1,15 @@
 import type { LucideIcon } from 'lucide-react';
 
-import { ChartPie, FileVideo, Image, NotebookPen, Siren, SquarePlus, User } from 'lucide-react';
+import {
+    ChartPie,
+    FileVideo,
+    Image,
+    Monitor,
+    NotebookPen,
+    Siren,
+    SquarePlus,
+    User,
+} from 'lucide-react';
 
 import type { AppType } from '@/_components/modal/types';
 
@@ -58,6 +67,11 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             title: 'Me',
             url: '/about',
             icon: User,
+        },
+        {
+            title: 'Projects',
+            url: '/about/projects',
+            icon: Monitor,
         },
         {
             title: 'Record',

@@ -2,7 +2,7 @@
 
 .mdx-preview {
     .code-window {
-        @apply my-4 rounded-sm  overflow-hidden border border-neutral-700;
+        @apply my-4 overflow-hidden rounded-sm border border-neutral-700;
 
         & pre {
             @apply m-0;
@@ -14,15 +14,15 @@
     }
 
     .code-header {
-        @apply list-none flex justify-between items-center px-2 pt-1 pb-2 bg-[color:hsl(220deg_13%_18%)];
+        @apply flex list-none items-center justify-between bg-[color:hsl(220deg_13%_18%)] px-2 pt-1 pb-2;
     }
 
     .window-controls {
-        @apply flex gap-1 items-center;
+        @apply flex items-center gap-1;
     }
 
     .window-controls .control {
-        @apply w-[0.625rem] h-[0.625rem] rounded-full;
+        @apply h-[0.625rem] w-[0.625rem] rounded-full;
     }
 
     .control.close {
@@ -43,11 +43,11 @@
 
     .code-lang,
     .code-copy {
-        @apply text-xs text-neutral-400 flex items-center font-semibold;
+        @apply flex items-center text-xs font-semibold text-neutral-400;
     }
 
     .code-lang {
-        @apply ml-auto mx-2;
+        @apply mx-2 ml-auto;
     }
 
     .code-content {
