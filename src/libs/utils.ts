@@ -96,6 +96,22 @@ export function classifyFileType(pathname: string): 'image' | 'video' | 'documen
     return 'unknown';
 }
 
+/**
+ * 获取CSS变量的值
+ * @param variableName CSS变量名（例如：--height-dock-menu）
+ * @param element 可选的元素，默认为document.documentElement
+ * @returns CSS变量的值，如果未找到则返回空字符串
+ */
+export function getCSSVariable(variableName: string, element?: HTMLElement): string {
+    if (typeof window === 'undefined' || typeof document === 'undefined') {
+        // 如果在服务器端渲染环境中，返回空字符串
+        return '';
+    }
+
+    const targetElement = element || document.documentElement;
+    return getComputedStyle(targetElement).getPropertyValue(variableName).trim();
+}
+
 export const calculatePercentage = (sizeInBytes: number, totalGB: number = 1) => {
     const totalSizeInBytes = totalGB * 1024 * 1024 * 1024; // 2GB in bytes
     const percentage = (sizeInBytes / totalSizeInBytes) * 100;

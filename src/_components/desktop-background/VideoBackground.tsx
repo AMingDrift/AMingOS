@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 
 import { storageApi } from '@/api/storage';
 
-const DesktopBackground = () => {
+const VideoBackground = () => {
     const { resolvedTheme } = useTheme();
     const [videoUrl, setVideoUrl] = useState('');
     const getBackgroundVideo = async (prefix: string) => {
@@ -46,4 +46,4 @@ const DesktopBackground = () => {
     );
 };
 
-export default DesktopBackground;
+export default VideoBackground;

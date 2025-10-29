@@ -1,5 +1,5 @@
-import Desktop from './page';
+import DesktopIcons from './page';
 
-const DefaultPage = () => <Desktop></Desktop>;
+const DefaultPage = () => <DesktopIcons></DesktopIcons>;
 
 export default DefaultPage;

@@ -5,8 +5,6 @@ import Link from 'next/link';
 import { Badge } from '@/_components/shadcn/ui/badge';
 import { Button } from '@/_components/shadcn/ui/button';
 const ProjectPage = () => {
-    console.log(projects);
-
     const projectsListByType = [
         { title: '🖥️ 网站', projects: projects.web },
         { title: '🛠 工具', projects: projects.tool },
@@ -14,7 +12,7 @@ const ProjectPage = () => {
     return (
         <>
             {projectsListByType.map((projectsList) => (
-                <div className="mb-10">
+                <div className="mb-10" key={projectsList.title}>
                     <div className="pl-10 text-xl">{projectsList.title}</div>
 
                     <div className="mx-10 mt-5 columns-1 gap-5 sm:columns-2 lg:columns-3">
