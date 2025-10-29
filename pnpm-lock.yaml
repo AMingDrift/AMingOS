@@ -200,6 +200,9 @@ importers:
       three:
         specifier: 0.136.0
         version: 0.136.0
+      threejs-components:
+        specifier: 0.0.22
+        version: 0.0.22
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
@@ -5269,6 +5272,9 @@ packages:
 
   three@0.136.0:
     resolution: {integrity: sha512-+fEMX7nYLz2ZesVP/dyifli5Jf8gR3XPAnFJveQ80aMhibFduzrADnjMbARXh8+W9qLK7rshJCjAIL/6cDxC+A==}
+
+  threejs-components@0.0.22:
+    resolution: {integrity: sha512-nb6Mq1tXh9Q4VJMIiK9cZSl/ZA/bA4a1xLxgbKO0aLiVuXPOk3eHUBytaGL+TIa7mHX714uDY+ODpO2JVA+/wA==}
 
   throttle-debounce@3.0.1:
     resolution: {integrity: sha512-dTEWWNu6JmeVXY0ZYoPuH5cRIwc0MeGbJwah9KUNYSJwommQpCzTySTpEe8Gs1J23aeWEuAobe4Ag7EHVt/LOg==}
@@ -11417,6 +11423,8 @@ snapshots:
       readable-stream: 3.6.2
 
   three@0.136.0: {}
+
+  threejs-components@0.0.22: {}
 
   throttle-debounce@3.0.1: {}
 

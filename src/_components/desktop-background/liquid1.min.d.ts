@@ -1,0 +1,1 @@
+declare module 'threejs-components/build/backgrounds/liquid1.min.js';

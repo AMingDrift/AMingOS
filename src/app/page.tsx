@@ -54,8 +54,6 @@ const DesktopIcons = () => {
             });
 
             setIconPositions(positions);
-
-            console.log(positions);
         };
 
         calculatePositions();

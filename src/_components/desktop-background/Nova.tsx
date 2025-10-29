@@ -1,40 +1,37 @@
 'use client';
 
-import { useTheme } from 'next-themes';
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
 const NovaBackground = () => {
-    const { resolvedTheme } = useTheme();
-    const mountRef = useRef<HTMLDivElement>(null);
-    const scene = new THREE.Scene();
+    const mountRef = useRef<HTMLCanvasElement>(null);
+
     useEffect(() => {
+        if (!mountRef.current) return;
+
         if (typeof window === 'undefined') {
             // 如果在服务器端渲染环境中，直接返回
             return;
         }
 
+        const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
             60,
             window.innerWidth / window.innerHeight,
             1,
             1000,
         );
-        const renderer = new THREE.WebGLRenderer();
 
-        if (!mountRef.current) return;
+        const renderer = new THREE.WebGLRenderer({
+            canvas: mountRef.current,
+        });
 
-        const updateBackground = () => {
-            scene.background = new THREE.Color(resolvedTheme === 'dark' ? 0x160016 : 0xdfdfdf);
-        };
-
-        updateBackground();
+        scene.background = new THREE.Color(0x160016);
 
         camera.position.set(0, 4, 21);
 
         renderer.setSize(window.innerWidth, window.innerHeight);
-        mountRef.current.appendChild(renderer.domElement);
 
         const resizeHandler = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
@@ -107,9 +104,7 @@ const NovaBackground = () => {
                     `#include <color_vertex>
         float d = length(abs(position) / vec3(40., 10., 40));
         d = clamp(d, 0., 1.);
-        vColor = mix(
-          ${resolvedTheme === 'dark' ? 'vec3(227., 155., 0.)' : 'vec3(0., 100., 200.)'},
-          ${resolvedTheme === 'dark' ? 'vec3(100., 50., 255.)' : 'vec3(255., 200., 100.)'},
+        vColor = mix(vec3(227., 155., 0.), vec3(100., 50., 255.), 
           d
         ) / 255.;
       `,
@@ -155,16 +150,10 @@ const NovaBackground = () => {
 
         return () => {
             window.removeEventListener('resize', resizeHandler);
-            mountRef.current?.removeChild(renderer.domElement);
         };
-    }, [resolvedTheme]);
+    }, []);
 
-    return (
-        <div
-            ref={mountRef}
-            className="absolute inset-0 z-(--z-index-desktop-bg) size-full h-full min-h-full w-full overflow-hidden"
-        />
-    );
+    return <canvas ref={mountRef} />;
 };
 
 export default NovaBackground;
