@@ -3,7 +3,6 @@ import path from 'node:path';
 import React, { Suspense } from 'react';
 
 import { BlurFade } from '@/_components/magicui/blur-fade';
-import { Skeleton } from '@/_components/shadcn/ui/skeleton';
 
 import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';

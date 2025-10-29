@@ -1,15 +1,6 @@
 import type { LucideIcon } from 'lucide-react';
 
-import {
-    ChartPie,
-    Files,
-    FileVideo,
-    Image,
-    NotebookPen,
-    Siren,
-    SquarePlus,
-    User,
-} from 'lucide-react';
+import { ChartPie, FileVideo, Image, NotebookPen, Siren, SquarePlus, User } from 'lucide-react';
 
 import type { AppType } from '@/_components/modal/types';
 

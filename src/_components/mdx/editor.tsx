@@ -8,7 +8,6 @@ import { debounce, isNil } from 'lodash';
 import { useTheme } from 'next-themes';
 import dynamic from 'next/dynamic';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useMount } from 'react-use';
 
 import { useIsMobile } from '@/libs/broswer';
 
