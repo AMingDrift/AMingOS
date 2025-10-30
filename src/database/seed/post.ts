@@ -141,6 +141,15 @@ const data: Item[] = [
         tagNames: ['typescript', 'react', 'next.js', 'ai', 'copilot', 'canvas', 'Konva'],
         thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/tangram%2Fthumb.png',
     },
+    {
+        title: '从炫酷粒子星云学 Three.js：深度解析一个 15 万粒子的 GPU 动画系统',
+        summary:
+            '这周偶然在 CodePen 上刷到一个名为 “Nova” 的 3D 粒子动画，展示一个星云效果，极其酷炫。 今天就带大家一步步拆解这个 15 万个粒子的高性能动画系统',
+        bodyPath: path.join(__dirname, '../fixture/wmc/5.md'),
+        categoryName: '每天一个知识点',
+        tagNames: ['three.js', 'webgl'],
+        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/blog%2Fnova.png',
+    },
 ];
 
 export const createPostData = async () => {
