@@ -23,7 +23,7 @@ const RootLayout: FC<PropsWithChildren> = ({
     modal?: ReactNode;
 }) => {
     return (
-        <html lang="en" suppressHydrationWarning>
+        <html lang="zh-CN" suppressHydrationWarning>
             <body className="overflow-hidden">
                 <ThemeProvider enableSystem defaultTheme="dark" disableTransitionOnChange>
                     <Auth>

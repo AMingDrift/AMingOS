@@ -48,12 +48,12 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             icon: ChartPie,
         },
         {
-            title: 'Images',
+            title: '图片',
             url: '/storage/images',
             icon: Image,
         },
         {
-            title: 'Videos',
+            title: '视频',
             url: '/storage/videos',
             icon: FileVideo,
         },
@@ -65,12 +65,12 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
     ],
     about: [
         {
-            title: 'Me',
+            title: '关于我',
             url: '/about',
             icon: User,
         },
         {
-            title: 'Projects',
+            title: '我的项目',
             url: '/about/projects',
             icon: Monitor,
         },
@@ -78,11 +78,13 @@ export const MenuItems: Record<AppType, IMenuItem[]> = {
             title: 'Record',
             url: '/about/record',
             icon: Siren,
+            adminOnly: true,
         },
         {
             title: 'Test',
             url: '/about/test',
             icon: TestTube,
+            adminOnly: true,
         },
     ],
 };

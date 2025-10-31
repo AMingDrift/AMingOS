@@ -31,7 +31,7 @@ const ProjectPage = () => {
                                         className="aspect-[2/1] w-full rounded-t-lg object-cover"
                                     />
 
-                                    <div className="min-h-[125px] bg-white p-3 dark:bg-gray-900">
+                                    <div className="min-h-[125px] bg-white p-3 dark:bg-neutral-950">
                                         <div className="flex items-center justify-between">
                                             <Link
                                                 className="animate-decoration text-sm"

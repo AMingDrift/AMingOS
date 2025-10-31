@@ -26,7 +26,7 @@ export const createModalStore = () =>
                         list: {
                             storage: {
                                 id: 'storage',
-                                title: 'Storage',
+                                title: '云存储',
                                 size: 'full',
                                 hide: true,
                                 max: true,
@@ -35,7 +35,7 @@ export const createModalStore = () =>
                             },
                             blog: {
                                 id: 'blog',
-                                title: 'Blog',
+                                title: '博客',
                                 size: 'full',
                                 hide: true,
                                 max: true,
@@ -44,7 +44,7 @@ export const createModalStore = () =>
                             },
                             about: {
                                 id: 'about',
-                                title: 'About',
+                                title: '介绍',
                                 size: 'full',
                                 hide: true,
                                 max: true,

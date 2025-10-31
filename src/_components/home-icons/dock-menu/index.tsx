@@ -126,7 +126,7 @@ export function DockMenu({ className }: { className?: string }) {
                                 </Link>
                             </TooltipTrigger>
                             <TooltipContent className="z-(--z-index-dock-menu)">
-                                <p>Home</p>
+                                <p>主页</p>
                             </TooltipContent>
                         </Tooltip>
                     </DockIcon>
