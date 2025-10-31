@@ -6,6 +6,7 @@ import { cn } from '@/_components/shadcn/utils';
 
 import $styles from './style.module.css';
 
+export const dynamic = 'force-dynamic';
 export const generateMetadata = async (_: any, parent: ResolvingMetadata): Promise<Metadata> => {
     return {
         title: `用户登录 - ${(await parent).title?.absolute}`,
@@ -14,8 +15,11 @@ export const generateMetadata = async (_: any, parent: ResolvingMetadata): Promi
 };
 
 const AuthLoginPage: FC = async () => (
-    <div className="page-item">
-        <div className={cn($styles.item, 'page-container page-block')} style={{ flex: 'none' }}>
+    <div className="absolute page-item flex size-full items-center justify-center">
+        <div
+            className={cn($styles.item, 'mt-0! page-container page-block')}
+            style={{ flex: 'none' }}
+        >
             <div className="text-center text-xl font-bold">用户登录</div>
             <AuthLoginForm />
         </div>
