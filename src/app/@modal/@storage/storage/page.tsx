@@ -9,6 +9,7 @@ import { Chart } from './components/Chart';
 import FormattedDateTime from './components/FormattedDateTime';
 import { mockStorageList } from './mock';
 
+export const dynamic = 'force-dynamic';
 const Page = async () => {
     const getAllBlobs =
         process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'

@@ -9,6 +9,7 @@ import ItemActionCard from '../components/ItemActionCard';
 import { HomeVideoCard } from './components/video';
 import { StorageVideoSkeleton } from '@/_components/blog/skeleton';
 
+export const dynamic = 'force-dynamic';
 const VideoContent = async () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const getVideos =
