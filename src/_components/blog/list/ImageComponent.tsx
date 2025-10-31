@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from 'react';
 
-import { checkRandomNumberParity } from '@/app/@modal/@blog/blog/utils/randomNumberChecker';
-
 interface ImageComponentProps {
     src: string;
     alt: string;
