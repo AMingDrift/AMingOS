@@ -4,7 +4,7 @@ import { betterAuth } from 'better-auth';
 import { prismaAdapter } from 'better-auth/adapters/prisma';
 import { nextCookies } from 'better-auth/next-js';
 import { openAPI } from 'better-auth/plugins';
-const connectionString = `${process.env.DATABASE_URL}`;
+const connectionString = `${process.env.POSTGRES_PRISMA_URL}`;
 
 const adapter = new PrismaPg({ connectionString });
 const prisma = new PrismaClient({ adapter });

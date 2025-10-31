@@ -39,6 +39,7 @@
         "@hono/swagger-ui": "^0.5.2",
         "@hono/zod-validator": "^0.7.4",
         "@hookform/resolvers": "^5.2.2",
+        "@neondatabase/serverless": "^1.0.2",
         "@prisma/adapter-pg": "^6.17.1",
         "@prisma/client": "6.17.1",
         "@radix-ui/react-accordion": "^1.2.12",

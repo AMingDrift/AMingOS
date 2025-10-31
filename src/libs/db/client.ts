@@ -14,7 +14,7 @@ export interface flatCategoryTreeArgs {
 }
 
 const prismaClientSingleton = () => {
-    const connectionString = `${process.env.DATABASE_URL}`;
+    const connectionString = `${process.env.POSTGRES_PRISMA_URL}`;
     const adapter = new PrismaPg({
         connectionString,
         max: 10,

@@ -16,6 +16,11 @@
 安装依赖并启动开发服务器：
 
 ```bash
+# 创建数据库
+sudo docker run -d --restart=always -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=amingos  -p 5432:5432 -v /opt/pgsql/data:/var/lib/postgresql/data postgres:16
+```
+
+```bash
 # 推荐 pnpm，如无可用 npm / yarn
 pnpm install
 pnpm dev

@@ -4,7 +4,7 @@ import { withBark } from 'prisma-extension-bark';
 
 import { truncateExt } from './extensions/truncate';
 
-const connectionString = `${process.env.DATABASE_URL}`;
+const connectionString = `${process.env.POSTGRES_PRISMA_URL}`;
 
 const adapter = new PrismaPg({ connectionString });
 
