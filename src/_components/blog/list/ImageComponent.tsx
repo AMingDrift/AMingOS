@@ -13,33 +13,20 @@ interface ImageComponentProps {
 export default function ImageComponent({ src, alt, id }: ImageComponentProps) {
     const [aspectRatio, setAspectRatio] = useState('aspect-[4/3]');
 
-    let newSrc = src;
-
-    if (process.env.NODE_ENV === 'production') {
-        const { isEven } = checkRandomNumberParity();
-        if (isEven) {
-            newSrc = '/hengping.png';
-        } else {
-            newSrc = '/shuping.png';
-        }
-    } else {
-        newSrc = src;
-    }
-
     useEffect(() => {
         const img = new Image();
-        img.src = newSrc;
+        img.src = src;
         img.onload = () => {
             const isLandscape = img.naturalWidth > img.naturalHeight;
             setAspectRatio(isLandscape ? 'aspect-[4/3]' : 'aspect-[3/4]');
         };
-    }, [newSrc]);
+    }, [src]);
 
     return (
         <img
             key={id}
-            className={`rounded-lg object-cover w-full ${aspectRatio}`}
-            src={newSrc}
+            className={`w-full rounded-lg object-cover ${aspectRatio}`}
+            src={src}
             alt={alt}
         />
     );
