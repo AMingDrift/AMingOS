@@ -3,7 +3,7 @@
 
 import { Check, Cloud, Copy, FileUser, HomeIcon, MailIcon, NotebookPen } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { Dock, DockIcon } from '@/_components/magicui/dock';
@@ -20,6 +20,7 @@ import { cn } from '@/_components/shadcn/utils';
 
 import { AnimatedThemeToggler } from '../../magicui/animated-theme-toggler';
 import DockMenuIcon from './doc-icon';
+import { toast } from 'sonner';
 
 export type IconProps = React.HTMLAttributes<SVGElement>;
 
@@ -96,11 +97,27 @@ export function DockMenu({ className }: { className?: string }) {
         })),
     );
     const [copiedEmail, setCopiedEmail] = useState(false);
+    const [emailOpen, setEmailOpen] = useState(false);
+    const emailRef = useRef<HTMLDivElement | null>(null);
+    useEffect(() => {
+        const handleDocClick = (e: MouseEvent) => {
+            // 如果点击发生在弹窗外，关闭弹窗
+            if (emailRef.current && !emailRef.current.contains(e.target as Node)) {
+                setEmailOpen(false);
+            }
+        };
+        document.addEventListener('click', handleDocClick);
+        return () => document.removeEventListener('click', handleDocClick);
+    }, []);
     const handleCopyEmail = (email: string) => {
-        navigator.clipboard.writeText(email).then(() => {
-            setCopiedEmail(true);
-            setTimeout(() => setCopiedEmail(false), 2000);
-        });
+        if (navigator.clipboard?.writeText) {
+            navigator.clipboard.writeText(email).then(() => {
+                setCopiedEmail(true);
+                setTimeout(() => setCopiedEmail(false), 2000);
+            });
+        } else {
+            toast.warning('当前浏览器不支持复制功能，请手动复制。');
+        }
     };
     return (
         <div className={cn('flex flex-col items-center justify-center', className)}>
@@ -153,6 +170,22 @@ export function DockMenu({ className }: { className?: string }) {
                                         </Link>
                                     ) : (
                                         <div
+                                            // 点击切换（支持移动端）并保留 group hover 的桌面样式
+                                            ref={emailRef}
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                setEmailOpen((v) => !v);
+                                            }}
+                                            onKeyDown={(e) => {
+                                                if (e.key === 'Enter' || e.key === ' ') {
+                                                    e.preventDefault();
+                                                    setEmailOpen((v) => !v);
+                                                }
+                                            }}
+                                            role="button"
+                                            tabIndex={0}
+                                            aria-haspopup="dialog"
+                                            aria-expanded={emailOpen}
                                             className={cn(
                                                 buttonVariants({
                                                     variant: 'ghost',
@@ -164,7 +197,19 @@ export function DockMenu({ className }: { className?: string }) {
                                         >
                                             <social.icon className="size-4" />
 
-                                            <div className="invisible absolute bottom-full left-1/2 mb-2.5 flex w-48 -translate-x-1/2 cursor-default flex-col gap-1 overflow-hidden rounded-md bg-(--modal-bg-color) bg-white/70 pt-1.5 opacity-0 shadow-(--modal-shadow) backdrop-blur-3xl transition-all duration-200 group-hover:visible group-hover:opacity-100 dark:bg-black/70">
+                                            <div
+                                                // 点击区域内阻止向外传播，桌面仍支持 hover（group-hover）
+                                                onClick={(e) => e.stopPropagation()}
+                                                className={cn(
+                                                    'absolute bottom-full left-1/2 mb-2.5 flex w-48 -translate-x-1/2 cursor-default flex-col gap-1 overflow-hidden rounded-md bg-(--modal-bg-color) bg-white/70 pt-1.5 shadow-(--modal-shadow) backdrop-blur-3xl transition-all duration-200 dark:bg-black/70',
+                                                    // 当 emailOpen 为 true 时强制显示（移动端点击）
+                                                    emailOpen
+                                                        ? 'visible opacity-100'
+                                                        : 'invisible opacity-0',
+                                                    // 保持原有的 group-hover 行为用于桌面 hover
+                                                    'group-hover:visible group-hover:opacity-100',
+                                                )}
+                                            >
                                                 <div className="px-3 text-sm font-medium text-gray-800 dark:text-gray-200">
                                                     联系我
                                                 </div>
@@ -173,19 +218,22 @@ export function DockMenu({ className }: { className?: string }) {
                                                 </div>
                                                 <div className="flex border-t border-gray-100 dark:border-gray-700">
                                                     <button
-                                                        onClick={() =>
-                                                            (window.location.href = social.url)
-                                                        }
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            // 跳转到 mailto
+                                                            window.location.href = social.url;
+                                                        }}
                                                         className="flex-1 px-3 py-2 text-center text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                                                     >
                                                         发送邮件
                                                     </button>
                                                     <button
-                                                        onClick={() =>
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
                                                             handleCopyEmail(
                                                                 (social as EmailSocialItem).address,
-                                                            )
-                                                        }
+                                                            );
+                                                        }}
                                                         className="flex-1 px-3 py-2 text-center text-xs transition-colors hover:bg-gray-50 dark:hover:bg-gray-700"
                                                     >
                                                         {copiedEmail ? (
