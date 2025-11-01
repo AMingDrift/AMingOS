@@ -29,7 +29,10 @@ const NovaBackground = () => {
 
         scene.background = new THREE.Color(0x160016);
 
-        camera.position.set(0, 4, 21);
+        // iphone 16 pro max 430*936 --> cameraZ: 50
+        const aspectRatio = window.innerWidth / window.innerHeight;
+        const cameraZ = aspectRatio < 1 ? -37 * aspectRatio + 67 : 30; // 竖屏时增加相机距离
+        camera.position.set(0, 4, cameraZ);
 
         renderer.setSize(window.innerWidth, window.innerHeight);
 

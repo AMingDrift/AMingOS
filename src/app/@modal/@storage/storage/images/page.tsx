@@ -42,7 +42,7 @@ const PictureContent = async () => {
     images.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
 
     return (
-        <div className="mx-10 mt-7 columns-2 gap-10 lg:columns-3">
+        <div className="mx-10 mt-7 columns-1 gap-10 md:columns-2 lg:columns-3">
             {images.map((imageInfo, idx) => (
                 <BlurFade
                     key={imageInfo.url}
