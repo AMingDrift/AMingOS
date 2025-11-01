@@ -9,6 +9,8 @@ import type { PostItem } from '@/server/post/type';
 import { postApi } from '@/api/post';
 
 import { PostList } from './items';
+import { Spinner } from '@/_components/shadcn/ui/spinner';
+import { cn } from '@/_components/shadcn/utils';
 
 const Loadmore = (props: { limit: number; tag?: string; category?: string }) => {
     const { ref, inView } = useInView();
@@ -75,30 +77,8 @@ const Loadmore = (props: { limit: number; tag?: string; category?: string }) => 
             {bloglistItems.map((bloglistItem) => (
                 <PostList key={bloglistItem[0].id} items={bloglistItem} activeTag={tag} />
             ))}
-            <div ref={ref}>
-                <div className="opacity-0">loadPlaceHolder</div>
-                {isLoading && (
-                    <div className="load-container">
-                        <div className="spin-container container-1">
-                            <div className="dot dot-1"></div>
-                            <div className="dot dot-2"></div>
-                            <div className="dot dot-3"></div>
-                            <div className="dot dot-4"></div>
-                        </div>
-                        <div className="spin-container container-2">
-                            <div className="dot dot-1"></div>
-                            <div className="dot dot-2"></div>
-                            <div className="dot dot-3"></div>
-                            <div className="dot dot-4"></div>
-                        </div>
-                        <div className="spin-container container-3">
-                            <div className="dot dot-1"></div>
-                            <div className="dot dot-2"></div>
-                            <div className="dot dot-3"></div>
-                            <div className="dot dot-4"></div>
-                        </div>
-                    </div>
-                )}
+            <div ref={ref} className="flex flex-col items-center justify-center">
+                {<Spinner className={cn('size-16 text-sky-500', isLoading ? '' : 'opacity-0')} />}
             </div>
         </>
     );

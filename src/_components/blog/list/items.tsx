@@ -28,7 +28,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                     key={item.id}
                     delay={0.25 + idx * 0.05}
                     inView
-                    className="mb-10 flex break-inside-avoid flex-col"
+                    className="mb-7 flex break-inside-avoid flex-col"
                 >
                     <Card3D>
                         <Link href={`/blog/posts/${item.slug || item.id}`}>
