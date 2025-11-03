@@ -21,6 +21,11 @@ import { AuthProtectedMiddleware } from '../user/middlwares';
 import { mockStorageList } from './mock';
 export const storageTags = ['对象存储操作'];
 
+// 简单2秒内存缓存
+let lastStorageQueryTime = 0;
+let lastStorageQueryResult: any = null;
+let lastStorageQueryOptions: any = null;
+
 const app = createHonoApp();
 export const storageRoutes = app
     .get(
@@ -45,12 +50,25 @@ export const storageRoutes = app
                         ['limit'].includes(k) ? Number(v) : v,
                     ]),
                 );
+                const now = Date.now();
+                // 只要options相同且2秒内，直接返回缓存
+                if (
+                    lastStorageQueryResult &&
+                    lastStorageQueryOptions &&
+                    JSON.stringify(options) === JSON.stringify(lastStorageQueryOptions) &&
+                    now - lastStorageQueryTime < 2000
+                ) {
+                    return c.json(lastStorageQueryResult, 200);
+                }
                 const result =
                     process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
                         ? mockStorageList
                         : await queryStorageBlobByType(options);
+                lastStorageQueryTime = now;
+                lastStorageQueryResult = result;
+                lastStorageQueryOptions = options;
                 console.log(
-                    `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' && '(MOCK)'}============== `,
+                    `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' ? '(MOCK)' : ''}============== `,
                 );
                 return c.json(result, 200);
             } catch (error) {
