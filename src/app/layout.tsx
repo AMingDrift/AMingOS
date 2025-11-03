@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import type { FC, PropsWithChildren, ReactNode } from 'react';
-
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './styles/index.css';
 
 import DesktopBackground from '@/_components/desktop-background';
@@ -45,6 +46,8 @@ const RootLayout: FC<PropsWithChildren> = ({
                     </Auth>
                     <Toaster />
                 </ThemeProvider>
+                <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
