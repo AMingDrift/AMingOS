@@ -77,7 +77,7 @@ export function classifyFileType(pathname: string): 'image' | 'video' | 'documen
         return 'unknown';
     }
 
-    const imageTypes = ['png', 'jpg', 'jpeg', 'webp'];
+    const imageTypes = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'bmp', 'svg'];
     const videoTypes = ['mp4', 'webm'];
     const documentTypes = ['pdf', 'doc', 'docx', 'excel'];
 

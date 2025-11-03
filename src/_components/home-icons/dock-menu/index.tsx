@@ -7,7 +7,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { Dock, DockIcon } from '@/_components/magicui/dock';
-import { useModalStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 import { buttonVariants } from '@/_components/shadcn/ui/button';
 import { Separator } from '@/_components/shadcn/ui/separator';
 import {

@@ -7,9 +7,9 @@ import { Circle, CircleDot, CircleMinus, CircleX, Folders } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useShallow } from 'zustand/shallow';
 
-import { useModalStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 
-import type { AppType, ModalOptions } from './types';
+import type { AppType, ModalOptions } from '@/_components/store/modalStore/types';
 
 export const ToolBar = ({
     name,

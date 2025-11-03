@@ -12,7 +12,7 @@ import {
     User,
 } from 'lucide-react';
 
-import type { AppType } from '@/_components/modal/types';
+import type { AppType } from '@/_components/store/modalStore/types';
 
 interface IMenuItem {
     title: string;

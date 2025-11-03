@@ -6,10 +6,10 @@ import React, { useState } from 'react';
 import { useShallow } from 'zustand/shallow';
 
 import { DockIcon } from '@/_components/magicui/dock';
-import { useModalStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/_components/shadcn/ui/tooltip';
 
-import type { AppType } from '../../modal/types';
+import type { AppType } from '@/_components/store/modalStore/types';
 
 import { buttonVariants } from '../../shadcn/ui/button';
 import { cn } from '../../shadcn/utils';

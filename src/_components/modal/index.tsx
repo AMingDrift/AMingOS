@@ -3,9 +3,9 @@ import type { FC, PropsWithChildren } from 'react';
 import { useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { AppType, ModalOptions } from '@/_components/modal/types';
+import type { AppType, ModalOptions } from '@/_components/store/modalStore/types';
 
-import { useModalStore } from './hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 import { ToolBar } from './toolbar';
 const Modal: FC<
     PropsWithChildren & {

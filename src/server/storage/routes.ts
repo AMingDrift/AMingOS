@@ -18,6 +18,7 @@ import {
 } from './schema';
 import { deleteStorageBlobByUrl, queryStorageBlobByType } from './service';
 import { AuthProtectedMiddleware } from '../user/middlwares';
+import { mockStorageList } from './mock';
 export const storageTags = ['对象存储操作'];
 
 const app = createHonoApp();
@@ -44,8 +45,13 @@ export const storageRoutes = app
                         ['limit'].includes(k) ? Number(v) : v,
                     ]),
                 );
-                const result = await queryStorageBlobByType(options);
-                console.log(`[${String(new Date())}]: 对象存储查询`);
+                const result =
+                    process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
+                        ? mockStorageList
+                        : await queryStorageBlobByType(options);
+                console.log(
+                    `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' && '(MOCK)'}============== `,
+                );
                 return c.json(result, 200);
             } catch (error) {
                 return c.json(createErrorResult('查询对象存储数据失败', error), 500);

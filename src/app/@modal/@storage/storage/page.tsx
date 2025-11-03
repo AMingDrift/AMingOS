@@ -1,27 +1,26 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Separator } from '@/_components/shadcn/ui/separator';
 import { classifyFileType, convertFileSize } from '@/libs/utils';
 
-import { listStorage } from '../actions';
 import { Chart } from './components/Chart';
 import FormattedDateTime from './components/FormattedDateTime';
-import { mockStorageList } from './mock';
+import { useStorageStore } from '@/_components/store/storageStore';
 
-export const dynamic = 'force-dynamic';
-const Page = async () => {
-    const getAllBlobs =
-        process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
-            ? async () => {
-                  return mockStorageList;
-              }
-            : async () => {
-                  const result = await listStorage();
-                  return result;
-              };
-    const result = await getAllBlobs();
-    const getUsageSummary = () => {
+import { useEffect, useMemo, useState } from 'react';
+
+const Page = () => {
+    const storageList = useStorageStore((s) => s.list);
+    // 兼容首次为空的情况
+    const [list, setList] = useState(storageList);
+    useEffect(() => {
+        setList(storageList);
+    }, [storageList]);
+
+    const usageSummary = useMemo(() => {
         const imageItem = {
             title: 'Images',
             size: 0,
@@ -36,15 +35,7 @@ const Page = async () => {
             icon: '/assets/file-video-light.svg',
             url: '/storage/videos',
         };
-        // const fileItem = {
-        //     title: 'Documents',
-        //     size: 0,
-        //     latestDate: '',
-        //     icon: '/assets/file-document-light.svg',
-        //     url: '/storage/documents',
-        // };
-        // 根据result中pathname后缀进行分类汇总
-        result.forEach((item) => {
+        list.forEach((item) => {
             switch (classifyFileType(item.pathname)) {
                 case 'video':
                     videoItem.size += item.size;
@@ -69,16 +60,13 @@ const Page = async () => {
             }
         });
         return [imageItem, videoItem];
-    };
-    const usageSummary = getUsageSummary();
+    }, [list]);
     const totalUsed = usageSummary.reduce((acc, item) => acc + item.size, 0);
 
-    console.log('usageSummary:', usageSummary);
     return (
         <div className="dashboard-container">
             <section>
                 <Chart used={totalUsed} />
-
                 {/* Uploaded file type summaries */}
                 <ul className="dashboard-summary-list">
                     {usageSummary.map((summary) => (
@@ -100,7 +88,6 @@ const Page = async () => {
                                         {convertFileSize(summary.size) || 0}
                                     </h4>
                                 </div>
-
                                 <h5 className="summary-type-title">{summary.title}</h5>
                                 <Separator className="bg-light-400" />
                                 <FormattedDateTime

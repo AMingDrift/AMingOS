@@ -3,7 +3,7 @@ import { Cloud, FileUser, NotebookPen } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import DesktopIcon from '@/_components/home-icons/desktop-icon';
-import { AppType } from '@/_components/modal/types';
+import { AppType } from '@/_components/store/modalStore/types';
 import { getCSSVariable } from '@/libs/utils';
 
 const DesktopIcons = () => {

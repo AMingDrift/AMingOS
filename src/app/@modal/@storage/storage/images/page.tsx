@@ -1,45 +1,28 @@
-import fs from 'node:fs';
-import path from 'node:path';
-import React, { Suspense } from 'react';
+'use client';
 
+import React, { Suspense, useEffect, useState } from 'react';
 import Card3D from '@/_components/3D-card';
 import ImageComponent from '@/_components/blog/list/ImageComponent';
 import { BlurFade } from '@/_components/magicui/blur-fade';
-
-import { listStorage } from '../../actions';
 import ItemActionCard from '../components/ItemActionCard';
 import { BlogIndexSkeleton } from '@/_components/blog/skeleton';
+import { useStorageStore } from '@/_components/store/storageStore';
+import { classifyFileType } from '@/libs/utils';
 
 export const dynamic = 'force-dynamic';
-const PictureContent = async () => {
-    const getImages =
-        process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
-            ? async () => {
-                  try {
-                      const imgDir = path.join(process.cwd(), 'public', 'test', 'img');
-                      if (!fs.existsSync(imgDir)) {
-                          console.warn('Image directory not found:', imgDir);
-                          return [];
-                      }
-                      const files = fs.readdirSync(imgDir);
-                      return files.map((file) => ({
-                          url: `/test/img/${file}`,
-                          pathname: file,
-                          size: fs.statSync(path.join(imgDir, file)).size,
-                          uploadedAt: `${fs.statSync(path.join(imgDir, file)).mtime.getDate()}`,
-                          downloadUrl: `/test/img/${file}`,
-                      }));
-                  } catch (err) {
-                      console.error('Error loading local images:', err);
-                      return [];
-                  }
-              }
-            : async () => {
-                  const result = await listStorage({ prefix: 'images/' });
-                  return result;
-              };
-    const images = await getImages();
-    images.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+
+function PictureContent() {
+    const storageList = useStorageStore((s) => s.list);
+    const [images, setImages] = useState<typeof storageList>([]);
+    useEffect(() => {
+        const imgs = storageList.filter(
+            (item) =>
+                item.pathname.startsWith('images/') && classifyFileType(item.pathname) === 'image',
+        );
+        // 按上传时间倒序
+        imgs.sort((a, b) => new Date(b.uploadedAt).getTime() - new Date(a.uploadedAt).getTime());
+        setImages(imgs);
+    }, [storageList]);
 
     return (
         <div className="mx-10 mt-7 columns-1 gap-10 md:columns-2 lg:columns-3">
@@ -65,14 +48,12 @@ const PictureContent = async () => {
             ))}
         </div>
     );
-};
+}
 
-const PicturePage = () => {
-    return (
-        <Suspense fallback={<BlogIndexSkeleton />}>
-            <PictureContent />
-        </Suspense>
-    );
-};
+const PicturePage = () => (
+    <Suspense fallback={<BlogIndexSkeleton />}>
+        <PictureContent />
+    </Suspense>
+);
 
 export default PicturePage;

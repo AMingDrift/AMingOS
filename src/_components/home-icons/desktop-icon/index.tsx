@@ -4,9 +4,9 @@
 import React from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { AppType } from '../../modal/types';
+import type { AppType } from '@/_components/store/modalStore/types';
 
-import { useModalStore } from '../../modal/hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 
 const DesktopIcon = ({ name, icon }: { name: AppType; icon: React.ReactNode }) => {
     const { app, toggleWindow } = useModalStore(

@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 import { useMount } from 'react-use';
 import { useShallow } from 'zustand/shallow';
 
-import type { AppType } from '@/_components/modal/types';
+import type { AppType } from '@/_components/store/modalStore/types';
 
-import { useModalStore } from '@/_components/modal/hooks';
+import { useModalStore } from '@/_components/store/modalStore';
 
 import { MenuItems } from '../constant';
 
