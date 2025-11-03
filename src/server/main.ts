@@ -25,7 +25,10 @@ const routes = app
     .use(
         '*',
         cors({
-            origin: process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001',
+            origin: [
+                process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001',
+                'http://192.168.2.20:3001',
+            ],
             allowHeaders: ['Content-Type', 'Authorization'],
             allowMethods: ['POST', 'GET', 'OPTIONS'],
             exposeHeaders: ['Content-Length'],
