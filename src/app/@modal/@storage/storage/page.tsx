@@ -25,14 +25,14 @@ const Page = () => {
             title: 'Images',
             size: 0,
             latestDate: '',
-            icon: '/assets/file-image-light.svg',
+            icon: '/assets/img/storage/file-image-light.svg',
             url: '/storage/images',
         };
         const videoItem = {
             title: 'Video',
             size: 0,
             latestDate: '',
-            icon: '/assets/file-video-light.svg',
+            icon: '/assets/img/storage/file-video-light.svg',
             url: '/storage/videos',
         };
         list.forEach((item) => {
