@@ -1,7 +1,8 @@
-import type { FC, MouseEventHandler } from 'react';
+'use client';
+
+import { MouseEventHandler, useCallback, type FC } from 'react';
 
 import Link from 'next/link';
-import { useCallback } from 'react';
 
 export interface ErrorBoundaryProps {
     error: Error & { digest?: string };

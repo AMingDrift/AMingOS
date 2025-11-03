@@ -5,6 +5,11 @@
     @apply m-0 flex min-h-full w-full flex-col justify-between bg-cover bg-fixed bg-center bg-no-repeat p-0;
 }
 
+.error,
+.not-found {
+    @apply absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center justify-center;
+}
+
 /* bg-[url(./styles/images/bg-light2.png)] */
 
 html[data-theme='dark'] .layout {
