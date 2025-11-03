@@ -23,7 +23,7 @@ export const storageTags = ['对象存储操作'];
 
 // 简单2秒内存缓存
 let lastStorageQueryTime = 0;
-let lastStorageQueryResult: any = null;
+let lastStorageQueryResult: Awaited<ReturnType<typeof queryStorageBlobByType>> | null = null;
 let lastStorageQueryOptions: any = null;
 
 const app = createHonoApp();
