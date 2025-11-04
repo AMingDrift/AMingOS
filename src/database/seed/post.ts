@@ -113,7 +113,7 @@ const data: Item[] = [
         bodyPath: path.join(__dirname, '../fixture/wmc/1.md'),
         categoryName: '网页开发',
         tagNames: ['modal', 'typescript', 'react', 'next.js'],
-        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/1.webp',
+        thumb: 'https://cdn.amingdrift.com/blogs/1-thumb.webp',
     },
     {
         title: '【MCP系列】介绍一个我自己开发的MCP工具：MCP Shipit',
@@ -121,7 +121,7 @@ const data: Item[] = [
         bodyPath: path.join(__dirname, '../fixture/wmc/2.md'),
         categoryName: 'MCP工具',
         tagNames: ['typescript', 'mcp', 'nodejs'],
-        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/mcp-shipit.png',
+        thumb: 'https://cdn.amingdrift.com/blogs/2-thumb.webp',
     },
     {
         title: '【MCP系列】用 MCP 扩展 AI 编辑器：从零开发一个自己的MCP服务',
@@ -130,7 +130,7 @@ const data: Item[] = [
         bodyPath: path.join(__dirname, '../fixture/wmc/3.md'),
         categoryName: 'MCP工具',
         tagNames: ['typescript', 'mcp', 'ai', 'nodejs'],
-        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/mcp-thumb.jpg',
+        thumb: 'https://cdn.amingdrift.com/blogs/3-thumb.webp',
     },
     {
         title: '🧩 AI协助 一周打造「七巧板益智小游戏」：从零高效开发教学工具 💡',
@@ -139,7 +139,7 @@ const data: Item[] = [
         bodyPath: path.join(__dirname, '../fixture/wmc/4.md'),
         categoryName: '网页开发',
         tagNames: ['typescript', 'react', 'next.js', 'ai', 'copilot', 'canvas', 'Konva'],
-        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/tangram%2Fthumb.png',
+        thumb: 'https://cdn.amingdrift.com/blogs/4-thumb.webp',
     },
     {
         title: '从炫酷粒子星云学 Three.js：深度解析一个 15 万粒子的 GPU 动画系统',
@@ -148,7 +148,7 @@ const data: Item[] = [
         bodyPath: path.join(__dirname, '../fixture/wmc/5.md'),
         categoryName: '每天一个知识点',
         tagNames: ['three.js', 'webgl'],
-        thumb: 'https://cdn.jsdelivr.net/gh/amingdrift/picBed/img/blog%2Fnova.png',
+        thumb: 'https://cdn.amingdrift.com/blogs/5-thumb.webp',
     },
 ];
 
