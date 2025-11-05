@@ -63,13 +63,27 @@ export const storageRoutes = app
                 const result =
                     process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
                         ? mockStorageList
-                        : await queryStorageBlobByType(options);
+                        : await (async () => {
+                              const blobItems = await queryStorageBlobByType(options);
+                              const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL;
+                              const proxyUrl =
+                                  process.env.NODE_ENV === 'development'
+                                      ? 'http://192.168.2.20:3001/api'
+                                      : 'https://blob.amingdrift.com/api';
+                              const publicItems = blobItems.map((item) => ({
+                                  ...item,
+                                  url: item.url.replace(VERCEL_BLOB_URL!, proxyUrl),
+                                  downloadUrl: item.downloadUrl.replace(VERCEL_BLOB_URL!, proxyUrl),
+                              }));
+                              return publicItems;
+                          })();
                 lastStorageQueryTime = now;
                 lastStorageQueryResult = result;
                 lastStorageQueryOptions = options;
                 console.log(
                     `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' ? '(MOCK)' : ''}============== `,
                 );
+                // console.log(result);
                 return c.json(result, 200);
             } catch (error) {
                 return c.json(createErrorResult('查询对象存储数据失败', error), 500);

@@ -42,6 +42,53 @@ const routes = app
     .route(storagePath, storageRoutes)
     .route(authPath, authRoutes);
 
+const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL;
+app.get('/:type{images|videos}/:path{.*}', async (c) => {
+    const type = c.req.param('type');
+    const path = c.req.param('path');
+    const originalUrl = `${VERCEL_BLOB_URL}/${type}/${path}`;
+
+    // 转发客户端的 Range 请求头（如果有）
+    const rangeHeader = c.req.header('Range');
+
+    const res = await fetch(originalUrl, {
+        headers: rangeHeader ? { Range: rangeHeader } : {},
+    });
+
+    if (!res.ok) {
+        if (res.status === 404) return c.notFound();
+        return c.text('Internal error', 500);
+    }
+
+    // 透传关键响应头
+    const headers: Record<string, string> = {};
+    for (const [key, value] of res.headers.entries()) {
+        // 只透传安全的头，避免安全问题
+        if (
+            [
+                'content-type',
+                'content-length',
+                'accept-ranges',
+                'content-range',
+                'cache-control',
+            ].includes(key.toLowerCase())
+        ) {
+            headers[key] = value;
+        }
+    }
+
+    // 强制缓存（可选）
+    headers['Cache-Control'] = 'public, max-age=86400, immutable';
+    headers['Access-Control-Allow-Origin'] = '*'; // 支持跨域播放
+
+    // 返回流式响应，状态码可能是 200 或 206
+    return new Response(res.body, {
+        status: res.status,
+        statusText: res.statusText,
+        headers,
+    });
+});
+
 app.on(['POST', 'GET'], '/auth/*', (c) => {
     return auth.handler(c.req.raw);
 });

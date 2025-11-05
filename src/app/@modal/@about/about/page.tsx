@@ -4,6 +4,11 @@ import { SparklesText } from '@/_components/magicui/sparkles-text';
 const Page = () => {
     return (
         <div className="w-[80%] p-5">
+            {/* <video controls width="600">
+                <source src="http://localhost:3001/api/videos/xl.webm" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
+            <img src="http://192.168.2.20:3001/api/images/0_0-c3SGSweIYj6FMtAmur4ARNBHzFqEh5.png" /> */}
             <SparklesText>阿明 Drift 的「桌面级」个人创作空间站</SparklesText>
             <div className="size-full items-center justify-center overflow-hidden pt-8">
                 <BoxReveal boxColor={'#5046e6'} duration={0.5}>
