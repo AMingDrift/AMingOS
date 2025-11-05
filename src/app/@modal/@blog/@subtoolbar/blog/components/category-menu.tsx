@@ -83,19 +83,22 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
             if (category.children && category.children.length > 0) {
                 return (
                     <DropdownMenuSub key={category.id}>
-                        <DropdownMenuSubTrigger
-                            className="flex items-center cursor-pointer"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSelectedCategory(category.name);
-                                setSelectedCategoryPath(currentPath);
-                                setIsOpen(false);
-                            }}
-                        >
-                            {category.name}
-                            {selectedCategory === category.name && (
-                                <Check className="mr-2 h-4 w-4" />
-                            )}
+                        <DropdownMenuSubTrigger className="flex cursor-pointer items-center">
+                            {/* 分类名称部分 */}
+                            <span
+                                className="flex flex-1 cursor-pointer items-center"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    setSelectedCategory(category.name);
+                                    setSelectedCategoryPath(currentPath);
+                                    setIsOpen(false);
+                                }}
+                            >
+                                {category.name}
+                                {selectedCategory === category.name && (
+                                    <Check className="mr-2 h-4 w-4" />
+                                )}
+                            </span>
                         </DropdownMenuSubTrigger>
                         <DropdownMenuPortal>
                             <DropdownMenuSubContent>
@@ -126,8 +129,8 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
     };
 
     return (
-        <div className="ml-2 flex items-center space-x-2 flex-1">
-            <div className="text-sm font-medium flex items-center">
+        <div className="ml-2 flex flex-1 items-center space-x-2">
+            <div className="flex items-center text-sm font-medium">
                 <Box size={18} />
                 分类
             </div>
