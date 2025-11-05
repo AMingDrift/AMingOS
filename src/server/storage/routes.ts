@@ -10,6 +10,7 @@ import {
     createServerErrorResponse,
     createSuccessResponse,
     createValidatorErrorResponse,
+    getCacheControl,
 } from '../common/response';
 import {
     docDeleteByUrlRequestParamsSchema,
@@ -70,21 +71,9 @@ export const storageRoutes = app
                     }));
                 }
 
-                // ✅ 关键：设置缓存头（Vercel Edge Cache）
-                // 缓存 1d（可根据需求调整）
-                // public：允许 CDN 缓存
-                // s-maxage：Vercel Edge 缓存时间（秒）
-                // stale-while-revalidate：过期后仍可返回旧数据，同时后台更新
-                // 开发时禁用缓存
-                const cacheControl =
-                    process.env.NODE_ENV === 'development'
-                        ? 'no-cache'
-                        : 'public, s-maxage=86400, stale-while-revalidate=3600';
                 return c.json(result, 200, {
-                    'Cache-Control': cacheControl,
+                    'Cache-Control': getCacheControl(),
                 });
-
-                // TODO: revalidatePath() 只对 Next.js App Router 中的 Server Components / Route Handlers 有效，对独立的 Hono API 无效。
             } catch (error) {
                 // 错误响应不缓存
                 return c.json(createErrorResult('查询对象存储数据失败', error), 500);

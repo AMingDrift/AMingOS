@@ -1,3 +1,4 @@
+import { getCacheControl } from '../common/response';
 import { describeRoute, validator as zValidator } from 'hono-openapi';
 import { isNil } from 'lodash';
 import z from 'zod';
@@ -61,7 +62,10 @@ export const postRoutes = app
                     ]),
                 );
                 const result = await queryPostPaginate(options);
-                return c.json(result, 200);
+
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询文章分页数据失败', error), 500);
             }
@@ -90,7 +94,10 @@ export const postRoutes = app
                     ]),
                 );
                 const result = await queryPostTotalPages(options);
-                return c.json({ result }, 200);
+
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询页面总数失败', error), 500);
             }
@@ -114,7 +121,11 @@ export const postRoutes = app
             try {
                 const { item } = c.req.valid('param');
                 const result = await queryPostItem(item);
-                if (!isNil(result)) return c.json(result, 200);
+
+                if (!isNil(result))
+                    return c.json(result, 200, {
+                        'Cache-Control': getCacheControl(),
+                    });
                 return c.json(createErrorResult('文章不存在'), 404);
             } catch (error) {
                 return c.json(createErrorResult('查询文章失败', error), 500);
@@ -138,7 +149,10 @@ export const postRoutes = app
             try {
                 const { id } = c.req.valid('param');
                 const result = await queryPostItemById(id);
-                if (!isNil(result)) return c.json(result, 200);
+                if (!isNil(result))
+                    return c.json(result, 200, {
+                        'Cache-Control': getCacheControl(),
+                    });
                 return c.json(createErrorResult('文章不存在'), 404);
             } catch (error) {
                 return c.json(createErrorResult('查询文章失败', error), 500);
@@ -162,7 +176,9 @@ export const postRoutes = app
             try {
                 const { slug } = c.req.valid('param');
                 const result = await queryPostItemBySlug(slug);
-                return c.json(result, 200);
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询文章失败', error), 500);
             }

@@ -6,6 +6,7 @@ import {
     createServerErrorResponse,
     createSuccessResponse,
     createValidatorErrorResponse,
+    getCacheControl,
 } from '../common/response';
 import {
     categoryBreadcrumbRequestParamsSchema,
@@ -38,7 +39,9 @@ export const categoryRoutes = app
                 const { parent } = c.req.valid('param');
                 const result = await queryCategoryList(parent);
 
-                return c.json(result, 200);
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询分类树数据失败', error), 500);
             }
@@ -61,7 +64,9 @@ export const categoryRoutes = app
             try {
                 const { parent } = c.req.valid('param');
                 const result = await queryCategoryTree(parent);
-                return c.json(result, 200);
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询分类列表(扁平树)数据失败', error), 500);
             }
@@ -84,7 +89,9 @@ export const categoryRoutes = app
             try {
                 const { latest } = c.req.valid('param');
                 const result = await queryCategoryBreadcrumb(latest);
-                return c.json(result, 200);
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询分类面包屑数据失败', error), 500);
             }

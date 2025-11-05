@@ -6,6 +6,7 @@ import {
     createServerErrorResponse,
     createSuccessResponse,
     createUnauthorizedErrorResponse,
+    getCacheControl,
 } from '../../common/response';
 import { authResponseSchema } from '../schema';
 import { findAccoundByUserId, getCurrentSession } from '../service';
@@ -32,15 +33,21 @@ export const authRoutes = app
             try {
                 const session = await getCurrentSession(c.req.raw);
                 if (!session?.user) {
-                    return c.json(false, 200);
+                    return c.json(false, 200, {
+                        'Cache-Control': getCacheControl(),
+                    });
                 }
                 // 通过用户ID查找关联的账户信息
                 const account = await findAccoundByUserId(session.user.id);
                 if (!account) {
-                    return c.json(false, 200);
+                    return c.json(false, 200, {
+                        'Cache-Control': getCacheControl(),
+                    });
                 }
 
-                return c.json(account.accountId === process.env.ADMIN_GITHUB_ID, 200);
+                return c.json(account.accountId === process.env.ADMIN_GITHUB_ID, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('判断管理员失败', error), 500);
             }

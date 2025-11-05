@@ -8,6 +8,7 @@ import {
     createServerErrorResponse,
     createSuccessResponse,
     createValidatorErrorResponse,
+    getCacheControl,
 } from '../common/response';
 import { tagItemRequestParamsSchema, tagListSchema, tagSchema } from './schema';
 import { queryTagItem, queryTagList } from './service';
@@ -39,7 +40,10 @@ export const tagRoutes = app
             try {
                 const { item } = c.req.valid('param');
                 const result = await queryTagItem(item);
-                if (!isNil(result)) return c.json(result, 200);
+                if (!isNil(result))
+                    return c.json(result, 200, {
+                        'Cache-Control': getCacheControl(),
+                    });
                 return c.json(createErrorResult('标签不存在'), 404);
             } catch (error) {
                 return c.json(createErrorResult('查询标签数据失败', error), 500);
@@ -61,7 +65,9 @@ export const tagRoutes = app
         async (c) => {
             try {
                 const result = await queryTagList();
-                return c.json(result, 200);
+                return c.json(result, 200, {
+                    'Cache-Control': getCacheControl(),
+                });
             } catch (error) {
                 return c.json(createErrorResult('查询标签列表数据失败', error), 500);
             }
