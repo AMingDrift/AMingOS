@@ -19,6 +19,7 @@ export const BlogIndex: FC<BlogIndexProps> = async (props) => {
     if (!categoryItems) return notFound();
     const category = categoryItems.length > 0 ? categoryItems[categoryItems.length - 1] : undefined;
     const result = await getBlogResult({ page: 1, limit, tag, category: category?.id });
+    console.log('result', result);
     return (
         <>
             {/* <CategoryTreeWidget actives={categoryItems} /> */}
