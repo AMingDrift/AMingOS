@@ -12,7 +12,7 @@ import { BlurFade } from '../magicui/blur-fade';
  */
 const BlogIndexSkeleton: FC = () => {
     return (
-        <div className="mx-10 mt-7 columns-1 gap-7 md:columns-2 lg:columns-3">
+        <div className="mx-10 mt-7 columns-1 gap-7 md:columns-2 2xl:columns-3">
             <BlurFade className="mb-10 break-inside-avoid">
                 <Skeleton className="h-[50vh] w-full flex-auto bg-gray-950/30 backdrop-blur-sm" />
             </BlurFade>

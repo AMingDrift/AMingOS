@@ -25,7 +25,7 @@ function PictureContent() {
     }, [storageList]);
 
     return (
-        <div className="mx-10 mt-7 columns-1 gap-10 md:columns-2 lg:columns-3">
+        <div className="mx-10 mt-7 columns-1 gap-10 md:columns-2 2xl:columns-3">
             {images.map((imageInfo, idx) => (
                 <BlurFade
                     key={imageInfo.url}
