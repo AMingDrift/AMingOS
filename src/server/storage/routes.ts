@@ -50,42 +50,48 @@ export const storageRoutes = app
                         ['limit'].includes(k) ? Number(v) : v,
                     ]),
                 );
-                const now = Date.now();
-                // 只要options相同且2秒内，直接返回缓存
-                if (
-                    lastStorageQueryResult &&
-                    lastStorageQueryOptions &&
-                    JSON.stringify(options) === JSON.stringify(lastStorageQueryOptions) &&
-                    now - lastStorageQueryTime < 2000
-                ) {
-                    return c.json(lastStorageQueryResult, 200);
+
+                let result;
+
+                if (process.env.NEXT_PUBLIC_MOCK_BLOB === 'true') {
+                    // Mock 模式
+                    result = mockStorageList;
+                } else {
+                    // 真实查询
+                    const blobItems = await queryStorageBlobByType(options);
+                    console.log(
+                        `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' ? '(MOCK)' : ''}============== `,
+                    );
+                    const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL || '';
+                    const proxyUrl =
+                        process.env.NODE_ENV === 'development'
+                            ? 'http://192.168.2.20:3001/api'
+                            : 'https://blob.amingdrift.com/api';
+
+                    result = blobItems.map((item) => ({
+                        ...item,
+                        url: item.url.replace(VERCEL_BLOB_URL, proxyUrl),
+                        downloadUrl: item.downloadUrl.replace(VERCEL_BLOB_URL, proxyUrl),
+                    }));
                 }
-                const result =
-                    process.env.NEXT_PUBLIC_MOCK_BLOB === 'true'
-                        ? mockStorageList
-                        : await (async () => {
-                              const blobItems = await queryStorageBlobByType(options);
-                              const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL;
-                              const proxyUrl =
-                                  process.env.NODE_ENV === 'development'
-                                      ? 'http://192.168.2.20:3001/api'
-                                      : 'https://blob.amingdrift.com/api';
-                              const publicItems = blobItems.map((item) => ({
-                                  ...item,
-                                  url: item.url.replace(VERCEL_BLOB_URL!, proxyUrl),
-                                  downloadUrl: item.downloadUrl.replace(VERCEL_BLOB_URL!, proxyUrl),
-                              }));
-                              return publicItems;
-                          })();
-                lastStorageQueryTime = now;
-                lastStorageQueryResult = result;
-                lastStorageQueryOptions = options;
-                console.log(
-                    `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' ? '(MOCK)' : ''}============== `,
-                );
-                // console.log(result);
-                return c.json(result, 200);
+
+                // ✅ 关键：设置缓存头（Vercel Edge Cache）
+                // 缓存 1d（可根据需求调整）
+                // public：允许 CDN 缓存
+                // s-maxage：Vercel Edge 缓存时间（秒）
+                // stale-while-revalidate：过期后仍可返回旧数据，同时后台更新
+                // 开发时禁用缓存
+                const cacheControl =
+                    process.env.NODE_ENV === 'development'
+                        ? 'no-cache'
+                        : 'public, s-maxage=86400, stale-while-revalidate=3600';
+                return c.json(result, 200, {
+                    'Cache-Control': cacheControl,
+                });
+
+                // TODO: revalidatePath() 只对 Next.js App Router 中的 Server Components / Route Handlers 有效，对独立的 Hono API 无效。
             } catch (error) {
+                // 错误响应不缓存
                 return c.json(createErrorResult('查询对象存储数据失败', error), 500);
             }
         },

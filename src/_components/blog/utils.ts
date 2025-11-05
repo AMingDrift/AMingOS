@@ -1,5 +1,3 @@
-'use server';
-
 import { isNil } from 'lodash';
 
 import type { CategoryItem } from '@/server/category/type';

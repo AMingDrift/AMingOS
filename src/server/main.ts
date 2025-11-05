@@ -89,6 +89,10 @@ app.get('/:type{images|videos}/:path{.*}', async (c) => {
     });
 });
 
+app.get('/region', (c) => {
+    return c.text(`Deployed in: ${process.env.VERCEL_REGION || 'unknown'}`);
+});
+
 app.on(['POST', 'GET'], '/auth/*', (c) => {
     return auth.handler(c.req.raw);
 });
