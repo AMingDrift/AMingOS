@@ -11,7 +11,7 @@ const data: Item[] = [
         name: '技术文集',
         children: [
             { name: '个人开发', children: [{ name: 'MCP工具' }, { name: '网页开发' }] },
-            { name: '每天一个知识点' },
+            { name: '每日一知' },
             { name: '课程', children: [{ name: 'TS全栈开发' }] },
         ],
     },

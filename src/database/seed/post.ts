@@ -146,7 +146,7 @@ const data: Item[] = [
         summary:
             '这周偶然在 CodePen 上刷到一个名为 “Nova” 的 3D 粒子动画，展示一个星云效果，极其酷炫。 今天就带大家一步步拆解这个 15 万个粒子的高性能动画系统',
         bodyPath: path.join(__dirname, '../fixture/wmc/5.md'),
-        categoryName: '每天一个知识点',
+        categoryName: '每日一知',
         tagNames: ['three.js', 'webgl'],
         thumb: 'https://cdn.amingdrift.com/blogs/5-thumb.webp',
     },
