@@ -70,7 +70,9 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                 }
             />
 
-            <Comments />
+            <div className="mt-10">
+                <Comments />
+            </div>
         </div>
     );
 };
