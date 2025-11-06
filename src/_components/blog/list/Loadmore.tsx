@@ -6,11 +6,11 @@ import { useInView } from 'react-intersection-observer';
 
 import type { PostItem } from '@/server/post/type';
 
+import { Spinner } from '@/_components/shadcn/ui/spinner';
+import { cn } from '@/_components/shadcn/utils';
 import { postApi } from '@/api/post';
 
 import { PostList } from './items';
-import { Spinner } from '@/_components/shadcn/ui/spinner';
-import { cn } from '@/_components/shadcn/utils';
 
 const Loadmore = (props: { limit: number; tag?: string; category?: string }) => {
     const { ref, inView } = useInView();

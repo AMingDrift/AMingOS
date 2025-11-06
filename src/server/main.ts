@@ -28,6 +28,7 @@ const routes = app
             origin: [
                 process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001',
                 'http://192.168.2.20:3001',
+                'https://www.amingdrift.com'
             ],
             allowHeaders: ['Content-Type', 'Authorization'],
             allowMethods: ['POST', 'GET', 'OPTIONS'],
