@@ -1,13 +1,28 @@
+@import 'tw-animate-css';
+
 :root {
-    --color-1: 0 100% 63%;
-    --color-2: 270 100% 63%;
-    --color-3: 210 100% 63%;
-    --color-4: 195 100% 63%;
-    --color-5: 90 100% 63%;
+    --color-1: oklch(66.2% 0.225 25.9deg);
+    --color-2: oklch(60.4% 0.26 302deg);
+    --color-3: oklch(69.6% 0.165 251deg);
+    --color-4: oklch(80.2% 0.134 225deg);
+    --color-5: oklch(90.7% 0.231 133deg);
+}
+
+.dark {
+    --color-1: oklch(66.2% 0.225 25.9deg);
+    --color-2: oklch(60.4% 0.26 302deg);
+    --color-3: oklch(69.6% 0.165 251deg);
+    --color-4: oklch(80.2% 0.134 225deg);
+    --color-5: oklch(90.7% 0.231 133deg);
 }
 
 @theme inline {
     --animate-rainbow: rainbow var(--speed, 2s) infinite linear;
+    --color-color-5: var(--color-5);
+    --color-color-4: var(--color-4);
+    --color-color-3: var(--color-3);
+    --color-color-2: var(--color-2);
+    --color-color-1: var(--color-1);
 
     @keyframes rainbow {
         0% {
@@ -35,5 +50,46 @@
         100% {
             background-position: 0% 0%;
         }
+    }
+}
+
+@theme inline {
+    --animate-aurora: aurora 8s ease-in-out infinite alternate;
+
+    @keyframes aurora {
+        0% {
+            background-position: 0% 50%;
+            transform: rotate(-5deg) scale(0.9);
+        }
+
+        25% {
+            background-position: 50% 100%;
+            transform: rotate(5deg) scale(1.1);
+        }
+
+        50% {
+            background-position: 100% 50%;
+            transform: rotate(-3deg) scale(0.95);
+        }
+
+        75% {
+            background-position: 50% 0%;
+            transform: rotate(3deg) scale(1.05);
+        }
+
+        100% {
+            background-position: 0% 50%;
+            transform: rotate(-5deg) scale(0.9);
+        }
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border outline-ring/50;
+    }
+
+    body {
+        @apply bg-background text-foreground;
     }
 }

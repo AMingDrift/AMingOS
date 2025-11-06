@@ -4,7 +4,7 @@ export const projects = {
             title: 'AMingOS 个人小站',
             description: '🖥 基于 Next.js 的"桌面式"个人网站 —— 仿 操作系统桌面交互风格',
             preview: '/assets/img/projects/blog.png',
-            website: 'https://a-ming-os.vercel.app/',
+            website: 'https://www.amingdrift.com/',
             source: 'https://github.com/AMingDrift/AMingOS',
             tags: ['opensource', 'design', 'favorite'],
         },

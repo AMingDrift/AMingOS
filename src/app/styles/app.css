@@ -163,3 +163,9 @@ html {
         }
     }
 }
+
+@layer utilities {
+    .prose :where(ul > li):not(:where([class~='not-prose'], [class~='not-prose'] *))::marker {
+        color: #4b5563;
+    }
+}
