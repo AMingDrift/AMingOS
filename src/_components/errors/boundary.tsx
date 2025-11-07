@@ -14,7 +14,7 @@ export const ErrorBoundary: FC<ErrorBoundaryProps> = ({ error, reset }) => {
         (e) => {
             e.preventDefault();
             reset();
-            // 使用 location.assign 而不是 router.push 以确保完全重新加载页面
+            // 使用 location.assign 而不是 router.replace 以确保完全重新加载页面
             window.location.assign('/');
         },
         [reset],
@@ -65,6 +65,7 @@ export const ErrorBoundary: FC<ErrorBoundaryProps> = ({ error, reset }) => {
                     </button>
 
                     <Link
+                        replace
                         href="/"
                         onClick={handleResetAndRedirect}
                         className="rounded-lg bg-gray-200 px-5 py-2 text-center font-medium text-gray-800 transition duration-300 ease-in-out hover:bg-gray-300 dark:bg-gray-700 dark:text-white dark:hover:bg-gray-600"

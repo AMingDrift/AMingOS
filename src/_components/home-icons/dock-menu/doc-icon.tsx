@@ -31,6 +31,7 @@ const DockMenuIcon = ({ name, icon }: { name: AppType; icon: React.ReactNode }) 
             <Tooltip>
                 <TooltipTrigger asChild>
                     <Link
+                        replace
                         href="#"
                         aria-label={app.title}
                         className={cn(

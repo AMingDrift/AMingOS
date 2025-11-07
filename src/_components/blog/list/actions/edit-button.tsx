@@ -33,7 +33,7 @@ const Button: FC<{ id: string; iconBtn?: boolean }> = ({ id, iconBtn }) => {
             variant="secondary"
             size={iconBtn ? 'icon' : 'sm'}
         >
-            <Link href={`/blog/edit/${id}${urlQuery}`}>
+            <Link replace href={`/blog/edit/${id}${urlQuery}`}>
                 {iconBtn ? (
                     <span className="xicon text-2xl">
                         <DocumentEdit24Regular />

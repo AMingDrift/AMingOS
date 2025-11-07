@@ -14,7 +14,7 @@ import { MenuItems } from '../constant';
 
 const UrlListener = () => {
     const router = useRouter();
-    const { list, full, toggleWindow, home, setActivePath, windowStack } = useModalStore(
+    const { list, full, setActivePath, windowStack } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
             windowStack: state.modalApp.windowStack,
@@ -48,9 +48,9 @@ const UrlListener = () => {
         const frontApp = windowStack.at(-1);
         if (frontApp) {
             const app = list[frontApp.id];
-            router.push(app.activePath, { scroll: false });
+            router.replace(app.activePath, { scroll: false });
         } else {
-            router.push('/');
+            router.replace('/');
         }
     }, [windowStack]);
 
@@ -63,28 +63,6 @@ const UrlListener = () => {
         }
     }, [pathname, searchParams]);
 
-    useEffect(() => {
-        const handlePopState = () => {
-            const currentPath = window.location.pathname;
-
-            // Find the app corresponding to the current path
-            const app = Object.values(list).find((item) => currentPath.startsWith(`/${item.id}`));
-
-            if (app) {
-                // Bring the app to the front
-                toggleWindow(app.id);
-            } else {
-                // If no app matches, reset to home
-                home();
-            }
-        };
-
-        window.addEventListener('popstate', handlePopState);
-
-        return () => {
-            window.removeEventListener('popstate', handlePopState);
-        };
-    }, [toggleWindow, home]);
     return null;
 };
 

@@ -32,6 +32,7 @@ export function AppSidebar({
                                     <SidebarMenuItem key={item.title}>
                                         <SidebarMenuButton asChild>
                                             <Link
+                                                replace
                                                 prefetch={true}
                                                 href={item.url}
                                                 className={

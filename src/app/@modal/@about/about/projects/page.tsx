@@ -15,7 +15,7 @@ const ProjectPage = () => {
                 <div className="mb-10" key={projectsList.title}>
                     <div className="pl-10 text-xl">{projectsList.title}</div>
 
-                    <div className="mx-10 mt-5 columns-1 gap-5 sm:columns-2 lg:columns-3">
+                    <div className="mx-10 mt-5 columns-1 gap-5 md:columns-2 2xl:columns-3">
                         {projectsList.projects.map((project, idx) => (
                             <BlurFade
                                 key={project.website}

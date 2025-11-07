@@ -3,16 +3,16 @@ import type { FC, PropsWithChildren } from 'react';
 import { useRef } from 'react';
 import { useShallow } from 'zustand/shallow';
 
-import type { AppType, ModalOptions } from '@/_components/store/modalStore/types';
+import type { AppType } from '@/_components/store/modalStore/types';
 
 import { useModalStore } from '@/_components/store/modalStore';
 import { ToolBar } from './toolbar';
 const Modal: FC<
     PropsWithChildren & {
-        app: ModalOptions['modalApp']['list'][AppType];
         name: AppType;
     }
-> = ({ children, app, name }) => {
+> = ({ children, name }) => {
+    const app = useModalStore(useShallow((state) => state.modalApp.list[name]));
     const modalRef = useRef<HTMLDivElement>(null);
     const { front } = useModalStore(
         useShallow((state) => ({

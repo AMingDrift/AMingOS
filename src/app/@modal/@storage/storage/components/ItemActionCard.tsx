@@ -123,6 +123,7 @@ const ItemActionCard = ({
                         </AlertDialog>
                     </AdminChecker>
                     <Link
+                        replace
                         href={blobInfo.downloadUrl}
                         download={blobInfo.pathname}
                         className="text-white transition-colors hover:text-blue-300"

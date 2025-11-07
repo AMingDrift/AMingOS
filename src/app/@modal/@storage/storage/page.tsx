@@ -71,6 +71,7 @@ const Page = () => {
                 <ul className="dashboard-summary-list">
                     {usageSummary.map((summary) => (
                         <Link
+                            replace
                             href={summary.url}
                             key={summary.title}
                             className="dashboard-summary-card hover:shadow-(--card-shadow) hover:backdrop-blur-md"

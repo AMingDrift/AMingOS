@@ -31,7 +31,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                     className="mb-7 flex break-inside-avoid flex-col"
                 >
                     <Card3D>
-                        <Link href={`/blog/posts/${item.slug || item.id}`}>
+                        <Link replace href={`/blog/posts/${item.slug || item.id}`}>
                             <div className="flex transform flex-col rounded-xl p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
                                 <ImageComponent
                                     key={item.id}
