@@ -1,3 +1,5 @@
+'use client';
+
 import { Button } from '@/_components/shadcn/ui/button';
 import { Reply } from 'lucide-react';
 import Link from 'next/link';

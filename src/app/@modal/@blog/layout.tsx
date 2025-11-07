@@ -13,7 +13,7 @@ const Layout = ({ children, subtoolbar }: { children: ReactNode; subtoolbar?: Re
                 {subtoolbar}
             </div>
 
-            <div className="scrollbar-custom h-[calc(100%-var(--height-modal-subtoolbar))] w-full overflow-auto rounded-md pb-5">
+            <div id='blog-layout' className="scrollbar-custom h-[calc(100%-var(--height-modal-subtoolbar))] w-full overflow-auto rounded-md pb-5">
                 {children}
             </div>
         </>
