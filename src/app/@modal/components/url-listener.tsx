@@ -14,13 +14,15 @@ import { MenuItems } from '../constant';
 
 const UrlListener = () => {
     const router = useRouter();
-    const { list, full, setActivePath, windowStack } = useModalStore(
+    const { list, full, toggleWindow, home, setActivePath, windowStack } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
             windowStack: state.modalApp.windowStack,
             full: state.actions.full,
             hide: state.actions.hide,
             setActivePath: state.actions.setActivePath,
+            toggleWindow: state.actions.toggleWindow,
+            home: state.actions.home,
         })),
     );
     const searchParams = useSearchParams();
@@ -42,7 +44,6 @@ const UrlListener = () => {
     });
 
     useEffect(() => {
-        // console.log('windowStack', windowStack);
         if (pathname === '/auth/login') return;
         const frontApp = windowStack.at(-1);
         if (frontApp) {
@@ -61,6 +62,29 @@ const UrlListener = () => {
             setActivePath(app.id, pathname + (params.toString() ? `?${params.toString()}` : ''));
         }
     }, [pathname, searchParams]);
+
+    useEffect(() => {
+        const handlePopState = () => {
+            const currentPath = window.location.pathname;
+
+            // Find the app corresponding to the current path
+            const app = Object.values(list).find((item) => currentPath.startsWith(`/${item.id}`));
+
+            if (app) {
+                // Bring the app to the front
+                toggleWindow(app.id);
+            } else {
+                // If no app matches, reset to home
+                home();
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [toggleWindow, home]);
     return null;
 };
 
