@@ -48,24 +48,7 @@ const UrlListener = () => {
         const frontApp = windowStack.at(-1);
         if (frontApp) {
             const app = list[frontApp.id];
-            // replace后尝试恢复滚动条
-            if (typeof window !== 'undefined') {
-                const scroll = sessionStorage.getItem('blogListScroll');
-                console.log('尝试恢复滚动条:', scroll);
-                if (scroll) {
-                    router.replace(app.activePath);
-
-                    const scrollArea = document.getElementById('blog-layout');
-                    setTimeout(() => {
-                        if (scrollArea) {
-                            scrollArea.scrollTop = Number(scroll);
-                        }
-                        sessionStorage.removeItem('blogListScroll');
-                    }, 0);
-                } else {
-                    router.replace(app.activePath, { scroll: false });
-                }
-            }
+            router.replace(app.activePath, { scroll: false });
         } else {
             router.replace('/');
         }
