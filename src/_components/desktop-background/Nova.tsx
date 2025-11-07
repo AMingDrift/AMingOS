@@ -8,13 +8,9 @@ const NovaBackground = () => {
     const mountRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        if (!mountRef.current) return;
+        if (!mountRef.current || typeof window === 'undefined') return;
 
-        if (typeof window === 'undefined') {
-            // 如果在服务器端渲染环境中，直接返回
-            return;
-        }
-
+        // 初始化 Three.js 场景
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(
             60,
@@ -48,10 +44,7 @@ const NovaBackground = () => {
         controls.enableDamping = true;
         controls.enablePan = false;
 
-        let gu = {
-            time: { value: 0 },
-        };
-
+        let gu = { time: { value: 0 } };
         let sizes: number[] = [];
         let shift: number[] = [];
         let pushShift = () => {
@@ -62,11 +55,13 @@ const NovaBackground = () => {
                 Math.random() * 0.9 + 0.1,
             );
         };
+
         let pts = new Array(50000).fill(null).map(() => {
             sizes.push(Math.random() * 1.5 + 0.5);
             pushShift();
             return new THREE.Vector3().randomDirection().multiplyScalar(Math.random() * 0.5 + 9.5);
         });
+
         for (let i = 0; i < 100000; i++) {
             let r = 10,
                 R = 40;
@@ -86,12 +81,14 @@ const NovaBackground = () => {
         let g = new THREE.BufferGeometry().setFromPoints(pts);
         g.setAttribute('sizes', new THREE.Float32BufferAttribute(sizes, 1));
         g.setAttribute('shift', new THREE.Float32BufferAttribute(shift, 4));
+
         let m = new THREE.PointsMaterial({
             size: 0.125,
             transparent: true,
             depthTest: false,
             blending: THREE.AdditiveBlending,
         });
+
         m.onBeforeCompile = (shader) => {
             shader.uniforms.time = gu.time;
             shader.vertexShader = `
@@ -121,6 +118,7 @@ const NovaBackground = () => {
         transformed += vec3(cos(moveS) * sin(moveT), cos(moveT), sin(moveS) * sin(moveT)) * shift.w;
       `,
                 );
+
             shader.fragmentShader = `
       varying vec3 vColor;
       ${shader.fragmentShader}
@@ -136,16 +134,17 @@ const NovaBackground = () => {
                     `vec4 diffuseColor = vec4( vColor, smoothstep(0.5, 0.1, d) );`,
                 );
         };
+
         let p = new THREE.Points(g, m);
         p.rotation.order = 'ZYX';
         p.rotation.z = 0.2;
         scene.add(p);
 
-        let clock = new THREE.Clock();
+        const clock = new THREE.Clock();
 
         renderer.setAnimationLoop(() => {
             controls.update();
-            let t = clock.getElapsedTime() * 0.5;
+            const t = clock.getElapsedTime() * 0.5;
             gu.time.value = t * Math.PI;
             p.rotation.y = t * 0.05;
             renderer.render(scene, camera);
@@ -153,6 +152,7 @@ const NovaBackground = () => {
 
         return () => {
             window.removeEventListener('resize', resizeHandler);
+            renderer.dispose(); // 清理资源
         };
     }, []);
 
