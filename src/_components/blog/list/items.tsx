@@ -51,7 +51,6 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                     >
                         <Card3D>
                             <Link
-                                replace
                                 href={`/blog/posts/${item.slug || item.id}`}
                                 onClick={() => {
                                     if (typeof window !== 'undefined') {

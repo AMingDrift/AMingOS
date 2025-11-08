@@ -58,11 +58,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                                     </span>
                                     <div className="flex flex-wrap gap-2">
                                         {post.tags.map((tag) => (
-                                            <Link
-                                                replace
-                                                key={tag.id}
-                                                href={`/blog?tag=${tag.text}`}
-                                            >
+                                            <Link key={tag.id} href={`/blog?tag=${tag.text}`}>
                                                 <TagLink tag={tag} key={tag.id}></TagLink>
                                             </Link>
                                         ))}

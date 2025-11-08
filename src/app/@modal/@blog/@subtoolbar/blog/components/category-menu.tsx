@@ -58,7 +58,7 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
     }, [pathname, categories]);
 
     useEffect(() => {
-        router.replace(selectedCategoryPath.join('/'));
+        router.push(selectedCategoryPath.join('/'));
     }, [selectedCategoryPath]);
 
     // 处理onBlur事件，当焦点离开菜单容器时关闭菜单

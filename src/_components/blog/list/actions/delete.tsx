@@ -66,7 +66,7 @@ export const PostDelete: FC<{ item: PostItem; iconBtn?: boolean }> = ({ item, ic
 
             // 2. 在blog detail页删除
             // 删除文章后返回上一页
-            router.replace('/blog');
+            router.push('/blog');
         },
         [item.id],
     );

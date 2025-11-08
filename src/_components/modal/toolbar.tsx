@@ -144,7 +144,7 @@ export const ToolBar = ({
                         className="actbtn"
                         onClick={() => {
                             hide(name);
-                            router.replace('/');
+                            router.push('/');
                         }}
                     >
                         <CircleMinus size={18} />
@@ -160,7 +160,7 @@ export const ToolBar = ({
                         className="actbtn closeBtn"
                         onClick={() => {
                             close(name);
-                            router.replace('/');
+                            router.push('/');
                         }}
                     >
                         <CircleX size={18} />

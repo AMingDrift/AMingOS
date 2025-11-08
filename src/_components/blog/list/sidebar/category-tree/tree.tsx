@@ -56,7 +56,6 @@ const Item: FC<CategoryItemProps> = ({ category, actives, parentPath }) => {
                             onClick={(e) => e.stopPropagation()}
                         >
                             <Link
-                                replace
                                 className="animate-decoration-sm mr-2 ellips animate-decoration"
                                 href={currentPath}
                             >

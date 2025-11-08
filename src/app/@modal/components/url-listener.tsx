@@ -14,7 +14,7 @@ import { MenuItems } from '../constant';
 
 const UrlListener = () => {
     const router = useRouter();
-    const { list, full, setActivePath, windowStack } = useModalStore(
+    const { list, full, setActivePath, windowStack, toggleWindow, home } = useModalStore(
         useShallow((state) => ({
             list: state.modalApp.list,
             windowStack: state.modalApp.windowStack,
@@ -48,11 +48,37 @@ const UrlListener = () => {
         const frontApp = windowStack.at(-1);
         if (frontApp) {
             const app = list[frontApp.id];
-            router.replace(app.activePath, { scroll: false });
+            router.push(app.activePath, { scroll: false });
         } else {
-            router.replace('/');
+            router.push('/');
         }
     }, [windowStack]);
+
+    useEffect(() => {
+        const handlePopState = () => {
+            const curFrontApp = windowStack.at(-1);
+            const currentPath = window.location.pathname;
+
+            // Find the app corresponding to the current path
+            const app = Object.values(list).find((item) => currentPath.startsWith(`/${item.id}`));
+
+            if (app) {
+                // Bring the app to the front
+                if (app.id !== curFrontApp?.id) {
+                    toggleWindow(app.id);
+                }
+            } else {
+                // If no app matches, reset to home
+                home();
+            }
+        };
+
+        window.addEventListener('popstate', handlePopState);
+
+        return () => {
+            window.removeEventListener('popstate', handlePopState);
+        };
+    }, [toggleWindow, home, windowStack]);
 
     useEffect(() => {
         // 根据pathname找到list中对应的app

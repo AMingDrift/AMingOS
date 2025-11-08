@@ -7,7 +7,7 @@ import Link from 'next/link';
 export const ErrorNotFound: FC = () => {
     const handleResetAndRedirect = useCallback<MouseEventHandler<HTMLAnchorElement>>((e) => {
         e.preventDefault();
-        // 使用 location.assign 而不是 router.replace 以确保完全重新加载页面
+        // 使用 location.assign 而不是 router.push 以确保完全重新加载页面
         window.location.assign('/');
     }, []);
 
@@ -49,7 +49,6 @@ export const ErrorNotFound: FC = () => {
 
                 <div className="flex flex-col justify-center gap-3 sm:flex-row">
                     <Link
-                        replace
                         href="/"
                         onClick={handleResetAndRedirect}
                         className="transform rounded-lg bg-yellow-500 px-5 py-2 text-center font-medium text-white transition duration-300 ease-in-out hover:scale-105 focus:ring-2 focus:ring-orange-300 focus:outline-none dark:focus:ring-orange-700"

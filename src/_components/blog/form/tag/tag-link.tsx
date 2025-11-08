@@ -59,7 +59,7 @@ export const TagLink: FC<{
             onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                router.replace(getPageUrl(tag));
+                router.push(getPageUrl(tag));
             }}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}

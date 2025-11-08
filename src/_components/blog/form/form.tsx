@@ -187,7 +187,6 @@ export const PostActionForm = forwardRef<PostActionFormRef, PostActionFormProps>
                                 <FormDescription>
                                     如果留空,则文章访问地址是id
                                     <Link
-                                        replace
                                         className="mr-1 ml-5 text-black dark:text-white"
                                         href="#"
                                         onClick={generateTitleSlug}

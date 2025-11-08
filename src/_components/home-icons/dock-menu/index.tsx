@@ -127,7 +127,6 @@ export function DockMenu({ className }: { className?: string }) {
                         <Tooltip>
                             <TooltipTrigger asChild>
                                 <Link
-                                    replace
                                     href="#"
                                     aria-label="Home"
                                     className={cn(
@@ -158,7 +157,6 @@ export function DockMenu({ className }: { className?: string }) {
                                 <TooltipTrigger asChild>
                                     {name !== 'Email' ? (
                                         <Link
-                                            replace
                                             href={social.url}
                                             target="_blank"
                                             aria-label={social.name}
