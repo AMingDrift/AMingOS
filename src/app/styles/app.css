@@ -44,6 +44,7 @@ html {
     --modal-bg-color: rgb(255 255 255 / 30%);
     --modal-shadow: 0 0 10px rgb(0 0 0 / 40%);
     --card-shadow: 0 0 10px rgb(0 0 0 / 40%);
+    --card-shadow-hover: 0 0 20px rgb(0 0 0 / 40%);
 }
 
 [data-theme='dark'] {
@@ -51,6 +52,7 @@ html {
     --modal-bg-color: rgb(0 0 0 / 30%);
     --modal-shadow: 0 0 10px rgb(255 255 255 / 40%);
     --card-shadow: 0 0 10px rgb(255 255 255 / 40%);
+    --card-shadow-hover: 0 0 20px rgb(255 255 255 / 40%);
 }
 
 /* ===== TYPOGRAPHY */

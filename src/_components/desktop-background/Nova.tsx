@@ -156,7 +156,7 @@ const NovaBackground = () => {
         };
     }, []);
 
-    return <canvas ref={mountRef} />;
+    return <canvas ref={mountRef} className="fixed" />;
 };
 
 export default NovaBackground;

@@ -18,7 +18,11 @@ const Liquid = () => {
         }
     }, []);
 
-    return <canvas ref={mountRef}>Liquid</canvas>;
+    return (
+        <canvas ref={mountRef} className="fixed">
+            Liquid
+        </canvas>
+    );
 };
 
 export default Liquid;

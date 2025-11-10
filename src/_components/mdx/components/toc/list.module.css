@@ -15,22 +15,22 @@
 }
 
 .toc-list {
-    @apply max-w-fit overflow-hidden text-base relative;
+    @apply relative max-w-fit overflow-hidden text-base;
 }
 
 .toc-list li {
-    @apply relative py-0.5 ml-0; /* 减小垂直内边距 */
+    @apply relative ml-0 py-0.5; /* 减小垂直内边距 */
 }
 
 .toc-list li[data-active='true']::before {
     content: '';
 
-    @apply hidden lg:block absolute left-3 h-4 w-0.5 bg-amber-500  top-1/2 -translate-y-1/2;
+    @apply absolute top-1/2 left-3 hidden h-4 w-0.5 -translate-y-1/2 bg-amber-500 lg:block;
 }
 
 /* 激活项的样式 */
 .toc-list li[data-active='true'] a {
-    @apply text-amber-500 font-medium;
+    @apply font-medium text-amber-500;
 }
 
 /* 链接基本样式 */
@@ -89,7 +89,7 @@
 }
 
 .toc-list a:hover span.href {
-    @apply inline-block ml-4 text-[80%] text-gray-500;
+    @apply ml-4 inline-block text-[80%] text-gray-500;
 }
 
 html[data-theme='dark'] {

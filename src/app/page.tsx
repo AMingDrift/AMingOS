@@ -66,8 +66,8 @@ const DesktopIcons = () => {
             {icons.map((icon, index) => (
                 <div
                     key={icon.name}
+                    className="fixed z-(--z-index-desktop-icon)"
                     style={{
-                        position: 'absolute',
                         top: iconPositions[index]?.top,
                         left: iconPositions[index]?.left,
                     }}

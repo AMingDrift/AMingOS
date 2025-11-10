@@ -63,7 +63,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                                     }
                                 }}
                             >
-                                <div className="flex transform flex-col rounded-xl p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
+                                <div className="flex transform flex-col rounded-xl p-3 hover:shadow-(--card-shadow-hover) shadow-(--card-shadow) transition-all duration-300 ease-out select-none hover:scale-105 hover:backdrop-blur-md">
                                     <ImageComponent
                                         key={item.id}
                                         src={item.thumb}
