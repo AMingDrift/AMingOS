@@ -156,7 +156,7 @@ const data: Item[] = [
             '一个简单不复杂，但是能提升网页用户体验的 3D 卡片组件。本文将带你从零开始理解 `perspective` 的原理，并结合 React 生态中的优秀库（如 `react-tilt`），打造一个随鼠标移动而动态倾斜的 3D 卡片组件。',
         bodyPath: path.join(__dirname, '../fixture/wmc/6.md'),
         categoryName: '每日一知',
-        tagNames: ['css', '3d'],
+        tagNames: ['css', '3d', 'perspective'],
         thumb: 'https://cdn.amingdrift.com/blogs/6-thumb.gif',
     },
 ];

@@ -41,7 +41,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                         <div className={$styles.meta}>
                             <div className={$styles.info}>
                                 <span>
-                                    <Calendar className="mr-2" />
+                                    <Calendar size={18} className="mr-2" />
                                     <time className="mt-1 ellips">
                                         {formatTime(
                                             !isNil(post.updatedAt)
@@ -54,7 +54,7 @@ const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
                             {post.tags.length > 0 && (
                                 <div className={$styles.tags}>
                                     <span className="mr-2">
-                                        <Tag />
+                                        <Tag size={18} />
                                     </span>
                                     <div className="flex flex-wrap gap-2">
                                         {post.tags.map((tag) => (
