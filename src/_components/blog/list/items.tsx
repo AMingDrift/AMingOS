@@ -23,21 +23,6 @@ export interface PostListProps extends IPaginateQueryProps {
 }
 
 export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items, activeTag }) => {
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            const scroll = sessionStorage.getItem('blogListScroll');
-            // console.log('尝试恢复滚动条:', scroll);
-            if (scroll) {
-                const scrollArea = document.getElementById('blog-layout');
-                setTimeout(() => {
-                    if (scrollArea) {
-                        scrollArea.scrollTop = Number(scroll);
-                    }
-                    sessionStorage.removeItem('blogListScroll');
-                }, 0);
-            }
-        }
-    }, []);
     const ref = useRef<HTMLDivElement>(null);
     return (
         <div ref={ref} className="mx-10 mt-7 columns-1 gap-7 md:columns-2 2xl:columns-3">
@@ -63,7 +48,7 @@ export const PostList: FC<{ items: PostItem[]; activeTag?: string }> = ({ items,
                                     }
                                 }}
                             >
-                                <div className="flex transform flex-col rounded-xl p-3 hover:shadow-(--card-shadow-hover) shadow-(--card-shadow) transition-all duration-300 ease-out select-none hover:scale-105 hover:backdrop-blur-md">
+                                <div className="flex transform flex-col rounded-xl p-3 shadow-(--card-shadow) transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow-hover) hover:backdrop-blur-md">
                                     <ImageComponent
                                         key={item.id}
                                         src={item.thumb}

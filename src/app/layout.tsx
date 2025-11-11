@@ -24,7 +24,7 @@ const RootLayout: FC<PropsWithChildren> = ({
     modal?: ReactNode;
 }) => {
     return (
-        <html lang="zh-CN" suppressHydrationWarning>
+        <html lang="zh-CN" suppressHydrationWarning data-scroll-behavior="smooth">
             <body className="overflow-hidden">
                 <ThemeProvider enableSystem defaultTheme="dark" disableTransitionOnChange>
                     <Auth>

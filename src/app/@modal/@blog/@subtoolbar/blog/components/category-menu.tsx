@@ -74,6 +74,11 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
         }, 0);
     };
 
+    // 滚动条重置逻辑
+    const resetBlogListScroll = () => {
+        sessionStorage.removeItem('blogListScroll');
+    };
+
     // 递归渲染分类树，传递父级分类信息
     const renderCategoryItems = (categories: CategoryItem[], parentCategories: string[] = []) => {
         return categories.map((category) => {
@@ -92,6 +97,7 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
                                     setSelectedCategory(category.name);
                                     setSelectedCategoryPath(currentPath);
                                     setIsOpen(false);
+                                    resetBlogListScroll();
                                 }}
                             >
                                 {category.name}
@@ -117,6 +123,7 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
                             setSelectedCategory(category.name);
                             setSelectedCategoryPath(currentPath);
                             setIsOpen(false);
+                            resetBlogListScroll();
                         }}
                         className="flex items-center"
                     >
@@ -152,6 +159,7 @@ export const CategoryMenu = ({ categories }: { categories: CategoryItem[] }) => 
                                     setSelectedCategory('全部');
                                     setSelectedCategoryPath(['/blog']);
                                     setIsOpen(false);
+                                    resetBlogListScroll();
                                 }}
                                 className="flex items-center"
                             >

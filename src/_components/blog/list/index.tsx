@@ -14,7 +14,7 @@ export interface BlogIndexProps extends IPaginateQueryProps {
 }
 
 export const BlogIndex: FC<BlogIndexProps> = async (props) => {
-    const { limit = 10, tag, categories } = props ?? {};
+    const { limit = 6, tag, categories } = props ?? {};
     const categoryItems = await getBreadcrumbsCategories(categories);
     if (!categoryItems) return notFound();
     const category = categoryItems.length > 0 ? categoryItems[categoryItems.length - 1] : undefined;

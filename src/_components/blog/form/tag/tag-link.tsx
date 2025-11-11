@@ -59,6 +59,7 @@ export const TagLink: FC<{
             onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
+                sessionStorage.removeItem('blogListScroll');
                 router.push(getPageUrl(tag));
             }}
             onMouseEnter={handleMouseEnter}

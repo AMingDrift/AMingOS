@@ -23,6 +23,24 @@ const Loadmore = (props: { limit: number; tag?: string; category?: string }) => 
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const scroll = sessionStorage.getItem('blogListScroll');
+            // console.log('尝试恢复滚动条:', scroll);
+            const scrollArea = document.getElementById('blog-layout');
+            if (scroll) {
+                setTimeout(() => {
+                    if (scrollArea) {
+                        scrollArea.scrollTop = Number(scroll);
+                    }
+                    sessionStorage.removeItem('blogListScroll');
+                }, 0);
+            } else {
+                scrollArea && (scrollArea.scrollTop = 0);
+            }
+        }
+    }, [category, tag]);
+
+    useEffect(() => {
         if (inView && !loadingRef.current) {
             loadingRef.current = true;
             setIsLoading(true);
