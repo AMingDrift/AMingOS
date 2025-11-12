@@ -17,7 +17,7 @@
 
 ```bash
 # 创建数据库
-sudo docker run -d --restart=always -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=amingos  -p 5432:5432 -v /opt/pgsql/data:/var/lib/postgresql/data postgres:16
+sudo docker run --name my-pgsql -d --restart=unless-stopped -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=amingos  -p 5432:5432 -v /opt/pgsql/data:/var/lib/postgresql/data postgres:16
 ```
 
 ```bash
