@@ -2,8 +2,12 @@
     "name": "amingos",
     "version": "0.1.0",
     "private": true,
+    "packageManager": "pnpm@10.21.0",
     "imports": {
         "#tailwind.css": "./src/app/styles/tailwind.css"
+    },
+    "engines": {
+        "node": "^22.0.0"
     },
     "scripts": {
         "dev": "rimraf -rf .next && next dev --turbopack -p 3001",
