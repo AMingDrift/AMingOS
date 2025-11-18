@@ -61,7 +61,7 @@ export const storageRoutes = app
                     const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL || '';
                     const proxyUrl =
                         process.env.NODE_ENV === 'development'
-                            ? 'http://192.168.2.20:3001/api'
+                            ? 'http://192.168.2.8:3001/api'
                             : 'https://blob.amingdrift.com/api';
 
                     result = blobItems.map((item) => ({

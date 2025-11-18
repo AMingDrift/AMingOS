@@ -30,6 +30,7 @@ export default function ImageComponent({ src, alt, id }: ImageComponentProps) {
             style={{ width: '100%', height: 'auto' }}
             src={src}
             alt={alt}
+            unoptimized
         />
     );
 }

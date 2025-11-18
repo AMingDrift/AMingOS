@@ -33,6 +33,7 @@ const ProjectPage = () => {
                                         height={400}
                                         className="aspect-[2/1] w-full rounded-t-lg object-cover"
                                         style={{ width: '100%', height: 'auto' }}
+                                        unoptimized
                                     />
 
                                     <div className="min-h-[125px] bg-white p-3 dark:bg-neutral-950">
