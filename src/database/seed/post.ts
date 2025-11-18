@@ -159,6 +159,14 @@ const data: Item[] = [
         tagNames: ['css', '3d', 'perspective'],
         thumb: 'https://cdn.amingdrift.com/blogs/6-thumb.gif',
     },
+    {
+        title: '《天听计划：罗斯陷阱》',
+        summary: '为构建 RAG 个人知识库系统而写的小说，简直是为醋包饺子',
+        bodyPath: path.join(__dirname, '../fixture/wmc/7-tianting.md'),
+        categoryName: '生活随笔',
+        tagNames: ['ai', 'RAG', '小说', '个人知识库', '为醋包饺子'],
+        thumb: 'https://cdn.amingdrift.com/blogs/7--thumb-tianting.png',
+    },
 ];
 
 export const createPostData = async () => {
