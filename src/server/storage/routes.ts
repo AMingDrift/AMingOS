@@ -59,15 +59,11 @@ export const storageRoutes = app
                         `==============对象存储查询${process.env.NEXT_PUBLIC_MOCK_BLOB === 'true' ? '(MOCK)' : ''}============== `,
                     );
                     const VERCEL_BLOB_URL = process.env.VERCEL_BLOB_URL || '';
-                    const proxyUrl =
-                        process.env.NODE_ENV === 'development'
-                            ? 'http://192.168.2.8:3001/api'
-                            : 'https://blob.amingdrift.com/api';
+                    const proxyUrl = 'https://blob.amingdrift.com/api';
 
                     result = blobItems.map((item) => ({
                         ...item,
-                        url: item.url.replace(VERCEL_BLOB_URL, proxyUrl),
-                        downloadUrl: item.downloadUrl.replace(VERCEL_BLOB_URL, proxyUrl),
+                        displayUrl: item.url.replace(VERCEL_BLOB_URL, proxyUrl),
                     }));
                 }
 

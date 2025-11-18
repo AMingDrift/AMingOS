@@ -18,7 +18,7 @@ export const StackCard: FC<PropsWithChildren<StackCardProps>> = ({
         <Card className={cn('absolute inset-0 p-0', 'bg-card/40 backdrop-blur-sm', 'rounded-sm!')}>
             {shine ? (
                 <ShineBorder
-                    className="relative h-full w-full rounded-full"
+                    className="relative h-full w-full rounded-sm"
                     color={['#A07CFE', '#FE8FB5', '#FFBE7B']}
                     always={shine.always}
                     borderRadius="0.56rem"

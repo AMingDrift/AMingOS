@@ -37,7 +37,7 @@ function PictureContent() {
                         <div className="group relative flex transform flex-col overflow-hidden rounded-xl p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
                             <ImageComponent
                                 key={imageInfo.url}
-                                src={imageInfo.url}
+                                src={imageInfo.displayUrl}
                                 alt={imageInfo.pathname}
                                 id={imageInfo.url}
                             />

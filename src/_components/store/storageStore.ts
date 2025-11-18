@@ -7,6 +7,7 @@ export interface StorageItem {
     size: number;
     uploadedAt: string;
     downloadUrl: string;
+    displayUrl: string;
     [key: string]: any;
 }
 

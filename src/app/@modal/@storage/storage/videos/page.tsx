@@ -41,7 +41,7 @@ function VideoContent() {
                     className="mb-10 flex break-inside-avoid flex-col"
                 >
                     <div className="group relative flex aspect-video transform flex-col overflow-hidden rounded-xl p-3 transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
-                        <HomeVideoCard image={video?.thumb} video={video.url} />
+                        <HomeVideoCard image={video?.thumb} video={video.displayUrl} />
                         <ItemActionCard blobInfo={video} storageType="video" />
                     </div>
                 </BlurFade>

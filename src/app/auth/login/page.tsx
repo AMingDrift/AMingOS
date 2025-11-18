@@ -15,7 +15,7 @@ export const generateMetadata = async (_: any, parent: ResolvingMetadata): Promi
 };
 
 const AuthLoginPage: FC = async () => (
-    <div className="absolute page-item flex size-full items-center justify-center">
+    <div className="absolute z-1 page-item flex size-full items-center justify-center">
         <div
             className={cn($styles.item, 'mt-0! page-container page-block')}
             style={{ flex: 'none' }}
