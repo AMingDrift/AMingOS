@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import NextImage from 'next/image';
 
 interface ImageComponentProps {
     src: string;
@@ -21,9 +22,12 @@ export default function ImageComponent({ src, alt, id }: ImageComponentProps) {
     }, [src]);
 
     return (
-        <img
+        <NextImage
             key={id}
             className={`w-full rounded-lg object-cover ${aspectRatio}`}
+            width={800}
+            height={400}
+            style={{ width: '100%', height: 'auto' }}
             src={src}
             alt={alt}
         />

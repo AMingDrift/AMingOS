@@ -17,10 +17,19 @@ const nextConfig: NextConfig = {
                 protocol: 'https',
                 hostname: 'cn-nb1.rains3.com',
             },
+            {
+                protocol: 'https',
+                hostname: 'blob.amingdrift.com',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cdn.amingdrift.com',
+            },
         ],
     },
     pageExtensions: ['js', 'jsx', 'mdx', 'ts', 'tsx'],
     experimental: {
+        reactCompiler: true,
         useCache: true,
         serverActions: {
             bodySizeLimit: '5mb',

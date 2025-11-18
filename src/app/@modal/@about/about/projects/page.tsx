@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { BlurFade } from '@/_components/magicui/blur-fade';
 import { projects } from './constants';
 import Link from 'next/link';
@@ -24,11 +25,14 @@ const ProjectPage = () => {
                                 className="mb-10 flex break-inside-avoid flex-col"
                             >
                                 <div className="group relative flex transform flex-col overflow-hidden rounded-xl transition-all duration-300 ease-out select-none hover:scale-105 hover:shadow-(--card-shadow) hover:backdrop-blur-md">
-                                    <img
+                                    <Image
                                         key={project.preview}
                                         alt={project.preview}
                                         src={project.preview}
+                                        width={800}
+                                        height={400}
                                         className="aspect-[2/1] w-full rounded-t-lg object-cover"
+                                        style={{ width: '100%', height: 'auto' }}
                                     />
 
                                     <div className="min-h-[125px] bg-white p-3 dark:bg-neutral-950">
