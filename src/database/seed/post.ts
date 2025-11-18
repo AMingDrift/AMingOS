@@ -13,6 +13,7 @@ type Item = Pick<Prisma.PostCreateInput, 'title' | 'summary'> & {
     categoryName: string;
     tagNames?: string[];
     thumb?: string;
+    createdAt?: Date | string;
 };
 
 const data: Item[] = [
@@ -114,6 +115,7 @@ const data: Item[] = [
         categoryName: '网页开发',
         tagNames: ['modal', 'typescript', 'react', 'next.js'],
         thumb: 'https://cdn.amingdrift.com/blogs/1-thumb.webp',
+        createdAt: '2025-09-16T12:00:00Z', // 可自定义时间
     },
     {
         title: '【MCP系列】介绍一个我自己开发的MCP工具：MCP Shipit',
@@ -122,6 +124,7 @@ const data: Item[] = [
         categoryName: 'MCP工具',
         tagNames: ['typescript', 'mcp', 'nodejs'],
         thumb: 'https://cdn.amingdrift.com/blogs/2-thumb.webp',
+        createdAt: '2025-10-09T12:00:00Z',
     },
     {
         title: '【MCP系列】用 MCP 扩展 AI 编辑器：从零开发一个自己的MCP服务',
@@ -131,6 +134,7 @@ const data: Item[] = [
         categoryName: 'MCP工具',
         tagNames: ['typescript', 'mcp', 'ai', 'nodejs'],
         thumb: 'https://cdn.amingdrift.com/blogs/3-thumb.webp',
+        createdAt: '2025-10-10T12:00:00Z',
     },
     {
         title: '🧩 AI协助 一周打造「七巧板益智小游戏」：从零高效开发教学工具 💡',
@@ -140,6 +144,7 @@ const data: Item[] = [
         categoryName: '网页开发',
         tagNames: ['typescript', 'react', 'next.js', 'ai', 'copilot', 'canvas', 'Konva'],
         thumb: 'https://cdn.amingdrift.com/blogs/4-thumb.webp',
+        createdAt: '2025-10-25T12:00:00Z',
     },
     {
         title: '从炫酷粒子星云学 Three.js：深度解析一个 15 万粒子的 GPU 动画系统',
@@ -149,6 +154,7 @@ const data: Item[] = [
         categoryName: '每日一知',
         tagNames: ['three.js', 'webgl', '3d'],
         thumb: 'https://cdn.amingdrift.com/blogs/5-thumb.webp',
+        createdAt: '2025-10-30T12:00:00Z',
     },
     {
         title: '使用 CSS perspective 实现 3D 卡片效果',
@@ -158,6 +164,7 @@ const data: Item[] = [
         categoryName: '每日一知',
         tagNames: ['css', '3d', 'perspective'],
         thumb: 'https://cdn.amingdrift.com/blogs/6-thumb.gif',
+        createdAt: '2025-11-11T12:00:00Z',
     },
     {
         title: '《天听计划：罗斯陷阱》',
@@ -166,12 +173,13 @@ const data: Item[] = [
         categoryName: '生活随笔',
         tagNames: ['ai', 'RAG', '小说', '个人知识库', '为醋包饺子'],
         thumb: 'https://cdn.amingdrift.com/blogs/7--thumb-tianting.png',
+        createdAt: '2025-11-18T12:00:00Z',
     },
 ];
 
 export const createPostData = async () => {
     for (const post of data) {
-        const { title, summary, bodyPath, categoryName, tagNames, thumb } = post;
+        const { title, summary, bodyPath, categoryName, tagNames, thumb, createdAt } = post;
         const category = await prisma.category.findFirst({
             where: { name: categoryName },
         });
@@ -200,6 +208,9 @@ export const createPostData = async () => {
                     },
                 },
                 tags,
+                ...(createdAt
+                    ? { createdAt: new Date(createdAt), updatedAt: new Date(createdAt) }
+                    : {}),
             },
         });
     }

@@ -64,4 +64,4 @@ export const localTime = (time: Dayjs, options?: Pick<TimeOptions, 'locale' | 't
  * 格式化时间输出
  * @param date
  */
-export const formatTime = (date?: string) => localTime(getTime(date)).format('LLL');
+export const formatTime = (date?: string) => localTime(getTime(date)).format('YYYY年MM月DD日');
