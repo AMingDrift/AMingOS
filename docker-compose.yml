@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: my-pgsql
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: amingos
+    ports:
+      - "5432:5432"
+    volumes:
+      - /opt/pgsql/data:/var/lib/postgresql/data

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import type { FC, PropsWithChildren, ReactNode } from 'react';
+import { Suspense, type FC, type PropsWithChildren, type ReactNode } from 'react';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './styles/index.css';
@@ -37,7 +37,9 @@ const RootLayout: FC<PropsWithChildren> = ({
 
                                 {/* 底部任务栏 */}
                                 <DockMenu className="bg-taskbar-bg bg-blur-win fixed right-1 bottom-1 left-1 z-(--z-index-dock-menu) flex items-center" />
-                                <DesktopBackground />
+                                <Suspense>
+                                    <DesktopBackground />
+                                </Suspense>
                             </div>
                         </div>
                     </Auth>

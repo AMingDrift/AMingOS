@@ -1,7 +1,8 @@
 :root {
     /* z-index 值 */
     --z-index-desktop-bg: 0;
-    --z-index-desktop-icon: 1;
+    --z-index-pending-desktop-bg: 1;
+    --z-index-desktop-icon: 2;
 
     /* msfiles modal的z-index由 createModalStore 中state.modalApp.hz定义，初始为2，逐步累加 */
     --z-index-dock-menu: 999;

@@ -9,7 +9,6 @@ import { Suspense } from 'react';
 import { MdxRender } from '@/_components/mdx/render';
 import { cn } from '@/_components/shadcn/utils';
 import { postApi } from '@/api/post';
-import Comments from '@/app/@modal/@blog/blog/posts/[item]/Comments';
 import { formatTime } from '@/libs/time';
 
 import { TagLink } from '../form/tag';
@@ -17,6 +16,7 @@ import { PostDelete } from '../list/actions/delete';
 import { PostEditButton } from '../list/actions/edit-button';
 import { PostContentSkeleton } from '../skeleton';
 import $styles from './style.module.css';
+import Comments from '@/_components/Comments';
 
 const PostItemPageContent: FC<{ item: string }> = async ({ item }) => {
     const result = await postApi.detail(item);

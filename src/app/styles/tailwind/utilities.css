@@ -132,3 +132,13 @@
         transform: scale(1);
     }
 }
+
+/* 自定义渐变背景 */
+
+/* @utility gradient-light {
+    background: linear-gradient(to top, #df89b5 0%, #bfd9fe 100%);
+}
+
+@utility gradient-dark {
+    background: linear-gradient(170deg, #2c001e 0%, #3c005a 40%, #77216f 90%, #2c001e 100%);
+} */

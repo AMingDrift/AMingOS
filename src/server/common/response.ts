@@ -18,7 +18,7 @@ import { errorSchema } from './schema';
 export const getCacheControl = () => {
     return process.env.NODE_ENV === 'development'
         ? 'no-cache'
-        : 'public, s-maxage=86400, stale-while-revalidate=3600';
+        : 'public, s-maxage=2592000, stale-while-revalidate=3600';
 };
 
 // TODO: revalidatePath() 只对 Next.js App Router 中的 Server Components / Route Handlers 有效，对独立的 Hono API 无效。

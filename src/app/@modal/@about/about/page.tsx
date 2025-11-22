@@ -1,3 +1,4 @@
+import Comments from '@/_components/Comments';
 import { BoxReveal } from '@/_components/magicui/box-reveal';
 import { SparklesText } from '@/_components/magicui/sparkles-text';
 import { AuroraText } from '@/_components/shadcn/ui/aurora-text';
@@ -45,7 +46,7 @@ const Page = () => {
                             </li>
                             <li>
                                 <p className="text-base leading-relaxed">
-                                    正在学习和实践 Vercel AI SDK 相关技术，探索 AI 应用开发
+                                    学习和实践过 Vercel AI SDK 相关技术，玩过 AI 应用开发
                                 </p>
                             </li>
                             <li>
@@ -92,10 +93,13 @@ const Page = () => {
                             上提 issue
                         </p>
                         <p className="text-base leading-relaxed">
-                            后续也会增加友链的功能，敬请期待🎈
+                            以后也会增加友链的功能，敬请期待🎈
                         </p>
                     </section>
                 </BoxReveal>
+            </div>
+            <div className="mt-10">
+                <Comments />
             </div>
         </div>
     );

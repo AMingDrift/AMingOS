@@ -11,11 +11,7 @@ const LiquidBackground = dynamic(() => import('./Liquid'), {
 });
 const DesktopBackground = () => {
     const { resolvedTheme } = useTheme();
-
-    if (resolvedTheme === 'dark') {
-        return <NovaBackground />;
-    }
-    return <LiquidBackground />;
+    return <>{resolvedTheme === 'dark' ? <NovaBackground /> : <LiquidBackground />}</>;
 };
 
 export default DesktopBackground;

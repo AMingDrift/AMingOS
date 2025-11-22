@@ -1,12 +1,24 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
-const NovaBackground = () => {
-    const mountRef = useRef<HTMLCanvasElement>(null);
+import React from 'react';
+import { cn } from '../shadcn/utils';
 
+const NovaBackground: React.FC = () => {
+    const [hide, setHide] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        if (isLoaded) {
+            // 渐隐动画触发
+            setTimeout(() => setHide(false), 600); // 动画结束后移除
+        }
+    }, [isLoaded]);
+
+    const mountRef = useRef<HTMLCanvasElement>(null);
     useEffect(() => {
         if (!mountRef.current || typeof window === 'undefined') return;
 
@@ -62,7 +74,7 @@ const NovaBackground = () => {
             return new THREE.Vector3().randomDirection().multiplyScalar(Math.random() * 0.5 + 9.5);
         });
 
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 25000; i++) {
             let r = 10,
                 R = 40;
             let rand = Math.pow(Math.random(), 1.5);
@@ -150,13 +162,28 @@ const NovaBackground = () => {
             renderer.render(scene, camera);
         });
 
+        setIsLoaded(true);
+
         return () => {
             window.removeEventListener('resize', resizeHandler);
             renderer.dispose(); // 清理资源
         };
     }, []);
 
-    return <canvas ref={mountRef} className="fixed" />;
+    return (
+        <div className="fixed size-full">
+            <div
+                className={cn('transition-opacity duration-600', {
+                    'opacity-0': !isLoaded,
+                    'opacity-100': isLoaded,
+                    hidden: hide,
+                    block: !hide,
+                })}
+            >
+                <canvas ref={mountRef} />
+            </div>
+        </div>
+    );
 };
 
 export default NovaBackground;
