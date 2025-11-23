@@ -171,9 +171,18 @@ const data: Item[] = [
         summary: '为构建 RAG 个人知识库系统而写的小说，简直是为醋包饺子',
         bodyPath: path.join(__dirname, '../fixture/wmc/7-tianting.md'),
         categoryName: '生活随笔',
-        tagNames: ['ai', 'RAG', '小说', '个人知识库', '为醋包饺子'],
+        tagNames: ['AI', 'RAG', '小说', '个人知识库', '为醋包饺子'],
         thumb: 'https://cdn.amingdrift.com/blogs/7--thumb-tianting.png',
         createdAt: '2025-11-18T12:00:00Z',
+    },
+    {
+        title: '用 RAG 搭建一个 AI 小说问答系统',
+        summary: '从零开始手把手教你搭建一个AI RAG个人知识问答系统，新手友好。',
+        bodyPath: path.join(__dirname, '../fixture/wmc/8-tianting-rag.md'),
+        categoryName: '网页开发',
+        tagNames: ['AI', 'RAG', '小说', '个人知识库', 'langchain.js', 'vercel ai sdk'],
+        thumb: 'https://cdn.amingdrift.com/blogs/8-tianting-effect.gif',
+        createdAt: '2025-11-23T12:00:00Z',
     },
 ];
 
