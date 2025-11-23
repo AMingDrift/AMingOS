@@ -2,14 +2,14 @@ export const projects = {
     web: [
         {
             title: 'AMingOS 个人小站',
-            description: '🖥 基于 Next.js 的"桌面式"个人网站 —— 仿 操作系统桌面交互风格',
+            description: '🖥 基于 Next.js 的"桌面式"个人网站 —— 仿操作系统桌面交互风格',
             preview: '/assets/img/projects/blog.png',
             website: 'https://www.amingdrift.com/',
             source: 'https://github.com/AMingDrift/AMingOS',
             tags: [
                 'Next.js',
                 'ReactMarkdown',
-                'zustand',
+                'Zustand',
                 'Tailwindcss',
                 'Shadcn UI',
                 'Magic UI',
@@ -28,7 +28,7 @@ export const projects = {
             tags: [
                 'Next.js',
                 'Konva.js',
-                'zustand',
+                'Zustand',
                 'indexDB',
                 'Tailwindcss',
                 'Shadcn UI',
@@ -48,7 +48,7 @@ export const projects = {
                 'AI',
                 'RAG',
                 'Vercel AI sdk',
-                'langchain.js',
+                'Langchain.js',
                 'Tailwindcss',
                 'Supabase',
                 'Vercel',

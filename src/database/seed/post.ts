@@ -119,7 +119,7 @@ const data: Item[] = [
     },
     {
         title: '【MCP系列】介绍一个我自己开发的MCP工具：MCP Shipit',
-        summary: '介绍一个我自己开发的MCP工具：MCP Shipit，欢迎来github提issue，start!',
+        summary: '介绍一个我自己开发的MCP工具：MCP Shipit，欢迎来github提issue，star!',
         bodyPath: path.join(__dirname, '../fixture/wmc/2.md'),
         categoryName: 'MCP工具',
         tagNames: ['typescript', 'mcp', 'nodejs'],

@@ -3,6 +3,7 @@ import { BoxReveal } from '@/_components/magicui/box-reveal';
 import { SparklesText } from '@/_components/magicui/sparkles-text';
 import { AuroraText } from '@/_components/shadcn/ui/aurora-text';
 import { RainbowButton } from '@/_components/shadcn/ui/rainbow-button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/_components/shadcn/ui/avatar';
 import Link from 'next/link';
 const Page = () => {
     return (
@@ -13,23 +14,44 @@ const Page = () => {
             <div className="flex size-full flex-col items-start justify-center gap-10 pt-8">
                 <BoxReveal boxColor={'#5046e6'} duration={0.5}>
                     <section className="flex size-full flex-col items-start justify-center gap-3">
-                        <h2 className="mb-2 text-2xl">☕ 关于我</h2>
+                        <h2 className="mb-2 line-clamp-1 inline-flex items-center gap-4 text-2xl">
+                            ☕ 关于我{' '}
+                            <div className="inline-flex">
+                                <Avatar className="size-[60px]">
+                                    <AvatarImage
+                                        className="size-full"
+                                        src="https://cdn.amingdrift.com/blogs/avatar-aming.jpg"
+                                    />
+                                    <AvatarFallback delayMs={600}>AM</AvatarFallback>
+                                </Avatar>
+                            </div>
+                        </h2>
+
                         <p className="leading-relaxed">
-                            你好！我是阿明Drift👋，一名热爱技术的{' '}
+                            你好！我是阿明Drift 👋，一名热爱技术的{' '}
                             <AuroraText>全栈开发工程师</AuroraText>，专注于 TypeScript 生态。
                         </p>
                         <ul className="prose list-disc space-y-2 pl-5">
                             <li>
                                 <p className="leading-relaxed">
-                                    目前主要技术栈是{' '}
-                                    <AuroraText>Next.js + Tailwind CSS + Prisma</AuroraText>，
-                                    致力于构建高性能、美观的现代 Web 应用
+                                    目前主要技术栈和工具链是{' '}
+                                    <AuroraText>
+                                        Next.js + Tailwind CSS + Zustand + Drizzle/Prisma + Supabase
+                                    </AuroraText>
+                                    ， 致力于构建高性能、美观的现代 Web 应用
+                                </p>
+                            </li>
+                            <li>
+                                <p className="text-base leading-relaxed">
+                                    学习和实践过{' '}
+                                    <AuroraText>Vercel AI SDK + Langchain.js</AuroraText>{' '}
+                                    相关技术，玩过 AI 应用开发，如 RAG 个人知识库系统，MCP 工具等
                                 </p>
                             </li>
                             <li>
                                 <p className="text-base leading-relaxed">
                                     早期接触过 Java 后端开发、Python 的 Flask 框架和网络爬虫技术。
-                                    同时也积累了前端、运维、CICD 等全栈开发经验（全栈打工人😄）
+                                    同时也积累了前端、运维、DevOps 等全栈开发经验（全栈打工人😄）
                                 </p>
                             </li>
                             <li>
@@ -40,13 +62,8 @@ const Page = () => {
                             </li>
                             <li>
                                 <p className="text-base leading-relaxed">
-                                    业余时间也探索过如 Ionic、微信小程序和
-                                    Uniapp等移动开发技术，不过并不打算作为主力
-                                </p>
-                            </li>
-                            <li>
-                                <p className="text-base leading-relaxed">
-                                    学习和实践过 Vercel AI SDK 相关技术，玩过 AI 应用开发
+                                    业余时间也探索过如微信小程序和 Uniapp、Ionic
+                                    等移动开发技术，不过并不打算作为主力
                                 </p>
                             </li>
                             <li>

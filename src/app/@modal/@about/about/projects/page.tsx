@@ -14,7 +14,7 @@ const ProjectPage = () => {
         <>
             {projectsListByType.map((projectsList) => (
                 <div className="mb-10" key={projectsList.title}>
-                    <div className="pl-10 text-xl">{projectsList.title}</div>
+                    <div className="pl-10 text-2xl">{projectsList.title}</div>
 
                     <div className="mx-10 mt-5 columns-1 gap-5 md:columns-2 2xl:columns-3">
                         {projectsList.projects.map((project, idx) => (
@@ -39,7 +39,7 @@ const ProjectPage = () => {
                                     <div className="min-h-[125px] bg-white p-3 dark:bg-neutral-950">
                                         <div className="flex items-center justify-between">
                                             <Link
-                                                className="animate-decoration text-sm"
+                                                className="animate-decoration text-xl"
                                                 href={project.website}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
@@ -55,7 +55,7 @@ const ProjectPage = () => {
                                                 <Link
                                                     href={project.source}
                                                     target="_blank"
-                                                    className="text-[10px]"
+                                                    className="text-[12px]"
                                                     rel="noopener noreferrer"
                                                 >
                                                     源码
@@ -63,15 +63,15 @@ const ProjectPage = () => {
                                             </Button>
                                         </div>
 
-                                        <p className="my-2 text-[11px] text-gray-500">
+                                        <p className="my-2 text-[12px] text-gray-500">
                                             {project.description}
                                         </p>
-                                        <div className="flex flex-wrap gap-2">
+                                        <div className="mt-4 flex flex-wrap gap-2">
                                             {project.tags.map((tag) => (
                                                 <Badge
                                                     key={tag}
                                                     variant="outline"
-                                                    className="text-[11px]"
+                                                    className="text-[12px]"
                                                 >
                                                     {tag}
                                                 </Badge>
