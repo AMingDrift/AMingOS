@@ -3,7 +3,7 @@ export const projects = {
         {
             title: 'AMingOS 个人小站',
             description: '🖥 基于 Next.js 的"桌面式"个人网站 —— 仿操作系统桌面交互风格',
-            preview: '/assets/img/projects/blog.png',
+            preview: 'https://cdn.amingdrift.com/blogs/project-thumb-blog.png',
             website: 'https://www.amingdrift.com/',
             source: 'https://github.com/AMingDrift/AMingOS',
             tags: [
@@ -22,7 +22,7 @@ export const projects = {
         {
             title: '七巧板益智游戏',
             description: '这是一个为小学数学课堂设计的七巧板互动教学工具',
-            preview: '/assets/img/projects/tangram.png',
+            preview: 'https://cdn.amingdrift.com/blogs/project-thumb-tangram.png',
             website: 'https://amingdrift.github.io/tangram-app/',
             source: 'https://github.com/AMingDrift/tangram-app',
             tags: [
@@ -40,7 +40,7 @@ export const projects = {
             title: '天听计划 RAG 个人知识库项目',
             description:
                 '一个基于 RAG（检索增强生成）技术的个人知识库项目，专为处理和查询科幻小说《天听计划：罗斯陷阱》内容而设计。',
-            preview: '/assets/img/projects/tianting-rag.png',
+            preview: 'https://cdn.amingdrift.com/blogs/project-thumb-tianting-rag.png',
             website: 'https://tianting-rag.amingdrift.com/',
             source: 'https://github.com/AMingDrift/tianting-rag',
             tags: [
@@ -61,7 +61,7 @@ export const projects = {
             title: 'mcp-shipit',
             description:
                 '一个基于MCP协议的工具，一句话让AI编辑器将指定的目录上传到GitHub Release。',
-            preview: '/assets/img/projects/mcp-upload.png',
+            preview: 'https://cdn.amingdrift.com/blogs/project-thumb-mcp-upload.png',
             website: 'https://www.npmjs.com/package/@amingdrift/mcp-shipit',
             source: 'https://github.com/AMingDrift/mcp-shipit',
             tags: ['npm', 'Node.js', 'AI', 'MCP Tool', 'Typescript'],

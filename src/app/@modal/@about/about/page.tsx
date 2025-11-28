@@ -36,7 +36,8 @@ const Page = () => {
                                 <p className="leading-relaxed">
                                     目前主要技术栈和工具链是{' '}
                                     <AuroraText>
-                                        Next.js + Tailwind CSS + Zustand + Drizzle/Prisma + Supabase
+                                        Next.js + Hono.js + Tailwind CSS + Zustand + Drizzle/Prisma
+                                        + Supabase
                                     </AuroraText>
                                     ， 致力于构建高性能、美观的现代 Web 应用
                                 </p>
@@ -51,7 +52,8 @@ const Page = () => {
                             <li>
                                 <p className="text-base leading-relaxed">
                                     早期接触过 Java 后端开发、Python 的 Flask 框架和网络爬虫技术。
-                                    同时也积累了前端、运维、DevOps 等全栈开发经验（全栈打工人😄）
+                                    同时也积累了前端、运维、DevOps、Github Actions
+                                    等全栈开发经验（全栈打工人😄）
                                 </p>
                             </li>
                             <li>
@@ -64,6 +66,12 @@ const Page = () => {
                                 <p className="text-base leading-relaxed">
                                     业余时间也探索过如微信小程序和 Uniapp、Ionic
                                     等移动开发技术，不过并不打算作为主力
+                                </p>
+                            </li>
+                            <li>
+                                <p className="text-base leading-relaxed">
+                                    目前正在探索 <AuroraText>Shopify App （插件）</AuroraText>{' '}
+                                    的开发
                                 </p>
                             </li>
                             <li>
