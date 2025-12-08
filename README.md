@@ -16,8 +16,8 @@
 安装依赖并启动开发服务器：
 
 ```bash
-# 创建数据库
-sudo docker run --name my-pgsql -d --restart=unless-stopped -e POSTGRES_PASSWORD=12345678 -e POSTGRES_DB=amingos  -p 5432:5432 -v /opt/pgsql/data:/var/lib/postgresql/data postgres:16
+# 启动数据库（使用 docker-compose）
+docker-compose up -d
 ```
 
 ```bash

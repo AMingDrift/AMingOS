@@ -12,7 +12,7 @@ import { ThemeProvider } from '@/_components/theme-provider';
 import $styles from './layout.module.css';
 import { Auth } from '@/_components/auth';
 export const metadata: Metadata = {
-    title: "AMingDrift's Blog",
+    title: '阿明Drift 的个人小站',
     description: 'AMingOS - 阿明的仿操作系统UI界面博客',
 };
 
