@@ -184,6 +184,16 @@ const data: Item[] = [
         thumb: 'https://cdn.amingdrift.com/blogs/8-tianting-effect.gif',
         createdAt: '2025-11-23T12:00:00Z',
     },
+    {
+        title: '电商都在用的 Sticky Sidebar，原来是这样实现的！',
+        summary:
+            '在电商、内容类网站中，“粘性侧边栏” 是非常常见的交互设计 —— 滚动页面时，侧边栏（如商品规格、筛选条件）始终保持可视，能显著提升用户体验。本文将从基础原理到进阶适配，拆解一个 “智能粘性侧边栏” 的实现思路。',
+        bodyPath: path.join(__dirname, '../fixture/wmc/9-sticky-pos.md'),
+        categoryName: '每日一知',
+        tagNames: ['position', 'sticky', '侧边栏', '交互设计'],
+        thumb: 'https://cdn.amingdrift.com/blogs/9-sticky_effect1.gif',
+        createdAt: '2026-01-16T12:00:00Z',
+    },
 ];
 
 export const createPostData = async () => {
